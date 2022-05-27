@@ -1,0 +1,47 @@
+//.page-title {
+//  @apply text-dark text-3xl font-SFProDisplay leading-normal font-medium mb-4;
+//  text-transform:capitalize;
+//}
+//
+//.page-sub-title {
+//  @apply text-dark text-2xl font-SFProDisplay leading-normal font-medium mb-4;
+//  text-transform:capitalize;
+//}
+
+.page-editor {
+  h1, h2, h3, h4, h5, h6 {
+    @apply text-label-dark leading-8 font-semibold mb-4 capitalize;
+  }
+
+  h2 {
+    @apply text-3xl;
+  }
+
+  h3 {
+    @apply text-2xl;
+  }
+
+  h4 {
+    @apply text-xl;
+  }
+
+  p {
+    @apply mb-2 text-label-dark font-light;
+  }
+
+  a {
+    @apply text-light hover:underline;
+  }
+
+  ul {
+    @apply mb-4 list-disc pl-4;
+
+    li {
+      @apply mb-2;
+    }
+
+    ul {
+      @apply mt-2;
+    }
+  }
+}

@@ -1,0 +1,238 @@
+
+@import "tailwind.color";
+
+
+.van-field {
+  @apply rounded;
+}
+
+.van-popover {
+  &__arrow {
+    transform: translate(24px, -6px);
+  }
+  &__content {
+    transform: translateX(-20px);
+  }
+  &__action {
+    width: 80px;
+  }
+}
+
+.van-cell {
+  z-index: 1;
+}
+
+
+
+.van-image__error {
+  background-color: transparent;
+}
+
+
+.input-bg-gradient{
+  background-image: linear-gradient(123.24deg, #e3ebf1 0.21%, #ecf0f3 100.42%);
+}
+
+
+
+input{
+  &:-webkit-autofill,
+  &:-webkit-autofill:hover,
+  &:-webkit-autofill:focus,
+  &:-webkit-autofill:active {
+    -webkit-animation-delay: 0.5s; /* Safari support - any positive time runs instantly */
+    -webkit-animation-name: onAutoFillStart;
+    -webkit-animation-fill-mode: both;
+    //-webkit-box-shadow: 0 0 0 60px rgba(0,0,0,1) inset !important;
+  }
+
+  &:not(:-webkit-autofill) {
+    // Expose a hook for JS onAutoFillCancel
+    // JavaScript can capture 'animationstart' events
+    animation-name: onAutoFillCancel;
+  }
+}
+
+
+
+
+:root{
+  --van-disabled-opacity: 0.5;
+  // toast
+  //--van-toast-default-width: 80%;
+  //--van-toast-max-width: 80%;
+  //--van-toast-text-min-width: 80%;
+
+  // button
+  --van-button-default-background-color: #{$primary};
+  --van-button-default-color: white;
+  --van-button-primary-background-color: #{$primary};
+  --van-button-primary-color: #{$primary};
+  --van-button-info-background-color: white;
+  --van-button-info-color: #{$primary};
+  --van-button-danger-background-color: #{$error-color};
+  --van-button-danger-color: #{$primary};
+  --van-button-warning-background-color: #{$warning-color};
+  --van-button-warning-color: #{$primary};
+  --van-tabs-nav-background-color: #{$bg-color};
+  // password
+  --van-password-input-error-info-color: #{$error-color};
+  --van-password-input-background-color: #{$bg-color};
+  --van-password-input-border-radius: 10px;
+  --van-base-font-family: Lexend, SFProDisplay, sans-serif;
+  // field
+  --van-field-error-message-color: #{$error-color};
+  --van-field-word-limit-line-height: 1.5rem;
+  // nav bar
+  --van-nav-bar-height: 56px;
+  --van-nav-bar-background-color: #{$bg-color};
+  // seaerch
+  --van-search-background-color: none;
+  // tabs
+  --van-tabs-bottom-bar-color: #{$primary};
+
+  .van-overlay {
+    z-index: 100;
+    &:not(.isLanding) {
+      @media (min-width: 551px) {
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+        width: auto;
+        height: auto;
+      }
+    }
+  }
+
+  .van-field{
+    @apply flex  m-0 p-0 mt-2;
+    overflow: visible;
+    background-color: transparent;
+
+    &__value{
+      @apply p-2 pl-4 inline-flex;
+      border: solid -0.1px $label-color;
+      border-radius: 10px;
+      background-color: $bg-color;
+    }
+
+    &__body{
+      @apply w-full;
+    }
+
+    &__right-icon{
+      @apply inline-flex;
+      line-height: normal;
+    }
+
+    &__label{
+      @apply inline-flex w-full text-base py-2;
+      padding-bottom: 0.3rem;
+    }
+
+    &__error-message{
+      position: absolute;
+      bottom: -1.5rem;
+      width: 100%;
+      text-align: left;
+      left: 1rem;
+    }
+  }
+
+  .focus-border .van-field {
+    &__value{
+      outline: 1px solid $primary;
+    }
+  }
+
+  .error-border .van-field{
+    &__label{
+      color: $error-color
+    }
+    &__value{
+      outline: 1px solid $error-color;
+    }
+  }
+
+  .van-password-input{
+    @apply m-0;
+    &__item{
+      border-radius: var(--van-password-input-border-radius);
+      border: solid 1px $primary;
+    }
+
+    &__error-info{
+      @apply text-right;
+    }
+  }
+
+  .van-search{
+    padding: 0;
+    background:none;
+    &__content{
+      padding: 0;
+      background:none;
+    }
+    & .van-field{
+      display: flex;
+      flex-direction: column;
+      margin: 0;
+      &__left-icon{
+        position: absolute;
+        z-index: 1;
+        left: 1rem;
+      }
+      &__value{
+        @apply input-inner-shadow;
+        padding-left: 2.8rem;
+      }
+    }
+    & .van-icon{
+      text-align: center;
+      height: 100%;
+      vertical-align: middle;
+      line-height: 2.5rem;
+    }
+
+  }
+
+  .van-field-base{
+    &__label{
+      position: absolute;
+      z-index: 1;
+      padding-left: 1rem;
+      left: 0;
+      width: fit-content;
+      transform: translateY(20%) translateX(0px);
+      transition: transform 300ms;
+      @apply text-xs;
+    }
+
+    &-error{
+      &-shift{
+        & .van-field-base__label{
+          transform: translateY(-15%) translateX(0px);
+        }
+        & input{
+          transform: translateY(0.3rem);
+        }
+
+        & .van-field__right-icon {
+          color: #{$error-color} !important;
+        }
+      }
+    }
+    & {
+      &-shift {
+        & .van-field-base__label{
+          transform: translateY(-15%) translateX(0px);
+        };
+        & input{
+          transform: translateY(0.3rem);
+        }
+      }
+    }
+  }
+
+}

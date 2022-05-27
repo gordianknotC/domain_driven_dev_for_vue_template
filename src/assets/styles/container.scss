@@ -1,0 +1,18 @@
+
+.van-dialog{
+  width: 33rem;
+  min-height: 30rem;
+  @include tablet{
+    width:80% !important;
+    max-width: 33rem;
+    max-height: 33rem;
+  }
+  @include mobile{
+    width:80% !important;
+    max-height: 38rem;
+  }
+  @include mini{
+    width:80% !important;
+    max-height: 38rem;
+  }
+}
