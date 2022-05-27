@@ -1,4 +1,6 @@
-# web_template
+# pavo11_fb_ad_cloak_blackpage
+
+A landing page used for cloaking Facebook algorithm. For cloaking it, we need two page, one is black page which overlayed ontop of white page. White page is a pseudo content page audit by facebook bot. And this is the black one. 
 
 
 
@@ -15,14 +17,14 @@ Already a pro? Just edit this README.md and make it your own. Want to make it ea
 
 ```
 cd existing_repo
-git remote add origin https://git.fillygaming888.net/curtis/web_template.git
+git remote add origin https://git.fillygaming888.net/pavo11/pavo11_fb_ad_cloak_blackpage.git
 git branch -M main
 git push -uf origin main
 ```
 
 ## Integrate with your tools
 
-- [ ] [Set up project integrations](https://git.fillygaming888.net/curtis/web_template/-/settings/integrations)
+- [ ] [Set up project integrations](https://git.fillygaming888.net/pavo11/pavo11_fb_ad_cloak_blackpage/-/settings/integrations)
 
 ## Collaborate with your team
 
