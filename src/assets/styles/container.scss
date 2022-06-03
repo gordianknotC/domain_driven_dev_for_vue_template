@@ -16,3 +16,31 @@
     max-height: 38rem;
   }
 }
+
+
+$header-h: 5.5rem;
+$card-h:5rem;
+
+.card{
+  @apply rounded p-4 ;
+  height: $card-h;
+}
+
+.hover-card{
+  @apply rounded p-4 border border-opacity-20 border-label  #{!important};
+  border: solid 1px;
+  height: $card-h;
+  margin-top:0.1rem;
+  margin-bottom:0.1rem;
+  &:hover{
+    @apply border border-opacity-50 border-primary #{!important};
+    cursor: pointer;
+  }
+}
+
+.clickable-label{
+  &:hover{
+    @apply text-primary font-bold;
+    cursor: pointer;
+  }
+}

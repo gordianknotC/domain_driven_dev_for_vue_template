@@ -1,30 +1,27 @@
 <template lang="pug">
-.page.pl-4.pr-4
-  .page-banner.image-container--w(
-    :style="`background-image: url(${require('~/assets/banner.png')})`")
-  .page-horizontal
-    hr
-  .page-rating.xm
-    .page-rating-left
-      .page-rating-left--sm Starring
-      .page-rating-left--lg 4.5
-    .page-rating-right
-      .page-rating-right--lg Extra +
-      .page-rating-right--sm USERS
-
-  .page-footer.image-container--w(
-    :style="`background-image: url(${require('~/assets/footer.jpg')})`")
-    .page-footer-container
+.page
+  Entry(v-if="route==='Entry'" )
+  UPI(v-else-if="route==='UPI'" )
+  Wallet(v-else-if="route==='Wallet'" )
 
 </template>
 
 <script lang="ts">
-
 import {defineComponent, reactive, ref, toRefs} from "vue";
+import Container from "~/components/Container.vue";
+import Entry from "~/views/Entry.vue";
+import UPI from "~/views/UPI.vue";
+import Wallet from "~/views/Wallet.vue";
+import mainStore, {TRouteName} from "~/service/store";
 
 export default defineComponent({
   name: "App",
   components: {
+    Container,
+    Entry,
+    UPI,
+    Wallet
+
   },
   props: {
     invitationCode: {
@@ -40,12 +37,12 @@ export default defineComponent({
     })
     const loading = ref(false);
     /** 儲存參數 */
-
-
     return {
-      ...toRefs(state),
+      ...toRefs(mainStore.state),
       loading,
-
+      onRoute(route: TRouteName){
+        mainStore.routeTo(route);
+      }
     };
   }
 });
@@ -53,7 +50,6 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-
 
 #app{
   @apply flex text-center justify-center;
@@ -76,81 +72,6 @@ export default defineComponent({
     max-width: 100%;
   }
 }
-
-
-.image-container{
-  &--w{
-    overflow: hidden;
-    background-size: cover;
-    background-repeat-x: no-repeat;
-    background-position-x: center;
-  }
-  &--h{
-    overflow: hidden;
-    background-size: contain;
-    background-repeat-x: no-repeat;
-    background-position-x: center;
-  }
-}
-
-// 1556, 132, 500, 146, 260, 118, 400
-.page{
-  @apply h-full;
-  height: 100vh;
-
-  &-banner{
-    height: 32vh;
-
-  }
-
-  &-horizontal {
-    margin-top: 4px;
-    border-top: 5px solid slategray;
-    width: 100%;
-  }
-
-  &-rating{
-    @apply w-full px-4 flex flex-row justify-between items-center;
-    height: 7.5vh;
-    color: slategray;
-    &-left{
-      @apply flex justify-center flex-col h-full;
-      &--lg {
-        font-weight: 700;
-        font-size: 2em;
-      }
-      &--sm{
-        margin-bottom: 0rem;
-        margin-top: 0rem;
-        font-size: 1rem;
-        line-height: 1rem;
-        font-weight: 500;
-      }
-    }
-    &-right{
-      @apply flex justify-center flex-col h-full;
-      &--lg{
-        font-weight: 600;
-        font-size: 1.8em;
-        line-height: 2rem;
-      }
-      &--sm{
-        font-size: 1rem;
-        line-height: 1rem;
-      }
-    }
-  }
-  &-footer{
-    height: 28vh;
-    &-container{
-      @apply w-full relative h-full;
-    }
-
-  }
-
-}
-
-
 
 
 

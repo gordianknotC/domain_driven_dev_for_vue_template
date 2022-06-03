@@ -5,13 +5,17 @@ import {TUnWrapVueRef} from "common_js_builtin";
 
 const KEY = "__USER_DATA_TEMPLATEKEY___";
 
+export
+type TRouteName = "Entry" | "UPI" | "Wallet";
 type TStore ={
-  phone: string|null;
+  route: TRouteName;
+  lastRoute: TRouteName | null;
 }
 
 class MainStore{
   state: TUnWrapVueRef<TStore> = reactive({
-    phone: null,
+    route: "Entry",
+    lastRoute: null,
   })
 
   constructor() {
@@ -32,6 +36,17 @@ class MainStore{
   private _get(): TStore | null{
     const val = window.localStorage.getItem(KEY) ?? "{}";
     return JSON.parse(val);
+  }
+
+  routeBack(){
+    if (this.state.lastRoute){
+      this.state.route = this.state.lastRoute;
+    }
+    this.state.lastRoute = null;
+  }
+  routeTo(page: TRouteName){
+    this.state.lastRoute = this.state.route;
+    this.state.route = page;
   }
 }
 
