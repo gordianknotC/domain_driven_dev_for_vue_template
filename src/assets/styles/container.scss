@@ -39,7 +39,7 @@ $card-h:5rem;
 }
 
 input{
-  @apply w-full h-full rounded border border-opacity-20 border-label  #{!important};
+  @apply p-3 w-full h-full rounded border border-opacity-20 border-label  #{!important};
   &:hover{
     @apply border border-opacity-50 border-primary #{!important};
   }

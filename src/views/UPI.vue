@@ -14,7 +14,7 @@ container.page.page-main
       input(v-model="upiValue")
     container.page-main-description
       span.text-label UPI ID should be in the format
-      span.font-bold.text-primary username@upihandle
+      span.font-bold.text-primary  username@upihandle
   container.page-main-submit
     button PAY ₹500.00
   container.page-main-sponsors
