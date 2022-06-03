@@ -15,7 +15,7 @@ module.exports = defineConfig({
         minimize: true,
         runtimeChunk: true,
         splitChunks: {
-          chunks: 'async',
+          chunks: 'all',
           minSize: 8000,
           minRemainingSize: 0,
           minChunks: 1,
@@ -23,16 +23,30 @@ module.exports = defineConfig({
           maxInitialRequests: 30,
           enforceSizeThreshold: 50000,
           cacheGroups: {
-            defaultVendors: {
-              test: /[\\/]node_modules[\\/]/,
-              priority: -10,
-              reuseExistingChunk: true,
-            },
-            default: {
+            common: {
+              name: 'chunk-common', // 打包后的文件名
               minChunks: 2,
-              priority: -20,
-              reuseExistingChunk: true,
+              maxInitialRequests: 5,
+              minSize: 0,
+              priority: 1,
+              reuseExistingChunk: true
             },
+            vendors: {
+              name: 'chunk-vendors',
+              test: /[\\/]node_modules[\\/]/,
+              priority: 2,
+              minSize: 0,
+              reuseExistingChunk: true,
+              enforce: true
+            },
+            vant: {
+              name: 'vant',
+              test: /[\\/]node_modules[\\/]vant[\\/]/,
+              minSize: 0,
+              priority: 3,
+              reuseExistingChunk: true,
+              enforce: true
+            }
           },
         },
       };
