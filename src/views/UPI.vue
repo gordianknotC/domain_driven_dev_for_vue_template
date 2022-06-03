@@ -11,7 +11,7 @@ container.page.page-main
   container.page-main-form
     container.page-main-label UPI ID
     container.page-main-input
-      input(v-model="upiValue")
+      input(v-model="upiID")
     container.page-main-description
       span.text-label UPI ID should be in the format
       span.font-bold.text-primary  username@upihandle

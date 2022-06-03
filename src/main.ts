@@ -8,7 +8,7 @@ import svgIconPlugin from "@/plugins/svgIcon";
 
 
 const app = createApp(App as any)
-installVant(app);
+// installVant(app);
 setupVToast(app);
 app.use(svgIconPlugin, {imports: []});
 app.mount('#app');

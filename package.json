@@ -10,14 +10,10 @@
   },
   "dependencies": {
     "axios": "^0.21.1",
-    "common_js_builtin": "git+https://github.com/gordianknotC/commonJSBuiltin.git#develop#v0.0.1+14",
-    "core-js": "^3.8.3",
-    "intl-tel-input": "^17.0.13",
     "numeral": "^2.0.6",
     "vant": "^3.0.6",
     "vue": "^3.2.13",
-    "vue-toastification": "^2.0.0-rc.1",
-    "vue_general_form_validator": "git+https://github.com/gordianknotC/generalFormValidator.git#develop#v0.0.1+40"
+    "vue-toastification": "^2.0.0-rc.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",

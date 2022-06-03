@@ -3332,18 +3332,6 @@ commander@^8.0.0, commander@^8.3.0:
   resolved "https://registry.yarnpkg.com/commander/-/commander-8.3.0.tgz#4837ea1b2da67b9c616a67afbb0fafee567bca66"
   integrity sha512-OkTL9umf+He2DZkUq8f8J9of7yL6RJKI24dVITBmNfZBmri9zYZQrKkuXiKhyfPSu8tUhnVBB1iKXevvnlR4Ww==
 
-"common_js_builtin@git+https://github.com/gordianknotC/commonJSBuiltin.git#develop#v0.0.1+12":
-  version "0.0.1"
-  resolved "git+https://github.com/gordianknotC/commonJSBuiltin.git#38d53d549a81af96cea14003226dc43d47a5c990"
-  dependencies:
-    string-format "^2.0.0"
-
-"common_js_builtin@git+https://github.com/gordianknotC/commonJSBuiltin.git#develop#v0.0.1+14":
-  version "0.0.1"
-  resolved "git+https://github.com/gordianknotC/commonJSBuiltin.git#b48ed83b3d4f603ae3e43fcdfaa8feb28def9008"
-  dependencies:
-    string-format "^2.0.0"
-
 commondir@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/commondir/-/commondir-1.0.1.tgz#ddd800da0c66127393cca5950ea968a3aaf1253b"
@@ -5447,11 +5435,6 @@ inherits@2.0.3:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/inherits/-/inherits-2.0.3.tgz#633c2c83e3da42a502f52466022480f4208261de"
   integrity sha512-x00IRNXNy63jwGkJmzPigoySHbaqpNuzKbBOmzK+g2OdZpQ9w+sxCN+VSB3ja7IAge2OP2qpfxTjeNcyjmW1uw==
-
-intl-tel-input@^17.0.13:
-  version "17.0.16"
-  resolved "https://registry.yarnpkg.com/intl-tel-input/-/intl-tel-input-17.0.16.tgz#0199884d8ead148b847a9579944a75c8fd5cbcf9"
-  integrity sha512-aDcfhkl+wf9NYYpvA2v40dPiNUZHLlORAaKogC85IwfN0v6B2jJtq+NyMd0GgM0MCAZp8N2dNG2oygz9pQVVaQ==
 
 ipaddr.js@1.9.1:
   version "1.9.1"
@@ -8732,11 +8715,6 @@ stream-shift@^1.0.0:
   resolved "https://registry.yarnpkg.com/stream-shift/-/stream-shift-1.0.1.tgz#d7088281559ab2778424279b0877da3c392d5a3d"
   integrity sha512-AiisoFqQ0vbGcZgQPY1cdP2I76glaVA/RauYR4G4thNFgkTqr90yXTo4LYX60Jl+sIlPNHHdGSwo01AvbKUSVQ==
 
-string-format@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/string-format/-/string-format-2.0.0.tgz#f2df2e7097440d3b65de31b6d40d54c96eaffb9b"
-  integrity sha512-bbEs3scLeYNXLecRRuk6uJxdXUSj6le/8rNPHChIJTn2V79aXVTR1EH2OH5zLKKoz0V02fOUKZZcw01pLUShZA==
-
 string-width@^1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/string-width/-/string-width-1.0.2.tgz#118bdf5b8cdc51a2a7e70d211e07e2b0b9b107d3"
@@ -9527,12 +9505,6 @@ vue@^3.2.13:
     "@vue/runtime-dom" "3.2.36"
     "@vue/server-renderer" "3.2.36"
     "@vue/shared" "3.2.36"
-
-"vue_general_form_validator@git+https://github.com/gordianknotC/generalFormValidator.git#develop#v0.0.1+40":
-  version "0.0.1"
-  resolved "git+https://github.com/gordianknotC/generalFormValidator.git#81965db6d6e03acb3b62b740212387880b90f5d2"
-  dependencies:
-    common_js_builtin "git+https://github.com/gordianknotC/commonJSBuiltin.git#develop#v0.0.1+12"
 
 watchpack-chokidar2@^2.0.1:
   version "2.0.1"

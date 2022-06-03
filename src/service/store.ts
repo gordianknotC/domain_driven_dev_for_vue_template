@@ -1,6 +1,7 @@
 
-import {computed, defineComponent, PropType, reactive, ref, toRefs, onMounted, watch} from "vue";
-import {TUnWrapVueRef} from "common_js_builtin";
+import {
+  computed, defineComponent, PropType, reactive, UnwrapRef,
+  ref, toRefs, onMounted, watch} from "vue";
 
 
 const KEY = "__USER_DATA_TEMPLATEKEY___";
@@ -23,13 +24,15 @@ type TStore ={
   route: TRouteName;
   lastRoute: TRouteName | null;
   walletType: EWalletType | null;
+  upiID: string | null;
 }
 
 class MainStore{
-  state: TUnWrapVueRef<TStore> = reactive({
+  state: UnwrapRef<TStore> = reactive({
     route: "Entry",
     lastRoute: null,
     walletType: null,
+    upiID: null,
   })
 
   constructor() {
