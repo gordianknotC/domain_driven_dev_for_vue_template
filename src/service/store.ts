@@ -7,15 +7,29 @@ const KEY = "__USER_DATA_TEMPLATEKEY___";
 
 export
 type TRouteName = "Entry" | "UPI" | "Wallet";
+
+export
+enum EWalletType{
+  paytm,
+  amazon,
+  gpay,
+  ola,
+  jio,
+  freecharge
+}
+
+
 type TStore ={
   route: TRouteName;
   lastRoute: TRouteName | null;
+  walletType: EWalletType | null;
 }
 
 class MainStore{
   state: TUnWrapVueRef<TStore> = reactive({
     route: "Entry",
     lastRoute: null,
+    walletType: null,
   })
 
   constructor() {
@@ -47,6 +61,9 @@ class MainStore{
   routeTo(page: TRouteName){
     this.state.lastRoute = this.state.route;
     this.state.route = page;
+  }
+  setWalletType(type: EWalletType){
+    this.state.walletType = type;
   }
 }
 

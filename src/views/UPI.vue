@@ -150,20 +150,20 @@ export default defineComponent({
     }
   }
 
-  &-main::after{
-    content: "";
-    background-image: url("~@/assets/Main-UPI.png");
-    background-size: contain;
-    background-repeat-x: no-repeat;
-    background-position-x: center;
-    opacity: 0.5;
-    top: -23px;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    position: absolute;
-    z-index: -10;
-  }
+  //&-main::after{
+  //  content: "";
+  //  background-image: url("~@/assets/Main-UPI.png");
+  //  background-size: contain;
+  //  background-repeat-x: no-repeat;
+  //  background-position-x: center;
+  //  opacity: 0.5;
+  //  top: -23px;
+  //  left: 0;
+  //  bottom: 0;
+  //  right: 0;
+  //  position: absolute;
+  //  z-index: -10;
+  //}
 }
 
 

@@ -9,23 +9,35 @@ container.page.page-main
     @back="onClickBack"
   )
   container.card-row
-    container.hover-card.card-paytm
+    container.hover-card.card-paytm(
+      @click="()=>setWallet(EWalletType.paytm)"
+      :class="[walletType===EWalletType.paytm ? 'chosen-card' : '']")
       img(:src="require('~/assets/mfi-paytm.png')")
       span paytm
-    container.hover-card.card-amazon
+    container.hover-card.card-amazon(
+      @click="()=>setWallet(EWalletType.amazon)"
+      :class="[walletType===EWalletType.amazon ? 'chosen-card' : '']")
       img(:src="require('~/assets/mfi-amazon-pay.png')")
       span amazon
-    container.hover-card.card-gpay
+    container.hover-card.card-gpay(
+      @click="()=>setWallet(EWalletType.gpay)"
+      :class="[walletType===EWalletType.gpay ? 'chosen-card' : '']")
       img(:src="require('~/assets/mfi-google-pay.png')")
       span gpay
   container.card-row
-    container.hover-card.card-ola
+    container.hover-card.card-ola(
+      @click="()=>setWallet(EWalletType.ola)"
+      :class="[walletType===EWalletType.ola ? 'chosen-card' : '']")
       img(:src="require('~/assets/mfi-ola-money.png')")
       span ola money
-    container.hover-card.card-jio
+    container.hover-card.card-jio(
+      @click="()=>setWallet(EWalletType.jio)"
+      :class="[walletType===EWalletType.jio ? 'chosen-card' : '']")
       img(:src="require('~/assets/mfi-jio-money.png')")
       span jio money
-    container.hover-card.card-free
+    container.hover-card.card-free(
+      @click="()=>setWallet(EWalletType.freecharge)"
+      :class="[walletType===EWalletType.freecharge ? 'chosen-card' : '']")
       img(:src="require('~/assets/mfi-freecharge.png')")
       span freecharge
 
@@ -37,7 +49,7 @@ container.page.page-main
 <script lang="ts">
 import {defineComponent, reactive, ref, toRefs} from "vue";
 import Container from "~/components/Container.vue";
-import mainStore from "~/service/store";
+import mainStore, {EWalletType} from "~/service/store";
 import PaymentCard from "~/components/PaymentCard.vue";
 import Header from "~/components/Header.vue";
 
@@ -56,7 +68,6 @@ export default defineComponent({
   },
   emit:["close", "route"],
   setup(props, {emit}) {
-
     const loading = ref(false);
     const onClickUPI = ()=>{
       mainStore.routeTo("UPI");
@@ -70,10 +81,16 @@ export default defineComponent({
     }
     /** 儲存參數 */
     return {
+      ...toRefs(mainStore.state),
       loading,
       onClickUPI,
       onClickWallet,
       onClickBack,
+      EWalletType,
+      setWallet(t: EWalletType){
+        console.log(t);
+        mainStore.setWalletType(t);
+      }
     };
   }
 });
@@ -128,7 +145,6 @@ export default defineComponent({
   //  z-index: -10;
   //}
 
-
   .card{
     @apply flex-1 flex items-center h-full;
     &-row{
@@ -144,8 +160,10 @@ export default defineComponent({
           @apply text-xs text-label font-Lexend;
         }
       }
+      .chosen-card{
+        @apply border border-primary #{!important};
+      }
     }
-
   }
 
 
