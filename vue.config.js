@@ -2,6 +2,7 @@ const { defineConfig } = require('@vue/cli-service')
 const path = require("path");
 const resolve = path.resolve;
 const CAPACITOR_CFG_PATH= resolve(__dirname, "patch/ios/App/App/capacitor.config.json");
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = defineConfig({
   transpileDependencies: true,
@@ -46,6 +47,9 @@ module.exports = defineConfig({
 
         }
       },
+      plugins:[
+        new BundleAnalyzerPlugin()
+      ]
     };
   },
   css: {
