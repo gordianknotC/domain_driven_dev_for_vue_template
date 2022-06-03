@@ -8,8 +8,28 @@ container.page.page-main
     :showBack="true"
     @back="onClickBack"
   )
-
-
+  container.page-main-form
+    container.page-main-label UPI ID
+    container.page-main-input
+      input(v-model="upiValue")
+    container.page-main-description
+      span.text-label UPI ID should be in the format
+      span.font-bold.text-primary username@upihandle
+  container.page-main-submit
+    button PAY ₹500.00
+  container.page-main-sponsors
+    .flex-1
+    container.sponsor-gpay
+      img(:src="require('~/assets/mfi-GPay.png')")
+    container.sponsor-paytm
+      img(:src="require('~/assets/mfi-paytm.png')")
+    container.sponsor-amazonPay
+      img(:src="require('~/assets/mfi-amazon-pay.png')")
+    container.sponsor-upi
+      img(:src="require('~/assets/mfi-UPI.png')")
+    container.sponsor-y
+      img(:src="require('~/assets/mfi-y.png')")
+    .flex-1
 
 </template>
 
@@ -79,6 +99,55 @@ export default defineComponent({
   &-main{
     // todo: remove this
     @apply px-3;
+    &-form{
+      @apply flex flex-col justify-start text-left p-3;
+      height: 8.8rem;
+    }
+    &-label{
+      @apply font-bold text-label text-left mb-3;
+    }
+    &-input{
+      height:3rem;
+    }
+    &-description{
+      @apply flex flex-row text-xs mt-3;
+    }
+    &-submit{
+      height: 4.4rem;
+      padding: 1rem 2.2rem;
+      button{
+        @apply bg-primary text-white font-bold text-center items-center rounded w-full h-full;
+        &:hover{
+          @apply bg-primary-light;
+        }
+      }
+    }
+    &-sponsors{
+      @apply flex flex-row items-center;
+      height: 3rem;
+      padding:0.5rem;
+      img{
+        @apply mx-1;
+        height: auto;
+      }
+    }
+    .sponsor{
+      &-gpay{
+
+      }
+      &-paytm{
+
+      }
+      &-amazonPay{
+
+      }
+      &-upi{
+
+      }
+      &-y{
+
+      }
+    }
   }
 
   &-main::after{

@@ -33,7 +33,7 @@ export default defineComponent({
         currentIndex++;
         return colors[currentIndex % numbersOfSteps];
       },
-      outline: false
+      outline: true
     };
   }
 });

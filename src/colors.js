@@ -3,6 +3,7 @@
 module.exports = {
   primary: {
     DEFAULT: "#4285F4",
+    light: "#58b6ff",
     deep: "#000AFF",
     dark: "#0A0943", // 用於部份 chamfered button 上
     border: "#001971",
