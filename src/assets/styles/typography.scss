@@ -1,14 +1,5 @@
-//.page-title {
-//  @apply text-dark text-3xl font-SFProDisplay leading-normal font-medium mb-4;
-//  text-transform:capitalize;
-//}
-//
-//.page-sub-title {
-//  @apply text-dark text-2xl font-SFProDisplay leading-normal font-medium mb-4;
-//  text-transform:capitalize;
-//}
 
-.page-editor {
+body {
   h1, h2, h3, h4, h5, h6 {
     @apply text-label-dark leading-8 font-semibold mb-4 capitalize;
   }

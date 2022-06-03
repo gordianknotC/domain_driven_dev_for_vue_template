@@ -68,8 +68,6 @@ const clearToast = (): void => {
 };
 
 const MessageService = {
-  errorMessageHandler,
-  errorMessageToast,
   failToast,
   successToast,
   warningToast,
