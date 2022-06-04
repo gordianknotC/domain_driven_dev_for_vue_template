@@ -2,10 +2,12 @@
   "name": "vant_boilerplate",
   "author": "gordianknot",
   "version": "0.1.0",
+  "slug": "VantBoilerplate",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "BUILD=true vue-cli-service build",
+    "build": "VUE_APP_ENV=production vue-cli-service build",
+    "githubPage": "VUE_APP_ENV=githubPage vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
