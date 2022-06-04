@@ -27,12 +27,6 @@ module.exports = defineConfig({
         runtimeChunk: true,
         splitChunks: {
           chunks: "all",
-          minSize: 8000,
-          minRemainingSize: 0,
-          minChunks: 1,
-          maxAsyncRequests: 30,
-          maxInitialRequests: 30,
-          enforceSizeThreshold: 50000,
           cacheGroups: {
             common: {
               name: "chunk-common", // 打包后的文件名
@@ -50,11 +44,19 @@ module.exports = defineConfig({
               reuseExistingChunk: true,
               enforce: true
             },
-            vant: {
-              name: "vant",
-              test: /[\\/]node_modules[\\/]vant[\\/]/,
+            "core-js": {
+              name: "core-js",
+              test: /[\\/]node_modules[\\/]core-js[\\/]/,
               minSize: 0,
               priority: 3,
+              reuseExistingChunk: true,
+              enforce: true
+            },
+            "vue": {
+              name: "vue",
+              test: /[\\/]node_modules[\\/]vue[\\/]/,
+              minSize: 0,
+              priority: 4,
               reuseExistingChunk: true,
               enforce: true
             }
