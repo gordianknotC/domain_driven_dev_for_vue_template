@@ -1,10 +1,10 @@
 {
-  "name": "vant_boilerplate",
+  "name": "vue_boilerplate",
   "author": "gordianknot",
   "version": "0.1.0",
-  "slug": "VantBoilerplate",
+  "slug": "VueBoilerPlate",
   "private": true,
-  "github": "https://github.com/gordianknotC/VantBoilerplate.git",
+  "github": "https://github.com/gordianknotC/VueBoilerplate.git",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "VUE_APP_ENV=production vue-cli-service build",
