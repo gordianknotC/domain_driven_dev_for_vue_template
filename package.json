@@ -9,8 +9,9 @@
     "serve": "vue-cli-service serve",
     "build": "VUE_APP_ENV=production vue-cli-service build",
     "lint": "vue-cli-service lint",
+    "githubPage:genScript": "VUE_APP_ENV=githubPage node github_deploy.js",
     "githubPage:build": "VUE_APP_ENV=githubPage vue-cli-service build",
-    "githubPage:deploy": "VUE_APP_ENV=githubPage node github_deploy.js"
+    "githubPage:deploy": "VUE_APP_ENV=githubPage bash github_deploy.sh"
   },
   "dependencies": {
     "vue": "^3.2.13"

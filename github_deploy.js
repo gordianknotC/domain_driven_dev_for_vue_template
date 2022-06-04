@@ -4,14 +4,9 @@ const github = packageJson.github;
 const stringFormat = require("string-format");
 const renderedScript = stringFormat(template, {"github_repository": github})
 const sh = require("shelljs");
+const fs = require("fs");
+const deploy_script = "github_deploy.sh";
 
-renderedScript.split("\n").forEach((l)=>{
-  if (l.startsWith("#")){
-    sh.echo(l);
-  }else{
-    sh.echo(l);
-    sh.exec(l);
-  }
-});
-
-sh.exit(1);
+fs.writeFileSync(deploy_script, renderedScript);
+console.log("script generated successfully");
+sh.exit(0);
