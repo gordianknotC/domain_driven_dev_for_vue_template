@@ -10,10 +10,8 @@ renderedScript.split("\n").forEach((l)=>{
     sh.echo(l);
   }else{
     sh.echo(l);
-    // sh.exec(l);
+    sh.exec(l);
   }
 });
 
 sh.exit(1);
-
-console.log(process.env);
