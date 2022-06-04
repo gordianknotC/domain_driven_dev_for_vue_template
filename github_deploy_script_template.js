@@ -3,7 +3,7 @@ module.exports =  `
 set -e
 
 # 打包
-yarn build
+yarn githubPage:build
 
 # 移動至到打包後的dist目錄
 cd dist
