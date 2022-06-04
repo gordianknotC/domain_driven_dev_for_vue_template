@@ -68,8 +68,6 @@ module.exports = defineConfig({
         alias: {
           "~": resolve(__dirname, "src/"),
           "@": resolve(__dirname, "src/"),
-          "common_js_builtin": path.resolve("node_modules", "common_js_builtin"),
-
         }
       },
       plugins,
