@@ -1,3 +1,4 @@
+const {useYamlAsEnv, configSVGIcon, rewriteDistIndex, getEnv, generateBundledHtml} = require("./util");
 const { defineConfig } = require("@vue/cli-service")
 const path = require("path");
 const resolve = path.resolve;
@@ -10,6 +11,17 @@ const plugins = isGithubPageDeployment
   : [
     new BundleAnalyzerPlugin(),
   ];
+
+if (process.env.BUNDLED){
+  plugins.push({
+    apply: (compiler) => {
+      compiler.hooks.afterEmit.tap('AfterEmitPlugin', (compilation) => {
+        generateBundledHtml();
+        // rewriteDistIndex();
+      });
+    }
+  });
+}
 
 
 module.exports = defineConfig({
