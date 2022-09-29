@@ -4,7 +4,7 @@ container.page.page-main
   PaymentCard(
     title="UPI"
     subtitle="Instant Payment Using UPI App"
-    :imageUrl="require('~/assets/mfi-UPI.png')"
+    :imageUrl="require('~/presentation/assets/mfi-UPI.png')"
     :showBack="true"
     @back="onClickBack"
   )
@@ -20,25 +20,25 @@ container.page.page-main
   container.page-main-sponsors
     .flex-1
     container.sponsor-gpay
-      img(:src="require('~/assets/mfi-GPay.png')")
+      img(:src="require('~/presentation/assets/mfi-GPay.png')")
     container.sponsor-paytm
-      img(:src="require('~/assets/mfi-paytm.png')")
+      img(:src="require('~/presentation/assets/mfi-paytm.png')")
     container.sponsor-amazonPay
-      img(:src="require('~/assets/mfi-amazon-pay.png')")
+      img(:src="require('~/presentation/assets/mfi-amazon-pay.png')")
     container.sponsor-upi
-      img(:src="require('~/assets/mfi-UPI.png')")
+      img(:src="require('~/presentation/assets/mfi-UPI.png')")
     container.sponsor-y
-      img(:src="require('~/assets/mfi-y.png')")
+      img(:src="require('~/presentation/assets/mfi-y.png')")
     .flex-1
 
 </template>
 
 <script lang="ts">
 import {defineComponent, reactive, ref, toRefs} from "vue";
-import Container from "~/components/Container.vue";
+import Container from "~/presentation/components/Container.vue";
 import mainStore from "~/service/store";
-import PaymentCard from "~/components/PaymentCard.vue";
-import Header from "~/components/Header.vue";
+import PaymentCard from "~/presentation/components/PaymentCard.vue";
+import Header from "~/presentation/components/Header.vue";
 
 
 export default defineComponent({
@@ -79,7 +79,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import "src/assets/styles/container";
+@import "src/presentation/assets/styles/container";
 
 
 
@@ -152,7 +152,7 @@ export default defineComponent({
 
   //&-main::after{
   //  content: "";
-  //  background-image: url("~@/assets/Main-UPI.png");
+  //  background-image: url("src/presentation/assets/Main-UPI.png");
   //  background-size: contain;
   //  background-repeat-x: no-repeat;
   //  background-position-x: center;

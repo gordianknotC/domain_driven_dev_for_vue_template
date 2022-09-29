@@ -1,4 +1,4 @@
-import {WritableComputedRef}    from "@vue/reactivity";
+import {WritableComputedRef} from "@vue/reactivity";
 import {computed} from "vue";
 type TEmitFn<E> = (event: E, ...args: any[])=>void;
 
@@ -22,7 +22,7 @@ export class CommonMixin {
 
   asVModel<R, T extends object=any>(param: TAsVModelParam<T>): WritableComputedRef<R>{
     const {props, propName, emit, onSet, onChange} = param;
-    const event = `update:${propName}`;
+    const event = `update:${String(propName)}`;
     this.vModelEvents.add(event as any);
     let initialValue:any;
     return computed({

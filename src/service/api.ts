@@ -1,7 +1,5 @@
 import axios from "axios";
 import {
-  IRequestOtpThruPhonePayload, ISignUpPayload, ISignUpResponse,
-  IVerifyOTPPayload,
   TSuccessResponse
 } from "~/service/apiTypes";
 
@@ -25,7 +23,6 @@ export const requestError = async (error: any) => {
   console.log(error);
   return Promise.reject(error);
 }
-
 
 export const mainAxios = axios.create({
   baseURL: API_DOMAIN,

@@ -8,10 +8,10 @@
 
 <script lang="ts">
 import {defineComponent, reactive, ref, toRefs} from "vue";
-import Container from "~/components/Container.vue";
-import Entry from "~/views/Entry.vue";
-import UPI from "~/views/UPI.vue";
-import Wallet from "~/views/Wallet.vue";
+import Container from "~/presentation/components/Container.vue";
+import Entry from "~/presentation/pages/Entry.vue";
+import UPI from "~/presentation/pages/UPI.vue";
+import Wallet from "~/presentation/pages/Wallet.vue";
 import mainStore, {TRouteName} from "~/service/store";
 
 export default defineComponent({

@@ -1,8 +1,31 @@
 const path = require("path");
-const { parse, HTMLElement } = require('node-html-parser');
 const fs = require("fs");
 
+
+
+// function trySyncWithIOSPatch(){
+//   if (fs.existsSync("ios") && FOLDER_SYNC === "true") {
+//     const capacitorCfgString = fs.readFileSync(CAPACITOR_CFG_PATH, "utf-8");
+//     const capacitorObj = JSON.parse(capacitorCfgString);
+//     capacitorObj.webDir = VITE_APP_ENV;
+//     const newCapacitorString = JSON.stringify(capacitorObj);
+//     fs.writeFileSync(CAPACITOR_CFG_PATH, newCapacitorString);
+//     copyDir.sync(IOS_SYNC_FOLDER, "ios");
+//   }
+// }
+
 const ENV = {};
+
+/**
+ *  用於定義 env variables, 之後使用 getEnv, 方便寫入 vue global
+ *  key: environment key
+ *  val: value
+ * */
+function asEnv(key, val){
+  ENV[key] = JSON.stringify(val);
+  return val;
+}
+
 
 function useYamlAsEnv(yaml, {override} = {override: true}){
   Object.keys(yaml).forEach((key)=>{
@@ -14,17 +37,6 @@ function useYamlAsEnv(yaml, {override} = {override: true}){
       }
     }
   });
-}
-
-
-/**
- *  用於定義 env variables, 之後使用 getEnv, 方便寫入 vue global
- *  key: environment key
- *  val: value
- * */
-function asEnv(key, val){
-  ENV[key] = JSON.stringify(val);
-  return val;
 }
 
 /**
@@ -39,7 +51,7 @@ function getEnv(){
 function configSVGIcon(config) {
   config.module
     .rule("svg")
-    .exclude.add(path.resolve(__dirname, "./src/assets/icons"))
+    .exclude.add(path.resolve(__dirname, "./presentation/assets/icons"))
     .end();
 
   // Options used by svgo-loader to optimize SVG files
@@ -89,7 +101,7 @@ function configSVGIcon(config) {
   config.module
     .rule("svg-icon")
     .test(/\.svg$/)
-    .include.add(path.resolve(__dirname, "./src/assets/icons"))
+    .include.add(path.resolve(__dirname, "./presentation/assets/icons"))
     .end()
     .use("svg-sprite-loader")
     .loader("svg-sprite-loader")
@@ -105,65 +117,9 @@ function configSVGIcon(config) {
 
 
 
-function _rewriteAttrPath(s, attrName, newBasePath){
-  const path = s.getAttribute(attrName);
-  const filename = path.split("/")[path.split("/").length - 1];
-  const newSrc = `${newBasePath}/${filename}`
-  s.setAttribute(attrName, newSrc);
-}
-
-// 用於 server side render
-function rewriteDistIndex(){
-  const index = fs.readFileSync("./dist/index.html").toString();
-  const dom = parse(index);
-  const scripts = dom.querySelector("head").querySelectorAll("script[defer]");
-  const csses = dom.querySelector("head").querySelectorAll("link[rel=stylesheet]");
-  const favicon = dom.querySelector("head").querySelector("link[rel=icon]");
-  _rewriteAttrPath(favicon, "href", "{{image_domain}}/image")
-
-  scripts.forEach((s)=>{
-    _rewriteAttrPath(s, "src", "{{js_domain}}")
-  });
-
-  csses.forEach((s)=>{
-    _rewriteAttrPath(s, "href", "{{css_domain}}")
-  });
-
-  fs.writeFileSync("./dist/new_payment_template_not_bundled.html", dom.toString() );
-}
-
-function _dumpAttrPathIntoDom(s, attrName, targetTagName){
-  const scriptPath = s.getAttribute(attrName);
-  const content = fs.readFileSync(path.join(path.join(__dirname, "dist"), scriptPath));
-  const newDom =  parse(`<${targetTagName}>${content}</${targetTagName}>`)
-  s.setAttribute(attrName, "");
-  return newDom;
-}
-
-function generateBundledHtml(){
-  const index = fs.readFileSync("./dist/index.html");
-  const dom = parse(index);
-  const scripts = dom.querySelector("head").querySelectorAll("script[defer]");
-  const csses = dom.querySelector("head").querySelectorAll("link[rel=stylesheet]");
-
-  scripts.forEach((s)=>{
-    const newDom = _dumpAttrPathIntoDom(s, "src", "script")
-    dom.querySelector("body").appendChild(newDom);
-  });
-
-  csses.forEach((s)=>{
-    const newDom = _dumpAttrPathIntoDom(s, "href", "style")
-    dom.querySelector("head").appendChild(newDom);
-  });
-
-  fs.writeFileSync("./bundled/index.html", dom.toString() );
-}
-
 module.exports = {
   configSVGIcon,
   asEnv,
   getEnv,
   useYamlAsEnv,
-  rewriteDistIndex,
-  generateBundledHtml
 }

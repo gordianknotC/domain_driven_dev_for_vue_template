@@ -18,8 +18,8 @@ module.exports = {
   rules: {
     "no-console": "off",
     "no-debugger": "off",
-    // "no-console": process.env.VUE_APP_ENV === "production" ? "warn" : "off",
-    // "no-debugger": process.env.VUE_APP_ENV === "production" ? "warn" : "off",
+    // "no-console": process.env.VITE_APP_ENV === "production" ? "warn" : "off",
+    // "no-debugger": process.env.VITE_APP_ENV === "production" ? "warn" : "off",
     "@typescript-eslint/ban-ts-ignore": "off",
     "@typescript-eslint/ban-ts-comment": "off",
     "@typescript-eslint/ban-types": "off",

@@ -1,27 +1,15 @@
-const {useYamlAsEnv, configSVGIcon, rewriteDistIndex, getEnv, generateBundledHtml} = require("./util");
 const { defineConfig } = require("@vue/cli-service")
 const path = require("path");
 const resolve = path.resolve;
-const CAPACITOR_CFG_PATH= resolve(__dirname, "patch/ios/App/App/capacitor.config.json");
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 const pjson = require("./package.json");
-const isGithubPageDeployment = process.env.VUE_APP_ENV === "githubPage";
+const isGithubPageDeployment = process.env.VITE_APP_ENV === "githubPage";
 const plugins = isGithubPageDeployment
   ? []
   : [
     new BundleAnalyzerPlugin(),
   ];
 
-if (process.env.BUNDLED){
-  plugins.push({
-    apply: (compiler) => {
-      compiler.hooks.afterEmit.tap('AfterEmitPlugin', (compilation) => {
-        generateBundledHtml();
-        // rewriteDistIndex();
-      });
-    }
-  });
-}
 
 
 module.exports = defineConfig({
@@ -33,7 +21,7 @@ module.exports = defineConfig({
   // outputDir: "../tempSiteForTestingOnly.github.io",
   configureWebpack: config => {
     let optimization = {};
-    if (process.env.VUE_APP_ENV) {
+    if (process.env.VITE_APP_ENV) {
       optimization = {
         minimize: true,
         runtimeChunk: true,
@@ -91,7 +79,7 @@ module.exports = defineConfig({
     sourceMap: false,
     loaderOptions: {
       sass: {
-        prependData: "@import '@/assets/styles/mixin';"
+        prependData: "@import '@/presentation/assets/styles/mixin';"
       }
     },
     extract: {

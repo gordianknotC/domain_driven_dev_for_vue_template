@@ -5,14 +5,14 @@ container.page.page-main
   PaymentCard(
     title="UPI"
     subtitle="Instant Payment Using UPI App"
-    :imageUrl="require('~/assets/mfi-UPI.png')"
+    :imageUrl="require('~/presentation/assets/mfi-UPI.png')"
     :showBack="false"
     @route="onClickUPI"
   )
   PaymentCard(
     title="EWallet"
     subtitle="PhonePe.Paytm & more"
-    :imageUrl="require('~/assets/mfi-EWallet.png')"
+    :imageUrl="require('~/presentation/assets/mfi-EWallet.png')"
     :showBack="false"
     @route="onClickWallet"
   )
@@ -20,10 +20,10 @@ container.page.page-main
 
 <script lang="ts">
 import {defineComponent, reactive, ref, toRefs} from "vue";
-import Container from "~/components/Container.vue";
+import Container from "~/presentation/components/Container.vue";
 import mainStore from "~/service/store";
-import PaymentCard from "~/components/PaymentCard.vue";
-import Header from "~/components/Header.vue";
+import PaymentCard from "~/presentation/components/PaymentCard.vue";
+import Header from "~/presentation/components/Header.vue";
 export default defineComponent({
   name: "Entry",
   components: {
@@ -70,7 +70,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import "src/assets/styles/container";
+@import "src/presentation/assets/styles/container";
 
 .page{
   .title{
@@ -96,7 +96,7 @@ export default defineComponent({
 
   //&-main::after{
   //  content: "";
-  //  background-image: url("~@/assets/Main.png");
+  //  background-image: url("src/presentation/assets/Main.png");
   //  background-size: contain;
   //  background-repeat-x: no-repeat;
   //  background-position-x: center;

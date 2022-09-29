@@ -4,7 +4,7 @@ container.page.page-main
   PaymentCard(
     title="EWallet"
     subtitle="PhonePe.Paytm & more"
-    :imageUrl="require('~/assets/mfi-UPI.png')"
+    :imageUrl="require('~/presentation/assets/mfi-UPI.png')"
     :showBack="true"
     @back="onClickBack"
   )
@@ -12,33 +12,33 @@ container.page.page-main
     container.hover-card.card-paytm(
       @click="()=>setWallet(EWalletType.paytm)"
       :class="[walletType===EWalletType.paytm ? 'chosen-card' : '']")
-      img(:src="require('~/assets/mfi-paytm.png')")
+      img(:src="require('~/presentation/assets/mfi-paytm.png')")
       span paytm
     container.hover-card.card-amazon(
       @click="()=>setWallet(EWalletType.amazon)"
       :class="[walletType===EWalletType.amazon ? 'chosen-card' : '']")
-      img(:src="require('~/assets/mfi-amazon-pay.png')")
+      img(:src="require('~/presentation/assets/mfi-amazon-pay.png')")
       span amazon
     container.hover-card.card-gpay(
       @click="()=>setWallet(EWalletType.gpay)"
       :class="[walletType===EWalletType.gpay ? 'chosen-card' : '']")
-      img(:src="require('~/assets/mfi-google-pay.png')")
+      img(:src="require('~/presentation/assets/mfi-google-pay.png')")
       span gpay
   container.card-row
     container.hover-card.card-ola(
       @click="()=>setWallet(EWalletType.ola)"
       :class="[walletType===EWalletType.ola ? 'chosen-card' : '']")
-      img(:src="require('~/assets/mfi-ola-money.png')")
+      img(:src="require('~/presentation/assets/mfi-ola-money.png')")
       span ola money
     container.hover-card.card-jio(
       @click="()=>setWallet(EWalletType.jio)"
       :class="[walletType===EWalletType.jio ? 'chosen-card' : '']")
-      img(:src="require('~/assets/mfi-jio-money.png')")
+      img(:src="require('~/presentation/assets/mfi-jio-money.png')")
       span jio money
     container.hover-card.card-free(
       @click="()=>setWallet(EWalletType.freecharge)"
       :class="[walletType===EWalletType.freecharge ? 'chosen-card' : '']")
-      img(:src="require('~/assets/mfi-freecharge.png')")
+      img(:src="require('~/presentation/assets/mfi-freecharge.png')")
       span freecharge
 
   container.page-main-submit
@@ -48,10 +48,10 @@ container.page.page-main
 
 <script lang="ts">
 import {defineComponent, reactive, ref, toRefs} from "vue";
-import Container from "~/components/Container.vue";
+import Container from "~/presentation/components/Container.vue";
 import mainStore, {EWalletType} from "~/service/store";
-import PaymentCard from "~/components/PaymentCard.vue";
-import Header from "~/components/Header.vue";
+import PaymentCard from "~/presentation/components/PaymentCard.vue";
+import Header from "~/presentation/components/Header.vue";
 
 
 export default defineComponent({
@@ -98,7 +98,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import "src/assets/styles/container";
+@import "src/presentation/assets/styles/container";
 
 
 .page{
@@ -132,7 +132,7 @@ export default defineComponent({
 
   //&-main::after{
   //  content: "";
-  //  background-image: url("~@/assets/Main-EWallet.png");
+  //  background-image: url("src/presentation/assets/Main-EWallet.png");
   //  background-size: contain;
   //  background-repeat-x: no-repeat;
   //  background-position-x: center;

@@ -1,14 +1,9 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-// import "vant/lib/index.css";
-import "~/assets/styles/tailwind.scss";
-// import {installVant, setupVToast} from "@/plugins/vantPlugin";
-import svgIconPlugin from "@/plugins/svgIcon";
+import "~/presentation/assets/styles/tailwind.scss";
+import {setupAppDependencies} from "~/domain/app/app_dependencies_setup";
+import {setupAppPlugins} from "~/third_parties/plugins/app_plugins_setup";
+const app = createApp(App as any);
 
-
-
-const app = createApp(App as any)
-// installVant(app);
-// setupVToast(app);
-app.use(svgIconPlugin, {imports: []});
-app.mount('#app');
+setupAppPlugins(app);
+setupAppDependencies(app, true);

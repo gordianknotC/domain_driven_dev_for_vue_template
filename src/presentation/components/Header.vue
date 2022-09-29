@@ -3,7 +3,7 @@ section
   container.list-tile.page-main-header
     container.page-main-header-container
       container.page-main-header--left
-        img(:src="require('~/assets/mfi-logo.png')")
+        img(:src="require('~/presentation/assets/mfi-logo.png')")
       container.page-main-header--right
         span OPTGIC NETWORK PRIVATE LIMITED
 
@@ -16,7 +16,7 @@ section
 
 <script lang="ts">
 import {defineComponent, reactive, ref, toRefs} from "vue";
-import Container from "~/components/Container.vue";
+import Container from "~/presentation/components/Container.vue";
 
 export default defineComponent({
   name: "Header",
@@ -35,7 +35,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import "src/assets/styles/container";
+@import "src/presentation/assets/styles/container";
 
 .page{
   .title{

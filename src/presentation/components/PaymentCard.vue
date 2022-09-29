@@ -18,7 +18,7 @@ container.hover-card.upi(@click="onRoute")
 
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
-import Container from "~/components/Container.vue";
+import Container from "~/presentation/components/Container.vue";
 import mainStore from "~/service/store";
 
 export default defineComponent({
@@ -60,7 +60,7 @@ export default defineComponent({
 });
 </script>
 <style lang="scss" scoped>
-@import "src/assets/styles/container";
+@import "src/presentation/assets/styles/container";
 
 .title{
   @apply text-left font-Lexend font-bold text-dark;

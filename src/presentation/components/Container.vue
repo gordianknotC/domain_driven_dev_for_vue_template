@@ -8,7 +8,7 @@ section(
 
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
-import {rainbow} from "~/utils/color";
+import {rainbow} from "~/app/utils/color";
 
 
 const numbersOfSteps = 50;
