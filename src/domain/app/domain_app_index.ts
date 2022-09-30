@@ -1,9 +1,9 @@
-import {App} from "vue";
-import {injectFacade} from "common_js_builtin/dist";
-import {setupDataCoreServices} from "~/data_source/core/data_source_core_index";
-import {setupRepositories} from "~/data_source/repositories/repositories_index";
-import {setupAppPlugins} from "~/domain/app/third_parties/plugins/plugins_index";
-import {setupMappers} from "~/data_source/mappers/mappers_index";
+import { App } from "vue";
+import { injectFacade } from "common_js_builtin/dist";
+import { setupDataCoreServices } from "~/data_source/core/data_source_core_index";
+import { setupRepositories } from "~/data_source/repositories/repositories_index";
+import { setupAppPlugins } from "~/domain/app/third_parties/plugins/plugins_index";
+import { setupMappers } from "~/data_source/mappers/mappers_index";
 import { setupPresentationControllers } from "~/presentation/controller/controller_index";
 
 /**
@@ -15,13 +15,15 @@ import { setupPresentationControllers } from "~/presentation/controller/controll
  *    5) all presentation controllers
  *
  * */
-export
-function setupDomainDependencies(app: App<Element>, applyMount: boolean) {
+export function setupDomainDependencies(
+  app: App<Element>,
+  applyMount: boolean
+) {
   setupAppPlugins(app);
   setupMappers();
   setupRepositories();
   setupDataCoreServices();
   setupPresentationControllers(app, false);
-  app.mount('#app');
+  app.mount("#app");
   setupPresentationControllers(app, true);
 }

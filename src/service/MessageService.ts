@@ -29,8 +29,8 @@ const errorMessageToast = (msg: any): void => {
   if (errorData?.error_code) {
     ElMessage.error(
       errorData?.message ??
-      errorData?.error_msg ??
-      "Internet connection is poor, please try again later"
+        errorData?.error_msg ??
+        "Internet connection is poor, please try again later"
     );
   } else {
     ElMessage.error("Internet connection is poor, please try again later");

@@ -8,8 +8,7 @@ section(
 
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
-import {rainbow} from "~/app/utils/color";
-
+import { rainbow } from "~/app/utils/color";
 
 const numbersOfSteps = 50;
 const colors: string[] = [];
@@ -23,13 +22,13 @@ let currentIndex = -1;
 export default defineComponent({
   name: "Container",
   props: {
-    bgImage:{
-      type: String,
+    bgImage: {
+      type: String
     }
   },
   setup() {
     return {
-      color(){
+      color() {
         currentIndex++;
         return colors[currentIndex % numbersOfSteps];
       },
@@ -39,10 +38,8 @@ export default defineComponent({
 });
 </script>
 <style lang="scss" scoped>
-.outline{
+.outline {
   outline: 1px solid;
   outline-offset: -1px;
 }
-
-
 </style>

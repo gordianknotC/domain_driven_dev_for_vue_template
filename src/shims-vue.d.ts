@@ -18,11 +18,11 @@ declare module "*.png" {
 declare global {
   const process: {
     env: {
-      NODE_ENV:string,
-      VITE_APP_VERSION:string,
-      VITE_APP_API_HOST:string,
-      VITE_APP_IMG_HOST:string,
-      VITE_APP_OUTPUT_DIR:string,
-    }
-  }
+      NODE_ENV: string;
+      VITE_APP_VERSION: string;
+      VITE_APP_API_HOST: string;
+      VITE_APP_IMG_HOST: string;
+      VITE_APP_OUTPUT_DIR: string;
+    };
+  };
 }

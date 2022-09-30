@@ -7,12 +7,12 @@
 </template>
 
 <script lang="ts">
-import {defineComponent, reactive, ref, toRefs} from "vue";
+import { defineComponent, reactive, ref, toRefs } from "vue";
 import Container from "~/presentation/components/Container.vue";
 import Entry from "~/presentation/pages/Entry.vue";
 import UPI from "~/presentation/pages/UPI.vue";
 import Wallet from "~/presentation/pages/Wallet.vue";
-import mainStore, {TRouteName} from "~/service/store";
+import mainStore, { TRouteName } from "~/service/store";
 
 export default defineComponent({
   name: "App",
@@ -21,58 +21,52 @@ export default defineComponent({
     Entry,
     UPI,
     Wallet
-
   },
   props: {
     invitationCode: {
       type: String
     }
   },
-  emit:["close"],
-  setup(props, {emit}) {
+  emit: ["close"],
+  setup(props, { emit }) {
     const state = reactive({
       isDialogVisible: false,
       username: "",
-      password: "",
-    })
+      password: ""
+    });
     const loading = ref(false);
     /** 儲存參數 */
     return {
       ...toRefs(mainStore.state),
       loading,
-      onRoute(route: TRouteName){
+      onRoute(route: TRouteName) {
         mainStore.routeTo(route);
       }
     };
   }
 });
-
 </script>
 
 <style lang="scss">
-
-#app{
+#app {
   @apply flex text-center justify-center;
-  margin:auto;
+  margin: auto;
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   height: 100vh;
 
-  @include tablet{
+  @include tablet {
     @apply h-full items-center;
     max-width: 530px;
   }
-  @include mobile{
+  @include mobile {
     @apply w-full h-full;
     max-width: 100%;
   }
-  @include mini{
+  @include mini {
     @apply w-full h-full;
     max-width: 100%;
   }
 }
-
-
-
 </style>

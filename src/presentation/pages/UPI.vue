@@ -34,12 +34,11 @@ container.page.page-main
 </template>
 
 <script lang="ts">
-import {defineComponent, reactive, ref, toRefs} from "vue";
+import { defineComponent, reactive, ref, toRefs } from "vue";
 import Container from "~/presentation/components/Container.vue";
 import mainStore from "~/service/store";
 import PaymentCard from "~/presentation/components/PaymentCard.vue";
 import Header from "~/presentation/components/Header.vue";
-
 
 export default defineComponent({
   name: "UPI",
@@ -53,99 +52,90 @@ export default defineComponent({
       type: String
     }
   },
-  emit:["close", "route"],
-  setup(props, {emit}) {
+  emit: ["close", "route"],
+  setup(props, { emit }) {
     const loading = ref(false);
-    const onClickUPI = ()=>{
+    const onClickUPI = () => {
       mainStore.routeTo("UPI");
-    }
-    const onClickWallet = ()=>{
+    };
+    const onClickWallet = () => {
       mainStore.routeTo("Wallet");
-    }
-    const onClickBack=()=>{
+    };
+    const onClickBack = () => {
       console.log("back");
       mainStore.routeBack();
-    }
+    };
     /** 儲存參數 */
     return {
       loading,
       onClickUPI,
       onClickWallet,
-      onClickBack,
+      onClickBack
     };
   }
 });
-
 </script>
 
 <style lang="scss" scoped>
 @import "src/assets/styles/container";
 
-
-
-.page{
-  .title{
+.page {
+  .title {
     @apply text-left font-Lexend font-bold text-dark;
   }
-  .subtitle{
+  .subtitle {
     @apply text-left text-label;
-
   }
 
   @apply h-full relative;
   height: 100vh;
   width: 375px;
 
-  &-main{
+  &-main {
     // todo: remove this
     @apply px-3;
-    &-form{
+    &-form {
       @apply flex flex-col justify-start text-left p-3;
       height: 8.8rem;
     }
-    &-label{
+    &-label {
       @apply font-bold text-label text-left mb-3;
     }
-    &-input{
-      height:3rem;
+    &-input {
+      height: 3rem;
     }
-    &-description{
+    &-description {
       @apply flex flex-row text-xs mt-3;
     }
-    &-submit{
+    &-submit {
       height: 4.4rem;
       padding: 1rem 2.2rem;
-      button{
+      button {
         @apply bg-primary text-white font-bold text-center items-center rounded w-full h-full;
-        &:hover{
+        &:hover {
           @apply bg-primary-light;
         }
       }
     }
-    &-sponsors{
+    &-sponsors {
       @apply flex flex-row items-center;
       height: 3rem;
-      padding:0.5rem;
-      img{
+      padding: 0.5rem;
+      img {
         @apply mx-1;
         height: auto;
       }
     }
-    .sponsor{
-      &-gpay{
-
+    .sponsor {
+      &-gpay {
       }
-      &-paytm{
-
+      &-paytm {
       }
-      &-amazonPay{
-
+      &-amazonPay {
       }
-      &-upi{
-
+      &-upi {
       }
-      &-y{
-
+      &-y {
       }
     }
   }
@@ -165,8 +155,4 @@ export default defineComponent({
   //  z-index: -10;
   //}
 }
-
-
-
-
 </style>

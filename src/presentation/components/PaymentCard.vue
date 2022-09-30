@@ -24,37 +24,37 @@ import mainStore from "~/service/store";
 export default defineComponent({
   name: "PaymentCard",
   props: {
-    title:{
+    title: {
       type: String,
       require: true
     },
-    subtitle:{
+    subtitle: {
       type: String,
       require: true
     },
-    imageUrl:{
+    imageUrl: {
       type: String,
-      require: true,
+      require: true
     },
-    showBack:{
+    showBack: {
       type: Boolean,
       default: false
     }
   },
-  components:{
+  components: {
     Container
   },
-  emits:["back", "route"],
-  setup(prop, {emit}) {
-    const onRoute = ()=>{
-      emit("route")
-    }
-    const onClickBack=()=>{
-      emit("back")
-    }
+  emits: ["back", "route"],
+  setup(prop, { emit }) {
+    const onRoute = () => {
+      emit("route");
+    };
+    const onClickBack = () => {
+      emit("back");
+    };
     return {
       onRoute,
-      onClickBack,
+      onClickBack
     };
   }
 });
@@ -62,27 +62,27 @@ export default defineComponent({
 <style lang="scss" scoped>
 @import "src/assets/styles/container";
 
-.title{
+.title {
   @apply text-left font-Lexend font-bold text-dark;
 }
-.subtitle{
+.subtitle {
   @apply text-left text-label;
 }
 
-.upi{
+.upi {
   @apply border-label;
   border: solid 1px;
   height: $card-h;
   max-height: $card-h;
-  &-container{
+  &-container {
     @apply flex flex-row justify-start items-center;
     height: auto;
-    &--left{
+    &--left {
       width: 2.4rem;
     }
-    &--right{
+    &--right {
       @apply w-full;
-      &-container{
+      &-container {
         @apply flex flex-row justify-between;
       }
     }

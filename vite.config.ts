@@ -47,6 +47,8 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
     },
     server: {
       port: 8088,
+      host: "127.0.0.1"
+
     },
     css: {
       preprocessorOptions: {
@@ -63,34 +65,34 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
       viteCommonjs(),
       // 讓 process.env 可以被存取
       envCompatible(),
-      injectHtml({
-        injectData: {
-          htmlWebpackPlugin: {
-            options: {
-              title: 'Fantasyee',
-              pwa: {
-                name: 'Fantasyee',
-                themeColor: '#1915bf',
-                msTileColor: '#000000',
-                appleMobileWebAppCapable: 'yes',
-                appleMobileWebAppStatusBarStyle: 'black',
-                workboxPluginMode: 'GenerateSW',
-                workboxOptions: {
-                  skipWaiting: true,
-                  clientsClaim: true,
-                },
-                iconPaths: {
-                  favicon32: "img/icons/favicon-32x32.png",
-                  favicon16: "img/icons/favicon-16x16.png",
-                  appleTouchIcon: "img/icons/apple-touch-icon-152x152.png",
-                  maskIcon: "img/icons/safari-pinned-tab.svg",
-                  msTileImage: "img/icons/msapplication-icon-144x144"
-                },
-              }
-            }
-          }
-        }
-      }),
+      // injectHtml({
+      //   injectData: {
+      //     htmlWebpackPlugin: {
+      //       options: {
+      //         title: 'Fantasyee',
+      //         pwa: {
+      //           name: 'Fantasyee',
+      //           themeColor: '#1915bf',
+      //           msTileColor: '#000000',
+      //           appleMobileWebAppCapable: 'yes',
+      //           appleMobileWebAppStatusBarStyle: 'black',
+      //           workboxPluginMode: 'GenerateSW',
+      //           workboxOptions: {
+      //             skipWaiting: true,
+      //             clientsClaim: true,
+      //           },
+      //           iconPaths: {
+      //             favicon32: "img/icons/favicon-32x32.png",
+      //             favicon16: "img/icons/favicon-16x16.png",
+      //             appleTouchIcon: "img/icons/apple-touch-icon-152x152.png",
+      //             maskIcon: "img/icons/safari-pinned-tab.svg",
+      //             msTileImage: "img/icons/msapplication-icon-144x144"
+      //           },
+      //         }
+      //       }
+      //     }
+      //   }
+      // }),
       pugPlugin(options, locals),
       createSvgIconsPlugin({
         // Specify the icon folder to be cached

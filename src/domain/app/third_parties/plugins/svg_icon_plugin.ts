@@ -1,11 +1,10 @@
 //@ts-ignore
 import SvgIcon from "~/presentation/components/SvgIcon.vue";
-import {App} from "vue";
+import { App } from "vue";
 
-export
-function setupSvg(app: App<Element>){
+export function setupSvg(app: App<Element>) {
   const componentPlugin: any = {
-    install: function(vue: any, options: any) {
+    install: function (vue: any, options: any) {
       if (
         options &&
         options.imports &&
@@ -30,5 +29,5 @@ function setupSvg(app: App<Element>){
       vue.component(SvgIcon.name, SvgIcon);
     }
   };
-  app.use(componentPlugin, {imports: []});
+  app.use(componentPlugin, { imports: [] });
 }

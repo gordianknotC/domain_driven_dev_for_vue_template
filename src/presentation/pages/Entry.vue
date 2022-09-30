@@ -19,7 +19,7 @@ container.page.page-main
 </template>
 
 <script lang="ts">
-import {defineComponent, reactive, ref, toRefs} from "vue";
+import { defineComponent, reactive, ref, toRefs } from "vue";
 import Container from "~/presentation/components/Container.vue";
 import mainStore from "~/service/store";
 import PaymentCard from "~/presentation/components/PaymentCard.vue";
@@ -30,31 +30,30 @@ export default defineComponent({
     Container,
     PaymentCard,
     Header
-
   },
   props: {
     invitationCode: {
       type: String
     }
   },
-  emit:["close", "route"],
-  setup(props, {emit}) {
+  emit: ["close", "route"],
+  setup(props, { emit }) {
     const state = reactive({
       isDialogVisible: false,
       username: "",
-      password: "",
-    })
+      password: ""
+    });
     const loading = ref(false);
-    const onClickUPI = ()=>{
+    const onClickUPI = () => {
       mainStore.routeTo("UPI");
-    }
-    const onClickWallet = ()=>{
+    };
+    const onClickWallet = () => {
       mainStore.routeTo("Wallet");
-    }
-    const onClickBack=()=>{
+    };
+    const onClickBack = () => {
       console.log("back");
       mainStore.routeBack();
-    }
+    };
     /** 儲存參數 */
     return {
       ...toRefs(state),
@@ -62,21 +61,19 @@ export default defineComponent({
       onClickUPI,
       onClickWallet,
       onClickBack
-
     };
   }
 });
-
 </script>
 
 <style lang="scss" scoped>
 @import "src/assets/styles/container";
 
-.page{
-  .title{
+.page {
+  .title {
     @apply text-left font-Lexend font-bold text-dark;
   }
-  .subtitle{
+  .subtitle {
     @apply text-left text-label;
   }
 
@@ -84,11 +81,11 @@ export default defineComponent({
   height: 100vh;
   width: 375px;
 
-  &-main{
+  &-main {
     // todo: remove this
     @apply px-3;
 
-    &-separator{
+    &-separator {
       @apply p-4 font-Lexend font-bold text-dark text-left;
       height: 3.6rem;
     }
@@ -108,12 +105,5 @@ export default defineComponent({
   //  position: absolute;
   //  z-index: -10;
   //}
-
-
 }
-
-
-
-
-
 </style>

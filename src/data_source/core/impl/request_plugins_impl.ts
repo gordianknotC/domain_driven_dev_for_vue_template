@@ -1,13 +1,13 @@
-import {ClientServicePlugins} from "~/data_source/core/interfaces/client_service_plugin";
-import {AxiosRequestConfig} from "axios";
+import { ClientServicePlugins } from "~/data_source/core/interfaces/client_service_plugin";
+import { AxiosRequestConfig } from "axios";
 import { RemoteClientService } from "src/data_source/core/interfaces/remote_client_service";
 
 type AxiosConfigHeader = {
   common: {
-    Authorization: string,
-    Version: string,
-  }
-}
+    Authorization: string;
+    Version: string;
+  };
+};
 
 abstract class BaseClientServiceRequestPlugin extends ClientServicePlugins<AxiosRequestConfig> {
   get canGoNext(): boolean {
@@ -33,15 +33,18 @@ abstract class BaseClientServiceRequestPlugin extends ClientServicePlugins<Axios
   }
 }
 
-
 export class UpdateRequestHeaderGuardImpl extends BaseClientServiceRequestPlugin {
   client?: RemoteClientService | undefined;
-  prev?: ClientServicePlugins<AxiosRequestConfig<any>, AxiosRequestConfig<any>> | undefined;
-  next?: ClientServicePlugins<AxiosRequestConfig<any>, AxiosRequestConfig<any>> | undefined;
+  prev?:
+    | ClientServicePlugins<AxiosRequestConfig<any>, AxiosRequestConfig<any>>
+    | undefined;
+  next?:
+    | ClientServicePlugins<AxiosRequestConfig<any>, AxiosRequestConfig<any>>
+    | undefined;
   process(config: AxiosRequestConfig): AxiosRequestConfig {
-    if (this.canProcess){
+    if (this.canProcess) {
       const header = config.headers as any as AxiosConfigHeader;
-      header.common.Authorization = facade.userReact.state.token ;
+      header.common.Authorization = facade.userReact.state.token;
     }
     return super.process(config);
   }

@@ -3,7 +3,7 @@
     class="svg-icon"
     :style="{
       width: props.width,
-      height: props.height,
+      height: props.height
     }"
   >
     <use :xlink:href="`#icon-${props.name}`" />

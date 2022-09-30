@@ -1,7 +1,5 @@
-
 // todo: define error code here...
-export enum EErrorCode {
-}
+export enum EErrorCode {}
 
 export type TPager = {
   page: number;
@@ -29,5 +27,3 @@ export type TDataResponse<T> = {
 };
 
 export type TResponse = Partial<TSuccessResponse & TDataResponse<any>>;
-
-

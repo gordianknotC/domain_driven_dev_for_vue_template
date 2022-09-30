@@ -47,12 +47,11 @@ container.page.page-main
 </template>
 
 <script lang="ts">
-import {defineComponent, reactive, ref, toRefs} from "vue";
+import { defineComponent, reactive, ref, toRefs } from "vue";
 import Container from "~/presentation/components/Container.vue";
-import mainStore, {EWalletType} from "~/service/store";
+import mainStore, { EWalletType } from "~/service/store";
 import PaymentCard from "~/presentation/components/PaymentCard.vue";
 import Header from "~/presentation/components/Header.vue";
-
 
 export default defineComponent({
   name: "Wallet",
@@ -66,19 +65,19 @@ export default defineComponent({
       type: String
     }
   },
-  emit:["close", "route"],
-  setup(props, {emit}) {
+  emit: ["close", "route"],
+  setup(props, { emit }) {
     const loading = ref(false);
-    const onClickUPI = ()=>{
+    const onClickUPI = () => {
       mainStore.routeTo("UPI");
-    }
-    const onClickWallet = ()=>{
+    };
+    const onClickWallet = () => {
       mainStore.routeTo("Wallet");
-    }
-    const onClickBack=()=>{
+    };
+    const onClickBack = () => {
       console.log("back");
       mainStore.routeBack();
-    }
+    };
     /** 儲存參數 */
     return {
       ...toRefs(mainStore.state),
@@ -87,25 +86,23 @@ export default defineComponent({
       onClickWallet,
       onClickBack,
       EWalletType,
-      setWallet(t: EWalletType){
+      setWallet(t: EWalletType) {
         console.log(t);
         mainStore.setWalletType(t);
       }
     };
   }
 });
-
 </script>
 
 <style lang="scss" scoped>
 @import "src/assets/styles/container";
 
-
-.page{
-  .title{
+.page {
+  .title {
     @apply text-left font-Lexend font-bold text-dark;
   }
-  .subtitle{
+  .subtitle {
     @apply text-left text-label;
   }
 
@@ -113,17 +110,17 @@ export default defineComponent({
   height: 100vh;
   width: 375px;
 
-  &-main{
+  &-main {
     // todo: remove this
     @apply px-3;
 
-    &-submit{
+    &-submit {
       height: 4.4rem;
       padding: 1rem 2.2rem;
       margin-top: 0.8rem;
-      button{
+      button {
         @apply bg-primary text-white font-bold text-center items-center rounded w-full h-full;
-        &:hover{
+        &:hover {
           @apply bg-primary-light;
         }
       }
@@ -145,34 +142,25 @@ export default defineComponent({
   //  z-index: -10;
   //}
 
-  .card{
+  .card {
     @apply flex-1 flex items-center h-full;
-    &-row{
+    &-row {
       @apply flex flex-row w-full;
       height: 3.6rem;
       margin-bottom: 0.2rem;
-      .hover-card{
+      .hover-card {
         @apply flex-1 flex items-center h-full;
-        img{
+        img {
           @apply h-full;
         }
-        span{
+        span {
           @apply text-xs text-label font-Lexend;
         }
       }
-      .chosen-card{
+      .chosen-card {
         @apply border border-primary #{!important};
       }
     }
   }
-
-
-
-
 }
-
-
-
-
-
 </style>

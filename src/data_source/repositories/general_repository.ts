@@ -1,13 +1,12 @@
-import {UserEntity} from "~/data_source/entities/user_entity";
-import {RemoteClientService} from "~/data_source/core/interfaces/remote_client_service";
-import {IFacade, injectFacade} from "common_js_builtin/dist";
-import {RemoteClientServiceImpl} from "~/data_source/core/impl/remote_client_service_impl";
+import { UserEntity } from "~/data_source/entities/user_entity";
+import { RemoteClientService } from "~/data_source/core/interfaces/remote_client_service";
+import { IFacade, injectFacade } from "common_js_builtin/dist";
+import { RemoteClientServiceImpl } from "~/data_source/core/impl/remote_client_service_impl";
 
 // todo: incomplete:
 
-export
-abstract class GeneralRepository<R, P=R>{
-  protected constructor(protected client: RemoteClientService){}
+export abstract class GeneralRepository<R, P = R> {
+  protected constructor(protected client: RemoteClientService) {}
   abstract get(params?: P): R;
   abstract set(val: R): void;
   abstract fetch(params?: P): Promise<R>;
@@ -30,11 +29,6 @@ abstract class GeneralRepository<R, P=R>{
 //   }
 // }
 
-
-class AppRepository{
-  constructor(){
-
-  }
+class AppRepository {
+  constructor() {}
 }
-
-
