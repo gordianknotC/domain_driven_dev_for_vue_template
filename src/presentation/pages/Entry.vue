@@ -5,14 +5,14 @@ container.page.page-main
   PaymentCard(
     title="UPI"
     subtitle="Instant Payment Using UPI App"
-    :imageUrl="require('~/presentation/assets/mfi-UPI.png')"
+    :imageUrl="require('~/assets/mfi-UPI.png')"
     :showBack="false"
     @route="onClickUPI"
   )
   PaymentCard(
     title="EWallet"
     subtitle="PhonePe.Paytm & more"
-    :imageUrl="require('~/presentation/assets/mfi-EWallet.png')"
+    :imageUrl="require('~/assets/mfi-EWallet.png')"
     :showBack="false"
     @route="onClickWallet"
   )
@@ -70,7 +70,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import "src/presentation/assets/styles/container";
+@import "src/assets/styles/container";
 
 .page{
   .title{
@@ -96,7 +96,7 @@ export default defineComponent({
 
   //&-main::after{
   //  content: "";
-  //  background-image: url("src/presentation/assets/Main.png");
+  //  background-image: url("src/assets/Main.png");
   //  background-size: contain;
   //  background-repeat-x: no-repeat;
   //  background-position-x: center;

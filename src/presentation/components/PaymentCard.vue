@@ -60,7 +60,7 @@ export default defineComponent({
 });
 </script>
 <style lang="scss" scoped>
-@import "src/presentation/assets/styles/container";
+@import "src/assets/styles/container";
 
 .title{
   @apply text-left font-Lexend font-bold text-dark;

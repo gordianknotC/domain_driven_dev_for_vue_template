@@ -46,7 +46,7 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
       ]
     },
     server: {
-      port: 8080
+      port: 8088,
     },
     css: {
       preprocessorOptions: {
@@ -96,7 +96,7 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
         // Specify the icon folder to be cached
         iconDirs: [
           path.resolve(process.cwd(),
-            'presentation/assets/icons')
+            'assets/icons')
         ],
         // Specify symbolId format
         symbolId: 'icon-[name]',

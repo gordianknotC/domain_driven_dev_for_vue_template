@@ -3,7 +3,7 @@ section
   container.list-tile.page-main-header
     container.page-main-header-container
       container.page-main-header--left
-        img(:src="require('~/presentation/assets/mfi-logo.png')")
+        img(:src="require('~/assets/mfi-logo.png')")
       container.page-main-header--right
         span OPTGIC NETWORK PRIVATE LIMITED
 
@@ -35,7 +35,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import "src/presentation/assets/styles/container";
+@import "src/assets/styles/container";
 
 .page{
   .title{

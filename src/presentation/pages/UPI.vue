@@ -4,7 +4,7 @@ container.page.page-main
   PaymentCard(
     title="UPI"
     subtitle="Instant Payment Using UPI App"
-    :imageUrl="require('~/presentation/assets/mfi-UPI.png')"
+    :imageUrl="require('~/assets/mfi-UPI.png')"
     :showBack="true"
     @back="onClickBack"
   )
@@ -20,15 +20,15 @@ container.page.page-main
   container.page-main-sponsors
     .flex-1
     container.sponsor-gpay
-      img(:src="require('~/presentation/assets/mfi-GPay.png')")
+      img(:src="require('~/assets/mfi-GPay.png')")
     container.sponsor-paytm
-      img(:src="require('~/presentation/assets/mfi-paytm.png')")
+      img(:src="require('~/assets/mfi-paytm.png')")
     container.sponsor-amazonPay
-      img(:src="require('~/presentation/assets/mfi-amazon-pay.png')")
+      img(:src="require('~/assets/mfi-amazon-pay.png')")
     container.sponsor-upi
-      img(:src="require('~/presentation/assets/mfi-UPI.png')")
+      img(:src="require('~/assets/mfi-UPI.png')")
     container.sponsor-y
-      img(:src="require('~/presentation/assets/mfi-y.png')")
+      img(:src="require('~/assets/mfi-y.png')")
     .flex-1
 
 </template>
@@ -79,7 +79,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import "src/presentation/assets/styles/container";
+@import "src/assets/styles/container";
 
 
 
@@ -152,7 +152,7 @@ export default defineComponent({
 
   //&-main::after{
   //  content: "";
-  //  background-image: url("src/presentation/assets/Main-UPI.png");
+  //  background-image: url("src/assets/Main-UPI.png");
   //  background-size: contain;
   //  background-repeat-x: no-repeat;
   //  background-position-x: center;

@@ -51,7 +51,7 @@ function getEnv(){
 function configSVGIcon(config) {
   config.module
     .rule("svg")
-    .exclude.add(path.resolve(__dirname, "./presentation/assets/icons"))
+    .exclude.add(path.resolve(__dirname, "./assets/icons"))
     .end();
 
   // Options used by svgo-loader to optimize SVG files
@@ -101,7 +101,7 @@ function configSVGIcon(config) {
   config.module
     .rule("svg-icon")
     .test(/\.svg$/)
-    .include.add(path.resolve(__dirname, "./presentation/assets/icons"))
+    .include.add(path.resolve(__dirname, "./assets/icons"))
     .end()
     .use("svg-sprite-loader")
     .loader("svg-sprite-loader")
