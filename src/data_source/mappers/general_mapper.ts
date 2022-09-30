@@ -1,3 +1,5 @@
+
+export
 abstract class ModelMapper<E, D> {
   abstract fromEntity(entity: E): D;
   abstract fromDomain(domain: D): E;

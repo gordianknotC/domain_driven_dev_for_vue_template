@@ -42,8 +42,11 @@ export function rainbow(numOfSteps: number, step: number): string {
   //@ts-ignore
   const c =
     "#" +
+    //@ts-ignore
     ("00" + (~~(r * 255)).toString(16)).slice(-2) +
+    //@ts-ignore
     ("00" + (~~(g * 255)).toString(16)).slice(-2) +
+    //@ts-ignore
     ("00" + (~~(b * 255)).toString(16)).slice(-2);
   return c;
 }

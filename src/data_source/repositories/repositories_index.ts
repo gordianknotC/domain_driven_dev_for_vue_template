@@ -4,9 +4,9 @@ import { UserRepositoryImpl } from "~/data_source/repositories/user/impl/user_re
 
 // todo: index repositories 統一注入
 export function setupRepositories() {
-  injectFacade({
-    repository: {
-      user: new UserRepositoryImpl()
-    }
-  });
+  // injectFacade({
+  //   repository: {
+  //     user: new UserRepositoryImpl()
+  //   }
+  // });
 }

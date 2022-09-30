@@ -1,10 +1,10 @@
 import {ConfigEnv, defineConfig, loadEnv, Plugin, UserConfig} from 'vite';
-import path from 'path';
+import path from 'node:path';
 import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
 import ViteRequireContext from '@originjs/vite-plugin-require-context';
 import envCompatible from 'vite-plugin-env-compatible';
-import { injectHtml } from 'vite-plugin-html';
+import { createHtmlPlugin } from 'vite-plugin-html';
 import { viteCommonjs } from '@originjs/vite-plugin-commonjs';
 import pugPlugin from "vite-plugin-pug"
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
@@ -46,9 +46,6 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
       ]
     },
     server: {
-      port: 8088,
-      host: "127.0.0.1"
-
     },
     css: {
       preprocessorOptions: {
@@ -64,7 +61,7 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
       ViteRequireContext(),
       viteCommonjs(),
       // 讓 process.env 可以被存取
-      envCompatible(),
+      // envCompatible(),
       // injectHtml({
       //   injectData: {
       //     htmlWebpackPlugin: {

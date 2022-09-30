@@ -44,7 +44,8 @@ export class UpdateRequestHeaderGuardImpl extends BaseClientServiceRequestPlugin
   process(config: AxiosRequestConfig): AxiosRequestConfig {
     if (this.canProcess) {
       const header = config.headers as any as AxiosConfigHeader;
-      header.common.Authorization = facade.userReact.state.token;
+      // fixme: todo: facade
+      // header.common.Authorization = facade.userReact.state.token;
     }
     return super.process(config);
   }
