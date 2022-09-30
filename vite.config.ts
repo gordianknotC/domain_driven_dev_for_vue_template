@@ -57,7 +57,10 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
           console.log("id, basedir, importopt", id, basedir, importOptions);
         },
         scss:{
-          additionalData:"@import '@/presentation/assets/styles/mixin';"
+          additionalData:`
+            @import '@/presentation/assets/styles/predefined/mixin';
+            @import '@/presentation/assets/styles/predefined/variables';
+          `,
         }
       },
     },

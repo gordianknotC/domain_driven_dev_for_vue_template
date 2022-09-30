@@ -10,10 +10,20 @@
     "develop": " VITE_APP_ENV=development vite build",
     "prod": " VITE_APP_ENV=production vite build",
     "release": " VITE_APP_ENV=release vite build",
-    "lint": "vue-cli-service lint",
-    "css": "tailwind build src/presentation/assets/styles/tailwind.scss -o ./src/assets/styles/index.scss",
     "prettier": "prettier --write 'src/**/*.vue' 'src/**/*.ts'",
-    "test": "jest"
+    "test": "jest",
+    "--------------------------": "",
+    " 其 他 工 具 腳 本 ": "",
+    "--------------------------_": "",
+    "lint": "vue-cli-service lint",
+    "css": "tailwind build src/presentation/assets/styles/index.scss -o ./src/assets/styles/index.scss",
+    "compress:png": "imageoptim -a src/assets/images/**/*.png src/assets/images/*.png",
+    "compress:svg": "node dumpSvgImage.js && bash compressSvgImage.sh && node updateSvgImage.js",
+    "-------------------------": "",
+    " 安 裝 編 譯 套 件 及 設 定 ": "",
+    "-------------------------_": "",
+    "install:imageOptim": "brew install --cask imageoptim && brew install imageoptim-cli",
+    "install:buildEssentials": "sudo brew install node@14 && brew install yarn && yarn global add npx && yarn global add cordova-res && yarn global add npm-run-all && brew update && brew upgrade && brew cleanup -d -v && brew install cocoapods && brew install aapt && brew install --cask imageoptim && brew install imageoptim-cli"
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.0.9",
