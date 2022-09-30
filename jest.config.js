@@ -28,7 +28,7 @@ module.exports = {
     "~/(.*)": [
       "<rootDir>/src/$1",
     ],
-    "assets/(.*)": [
+    "presentation/assets/(.*)": [
       "<rootDir>/images/$1",
       "<rootDir>/photos/$1",
       "<rootDir>/recipes/$1"

@@ -3,7 +3,7 @@ section
   container.list-tile.page-main-header
     container.page-main-header-container
       container.page-main-header--left
-        img(:src="require('~/assets/mfi-logo.png')")
+        img(:src="require('~/presentation/assets/mfi-logo.png')")
       container.page-main-header--right
         span OPTGIC NETWORK PRIVATE LIMITED
 

@@ -57,7 +57,7 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
           console.log("id, basedir, importopt", id, basedir, importOptions);
         },
         scss:{
-          //additionalData:"@use '@/assets/styles/mixin';"
+          //additionalData:"@use '@/presentation/assets/styles/mixin';"
         }
       },
     },
@@ -101,7 +101,7 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
         // Specify the icon folder to be cached
         iconDirs: [
           path.resolve(process.cwd(),
-            'assets/icons')
+            'presentation/assets/icons')
         ],
         // Specify symbolId format
         symbolId: 'icon-[name]',

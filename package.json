@@ -11,10 +11,11 @@
     "prod": " VITE_APP_ENV=production vite build",
     "release": " VITE_APP_ENV=release vite build",
     "lint": "vue-cli-service lint",
-    "css" : "tailwind build ./src/assets/styles/tailwind.scss -o ./src/assets/styles/index.scss",
-    "prettier": "prettier --write 'src/**/*.vue' 'src/**/*.ts'",
+    "css": "tailwind build src/presentation/assets/styles/tailwind.scss -o ./src/assets/styles/index.scss",
+    "prettier": "prettier --write 'src/**/*.vue' 'src/**/*.ts'"
   },
   "dependencies": {
+    "@element-plus/icons-vue": "^2.0.9",
     "axios": "^0.27.2",
     "common_js_builtin": "git+https://github.com/gordianknotC/commonJSBuiltin.git#develop#v0.1.1+1",
     "crypto-js": "^4.1.1",

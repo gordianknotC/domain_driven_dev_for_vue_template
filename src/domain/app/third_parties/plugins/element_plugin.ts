@@ -2,7 +2,7 @@ import { App } from "vue";
 import ElementPlus from "element-plus";
 
 // todo: fix css import
-// import "@/assets/styles/custom/element-variables.scss";
+// import "@/presentation/assets/styles/custom/element-variables.scss";
 import "element-plus/theme-chalk/index.css";
 import * as Icons from "@element-plus/icons-vue";
 

@@ -79,7 +79,7 @@ module.exports = defineConfig({
     sourceMap: false,
     loaderOptions: {
       sass: {
-        additionalData: "@use '@/assets/styles/mixin';"
+        additionalData: "@use '@/presentation/assets/styles/mixin';"
       }
     },
     extract: {
