@@ -4,10 +4,6 @@ h3 hello
 
 <script lang="ts">
 import { defineComponent, reactive, ref, toRefs } from "vue";
-import Container from "~/presentation/components/Container.vue";
-import mainStore from "~/service/temp_store";
-import PaymentCard from "~/presentation/components/PaymentCard.vue";
-import VHeader from "~/presentation/components/Header.vue";
 export default defineComponent({
   name: "Entry",
   components: {
