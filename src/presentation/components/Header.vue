@@ -19,7 +19,7 @@ import { defineComponent, reactive, ref, toRefs } from "vue";
 import Container from "~/presentation/components/Container.vue";
 
 export default defineComponent({
-  name: "Header",
+  name: "VHeader",
   components: {
     Container
   },

@@ -23,13 +23,13 @@ import { defineComponent, reactive, ref, toRefs } from "vue";
 import Container from "~/presentation/components/Container.vue";
 import mainStore from "~/service/store";
 import PaymentCard from "~/presentation/components/PaymentCard.vue";
-import Header from "~/presentation/components/Header.vue";
+import VHeader from "~/presentation/components/Header.vue";
 export default defineComponent({
   name: "Entry",
   components: {
     Container,
     PaymentCard,
-    Header
+    VHeader
   },
   props: {
     invitationCode: {

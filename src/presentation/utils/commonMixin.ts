@@ -1,4 +1,4 @@
-import { WritableComputedRef } from "@vue/reactivity";
+import { WritableComputedRef } from "vue";
 import { computed } from "vue";
 type TEmitFn<E> = (event: E, ...args: any[]) => void;
 
