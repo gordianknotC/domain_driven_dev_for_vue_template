@@ -1,9 +1,9 @@
 <template lang="pug">
 .page
-  Entry(v-if="route==='Entry'" )
-  UPI(v-else-if="route==='UPI'" )
-  Wallet(v-else-if="route==='Wallet'" )
-
+  Entry()
+<!--  Entry(v-if="route==='Entry'" )-->
+<!--  UPI(v-else-if="route==='UPI'" )-->
+<!--  Wallet(v-else-if="route==='Wallet'" )-->
 </template>
 
 <script lang="ts">
@@ -34,6 +34,7 @@ export default defineComponent({
       username: "",
       password: ""
     });
+    console.log("..");
     const loading = ref(false);
     /** 儲存參數 */
     return {
@@ -56,17 +57,7 @@ export default defineComponent({
   -moz-osx-font-smoothing: grayscale;
   height: 100vh;
 
-  @include tablet {
-    @apply h-full items-center;
-    max-width: 530px;
-  }
-  @include mobile {
-    @apply w-full h-full;
-    max-width: 100%;
-  }
-  @include mini {
-    @apply w-full h-full;
-    max-width: 100%;
-  }
+  @apply h-full items-center;
+  max-width: 530px;
 }
 </style>

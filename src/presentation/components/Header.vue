@@ -32,7 +32,6 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import "src/assets/styles/container";
 
 .page {
   .title {
@@ -46,7 +45,7 @@ export default defineComponent({
     @apply px-3;
     &-header {
       @apply pt-4 absolute left-0 right-0 px-3;
-      height: $header-h;
+      height: 30px;
       background-color: rgba(66, 133, 244, 0.8);
       z-index: -1;
       &-container {
@@ -70,7 +69,7 @@ export default defineComponent({
 
     &-payment {
       @apply rounded bg-white;
-      height: $card-h;
+      height: 30px;
       &-container {
         @apply flex flex-col justify-start;
       }

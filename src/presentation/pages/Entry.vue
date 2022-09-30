@@ -67,7 +67,6 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import "src/assets/styles/container";
 
 .page {
   .title {

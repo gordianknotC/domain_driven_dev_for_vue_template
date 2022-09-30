@@ -1,4 +1,4 @@
-import { injectFacade } from "common_js_builtin";
+import { injectFacade } from "common_js_builtin/dist";
 import { RemoteClientServiceImpl } from "~/data_source/core/impl/remote_client_service_impl";
 import { UpdateRequestHeaderGuardImpl } from "~/data_source/core/impl/request_plugins_impl";
 import { AuthResponseGuardImpl } from "~/data_source/core/impl/response_plugins_impl";

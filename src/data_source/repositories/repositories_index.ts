@@ -1,4 +1,4 @@
-import { injectFacade } from "common_js_builtin";
+import { injectFacade } from "common_js_builtin/dist";
 import { UserRepository } from "~/data_source/repositories/user/interfaces/user_repository";
 import { UserRepositoryImpl } from "~/data_source/repositories/user/impl/user_repository_impl";
 

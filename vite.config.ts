@@ -52,6 +52,9 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
         //@ts-ignore
         resolver(id, basedir, importOptions){
           console.log("id, basedir, importopt", id, basedir, importOptions);
+        },
+        scss:{
+          //additionalData:"@use '@/assets/styles/mixin';"
         }
       },
     },
@@ -61,7 +64,7 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
       ViteRequireContext(),
       viteCommonjs(),
       // 讓 process.env 可以被存取
-      // envCompatible(),
+      envCompatible(),
       // injectHtml({
       //   injectData: {
       //     htmlWebpackPlugin: {

@@ -60,7 +60,6 @@ export default defineComponent({
 });
 </script>
 <style lang="scss" scoped>
-@import "src/assets/styles/container";
 
 .title {
   @apply text-left font-Lexend font-bold text-dark;
@@ -72,8 +71,8 @@ export default defineComponent({
 .upi {
   @apply border-label;
   border: solid 1px;
-  height: $card-h;
-  max-height: $card-h;
+  height: 30px;
+  max-height: 30px;
   &-container {
     @apply flex flex-row justify-start items-center;
     height: auto;
