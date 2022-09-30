@@ -29,9 +29,7 @@ module.exports = {
       "<rootDir>/src/$1",
     ],
     "presentation/assets/(.*)": [
-      "<rootDir>/images/$1",
-      "<rootDir>/photos/$1",
-      "<rootDir>/recipes/$1"
+      "<rootDir>/presentation/assets",
     ]
   },
   globals: {

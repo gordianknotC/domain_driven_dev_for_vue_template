@@ -12,7 +12,8 @@
     "release": " VITE_APP_ENV=release vite build",
     "lint": "vue-cli-service lint",
     "css": "tailwind build src/presentation/assets/styles/tailwind.scss -o ./src/assets/styles/index.scss",
-    "prettier": "prettier --write 'src/**/*.vue' 'src/**/*.ts'"
+    "prettier": "prettier --write 'src/**/*.vue' 'src/**/*.ts'",
+    "test": "jest"
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.0.9",
