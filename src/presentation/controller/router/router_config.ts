@@ -4,7 +4,7 @@ const routes: Array<RouteRecordRaw> = [
     path: "/",
     name: "Home",
     component: () => import("@/presentation/pages/Entry.vue")
-  },
+  }
 ];
 
 const router = createRouter({
