@@ -1,5 +1,5 @@
 import {RemoteClientService} from "~/data_source/core/interfaces/remote_client_service";
-import {assert, AssertMessages} from "~/third_parties/utils/exceptions";
+import {assert, AssertMessages} from "~/domain/app/third_parties/utils/exceptions";
 
 
 export

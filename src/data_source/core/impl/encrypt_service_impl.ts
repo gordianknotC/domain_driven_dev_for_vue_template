@@ -1,8 +1,11 @@
 import {CryptoService} from "~/data_source/core/interfaces/encrypt_service";
-import {decryptWithAES, encryptWithAES} from "~/third_parties/utils/crypto";
+import {decryptWithAES, encryptWithAES} from "~/domain/app/third_parties/utils/crypto_util";
 
 export
-class EncryptServiceImpl <T> extends CryptoService<T> {
+class CryptoServiceImpl <T> extends CryptoService<T> {
+  constructor(key: string) {
+    super(key);
+  }
   decrypt(val: string, onFailed?: (val: any)=>any ): T | undefined {
     onFailed ??= (val: any)=> undefined;
     try {

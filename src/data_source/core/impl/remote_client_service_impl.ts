@@ -1,11 +1,11 @@
 import {AxiosPromise, AxiosRequestConfig, AxiosResponse} from "axios";
-import {assert, AssertMessages} from "~/third_parties/utils/exceptions";
+import {assert, AssertMessages} from "~/domain/app/third_parties/utils/exceptions";
 import {ClientServicePlugins} from "~/data_source/core/interfaces/client_service_plugin";
 import {RemoteClientService, EClientStage} from "~/data_source/core/interfaces/remote_client_service";
 
 export
-class ClientServiceImpl extends RemoteClientService{
-  static _instance?: ClientServiceImpl;
+class RemoteClientServiceImpl extends RemoteClientService{
+  static _instance?: RemoteClientServiceImpl;
   static singleton(
     requestPlugins?: ClientServicePlugins<AxiosRequestConfig>[],
     responsePlugins?: ClientServicePlugins<AxiosResponse, Promise<AxiosResponse>>[],
@@ -16,7 +16,7 @@ class ClientServiceImpl extends RemoteClientService{
       assert(()=>responsePlugins != undefined, AssertMessages.notUndefined("responsePlugins"));
       assert(()=>config != undefined, AssertMessages.notUndefined("config"));
     }
-    return this._instance ??= new ClientServiceImpl(
+    return this._instance ??= new RemoteClientServiceImpl(
       requestPlugins!, responsePlugins!, config!
     );
   }

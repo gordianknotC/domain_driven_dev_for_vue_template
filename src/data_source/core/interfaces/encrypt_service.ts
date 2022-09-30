@@ -1,6 +1,6 @@
 
 export
-abstract class CryptoService <T>{
+abstract class CryptoService <T> {
   protected constructor (protected key: string){}
   abstract encryptObj(val: T): string;
   abstract encrypt(val: string): string;

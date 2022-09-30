@@ -8,7 +8,8 @@ abstract class LocalClientService<T>{
   protected constructor(
     protected storeKey: string,
     protected enableCrypto: boolean = true,
-  ){}
+  ){
+  }
 
   protected getWithCrypto(){
     const encrypted = localStorage.getItem(this.storeKey) as string;

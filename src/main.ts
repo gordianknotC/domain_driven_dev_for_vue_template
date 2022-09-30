@@ -1,9 +1,8 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import "~/presentation/assets/styles/tailwind.scss";
-import {setupAppDependencies} from "~/domain/app/app_dependencies_setup";
-import {setupAppPlugins} from "~/third_parties/plugins/app_plugins_setup";
+import {setupDomainDependencies} from "~/domain/app/domain_app_index";
+import {setupAppPlugins} from "~/domain/app/third_parties/plugins/plugins_index";
 const app = createApp(App as any);
 
-setupAppPlugins(app);
-setupAppDependencies(app, true);
+setupDomainDependencies(app, true);

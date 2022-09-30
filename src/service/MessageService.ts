@@ -1,79 +1,86 @@
-import Toast, { ToastOptions } from "vant/lib/toast";
-import {EErrorCode, TErrorResponse} from "~/service/apiTypes";
-import {useI18n} from "~/service/fadkeI18n";
+import { ElLoading, ElMessage } from "element-plus";
+import { TErrorResponse } from "~/data_source/entities/response_entity";
 
-const i18n = useI18n();
-
-
-const failToast = (message: string, options?: ToastOptions): void => {
-  options ??= {};
-  options.closeOnClick ??= true;
-  Toast({
-    message: message,
-    position: "bottom",
-    overlay: false,
-    className: "royal-toast fail-toast",
-    ...options
-  });
+const errorMessageHandler = (msg: any): TErrorResponse => {
+  const errorData = msg?.error_code
+    ? (msg as TErrorResponse)
+    : (msg?.data as TErrorResponse);
+  if (errorData?.error_code) {
+    return errorData;
+  } else {
+    // 如果拿不到任何錯誤資訊
+    return {
+      error_code: 0,
+      error_key: "",
+      error_msg: "",
+      message: "Internet connection is poor, please try again later"
+    };
+  }
 };
 
-const successToast = (message: string, options?: ToastOptions): void => {
-  options ??= {};
-  options.closeOnClick ??= true;
-  Toast({
-    message: message,
-    position: "bottom",
-    overlay: false,
-    className: "royal-toast success-toast",
-    ...options
-  });
+/**
+ * errorMessageToast
+ * @param msg data: TErrorResponse
+ */
+const errorMessageToast = (msg: any): void => {
+  const errorData = msg?.error_code
+    ? (msg as TErrorResponse)
+    : (msg?.data as TErrorResponse);
+  if (errorData?.error_code) {
+    ElMessage.error(
+      errorData?.message ??
+      errorData?.error_msg ??
+      "Internet connection is poor, please try again later"
+    );
+  } else {
+    ElMessage.error("Internet connection is poor, please try again later");
+  }
 };
 
-const warningToast = (message: string, options?: ToastOptions): void => {
-  options ??= {};
-  options.closeOnClick ??= true;
-  Toast({
-    message: message,
-    position: "bottom",
-    overlay: false,
-    className: "royal-toast warning-toast",
-    ...options
-  });
+const failToast = (message: string): void => {
+  ElMessage.error(message);
 };
 
-const infoToast = (message: string, options?: ToastOptions): void => {
-  options ??= {};
-  options.closeOnClick ??= true;
-  Toast({
-    message: message,
-    position: "bottom",
-    overlay: false,
-    className: "royal-toast black-toast",
-    ...options
-  });
+const successToast = (message: string): void => {
+  ElMessage.success(message);
+};
+
+const warningToast = (message: string): void => {
+  ElMessage.warning(message);
+};
+
+const infoToast = (message: string): void => {
+  ElMessage.info(message);
 };
 
 const loadingToast = (): void => {
-  const i18n = useI18n();
-  Toast.loading({
-    duration: 0,
-    message: i18n.$t("loading"),
-    forbidClick: true,
-    className: "royal-toast loading-toast"
+  const loading = ElLoading.service({
+    lock: true,
+    text: "Loading",
+    background: "rgba(0, 0, 0, 0.7)"
+  });
+  setTimeout(() => {
+    loading.close();
+  }, 3000);
+};
+
+const loadingDelegate = () => {
+  return ElLoading.service({
+    lock: true,
+    text: "Loading",
+    background: "rgba(0, 0, 0, 0.7)"
   });
 };
 
-const clearToast = (): void => {
-  Toast.clear();
-};
-
 const MessageService = {
+  errorMessageHandler,
+  errorMessageToast,
   failToast,
   successToast,
   warningToast,
   infoToast,
   loadingToast,
-  clearToast
+  loadingDelegate
 };
 
 export default MessageService;

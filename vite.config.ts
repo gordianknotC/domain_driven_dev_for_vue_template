@@ -45,7 +45,9 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
         '.vue'
       ]
     },
-    server: {},
+    server: {
+      port: 8080
+    },
     css: {
       preprocessorOptions: {
         //@ts-ignore
@@ -92,7 +94,10 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
       pugPlugin(options, locals),
       createSvgIconsPlugin({
         // Specify the icon folder to be cached
-        iconDirs: [path.resolve(process.cwd(), 'presentation/assets/icons')],
+        iconDirs: [
+          path.resolve(process.cwd(),
+            'presentation/assets/icons')
+        ],
         // Specify symbolId format
         symbolId: 'icon-[name]',
       }),
