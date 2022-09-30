@@ -6,7 +6,6 @@
   "private": true,
   "github": "https://github.com/gordianknotC/VueBoilerplate.git",
   "scripts": {
-    "servew": "VUE_APP_ENV=default vue-cli-service serve",
     "serve": " VITE_APP_ENV=default vite",
     "develop": " VITE_APP_ENV=development vite build",
     "prod": " VITE_APP_ENV=production vite build",
@@ -14,9 +13,6 @@
     "lint": "vue-cli-service lint",
     "css" : "tailwind build ./src/assets/styles/tailwind.scss -o ./src/assets/styles/index.scss",
     "prettier": "prettier --write 'src/**/*.vue' 'src/**/*.ts'",
-    "githubPage:genScript": "VITE_APP_ENV=githubPage node github_deploy.js",
-    "githubPage:build": "VITE_APP_ENV=githubPage vue-cli-service build",
-    "githubPage:deploy": "VITE_APP_ENV=githubPage bash github_deploy.sh"
   },
   "dependencies": {
     "axios": "^0.27.2",

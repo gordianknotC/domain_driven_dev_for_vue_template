@@ -7,5 +7,5 @@ import router from "~/presentation/controller/router/router_config";
 const app = createApp(App as any);
 app.use(router);
 
-console.log("123");
+
 setupDomainDependencies(app, true);

@@ -60,6 +60,9 @@ export default defineComponent({
         @apply flex text-white text-sm font-Lexend font-bold;
         @apply text-right items-center justify-end pr-2;
         font-size: 12px;
+
+
+
       }
     }
 

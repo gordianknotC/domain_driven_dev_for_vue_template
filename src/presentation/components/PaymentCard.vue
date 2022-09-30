@@ -19,7 +19,7 @@ container.hover-card.upi(@click="onRoute")
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
 import Container from "~/presentation/components/Container.vue";
-import mainStore from "~/service/store";
+import mainStore from "~/service/temp_store";
 
 export default defineComponent({
   name: "PaymentCard",

@@ -33,20 +33,13 @@ abstract class BaseClientServiceResponsePlugin extends ClientServicePlugins<
 
 // todo:
 export class AuthResponseGuardImpl extends BaseClientServiceResponsePlugin {
-  client?: RemoteClientService | undefined;
-  prev?:
-    | ClientServicePlugins<
+  client?: RemoteClientService;
+  prev?: ClientServicePlugins<
         AxiosRequestConfig<AxiosResponse>,
-        Promise<AxiosResponse>
-      >
-    | undefined;
-  next?:
-    | ClientServicePlugins<
+        Promise<AxiosResponse>> ;
+  next?: ClientServicePlugins<
         AxiosRequestConfig<AxiosResponse>,
-        Promise<AxiosResponse>
-      >
-    | undefined;
-
+        Promise<AxiosResponse>>;
   process(response: AxiosResponse): Promise<AxiosResponse> {
     if (this.canProcess) {
     }
