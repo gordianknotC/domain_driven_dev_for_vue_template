@@ -35,8 +35,8 @@ abstract class BaseClientServiceRequestPlugin extends ClientServicePlugins<Axios
 
 export class UpdateRequestHeaderGuardImpl extends BaseClientServiceRequestPlugin {
   client?: RemoteClientService;
-  prev?: ClientServicePlugins<AxiosRequestConfig<any>, AxiosRequestConfig<any>>
-  next?: ClientServicePlugins<AxiosRequestConfig<any>, AxiosRequestConfig<any>>
+  prev?: ClientServicePlugins<AxiosRequestConfig<any>, AxiosRequestConfig<any>>;
+  next?: ClientServicePlugins<AxiosRequestConfig<any>, AxiosRequestConfig<any>>;
   process(config: AxiosRequestConfig): AxiosRequestConfig {
     if (this.canProcess) {
       const header = config.headers as any as AxiosConfigHeader;

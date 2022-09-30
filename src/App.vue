@@ -10,13 +10,12 @@ import Entry from "~/presentation/pages/Entry.vue";
 export default defineComponent({
   name: "App",
   components: {
-    Entry,
+    Entry
   },
-  props: {
-  },
+  props: {},
   emit: ["close"],
   setup(props, { emit }) {
-    return {}
+    return {};
   }
 });
 </script>

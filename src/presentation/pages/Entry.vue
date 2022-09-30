@@ -6,19 +6,14 @@ h3 hello
 import { defineComponent, reactive, ref, toRefs } from "vue";
 export default defineComponent({
   name: "Entry",
-  components: {
-  },
-  props: {
-  },
+  components: {},
+  props: {},
   emit: ["close", "route"],
   setup(props, { emit }) {
     /** 儲存參數 */
-    return {
-    };
+    return {};
   }
 });
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

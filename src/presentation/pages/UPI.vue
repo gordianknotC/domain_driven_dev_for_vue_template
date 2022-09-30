@@ -37,8 +37,7 @@ import { defineComponent, reactive, ref, toRefs } from "vue";
 
 export default defineComponent({
   name: "UPI",
-  components: {
-  },
+  components: {},
   props: {
     invitationCode: {
       type: String
@@ -49,14 +48,13 @@ export default defineComponent({
     const loading = ref(false);
     /** 儲存參數 */
     return {
-      loading,
+      loading
     };
   }
 });
 </script>
 
 <style lang="scss" scoped>
-
 .page {
   .title {
     @apply text-left font-Lexend font-bold text-dark;
