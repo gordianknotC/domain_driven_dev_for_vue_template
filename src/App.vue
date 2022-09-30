@@ -1,5 +1,5 @@
 <template lang="pug">
-.page
+.page.w-full
   Entry()
 </template>
 
@@ -30,7 +30,17 @@ export default defineComponent({
   -moz-osx-font-smoothing: grayscale;
   height: 100vh;
 
-  @apply h-full items-center;
-  max-width: 530px;
+  @include tablet {
+    @apply h-full items-center;
+    max-width: 530px;
+  }
+  @include mobile {
+    @apply w-full h-full;
+    max-width: 100%;
+  }
+  @include mini {
+    @apply w-full h-full;
+    max-width: 100%;
+  }
 }
 </style>

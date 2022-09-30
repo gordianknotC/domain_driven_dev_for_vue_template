@@ -1,6 +1,6 @@
 import { Plugin } from 'vite'
-import { readFileSync, readdirSync } from 'fs'
-import path from "path";
+import { readFileSync, readdirSync } from 'node:fs'
+import path from "node:path";
 
 let idPerfix    = ''
 const svgTitle  = /<svg([^>+].*?)>/

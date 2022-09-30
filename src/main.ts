@@ -1,6 +1,6 @@
 import { createApp } from "vue";
 import App from "./App.vue";
-import "~/presentation/assets/styles/index.scss";
+import "~/presentation/assets/styles/tailwind.scss";
 import { setupDomainDependencies } from "~/domain/app/domain_app_index";
 import { setupAppPlugins } from "~/domain/app/third_parties/plugins/plugins_index";
 import router from "~/presentation/controller/router/router_config";
