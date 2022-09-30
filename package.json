@@ -87,7 +87,7 @@
     "tailwindcss-theming": "^3.0.0-beta.3",
     "ts-jest": "^29.0.2",
     "typescript": "^4.8.3",
-    "vite": "^3.1.4",
+    "vite": "2.9.15",
     "vite-plugin-env-compatible": "^1.1.1",
     "vite-plugin-html": "^3.2.0",
     "vite-plugin-pug": "^0.3.1",

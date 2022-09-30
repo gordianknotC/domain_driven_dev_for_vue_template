@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "target": "ESNext",
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "baseUrl": ".",
@@ -28,7 +29,6 @@
     "strictFunctionTypes": true,
     "strictNullChecks": true,              /* Enable strict null checks. */
     "strictPropertyInitialization": true,
-    "target": "ES2018",
     "types": [
       "webpack-env",
       "jquery"

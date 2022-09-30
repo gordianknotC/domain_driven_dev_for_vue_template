@@ -31,6 +31,9 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
       ...stringfiedEnv,
       global:{}
     },
+    esbuild: {
+      target: 'esnext'
+    },
     resolve: {
       alias: {
         "@": path.resolve(root, 'src/'),
