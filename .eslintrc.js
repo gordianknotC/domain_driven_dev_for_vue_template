@@ -40,6 +40,8 @@ module.exports = {
     "@typescript-eslint/triple-slash-reference": "off",
     "no-useless-catch": "off",
     "no-useless-escape": "off",
+    "no-mutation": "warn",
+    "no-param-reassign": "warn",
     "import/named": "off",
     "import/newline-after-import": "off",
     "import/no-dynamic-require": "off",
