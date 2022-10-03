@@ -52,6 +52,7 @@ export class RemoteClientServiceImpl extends RemoteClientService {
     url: string,
     params: Record<string, any>
   ): Promise<AxiosResponse<any>> {
+    // todo: processing plugins here...
     if (this.isAuthorizing) {
     } else if (this.canResetAsIdle) {
       this.stage = EClientStage.idle;

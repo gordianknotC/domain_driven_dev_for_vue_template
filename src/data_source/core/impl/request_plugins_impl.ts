@@ -13,7 +13,6 @@ abstract class BaseClientServiceRequestPlugin extends ClientServicePlugins<Axios
   get canGoNext(): boolean {
     return super.canGoNext;
   }
-
   get canProcess(): boolean {
     return super.canProcess;
   }

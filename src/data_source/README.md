@@ -48,7 +48,6 @@
   websocket service
 
 
-
 ## entities
 
 ## mappers

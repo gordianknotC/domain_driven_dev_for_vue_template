@@ -41,6 +41,7 @@ module.exports = {
     "no-useless-catch": "off",
     "no-useless-escape": "off",
     "no-mutation": "warn",
+    "no-var": "warn",
     "no-param-reassign": "warn",
     "import/named": "off",
     "import/newline-after-import": "off",

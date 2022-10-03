@@ -42,6 +42,7 @@ export class AuthResponseGuardImpl extends BaseClientServiceResponsePlugin {
     AxiosRequestConfig<AxiosResponse>,
     Promise<AxiosResponse>
   >;
+
   process(response: AxiosResponse): Promise<AxiosResponse> {
     if (this.canProcess) {
     }
