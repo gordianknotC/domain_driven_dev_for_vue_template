@@ -12,7 +12,7 @@
     "importHelpers": true,
     "jsx": "preserve",
     "jsxFactory": "h",                        /* Specify the JSX factory function to use when targeting react JSX emit, e.g. React.createElement or h. */
-    "module": "ESNext",
+    /*"module": "ESNext", */
     "moduleResolution": "node",
     "noEmit": true,
     "resolveJsonModule": true,
@@ -31,7 +31,9 @@
     "strictPropertyInitialization": true,
     "types": [
       "webpack-env",
-      "jquery"
+      "jquery",
+      "vitest/globals",
+      "vitest"
     ],
     "typeRoots": [
       "node_modules/@types"
@@ -56,14 +58,16 @@
     ]
   },
   "include": [
+    "vite.config.ts",
+    "jest.d.ts",
     "src/**/*.svg",
     "src/**/*.png",
     "src/**/*.jpg",
     "src/**/*.ts",
     "src/**/*.tsx",
     "src/**/*.vue",
-    "tests/**/*.ts",
-    "tests/**/*.tsx"
+    "__tests__/**/*.ts",
+    "__tests__/**/*.tsx"
   ],
   "exclude": [
     "node_modules"

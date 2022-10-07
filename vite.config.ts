@@ -1,10 +1,11 @@
-import {ConfigEnv, defineConfig, loadEnv, Plugin, UserConfig} from 'vite';
+/// <reference types="vitest" />
+
+import { ConfigEnv, defineConfig, loadEnv, Plugin, UserConfig, UserConfigExport } from "vite";
 import path from 'node:path';
 import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
 import ViteRequireContext from '@originjs/vite-plugin-require-context';
 import envCompatible from 'vite-plugin-env-compatible';
-import { createHtmlPlugin } from 'vite-plugin-html';
 import { viteCommonjs } from '@originjs/vite-plugin-commonjs';
 import pugPlugin from "vite-plugin-pug"
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
@@ -12,7 +13,7 @@ import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
 const options = { pretty: true } // FIXME: pug pretty is deprecated!
 const locals = { name: "My Pug" }
 
-export default ({ command, mode }: ConfigEnv): UserConfig => {
+export default ({ command, mode }: ConfigEnv) => {
   const root = process.cwd();
   const env = loadEnv(mode, root);
   const stringfiedEnv: Record<string, any> = {};
@@ -25,11 +26,12 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
   // Load app-level env vars to node-level env vars.
   console.log("env:", stringfiedEnv);
 
-  return {
+  return defineConfig({
     root,
     define:{
       ...stringfiedEnv,
-      global:{}
+      global:{
+      }
     },
     esbuild: {
       target: 'esnext'
@@ -110,7 +112,7 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
         symbolId: 'icon-[name]',
       }),
     ]
-  };
+  });
 }
 
 
