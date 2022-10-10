@@ -73,6 +73,16 @@ export default ({ command, mode }: ConfigEnv) => {
       viteCommonjs(),
       // 讓 process.env 可以被存取
       envCompatible(),
+      pugPlugin(options, locals),
+      createSvgIconsPlugin({
+        // Specify the icon folder to be cached
+        iconDirs: [
+          path.resolve(process.cwd(),
+            'presentation/assets/icons')
+        ],
+        // Specify symbolId format
+        symbolId: 'icon-[name]',
+      }),
       // injectHtml({
       //   injectData: {
       //     htmlWebpackPlugin: {
@@ -101,16 +111,6 @@ export default ({ command, mode }: ConfigEnv) => {
       //     }
       //   }
       // }),
-      pugPlugin(options, locals),
-      createSvgIconsPlugin({
-        // Specify the icon folder to be cached
-        iconDirs: [
-          path.resolve(process.cwd(),
-            'presentation/assets/icons')
-        ],
-        // Specify symbolId format
-        symbolId: 'icon-[name]',
-      }),
     ]
   });
 }

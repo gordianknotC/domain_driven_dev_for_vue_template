@@ -20,12 +20,15 @@ export class RemoteClientServiceImpl extends RemoteClientService {
     config?: AxiosRequestConfig
   ) {
     if (this._instance != undefined) {
-      assert(() => requestPlugins != undefined,
-        AssertMessages.notUndefined("requestParam"));
-      assert(() => responsePlugins != undefined,
-        AssertMessages.notUndefined("responsePlugins"));
-      assert(() => config != undefined,
-        AssertMessages.notUndefined("config"));
+      assert(
+        () => requestPlugins != undefined,
+        AssertMessages.notUndefined("requestParam")
+      );
+      assert(
+        () => responsePlugins != undefined,
+        AssertMessages.notUndefined("responsePlugins")
+      );
+      assert(() => config != undefined, AssertMessages.notUndefined("config"));
     }
     return (this._instance ??= new RemoteClientServiceImpl(
       requestPlugins!,
