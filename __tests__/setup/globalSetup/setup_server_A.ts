@@ -1,7 +1,7 @@
 import { createServer } from 'vite'
 import { resolve } from 'pathe'
 
-export async function setup() {
+export async function setupServerA() {
   const server = await createServer({
     root: resolve(__dirname, '..'),
     server: {

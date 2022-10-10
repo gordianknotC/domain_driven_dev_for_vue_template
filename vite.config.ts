@@ -7,7 +7,7 @@ import vueJsx from '@vitejs/plugin-vue-jsx';
 import ViteRequireContext from '@originjs/vite-plugin-require-context';
 import envCompatible from 'vite-plugin-env-compatible';
 import { viteCommonjs } from '@originjs/vite-plugin-commonjs';
-import pugPlugin from "vite-plugin-pug"
+// import pugPlugin from "vite-plugin-pug"
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
 
 const options = { pretty: true } // FIXME: pug pretty is deprecated!
@@ -73,7 +73,7 @@ export default ({ command, mode }: ConfigEnv) => {
       viteCommonjs(),
       // 讓 process.env 可以被存取
       envCompatible(),
-      pugPlugin(options, locals),
+      // pugPlugin(options, locals),
       createSvgIconsPlugin({
         // Specify the icon folder to be cached
         iconDirs: [
