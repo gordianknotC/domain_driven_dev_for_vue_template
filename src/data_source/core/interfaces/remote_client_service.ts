@@ -60,5 +60,4 @@ export abstract class RemoteClientService {
   abstract post(url: string, payload: Record<string, any>): AxiosPromise<any>;
   abstract put(url: string, payload: Record<string, any>): AxiosPromise<any>;
   abstract del(url: string, payload: Record<string, any>): AxiosPromise<any>;
-  abstract dl(url: string, payload: Record<string, any>): AxiosPromise<any>;
 }

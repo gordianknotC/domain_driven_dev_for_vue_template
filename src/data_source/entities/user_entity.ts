@@ -1,3 +1,8 @@
+export enum ERole {
+  admin,
+  merchant
+}
+
 export type UserEntity = {
   name: string;
   email: string;
@@ -5,4 +10,5 @@ export type UserEntity = {
   phone: string;
   token?: string;
   refresh_token?: string;
+  role: ERole;
 };

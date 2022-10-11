@@ -102,18 +102,6 @@ export class RemoteClientServiceImpl extends RemoteClientService {
     }
   }
 
-  async dl(
-    url: string,
-    payload: Record<string, any>
-  ): Promise<AxiosResponse<any, any>> {
-    try {
-      const result = await this.fetch("post", url, payload);
-      return result.data;
-    } catch (e) {
-      throw e;
-    }
-  }
-
   async del(
     url: string,
     payload: Record<string, any>

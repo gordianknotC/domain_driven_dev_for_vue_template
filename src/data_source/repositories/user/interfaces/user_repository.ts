@@ -1,12 +1,10 @@
 import { UserEntity } from "~/data_source/entities/user_entity";
 import { RemoteClientService } from "~/data_source/core/interfaces/remote_client_service";
-import { ModelMapper } from "~/data_source/mappers/general_mapper";
+import { UserMapper } from "~/data_source/mappers/mappers_types";
+import { BaseRepository } from "~/data_source/repositories/base_repository";
 
-export abstract class UserRepository {
-  abstract client: RemoteClientService;
-  abstract mapping: ModelMapper<UserEntity, UserEntity>;
-  abstract get(): UserEntity;
-  abstract set(val: UserEntity): void;
-  abstract fetch(): Promise<UserEntity>;
-  abstract upload(): Promise<{ success: boolean }>;
-}
+export type UserRepository = BaseRepository<
+  RemoteClientService,
+  UserMapper,
+  UserEntity
+>;
