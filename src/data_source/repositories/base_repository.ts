@@ -1,24 +1,43 @@
 import { RemoteClientService } from "~/data_source/core/interfaces/remote_client_service";
-import { ModelMapper } from "~/data_source/mappers/base_mappers";
+import { Model, ModelMapper } from "~/data_source/mappers/base_mappers";
+import { TDataResponse } from "~/data_source/entities/response_entity";
+import { NotImplementedError } from "common_js_builtin";
 
-// todo: incomplete:
+/**
+ *  用於可與 local 同步之 repository
+ *  get - 同步local取值
+ *  set - 同步local設值
+ *  fetch / upload 非同步遠端取/設值
+ * */
+export abstract class BaseRepository<M extends ModelMapper<ENTITY, any>, ENTITY=any, PAYLOAD=any> {
+  protected constructor(
+    protected client: RemoteClientService,
+    protected mapper: M
+  ) {}
 
-export abstract class BaseRepository<R, M, P = R> {
-  protected constructor(protected client: RemoteClientService) {}
-  abstract mapper: M;
-  /** sync get from local storage if available*/
-  abstract get(): R | null;
-  abstract set(val: R): void;
-  abstract fetch(params?: P): Promise<R>;
-  abstract upload(val: R): Promise<{ success: boolean }>;
+  /** sync get and set from local storage if available*/
+  abstract get(): Model<ENTITY, any> | null;
+  abstract set(val: ENTITY): void;
+
+  /** async fetch and upload from remote cloud if available */
+  abstract fetch(params?: PAYLOAD): Promise<TDataResponse<Model<ENTITY, any>> | null>;
+  abstract upload(val: ENTITY): Promise<{ success: boolean } | null>;
 }
 
-// export abstract class RemoteRepository<E, P, D> {
-//   abstract client: RemoteClientService;
-//   abstract mapper: ModelMapper<E, D>;
-//   abstract get(params?: P): E;
-//   abstract set(val: E): void;
-//   abstract fetch(params?: P): Promise<E>;
-//   abstract upload(val: Partial<E>): Promise<{ success: boolean }>;
-// }
-// export abstract class LocalRepository {}
+
+/**
+ *  用於 不需與 local 同步之 repository
+ *  fetch / upload 非同步遠端取/設值
+ * */
+export abstract class BaseRemoteRepository<E, PAYLOAD> extends BaseRepository<ModelMapper<E, any>, E, PAYLOAD>{
+  abstract fetch(params?: PAYLOAD): Promise<TDataResponse<Model<E, any>> | null>;
+  abstract upload(val: E): Promise<{ success: boolean } | null>;
+
+  get(): Model<E, any> | null {
+    throw new NotImplementedError();
+  }
+
+  set(val: E): void {
+    throw new NotImplementedError();
+  }
+}

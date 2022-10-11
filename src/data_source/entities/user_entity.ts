@@ -5,9 +5,9 @@ export enum ERole {
 
 export type UserEntity = {
   name: string;
-  email: string;
+  email?: string;
   id: string;
-  phone: string;
+  phone?: string;
   token?: string;
   refresh_token?: string;
   role: ERole;

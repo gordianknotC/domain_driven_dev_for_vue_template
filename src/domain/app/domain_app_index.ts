@@ -6,14 +6,42 @@ import { setupAppPlugins } from "~/domain/app/third_parties/plugins/plugins_inde
 import { FacadeMappers, setupMappers } from "~/data_source/mappers/mappers_index";
 import { FacadePresentationController, setupPresentationControllers } from "~/presentation/controller/controller_index";
 
+export type FacadeDomainService = {
+  svc: {
+    material: any,
+    merchant: any,
+    generalMaterial: any,
+  },
+};
 
+/**
+ *
+ * 存取 data source
+ * facade.data.remote;
+ * facade.data.socket;
+ *
+ * 存取 mappers / repository
+ * facade.data.mappers.user;
+ * facade.data.repo.user;
+ *
+ * 存取 presentation controllers
+ * facade.ctlr.sideMenu;
+
+ * facade.svc.material;
+ * facade.svc.merchant;
+ * facade.svc.generalMaterial;
+ *
+ * */
 export const facade = IFacade<
   FacadeMappers &
   FacadeDateSource &
   FacadeRepository &
-  //FacadeDomainService &
-  FacadePresentationController
+  FacadePresentationController &
+  FacadeDomainService
 >();
+
+
+
 
 /**
  *  App dependencies includes
@@ -22,7 +50,6 @@ export const facade = IFacade<
  *    3) all repositories
  *    4) all services
  *    5) all presentation controllers
- *
  * */
 export function setupDomainDependencies(
   app: App<Element>,

@@ -4,8 +4,10 @@ import { UserEntity } from "~/data_source/entities/user_entity";
 import { BaseModelMapper } from "~/data_source/mappers/base_mappers";
 
 export type FacadeMappers = {
-  mappers: {
-    user: BaseModelMapper<UserEntity, UserEntity>
+  data:{
+    mappers: {
+      user: BaseModelMapper<UserEntity, UserEntity>
+    }
   }
 }
 
@@ -13,15 +15,14 @@ export type FacadeMappers = {
 export function setupMappers() {
   injectFacade({
     mappers: {
-      user: () =>
-        new BaseModelMapper(
-          entity => {
-            return entity;
-          },
-          domain => {
-            return domain;
-          }
-        )
+      user: new BaseModelMapper(
+        entity => {
+          return entity;
+        },
+        domain => {
+          return domain;
+        }
+      )
     }
   } );
 }

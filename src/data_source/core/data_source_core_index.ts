@@ -8,8 +8,10 @@ import { RemoteClientService } from "~/data_source/core/interfaces/remote_client
 import { ISocketClientService } from "~/data_source/core/interfaces/socket_client_service";
 
 export type FacadeDateSource = {
-  clientService: RemoteClientService,
-  socketService: ISocketClientService,
+  data: {
+    remote: RemoteClientService,
+    socket: ISocketClientService,
+  }
 }
 
 

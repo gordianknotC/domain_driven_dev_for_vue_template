@@ -1,25 +1,29 @@
 import { defineStore } from "pinia";
-import { ref } from "vue";
-import { useMediaControls } from "@vueuse/core";
+import { computed } from "vue";
+import { useLocalStorage, RemovableRef } from "@vueuse/core";
+import { ERole, UserEntity } from "~/data_source/entities/user_entity";
 
 export const userController = defineStore("user", () => {
-  // we won't expose this element directly
-  const videoElement = ref<HTMLVideoElement>();
-  const src = ref<any>("/data/video.mp4");
-  const { playing, volume, currentTime, togglePictureInPicture } =
-    useMediaControls(videoElement, { src });
-
-  function loadVideo(element: HTMLVideoElement, url: string) {
-    videoElement.value = element;
-    src.value = url;
-  }
+  const doubleCount = computed(() => 22);
+  const userKey = ``;
+  const defaultState:UserEntity = {
+    id: "",
+    name: "guest",
+    role: ERole.merchant,
+  };
 
   return {
-    src,
-    playing,
-    volume,
-    currentTime,
-    loadVideo,
-    togglePictureInPicture
+    state: useLocalStorage("", {
+      ...defaultState
+    }),
+    getters: {
+
+    },
+    actions: {
+
+    },
   };
 });
+
+
+

@@ -2,7 +2,8 @@ import { App } from "vue";
 
 
 export type FacadePresentationController ={
-  ctrls: {
+  ctlr: {
+    sideMenu: any,
 
   }
 }
