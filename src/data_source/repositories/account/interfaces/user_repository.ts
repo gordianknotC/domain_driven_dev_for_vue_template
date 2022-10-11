@@ -7,4 +7,7 @@ export const UserRepository = BaseRepository<
   UserEntity
 >;
 
-export type UserRepository = typeof UserRepository;
+export type TUserRepository = BaseRepository<
+  UserMapper,
+  UserEntity
+>;

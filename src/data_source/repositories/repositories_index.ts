@@ -1,13 +1,12 @@
 import { injectFacade } from "common_js_builtin/dist";
-import { UserRepository } from "~/data_source/repositories/account/interfaces/user_repository";
+import { TUserRepository } from "~/data_source/repositories/account/interfaces/user_repository";
 import { UserRepositoryImpl } from "~/data_source/repositories/account/impl/user_repository_impl";
 import { facade } from "~/domain/app/domain_app_index";
-
 
 export type FacadeRepository = {
   data: {
     repo: {
-      user: UserRepository
+      user: TUserRepository
     }
   }
 }

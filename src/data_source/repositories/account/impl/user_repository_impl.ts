@@ -3,7 +3,7 @@ import { UserRepository } from "~/data_source/repositories/account/interfaces/us
 import { TDataResponse } from "~/data_source/entities/response_entity";
 import { Model } from "~/data_source/mappers/base_mappers";
 import { UserDomainModel } from "~/domain/account/user_domain_model";
-import { useLocalStorage } from "@vueuse/core";
+import { useLocalStorage, RemovableRef } from "@vueuse/core";
 import { StorageKeys } from "~/data_source/core/impl/local_client_service_impl";
 import { facade } from "~/domain/app/domain_app_index";
 import { RemoteClientService } from "~/data_source/core/interfaces/remote_client_service";
@@ -27,6 +27,10 @@ export class UserRepositoryImpl extends UserRepository {
     super(client, mapper);
   }
 
+  get localStorage(): RemovableRef<UserEntity> | null {
+    return useLocalStorage(StorageKeys.user, defaultUser);
+  }
+
   async fetch(params: UserEntity | undefined): Promise<TDataResponse<Model<UserEntity, any>> | null> {
     try{
       const response = await this.client.get("user", params!);
@@ -41,7 +45,7 @@ export class UserRepositoryImpl extends UserRepository {
 
   get(): Model<UserEntity, UserDomainModel> | null {
     const mapper = facade.data.mappers.user;
-    return new Model(mapper, useLocalStorage(StorageKeys.user, defaultUser).value as UserEntity);
+    return new Model(mapper, this.localStorage!.value);
   }
 
   set(val: UserEntity): void {
