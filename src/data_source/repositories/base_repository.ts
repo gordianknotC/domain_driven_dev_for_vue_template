@@ -21,5 +21,4 @@ export abstract class BaseRepository<R, M, P = R> {
 //   abstract fetch(params?: P): Promise<E>;
 //   abstract upload(val: Partial<E>): Promise<{ success: boolean }>;
 // }
-
-export abstract class LocalRepository {}
+// export abstract class LocalRepository {}

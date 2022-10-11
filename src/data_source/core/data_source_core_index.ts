@@ -4,6 +4,15 @@ import { UpdateRequestHeaderGuardImpl } from "~/data_source/core/impl/request_pl
 import { AuthResponseGuardImpl } from "~/data_source/core/impl/response_plugins_impl";
 import { SocketClientServiceImpl } from "~/data_source/core/impl/socket_client_service_impl";
 
+import { RemoteClientService } from "~/data_source/core/interfaces/remote_client_service";
+import { ISocketClientService } from "~/data_source/core/interfaces/socket_client_service";
+
+export type FacadeDateSource = {
+  clientService: RemoteClientService,
+  socketService: ISocketClientService,
+}
+
+
 function setupClientService() {
   const requestPlugins = [new UpdateRequestHeaderGuardImpl()];
   const responsePlugins = [new AuthResponseGuardImpl()];
