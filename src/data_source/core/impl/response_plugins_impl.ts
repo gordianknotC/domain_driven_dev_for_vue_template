@@ -32,7 +32,7 @@ abstract class BaseClientServiceResponsePlugin extends ClientServicePlugins<
 }
 
 // todo:
-export class AuthResponseGuardImpl extends BaseClientServiceResponsePlugin {
+export class AuthResponsePlugin extends BaseClientServiceResponsePlugin {
   client?: RemoteClientService;
   prev?: ClientServicePlugins<
     AxiosRequestConfig<AxiosResponse>,

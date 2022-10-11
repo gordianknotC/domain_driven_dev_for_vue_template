@@ -1,7 +1,7 @@
 import { injectFacade } from "common_js_builtin/dist";
 import { RemoteClientServiceImpl } from "~/data_source/core/impl/remote_client_service_impl";
-import { UpdateRequestHeaderGuardImpl } from "~/data_source/core/impl/request_plugins_impl";
-import { AuthResponseGuardImpl } from "~/data_source/core/impl/response_plugins_impl";
+import { UpdateRequestHeaderPlugin } from "~/data_source/core/impl/request_plugins_impl";
+import { AuthResponsePlugin } from "~/data_source/core/impl/response_plugins_impl";
 import { SocketClientServiceImpl } from "~/data_source/core/impl/socket_client_service_impl";
 
 import { RemoteClientService } from "~/data_source/core/interfaces/remote_client_service";
@@ -15,8 +15,8 @@ export type FacadeDateSource = {
 };
 
 function setupClientService() {
-  const requestPlugins = [new UpdateRequestHeaderGuardImpl()];
-  const responsePlugins = [new AuthResponseGuardImpl()];
+  const requestPlugins = [new UpdateRequestHeaderPlugin()];
+  const responsePlugins = [new AuthResponsePlugin()];
   const clientService = RemoteClientServiceImpl.singleton(
     requestPlugins,
     responsePlugins,

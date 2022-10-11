@@ -32,7 +32,7 @@ abstract class BaseClientServiceRequestPlugin extends ClientServicePlugins<Axios
   }
 }
 
-export class UpdateRequestHeaderGuardImpl extends BaseClientServiceRequestPlugin {
+export class UpdateRequestHeaderPlugin extends BaseClientServiceRequestPlugin {
   client?: RemoteClientService;
   prev?: ClientServicePlugins<AxiosRequestConfig<any>, AxiosRequestConfig<any>>;
   next?: ClientServicePlugins<AxiosRequestConfig<any>, AxiosRequestConfig<any>>;
