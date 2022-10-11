@@ -10,7 +10,11 @@ import { useLocalStorage, RemovableRef } from "@vueuse/core";
  *  set - 同步local設值
  *  fetch / upload 非同步遠端取/設值
  * */
-export abstract class BaseRepository<M extends ModelMapper<ENTITY, any>, ENTITY=any, PAYLOAD=any> {
+export abstract class BaseRepository<
+  M extends ModelMapper<ENTITY, any>,
+  ENTITY = any,
+  PAYLOAD = any
+> {
   protected constructor(
     protected client: RemoteClientService,
     protected mapper: M
@@ -22,21 +26,28 @@ export abstract class BaseRepository<M extends ModelMapper<ENTITY, any>, ENTITY=
   abstract set(val: ENTITY): void;
 
   /** async fetch and upload from remote cloud if available */
-  abstract fetch(params?: PAYLOAD): Promise<TDataResponse<Model<ENTITY, any>> | null>;
+  abstract fetch(
+    params?: PAYLOAD
+  ): Promise<TDataResponse<Model<ENTITY, any>> | null>;
   abstract upload(val: ENTITY): Promise<{ success: boolean } | null>;
 }
-
 
 /**
  *  用於 不需與 local 同步之 repository
  *  fetch / upload 非同步遠端取/設值
  * */
-export abstract class BaseRemoteRepository<E, PAYLOAD> extends BaseRepository<ModelMapper<E, any>, E, PAYLOAD>{
-  abstract fetch(params?: PAYLOAD): Promise<TDataResponse<Model<E, any>> | null>;
+export abstract class BaseRemoteRepository<E, PAYLOAD> extends BaseRepository<
+  ModelMapper<E, any>,
+  E,
+  PAYLOAD
+> {
+  abstract fetch(
+    params?: PAYLOAD
+  ): Promise<TDataResponse<Model<E, any>> | null>;
   abstract upload(val: E): Promise<{ success: boolean } | null>;
   get localStorage(): RemovableRef<E> | null {
     throw new NotImplementedError();
-  };
+  }
   get(): Model<E, any> | null {
     throw new NotImplementedError();
   }

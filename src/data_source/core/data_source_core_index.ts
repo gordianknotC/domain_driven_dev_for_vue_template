@@ -9,11 +9,10 @@ import { ISocketClientService } from "~/data_source/core/interfaces/socket_clien
 
 export type FacadeDateSource = {
   data: {
-    remote: RemoteClientService,
-    socket: ISocketClientService,
-  }
-}
-
+    remote: RemoteClientService;
+    socket: ISocketClientService;
+  };
+};
 
 function setupClientService() {
   const requestPlugins = [new UpdateRequestHeaderGuardImpl()];

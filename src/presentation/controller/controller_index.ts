@@ -1,12 +1,10 @@
 import { App } from "vue";
 
-
-export type FacadePresentationController ={
+export type FacadePresentationController = {
   ctlr: {
-    sideMenu: any,
-
-  }
-}
+    sideMenu: any;
+  };
+};
 
 // todo: presentation controller
 export function setupPresentationControllers(

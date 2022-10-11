@@ -15,9 +15,9 @@ const defaultUser: UserEntity = {
   name: "guest",
   phone: "",
   // refresh_token: "",
-  role: ERole.merchant,
+  role: ERole.merchant
   // token: ""
-}
+};
 
 export class UserRepositoryImpl extends UserRepository {
   constructor(
@@ -31,14 +31,16 @@ export class UserRepositoryImpl extends UserRepository {
     return useLocalStorage(StorageKeys.user, defaultUser);
   }
 
-  async fetch(params: UserEntity | undefined): Promise<TDataResponse<Model<UserEntity, any>> | null> {
-    try{
+  async fetch(
+    params: UserEntity | undefined
+  ): Promise<TDataResponse<Model<UserEntity, any>> | null> {
+    try {
       const response = await this.client.get("user", params!);
       const mapper = facade.data.mappers.user;
       const entity = response.data.data as UserEntity;
       response.data.data = new Model(mapper, entity);
       return response.data as TDataResponse<Model<UserEntity, any>>;
-    }catch(e){
+    } catch (e) {
       throw e;
     }
   }

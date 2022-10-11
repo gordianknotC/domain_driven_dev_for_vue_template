@@ -6,11 +6,10 @@ import { facade } from "~/domain/app/domain_app_index";
 export type FacadeRepository = {
   data: {
     repo: {
-      user: TUserRepository
-    }
-  }
-}
-
+      user: TUserRepository;
+    };
+  };
+};
 
 // todo: index repositories 統一注入
 export function setupRepositories() {

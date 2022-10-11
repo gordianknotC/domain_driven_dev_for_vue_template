@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { computed, ref} from "vue";
+import { computed, ref } from "vue";
 import { ERole, UserEntity } from "~/data_source/entities/user_entity";
 import { facade } from "~/domain/app/domain_app_index";
 import { useRestoreActive } from "element-plus";
@@ -9,16 +9,13 @@ export const accountCtlr = defineStore("user", () => {
   return {
     state,
     getters: {
-      isAdmin: computed(()=>{
+      isAdmin: computed(() => {
         return state!.value!.role == ERole.admin;
       }),
-      isMerchant:computed(()=>{
+      isMerchant: computed(() => {
         return state!.value!.role == ERole.merchant;
-      }),
+      })
     },
-    actions: {
-    },
+    actions: {}
   };
 });
-
-

@@ -4,8 +4,8 @@ import { CryptoServiceImpl } from "~/data_source/core/impl/encrypt_service_impl"
 
 const APP = process.title;
 export const StorageKeys = {
-  user: `${APP}/user`,
-}
+  user: `${APP}/user`
+};
 
 export class LocalClientServiceImpl<T> extends LocalClientService<T> {
   crypto: CryptoService<T>;
