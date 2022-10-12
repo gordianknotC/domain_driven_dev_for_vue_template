@@ -1,4 +1,4 @@
-import { injectFacade } from "common_js_builtin/dist";
+import { IFacade, injectFacade } from "common_js_builtin/dist";
 import { TUserRepository } from "~/data_source/repositories/account/interfaces/user_repository";
 import { UserRepositoryImpl } from "~/data_source/repositories/account/impl/user_repository_impl";
 import { facade } from "~/domain/app/domain_app_index";
@@ -16,9 +16,13 @@ export function setupRepositories() {
   const userMapper = facade.data.mappers.user;
   const client = facade.data.remote;
   const user = new UserRepositoryImpl(client, userMapper);
+  const repo = {};
+
   injectFacade({
-    repository: {
+    repo: {
       user
     }
   });
 }
+
+facade.data.repo.user

@@ -1,7 +1,7 @@
 import { RemoteClientService } from "~/data_source/core/interfaces/remote_client_service";
 import { Model, ModelMapper } from "~/data_source/mappers/base_mappers";
 import { TDataResponse } from "~/data_source/entities/response_entity";
-import { NotImplementedError } from "common_js_builtin";
+import { NotImplementedError } from "common_js_builtin/dist";
 import { useLocalStorage, RemovableRef } from "@vueuse/core";
 
 /**
