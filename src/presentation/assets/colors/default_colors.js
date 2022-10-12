@@ -77,36 +77,6 @@ module.exports = {
   highlight: {
     DEFAULT: "#FFFFFF"
   },
-  vips: {
-    DEFAULT: "#FFFFFF",
-    vipGauge: "#325FFF",
-    vipGaugeInActive: "#828F98",
-    vip1Source: "#F9E6D8",
-    vip1Dest: "#E0B39A",
-    vip2Source: "#F0F2FF",
-    vip2Dest: "#BDC4D0",
-    vip3Source: "#FFFFDB",
-    vip3Dest: "#F2DD9F",
-    vip4Source: "#ECFFFF",
-    vip4Dest: "#C1EDF3",
-    vip5Source: "#D2E9FF",
-    vip5Dest: "#99BDE8",
-    vip6Source: "#C9C0F7",
-    vip6Dest: "#A790E5",
-    vip7Source: "#731CBA",
-    vip7Dest: "#3D0272",
-    vip8Source: "#24C2F6",
-    vip8Dest: "#15087F",
-    vip0C: "#22272A",
-    vip1C: "#5E2404",
-    vip2C: "#4D525B",
-    vip3C: "#6C5D2F",
-    vip4C: "#4C6265",
-    vip5C: "#465669",
-    vip6C: "#61528A",
-    vip7C: "#FFFFFF",
-    vip8C: "#FFFFFF",
-  },
   stops: {
     chamferToggledT: "#E3EBF1", // toggled 漸層色 Top
     chamferToggledB: "#F2F5F7", // toggled 漸層色 Bottom
