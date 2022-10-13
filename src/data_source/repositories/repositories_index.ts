@@ -19,10 +19,11 @@ export function setupRepositories() {
   const repo = {};
 
   injectFacade({
-    repo: {
-      user
-    }
-  });
+    data: {
+      repo: {
+        user
+      }
+    },
+  }, true);
 }
 
-facade.data.repo.user

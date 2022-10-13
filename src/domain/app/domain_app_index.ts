@@ -64,6 +64,8 @@ export function setupDomainDependencies(
   app: App<Element>,
   applyMount: boolean
 ) {
+  //@ts-ignore
+  window.facade = facade;
   setupAppPlugins(app);
   setupMappers();
   setupRepositories();

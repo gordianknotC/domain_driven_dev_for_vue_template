@@ -2,17 +2,6 @@
 const colors = require("tailwindcss/colors");
 const cColors = require("./src/presentation/assets/colors/default_colors");
 
-/**
- * 以下用來擋掉 tailwind future color migration warning
- * tailwin 3.0.24 之後無效
- */
-delete colors['lightBlue'];
-delete colors['warmGray'];
-delete colors['trueGray'];
-delete colors['coolGray'];
-delete colors['blueGray'];
-
-
 module.exports = {
   content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
   theme: {
