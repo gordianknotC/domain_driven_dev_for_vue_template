@@ -1,5 +1,5 @@
 import { App } from "vue";
-import { IFacade, injectFacade } from "common_js_builtin/dist";
+import { IFacade, provideFacade } from "js_util_for_vue_project";
 import {
   FacadeDateSource,
   setupDataCoreServices

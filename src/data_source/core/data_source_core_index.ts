@@ -1,4 +1,4 @@
-import { injectFacade } from "common_js_builtin/dist";
+import { provideFacade } from "js_util_for_vue_project";
 import { RemoteClientServiceImpl } from "~/data_source/core/impl/remote_client_service_impl";
 import { UpdateRequestHeaderPlugin } from "~/data_source/core/impl/request_plugins_impl";
 import { AuthResponsePlugin } from "~/data_source/core/impl/response_plugins_impl";
@@ -25,7 +25,7 @@ function setupClientService() {
       timeout: 10000
     }
   );
-  injectFacade({
+  provideFacade({
     clientService
   });
 }
@@ -41,7 +41,7 @@ function setupRemoteService() {
 function setupSocketService() {
   const token = "";
   const socketService = new SocketClientServiceImpl(token);
-  injectFacade({
+  provideFacade({
     socketService
   });
 }
