@@ -24,5 +24,3 @@ export function setupRepositories() {
     }
   });
 }
-
-facade.data.repo.user
