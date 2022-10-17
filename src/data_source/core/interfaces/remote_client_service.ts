@@ -72,21 +72,38 @@ export abstract class RemoteClientService implements RemoteClientMethods {
   abstract del(url: string, payload: Record<string, any>): AxiosPromise<any>;
 }
 
-
-
 /**  Api client 方法 interface */
-export abstract class IApiClientMethods<T extends {id: number}> {
-  abstract get(url: string, payload: Record<string, any>): Promise<TDataResponse<T>>;
-  abstract post(url: string, payload: Record<string, any>): Promise<TDataResponse<T>>;
-  abstract put(url: string, payload: Record<string, any>): Promise<TDataResponse<T>>;
-  abstract del(url: string, payload: Record<string, any>): Promise<TDataResponse<T>>;
+export abstract class IApiClientMethods<T extends { id: number }> {
+  abstract get(
+    url: string,
+    payload: Record<string, any>
+  ): Promise<TDataResponse<T>>;
+  abstract post(
+    url: string,
+    payload: Record<string, any>
+  ): Promise<TDataResponse<T>>;
+  abstract put(
+    url: string,
+    payload: Record<string, any>
+  ): Promise<TDataResponse<T>>;
+  abstract del(
+    url: string,
+    payload: Record<string, any>
+  ): Promise<TDataResponse<T>>;
 }
 
-/** 
+/**
  * api client 處理由 websocket 傳送出去的請求, 將請求暫存於 queue 以後，待收到 socket
  * 資料，再由 queue 裡的 promise resolve 返回值， resolve 後無論成功失敗，移除該筆 queue
  */
-export abstract class IApiClientRequestQueue<T extends {id: number ,timestamp: number, timeout: number, promise: Promise<any>}>{
+export abstract class IApiClientRequestQueue<
+  T extends {
+    id: number;
+    timestamp: number;
+    timeout: number;
+    promise: Promise<any>;
+  }
+> {
   abstract queue: T[];
   abstract add(elt: T): void;
   abstract addAll(elts: T[]): void;
@@ -95,20 +112,27 @@ export abstract class IApiClientRequestQueue<T extends {id: number ,timestamp: n
   abstract pop(): T;
 }
 
-
-/**  */
-export abstract class IApiClientService implements IApiClientMethods<any>{
+/**  api client service */
+export abstract class IApiClientService<T extends { id: number }>
+  implements IApiClientMethods<T>
+{
   abstract socket: ISocketClientService;
-  get(url: string, payload: Record<string, any>): Promise<TDataResponse<any>> {
-    throw new Error("Method not implemented.");
-  }
-  post(url: string, payload: Record<string, any>): Promise<TDataResponse<any>> {
-    throw new Error("Method not implemented.");
-  }
-  put(url: string, payload: Record<string, any>): Promise<TDataResponse<any>> {
-    throw new Error("Method not implemented.");
-  }
-  del(url: string, payload: Record<string, any>): Promise<TDataResponse<any>> {
-    throw new Error("Method not implemented.");
-  } 
+  abstract queue: IApiClientRequestQueue<any>;
+  abstract stage: EClientStage;
+  abstract get(
+    url: string,
+    payload: Record<string, any>
+  ): Promise<TDataResponse<T>>;
+  abstract post(
+    url: string,
+    payload: Record<string, any>
+  ): Promise<TDataResponse<T>>;
+  abstract put(
+    url: string,
+    payload: Record<string, any>
+  ): Promise<TDataResponse<T>>;
+  abstract del(
+    url: string,
+    payload: Record<string, any>
+  ): Promise<TDataResponse<T>>;
 }

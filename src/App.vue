@@ -22,7 +22,7 @@ export default defineComponent({
 
 <style lang="scss">
 #app {
-  @apply flex text-center justify-center;
+  @apply flex justify-center text-center;
   margin: auto;
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -34,11 +34,11 @@ export default defineComponent({
     max-width: 530px;
   }
   @include mobile {
-    @apply w-full h-full;
+    @apply h-full w-full;
     max-width: 100%;
   }
   @include mini {
-    @apply w-full h-full;
+    @apply h-full w-full;
     max-width: 100%;
   }
 }

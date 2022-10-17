@@ -1,5 +1,5 @@
 <template>
-<h3>MerchantListPage</h3>
+  <h3>MerchantListPage</h3>
 </template>
 
 <script lang="ts">
@@ -15,6 +15,4 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

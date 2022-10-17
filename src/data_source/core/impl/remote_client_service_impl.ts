@@ -6,8 +6,13 @@ import {
 import { ClientServicePlugins } from "~/data_source/core/interfaces/client_service_plugin";
 import {
   RemoteClientService,
-  EClientStage
+  EClientStage,
+  IApiClientMethods,
+  IApiClientService,
+  IApiClientRequestQueue
 } from "~/data_source/core/interfaces/remote_client_service";
+import { TDataResponse } from "~/data_source/entities/response_entity";
+import { ISocketClientService } from "../interfaces/socket_client_service";
 
 export class RemoteClientServiceImpl extends RemoteClientService {
   static _instance?: RemoteClientServiceImpl;
@@ -112,5 +117,75 @@ export class RemoteClientServiceImpl extends RemoteClientService {
     } catch (e) {
       throw e;
     }
+  }
+}
+
+export class Queue implements IApiClientRequestQueue<any> {
+  queue: any[];
+  constructor() {
+    this.queue = [];
+  }
+  private processElt(elt: any): any {
+    return elt;
+  }
+  add(elt: any): void {
+    this.queue.add(this.processElt(elt));
+  }
+  addAll(elts: any[]): void {
+    elts.forEach(this.add);
+  }
+  remove(id: number): void {
+    try {
+      const elt = this.queue.firstWhere(_ => _.id == id)!;
+      this.queue.remove(elt);
+    } catch (e) {
+      throw e;
+    }
+  }
+  removeAll(ids: number[]): void {
+    ids.forEach(this.remove);
+  }
+  pop() {
+    return this.queue.pop();
+  }
+}
+
+// UNTESTED:
+// INCOMPLETED:
+export class ApiClientService<T extends { id: number }>
+  implements IApiClientService<T>
+{
+  stage: EClientStage;
+  constructor(
+    public socket: ISocketClientService,
+    public queue: IApiClientRequestQueue<any>
+  ) {
+    this.stage = EClientStage.idle;
+  }
+
+  private connect() {}
+  get(url: string, payload: Record<string, any>): Promise<TDataResponse<T>> {
+    this.stage = EClientStage.fetching;
+    if (this.socket.socket.connected) {
+      this.queue.add(new Promise(() => {}));
+      this.socket.send(
+        JSON.stringify({
+          url,
+          payload
+        }),
+        msg => {}
+      );
+    } else {
+      this.connect();
+    }
+  }
+  post(url: string, payload: Record<string, any>): Promise<TDataResponse<T>> {
+    throw new Error("Method not implemented.");
+  }
+  put(url: string, payload: Record<string, any>): Promise<TDataResponse<T>> {
+    throw new Error("Method not implemented.");
+  }
+  del(url: string, payload: Record<string, any>): Promise<TDataResponse<T>> {
+    throw new Error("Method not implemented.");
   }
 }

@@ -75,5 +75,4 @@ export const facade = IFacade<
   setupPresentationControllers(app, false);
   app.mount("#app");
   setupPresentationControllers(app, true);
-})()
-
+})();

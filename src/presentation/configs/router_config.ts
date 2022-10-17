@@ -30,9 +30,9 @@ const routes: Array<RouteRecordRaw> = [
         path: "/material-list",
         name: ERouter.merhantList,
         component: () => import("~/presentation/pages/MaterialListPage.vue")
-      },
+      }
     ]
-  },
+  }
 ];
 
 const router = createRouter({

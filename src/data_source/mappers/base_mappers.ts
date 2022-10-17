@@ -29,7 +29,7 @@ export class BaseModelMapper<E, D> extends IModelMapper<E, D> {
  *    const model = new Model(mapper, entityOrUndefined, domainOrUndefined);
  *    const entity = model.entity;
  *    const domain = model.domain;
-*/
+ */
 export class Model<E, D> {
   entity!: E;
   domain!: D;

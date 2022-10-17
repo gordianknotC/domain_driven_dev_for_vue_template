@@ -32,7 +32,6 @@ export abstract class BaseRepository<
   abstract upload(val: ENTITY): Promise<{ success: boolean } | null>;
 }
 
-
 /**
  *  用於 不需與 local 同步之 repository
  *  fetch / upload 非同步遠端取/設值

@@ -12,18 +12,21 @@ export type FacadeMappers = {
 };
 
 export function setupMappers() {
-  provideFacade({
-    data: {
-      mappers: {
-        user: new BaseModelMapper(
-          entity => {
-            return entity;
-          },
-          domain => {
-            return domain;
-          }
-        )
+  provideFacade(
+    {
+      data: {
+        mappers: {
+          user: new BaseModelMapper(
+            entity => {
+              return entity;
+            },
+            domain => {
+              return domain;
+            }
+          )
+        }
       }
-    }
-  }, true);
+    },
+    true
+  );
 }

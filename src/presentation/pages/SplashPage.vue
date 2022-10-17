@@ -10,12 +10,10 @@ export default defineComponent({
   props: {},
   setup(props, { emit }) {
     /** 儲存參數 */
-    console.log("123 splash")
+    console.log("123 splash");
     return {};
   }
 });
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

@@ -19,12 +19,14 @@ export function setupRepositories() {
   const userMapper = facade.data.mappers.user;
   const user = new UserRepositoryImpl(client, userMapper);
 
-  provideFacade({
-    data: {
-      repo: {
-        user
+  provideFacade(
+    {
+      data: {
+        repo: {
+          user
+        }
       }
     },
-  }, true);
+    true
+  );
 }
-

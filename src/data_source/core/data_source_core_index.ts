@@ -1,5 +1,9 @@
 import { provideFacade } from "js_util_for_vue_project";
-import { RemoteClientServiceImpl } from "~/data_source/core/impl/remote_client_service_impl";
+import {
+  ApiClientService,
+  Queue,
+  RemoteClientServiceImpl
+} from "~/data_source/core/impl/remote_client_service_impl";
 import { UpdateRequestHeaderPlugin } from "~/data_source/core/impl/request_plugins_impl";
 import { AuthResponsePlugin } from "~/data_source/core/impl/response_plugins_impl";
 import { SocketClientServiceImpl } from "~/data_source/core/impl/socket_client_service_impl";
@@ -9,7 +13,7 @@ import { ISocketClientService } from "~/data_source/core/interfaces/socket_clien
 
 export type FacadeDateSource = {
   data: {
-    remote: RemoteClientService;
+    remoteClient: RemoteClientService;
     socket: ISocketClientService;
   };
 };
@@ -25,9 +29,6 @@ function setupClientService() {
       timeout: 10000
     }
   );
-  provideFacade({
-    clientService
-  });
 }
 
 function setupLocalService() {
@@ -40,9 +41,19 @@ function setupRemoteService() {
 
 function setupSocketService() {
   const token = "";
-  const socketService = new SocketClientServiceImpl(token);
+  const socket = new SocketClientServiceImpl(token);
   provideFacade({
-    socketService
+    data: {
+      socket
+    }
+  });
+
+  const queue = new Queue();
+  const remoteClient = new ApiClientService(socket, queue);
+  provideFacade({
+    data: {
+      remoteClient
+    }
   });
 }
 
