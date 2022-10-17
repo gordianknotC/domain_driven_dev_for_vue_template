@@ -7,22 +7,38 @@
 <script lang="ts">
 import { defineComponent, ref, watch } from "vue";
 import { Search } from "@element-plus/icons-vue";
+import debounce from "lodash/debounce";
 
 export default defineComponent({
   name: "SearchBar",
   props: {
-    placeholder: { type: String, default: "" }
+    placeholder: { type: String, default: "" },
+    // 需要延遲的毫秒數
+    debounceDuration: {
+      type: Number,
+      default: 300
+    }
   },
-  emits: ["onValueChanged"],
+  emits: ["inputChanged"],
   setup(props, { emit }) {
     const input = ref("");
+    const debounceCallback = debounce(
+      (val: string) => emit("inputChanged", val),
+      props.debounceDuration,
+      {}
+    );
+
     watch(
       () => input.value,
       (val, prevVal) => {
+        // 值若改變則觸發debounceCallback,
+        // 忽略前後空白格
         if (val === prevVal) return;
-        emit("onValueChanged", val);
+        console.log(props.debounceDuration);
+        debounceCallback(val.trim());
       }
     );
+
     return {
       props,
       input,
