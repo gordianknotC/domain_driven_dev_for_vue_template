@@ -37,6 +37,7 @@ export class SocketClientServiceImpl implements ISocketClientService {
     this.socket = new PseudoSocket();
     this.token = token;
   }
+
   server_response(callback: (msg: string) => void) {
     this.socket.on("server_response", function (msg) {
       callback(msg);
@@ -48,6 +49,7 @@ export class SocketClientServiceImpl implements ISocketClientService {
       callback(msg);
     });
   }
+
   disconnect() {
     this.socket.emit("disconnect", { token: this.token });
   }
