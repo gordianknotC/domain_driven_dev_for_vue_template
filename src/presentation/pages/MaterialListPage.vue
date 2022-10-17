@@ -1,14 +1,13 @@
-<template lang="pug">
-h3 hello
+<template>
+<h3>MaterialList</h3>
 </template>
 
 <script lang="ts">
 import { defineComponent, reactive, ref, toRefs } from "vue";
 export default defineComponent({
-  name: "Entry",
+  name: "MaterialListPage",
   components: {},
   props: {},
-  emit: ["close", "route"],
   setup(props, { emit }) {
     /** 儲存參數 */
     return {};

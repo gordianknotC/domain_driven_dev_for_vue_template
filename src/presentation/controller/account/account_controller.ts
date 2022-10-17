@@ -1,8 +1,8 @@
 import { defineStore } from "pinia";
 import { computed, ref } from "vue";
 import { ERole, UserEntity } from "~/data_source/entities/user_entity";
-import { facade } from "~/domain/app/domain_app_index";
 import { useRestoreActive } from "element-plus";
+import { facade } from "~/main";
 
 export const accountCtlr = defineStore("user", () => {
   const state = facade.data.repo.user.localStorage;

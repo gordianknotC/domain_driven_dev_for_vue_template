@@ -1,16 +1,16 @@
 <template lang="pug">
 .page.w-full
-  Entry()
+  AppLayout()
 </template>
 
 <script lang="ts">
 import { defineComponent, reactive, ref, toRefs } from "vue";
-import Entry from "~/presentation/pages/Entry.vue";
+import AppLayout from "~/presentation/layout/HomeLayout.vue";
 
 export default defineComponent({
   name: "App",
   components: {
-    Entry
+    AppLayout
   },
   props: {},
   emit: ["close"],

@@ -2,7 +2,7 @@ import { RemoteClientService } from "~/data_source/core/interfaces/remote_client
 import {
   assert,
   AssertMessages
-} from "~/domain/app/third_parties/utils/exceptions";
+} from "~/presentation/third_parties/utils/exceptions";
 
 export abstract class ClientServicePlugins<T, R = T> {
   abstract prev?: ClientServicePlugins<T, R>;

@@ -5,9 +5,9 @@ import { Model } from "~/data_source/mappers/base_mappers";
 import { UserDomainModel } from "~/domain/account/user_domain_model";
 import { useLocalStorage, RemovableRef } from "@vueuse/core";
 import { StorageKeys } from "~/data_source/core/impl/local_client_service_impl";
-import { facade } from "~/domain/app/domain_app_index";
 import { RemoteClientService } from "~/data_source/core/interfaces/remote_client_service";
 import { UserMapper } from "~/data_source/mappers/mappers_types";
+import { facade } from "~/main";
 
 const defaultUser: UserEntity = {
   // email: "",

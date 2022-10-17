@@ -1,5 +1,5 @@
 import { RemoteClientService } from "~/data_source/core/interfaces/remote_client_service";
-import { Model, ModelMapper } from "~/data_source/mappers/base_mappers";
+import { Model, IModelMapper } from "~/data_source/mappers/base_mappers";
 import { TDataResponse } from "~/data_source/entities/response_entity";
 import { NotImplementedError } from "js_util_for_vue_project";
 import { useLocalStorage, RemovableRef } from "@vueuse/core";
@@ -11,7 +11,7 @@ import { useLocalStorage, RemovableRef } from "@vueuse/core";
  *  fetch / upload 非同步遠端取/設值
  * */
 export abstract class BaseRepository<
-  M extends ModelMapper<ENTITY, any>,
+  M extends IModelMapper<ENTITY, any>,
   ENTITY = any,
   PAYLOAD = any
 > {
@@ -38,7 +38,7 @@ export abstract class BaseRepository<
  *  fetch / upload 非同步遠端取/設值
  * */
 export abstract class BaseRemoteRepository<E, PAYLOAD> extends BaseRepository<
-  ModelMapper<E, any>,
+  IModelMapper<E, any>,
   E,
   PAYLOAD
 > {

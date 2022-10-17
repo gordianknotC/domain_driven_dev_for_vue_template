@@ -2,7 +2,7 @@ import { CryptoService } from "~/data_source/core/interfaces/encrypt_service";
 import {
   decryptWithAES,
   encryptWithAES
-} from "~/domain/app/third_parties/utils/crypto_util";
+} from "~/presentation/third_parties/utils/crypto_util";
 
 export class CryptoServiceImpl<T> extends CryptoService<T> {
   constructor(key: string) {
