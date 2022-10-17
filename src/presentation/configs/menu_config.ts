@@ -1,15 +1,14 @@
 import { ERouter } from "../consts/router_const";
 import { ADMIN_GROUP, EUserAdmin } from "../consts/ua_const";
 
-
 export type TAppMenu = {
-  name: string, 
+  name: string;
   default?: boolean;
   children: TAppMenu[];
   meta: {
-    admin: EUserAdmin[],
-  },
-}
+    admin: EUserAdmin[];
+  };
+};
 
 export const APP_MENU_CONFIG: TAppMenu[] = [
   {
@@ -26,6 +25,5 @@ export const APP_MENU_CONFIG: TAppMenu[] = [
     meta: {
       admin: ADMIN_GROUP.all
     }
-  },
-]
-
+  }
+];
