@@ -55,6 +55,8 @@ type TReg = {
   forceCheck: boolean;
 };
 
+export class UACPreprocessorGuard {}
+
 export class QueryStringPreprocessorGuard implements IRouterGuardPreprocessor {
   protected registry: TReg[] = [];
   _nextChain?: IRouterGuardPreprocessor;
@@ -62,12 +64,14 @@ export class QueryStringPreprocessorGuard implements IRouterGuardPreprocessor {
 
   constructor(public router: Router) {}
 
+  // TODO: 移至上層封裝
   addNext(nextChain?: IRouterGuardPreprocessor) {
     if (!nextChain) return;
     this._nextChain = nextChain;
     nextChain._prevChain = this;
   }
 
+  // TODO: 移至上層封裝
   addAction(
     queryName: string,
     action: (
@@ -110,6 +114,7 @@ export class QueryStringPreprocessorGuard implements IRouterGuardPreprocessor {
     return false;
   }
 
+  // TODO: 移至上層封裝
   async process(
     to: RouteLocationNormalized,
     from: RouteLocationNormalized,

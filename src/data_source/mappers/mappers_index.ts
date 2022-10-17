@@ -11,9 +11,9 @@ export type FacadeMappers = {
   };
 };
 
-export function setupMappers() {
-  provideFacade(
-    {
+export function setupMappers(app: App<Element>, facade: any) {
+  const mergeObject = true;
+  provideFacade({
       data: {
         mappers: {
           user: new BaseModelMapper(
@@ -27,6 +27,6 @@ export function setupMappers() {
         }
       }
     },
-    true
+    mergeObject
   );
 }

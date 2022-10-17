@@ -8,7 +8,8 @@ export type FacadePresentationController = {
 
 // todo: presentation controller
 export function setupPresentationControllers(
-  app: App<Element>,
+  app: App<Element>, 
+  facade: any,
   mounted: boolean
 ) {
   if (!mounted) {

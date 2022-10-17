@@ -57,7 +57,7 @@ function setupSocketService() {
   });
 }
 
-export function setupDataCoreServices() {
+export function setupDataCoreServices(app: App<Element>, facade: any) {
   setupClientService();
   setupLocalService();
   setupRemoteService();

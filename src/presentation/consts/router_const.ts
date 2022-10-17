@@ -4,5 +4,6 @@ export enum ERouter {
   home = "home",
   signin = "signin",
   merhantList = "merhantList",
-  materialList = "materialList"
+  materialList = "materialList",
+  notFound = "notFound"
 }

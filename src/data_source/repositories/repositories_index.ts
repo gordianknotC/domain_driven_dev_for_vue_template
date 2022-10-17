@@ -12,21 +12,20 @@ export type FacadeRepository = {
 };
 
 // todo: index repositories 統一注入
-export function setupRepositories() {
+export function setupRepositories(app: App<Element>, facade: any) {
+  const mergeObject = true;
   const client = facade.data.remote;
 
   /** repository 設定，注入 */
   const userMapper = facade.data.mappers.user;
   const user = new UserRepositoryImpl(client, userMapper);
 
-  provideFacade(
-    {
-      data: {
-        repo: {
-          user
-        }
+  
+  provideFacade({
+    data: {
+      repo: {
+        user
       }
-    },
-    true
-  );
+    }
+  },mergeObject);
 }

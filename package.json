@@ -34,7 +34,7 @@
     "crypto-js": "^4.1.1",
     "element-plus": "^2.2.17",
     "http-status-codes": "^2.1.4",
-    "js_util_for_vue_project": "0.2.0+3",
+    "js_util_for_vue_project": "0.2.1",
     "pinia": "^2.0.22",
     "socket.io-client": "^4.5.2",
     "vue": "^3.2.13",

@@ -2,7 +2,7 @@ import { createApp } from "vue";
 import App from "./App.vue";
 import "~/presentation/assets/styles/index.scss";
 import { setupAppPlugins } from "~/presentation/third_parties/plugins/plugins_index";
-import router from "~/presentation/configs/router_config";
+import routerConfig from "~/presentation/configs/router_config";
 
 import { IFacade, provideFacade } from "js_util_for_vue_project";
 import {
@@ -21,17 +21,10 @@ import {
   FacadePresentationController,
   setupPresentationControllers
 } from "~/presentation/controller/controller_index";
+import { FacadeDomainService, setupDomainServices } from "./domain/domain_index";
+import { getRouter, setupRouter } from "./presentation/controller/router/router_index";
 
 const app = createApp(App as any);
-app.use(router);
-
-export type FacadeDomainService = {
-  svc: {
-    material: any;
-    merchant: any;
-    generalMaterial: any;
-  };
-};
 
 /**
  *
@@ -53,11 +46,14 @@ export type FacadeDomainService = {
 * */
 export const facade = IFacade<
   FacadeMappers &
-    FacadeDateSource &
-    FacadeRepository &
-    FacadePresentationController &
-    FacadeDomainService
+  FacadeDateSource &
+  FacadeRepository &
+  FacadePresentationController &
+  FacadeDomainService
 >();
+
+app.use(getRouter());
+
 
 /**
  *  App dependencies includes
@@ -69,10 +65,12 @@ export const facade = IFacade<
  * */
 (function setupDependencies() {
   setupAppPlugins(app, facade);
-  setupMappers();
-  setupRepositories();
-  setupDataCoreServices();
-  setupPresentationControllers(app, false);
+  setupMappers(app, facade);
+  setupRepositories(app, facade);
+  setupDataCoreServices(app, facade);
+  setupDomainServices(app, facade);
+  setupPresentationControllers(app, facade, false);
   app.mount("#app");
-  setupPresentationControllers(app, true);
+  setupRouter();
+  setupPresentationControllers(app, facade, true);
 })();

@@ -6,24 +6,17 @@ import {
   RouterGuardImpl
 } from "../controller/router/impls/router_guard_impl";
 
-function applyAdminMetaIfNotSpecified(
-  routes: RouteRecordRaw[],
-  defaults = ADMIN_GROUP.all
-): RouteRecordRaw[] {
-  routes.forEach(r => {
-    if (r.meta?.admin == undefined) {
-      r.meta ??= {};
-      r.meta.admin = defaults;
-    }
-    if ((r.children?.length ?? 0) >= 1) {
-      applyAdminMetaIfNotSpecified(r.children!, defaults);
-    }
-  });
-  return routes;
-}
 
-/** 沒有註明 meta.admin 代表 all */
-const routes: Array<RouteRecordRaw> = [
+const notFoundROutes:  Array<RouteRecordRaw> = [
+  {
+    path: "/:catchAll(.*)",
+    name: ERouter.notFound,
+    component: () => import("@/views/NotFound.vue")
+  }
+];
+
+
+const loginRoutes:  Array<RouteRecordRaw>= [
   {
     path: "/splash",
     name: ERouter.splash,
@@ -34,6 +27,15 @@ const routes: Array<RouteRecordRaw> = [
     name: ERouter.signin,
     component: () => import("~/presentation/pages/SigninPage.vue")
   },
+]
+
+
+/** 
+ * adminRouterConfig, 用於設定 admin 可訪頁面
+ * 
+ *  */
+const adminRoutes: Array<RouteRecordRaw> = [
+  ...loginRoutes,
   {
     path: "/",
     name: ERouter.homelayout,
@@ -61,23 +63,34 @@ const routes: Array<RouteRecordRaw> = [
         }
       }
     ]
-  }
+  },
+  ...notFoundROutes,
 ];
 
-const router = createRouter({
-  history: createWebHistory(),
-  routes: applyAdminMetaIfNotSpecified(routes, ADMIN_GROUP.all)
-});
 
-// const rotuerGuard = new RouterGuardImpl(
-//   [new QueryStringPreprocessorGuard(
-//     router
-//   )],
-//   []
-// );
+export const userRoutes: Array<RouteRecordRaw>  = [
+  ... loginRoutes, 
+  {
+    path: "/",
+    name: ERouter.homelayout,
+    component: () => import("~/presentation/layout/HomeLayout.vue"),
+    children: [
+      {
+        path: "",
+        name: ERouter.homelayout,
+        redirect: { name: ERouter.notFound }
+      },
+    ]
+  },
+  ... notFoundROutes
+]
 
-router.beforeEach((to, from, next) => {});
 
-// todo:
-// user role 切換 router
-export default router;
+/** 
+ * adminRouterConfig, 用於設定 user 可訪頁面
+ * 
+ *  */
+export const routerConfig = {
+  admin: adminRoutes,
+  user: userRoutes
+}
