@@ -34,7 +34,6 @@ export default defineComponent({
         // 值若改變則觸發debounceCallback,
         // 忽略前後空白格
         if (val === prevVal) return;
-        console.log(props.debounceDuration);
         debounceCallback(val.trim());
       }
     );
