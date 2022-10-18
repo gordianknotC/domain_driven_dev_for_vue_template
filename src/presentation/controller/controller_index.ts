@@ -1,23 +1,23 @@
 import { App } from "vue";
+import i18n, { setupI18n } from "./i18n/i18n_index";
+import { setupRouter } from "./router/router_index";
 
 export type FacadePresentationController = {
   ctlr: {
     sideMenu: any;
+    i18n: typeof i18n;
   };
 };
 
 // todo: presentation controller
 export function setupPresentationControllers(
-  app: App<Element>, 
+  app: App<Element>,
   facade: any,
-  mounted: boolean
+  beforeMounted: boolean
 ) {
-  if (!mounted) {
-    // todo:
-    // 1) controller 前袑始化
+  if (beforeMounted) {
+    setupRouter();
+    setupI18n(app);
   } else {
-    // todo:
-    // 1）theme 切換寫在這
-    // 2） controller 後初始化
   }
 }

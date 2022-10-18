@@ -1,5 +1,1 @@
-
-
-export abstract class IMaterialService {
-
-}
+export abstract class IMaterialService {}

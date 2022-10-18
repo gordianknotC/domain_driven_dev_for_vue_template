@@ -20,12 +20,14 @@ export function setupRepositories(app: App<Element>, facade: any) {
   const userMapper = facade.data.mappers.user;
   const user = new UserRepositoryImpl(client, userMapper);
 
-  
-  provideFacade({
-    data: {
-      repo: {
-        user
+  provideFacade(
+    {
+      data: {
+        repo: {
+          user
+        }
       }
-    }
-  },mergeObject);
+    },
+    mergeObject
+  );
 }

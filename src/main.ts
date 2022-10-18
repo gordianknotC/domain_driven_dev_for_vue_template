@@ -19,18 +19,24 @@ import {
   FacadePresentationController,
   setupPresentationControllers
 } from "~/presentation/controller/controller_index";
-import { FacadeDomainService, setupDomainServices } from "./domain/domain_index";
-import { getRouter, setupRouter } from "./presentation/controller/router/router_index";
+import {
+  FacadeDomainService,
+  setupDomainServices
+} from "./domain/domain_index";
+import {
+  getRouter,
+  setupRouter
+} from "./presentation/controller/router/router_index";
 
 const app = createApp(App as any);
 
 /**
- * Facade 
+ * Facade
  * 提供 APP 入口界面，實際上的相依則以 provideFacade 以注入的方式
  * 注入 container 中，其運作方式 同 DI pattern
- * 
+ *
  * facade 用來存取 app 中的 data source / domain / presentation
- * 
+ *
  * 存取 data source
  * facade.data.remote;
  * facade.data.socket;
@@ -47,17 +53,16 @@ const app = createApp(App as any);
  * facade.svc.merchant;
  * facade.svc.generalMaterial;
  *
-* */
+ * */
 export const facade = IFacade<
   FacadeMappers &
-  FacadeDateSource &
-  FacadeRepository &
-  FacadePresentationController &
-  FacadeDomainService
+    FacadeDateSource &
+    FacadeRepository &
+    FacadePresentationController &
+    FacadeDomainService
 >();
 
 app.use(getRouter());
-
 
 /**
  *  設定 App 所需要的相依注入
@@ -74,8 +79,7 @@ app.use(getRouter());
   setupDomainServices(app, facade);
   // ----------------
   // presentation 注入
-  setupRouter();
-  setupPresentationControllers(app, facade, false);
-  app.mount("#app");
   setupPresentationControllers(app, facade, true);
+  app.mount("#app");
+  setupPresentationControllers(app, facade, false);
 })();

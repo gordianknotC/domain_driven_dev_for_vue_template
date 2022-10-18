@@ -6,10 +6,10 @@ import {
   RouterGuardImpl
 } from "../controller/router/impls/router_guard_impl";
 
-/** 
+/**
  * 共用 - not found
  *  */
-const notFoundROutes:  Array<RouteRecordRaw> = [
+const notFoundROutes: Array<RouteRecordRaw> = [
   {
     path: "/:catchAll(.*)",
     name: ERouter.notFound,
@@ -17,11 +17,10 @@ const notFoundROutes:  Array<RouteRecordRaw> = [
   }
 ];
 
-
-/** 
+/**
  * 共用 - login
  *  */
-const loginRoutes:  Array<RouteRecordRaw>= [
+const loginRoutes: Array<RouteRecordRaw> = [
   {
     path: "/splash",
     name: ERouter.splash,
@@ -31,13 +30,12 @@ const loginRoutes:  Array<RouteRecordRaw>= [
     path: "/signin",
     name: ERouter.signin,
     component: () => import("~/presentation/pages/SigninPage.vue")
-  },
-]
+  }
+];
 
-
-/** 
+/**
  * adminRouterConfig, 用於設定 admin 可訪頁面
- * 
+ *
  *  */
 const adminRoutes: Array<RouteRecordRaw> = [
   ...loginRoutes,
@@ -69,16 +67,15 @@ const adminRoutes: Array<RouteRecordRaw> = [
       }
     ]
   },
-  ...notFoundROutes,
+  ...notFoundROutes
 ];
 
-
-/** 
+/**
  * userRouterConfig, 用於設定 user 可訪頁面
- * 
+ *
  *  */
-export const userRoutes: Array<RouteRecordRaw>  = [
-  ... loginRoutes, 
+export const userRoutes: Array<RouteRecordRaw> = [
+  ...loginRoutes,
   {
     path: "/",
     name: ERouter.homelayout,
@@ -88,18 +85,17 @@ export const userRoutes: Array<RouteRecordRaw>  = [
         path: "",
         name: ERouter.homelayout,
         redirect: { name: ERouter.notFound }
-      },
+      }
     ]
   },
-  ... notFoundROutes
-]
+  ...notFoundROutes
+];
 
-
-/** 
+/**
  * adminRouterConfig, 用於設定 user 可訪頁面
- * 
+ *
  *  */
 export const routerConfig = {
   admin: adminRoutes,
   user: userRoutes
-}
+};

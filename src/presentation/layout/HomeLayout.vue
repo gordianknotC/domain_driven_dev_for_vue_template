@@ -10,10 +10,15 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import AppAsideMenu from "../components/AppAsideMenu.vue";
+import AppHeader from "../components/AppHeader.vue";
 
 export default defineComponent({
   name: "AppLayout",
-  components: {},
+  components: {
+    AppAsideMenu,
+    AppHeader
+  },
   setup() {}
 });
 </script>

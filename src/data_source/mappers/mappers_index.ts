@@ -1,5 +1,6 @@
 // todo: index mappers 統一注入
 import { provideFacade } from "js_util_for_vue_project";
+import { App } from "vue";
 import { UserEntity } from "~/data_source/entities/user_entity";
 import { BaseModelMapper } from "~/data_source/mappers/base_mappers";
 
@@ -13,7 +14,8 @@ export type FacadeMappers = {
 
 export function setupMappers(app: App<Element>, facade: any) {
   const mergeObject = true;
-  provideFacade({
+  provideFacade(
+    {
       data: {
         mappers: {
           user: new BaseModelMapper(
