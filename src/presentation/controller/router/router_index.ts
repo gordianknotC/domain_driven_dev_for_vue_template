@@ -12,8 +12,10 @@ import {
   QueryStringPreprocessorGuard
 } from "~/presentation/controller/router/impls/router_guard_impl";
 
+let routerInstance: Router;
+
 /** 用來巢狀寫入 router config 中 meta.admin 裡面的值 */
-function applyAdminMetaIfNotSpecified(
+function applyMetaDefaults(
   routes: RouteRecordRaw[],
   defaults = ADMIN_GROUP.all
 ): RouteRecordRaw[] {
@@ -23,20 +25,21 @@ function applyAdminMetaIfNotSpecified(
       r.meta.admin = defaults;
     }
     if ((r.children?.length ?? 0) >= 1) {
-      applyAdminMetaIfNotSpecified(r.children!, defaults);
+      applyMetaDefaults(r.children!, defaults);
     }
   });
   return routes;
 }
 
-let routerInstance: Router;
 export function getRouter(): Router {
+  if (routerInstance != undefined) return routerInstance!;
+
   // TODO:
   // 實作角色權限 router 選擇, 目前先直接用 routerConfig.admin,
   // 預計這裡會偵聽 UAC change 重刷 routerInstance
   routerInstance ??= createRouter({
     history: createWebHistory(),
-    routes: applyAdminMetaIfNotSpecified(routerConfig.admin, ADMIN_GROUP.all)
+    routes: applyMetaDefaults(routerConfig.admin, ADMIN_GROUP.all)
   });
 
   // TODO: UAC guard
@@ -54,6 +57,7 @@ export function getRouter(): Router {
   return routerInstance!;
 }
 
+/** 注入 router */
 export function setupRouter() {
   const mergeObject = true;
   provideFacade(

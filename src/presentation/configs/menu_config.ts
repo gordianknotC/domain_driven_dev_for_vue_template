@@ -1,6 +1,6 @@
 import { computed, ComputedRef } from "vue";
 import { ERouter } from "../consts/router_const";
-import { ADMIN_GROUP, EUserAdmin } from "../consts/ua_const";
+import { ADMIN_GROUP, EUserAccount } from "../consts/ua_const";
 
 /**
  * @param label 選單 label, 必需是 computed ref 或 ref object, 當語系變動時才能跟著連動
@@ -16,7 +16,7 @@ export type TAppMenu = {
   default?: boolean;
   children: TAppMenu[];
   meta: {
-    admin: EUserAdmin[];
+    admin: EUserAccount[];
   };
 };
 

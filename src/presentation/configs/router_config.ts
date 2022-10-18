@@ -1,19 +1,35 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import { ERouter } from "../consts/router_const";
-import { ADMIN_GROUP } from "../consts/ua_const";
+import { ADMIN_GROUP, EUserAccount } from "../consts/ua_const";
 import {
   QueryStringPreprocessorGuard,
   RouterGuardImpl
 } from "../controller/router/impls/router_guard_impl";
 
 /**
+ *  Router Config 所使用的 meta type
+ *  @param auth @default true           是否需要 auth, 預設為 true
+ *  @param admin @default [admin+user]  admin group
+ *
+ *  以上預設值由 router index 邏輯部份處理，config 檔只指派非預設值, 如
+ *  notFound / login pages 不需要 auth, 其他頁面均需要
+ */
+type RouterMetaType = {
+  admin: EUserAccount[];
+  auth: boolean;
+};
+
+/**
  * 共用 - not found
- *  */
+ **/
 const notFoundROutes: Array<RouteRecordRaw> = [
   {
     path: "/:catchAll(.*)",
     name: ERouter.notFound,
-    component: () => import("@/views/NotFound.vue")
+    component: () => import("@/views/NotFound.vue"),
+    meta: {
+      auth: false
+    }
   }
 ];
 
@@ -24,12 +40,18 @@ const loginRoutes: Array<RouteRecordRaw> = [
   {
     path: "/splash",
     name: ERouter.splash,
-    component: () => import("~/presentation/pages/SplashPage.vue")
+    component: () => import("~/presentation/pages/SplashPage.vue"),
+    meta: {
+      auth: false
+    }
   },
   {
     path: "/signin",
     name: ERouter.signin,
-    component: () => import("~/presentation/pages/SigninPage.vue")
+    component: () => import("~/presentation/pages/SigninPage.vue"),
+    meta: {
+      auth: false
+    }
   }
 ];
 
