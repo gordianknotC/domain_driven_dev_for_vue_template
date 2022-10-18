@@ -22,7 +22,7 @@ const notFoundROutes: Array<RouteRecordRaw> = [
   {
     path: "/:catchAll(.*)",
     name: ERouter.notFound,
-    component: () => import("@/views/NotFound.vue"),
+    component: () => import("~/presentation/components/NotFound.vue"),
     meta: {
       auth: false
     }
@@ -88,9 +88,8 @@ const adminRoutes: Array<RouteRecordRaw> = [
   ...notFoundROutes
 ];
 
-
 export default {
-    loginRoutes,
-    adminRoutes,
-    notFoundROutes
-}
+  loginRoutes,
+  adminRoutes,
+  notFoundROutes
+};
