@@ -28,8 +28,7 @@ export default defineComponent({
   name: "DropdownButton",
   props: {
     placeholder: {
-      type: String,
-      default: "placeholder"
+      type: String
     },
     items: {
       type: Array as PropType<string[]>,
