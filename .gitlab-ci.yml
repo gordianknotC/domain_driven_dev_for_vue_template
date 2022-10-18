@@ -1,16 +1,12 @@
 build site:
-  image: node:14
+  image: node:latest
   stage: build
   script:
     - yarn install
     - yarn serve
-  artifacts:
-    expire_in: 1 week
-    paths:
-      - dist
 
 unit test:
-  image: node:14
+  image: node:latest
   stage: test
   script:
     - yarn install
