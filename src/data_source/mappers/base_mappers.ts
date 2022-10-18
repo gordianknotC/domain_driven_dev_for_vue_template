@@ -1,5 +1,5 @@
 import { UserEntity } from "~/data_source/entities/user_entity";
-import { assert } from "~/presentation/third_parties/utils/exceptions";
+import { assert } from "~/presentation/third_parties/utils/assert_exceptions";
 
 /** mapper interface */
 export abstract class IModelMapper<E, D> {

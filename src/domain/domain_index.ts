@@ -10,7 +10,6 @@ export type FacadeDomainService = {
   };
 };
 
-
 export function setupDomainServices(app: App<Element>, facade: any){
   const materialService = new MaterialServiceImpl();
   const merchantService = new MerchantServiceImpl();

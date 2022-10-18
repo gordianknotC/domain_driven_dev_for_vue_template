@@ -1,6 +1,13 @@
 import { ERouter } from "../consts/router_const";
 import { ADMIN_GROUP, EUserAdmin } from "../consts/ua_const";
 
+/**
+ * @param meta 額外資料，可用來判斷該 menu 是不出現
+ *             如 meta.admin 表明menu 在什麼樣的權限下是否限示
+ * @param name menu 名稱，也對應到 [ERouter], 用來表示連結到 router 的名稱
+ * @param default 是否為母層展開後的第一個預設節點
+ * @param children 子層 menu
+ */
 export type TAppMenu = {
   name: string;
   default?: boolean;

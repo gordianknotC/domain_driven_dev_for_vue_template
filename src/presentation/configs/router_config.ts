@@ -6,7 +6,9 @@ import {
   RouterGuardImpl
 } from "../controller/router/impls/router_guard_impl";
 
-
+/** 
+ * 共用 - not found
+ *  */
 const notFoundROutes:  Array<RouteRecordRaw> = [
   {
     path: "/:catchAll(.*)",
@@ -16,6 +18,9 @@ const notFoundROutes:  Array<RouteRecordRaw> = [
 ];
 
 
+/** 
+ * 共用 - login
+ *  */
 const loginRoutes:  Array<RouteRecordRaw>= [
   {
     path: "/splash",
@@ -68,6 +73,10 @@ const adminRoutes: Array<RouteRecordRaw> = [
 ];
 
 
+/** 
+ * userRouterConfig, 用於設定 user 可訪頁面
+ * 
+ *  */
 export const userRoutes: Array<RouteRecordRaw>  = [
   ... loginRoutes, 
   {

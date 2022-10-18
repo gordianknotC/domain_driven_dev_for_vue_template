@@ -2,7 +2,7 @@ import { AxiosPromise, AxiosRequestConfig, AxiosResponse } from "axios";
 import {
   assert,
   AssertMessages
-} from "~/presentation/third_parties/utils/exceptions";
+} from "~/presentation/third_parties/utils/assert_exceptions";
 import { ClientServicePlugins } from "~/data_source/core/interfaces/client_service_plugin";
 import {
   RemoteClientService,

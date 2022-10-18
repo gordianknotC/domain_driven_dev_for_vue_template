@@ -3,6 +3,26 @@ business logic (BLOC)(XState)
 
 > 商業操作邏輯
 
+
+# const
+> app constants
+### router constants
+### user account control(UAC) constants
+
+# config
+> application configs
+### menu config
+### router config
+### theme config
+
+# controller
+>  用來處理 presentation 層的邏輯, 之後會改為 pinia
+>  的 convention "store"
+### account
+### i18n
+### router
+
+
 # components
 
 > 組件
@@ -16,10 +36,21 @@ business logic (BLOC)(XState)
 > 主題
 
 
-# utils
-> presentation 層專用 utils
-> 其他地方不要存取 presentation utils
+# third_parties
+> 第三方套件，所有 plugin，及可能會被 domain / data source / presentation 存取的工具類，如 exception, 加密解密, 
+## plugins
+### devtool plugin
+> 將 debug 工具注入 browser console
+### element plugin
+> 安裝設定 element plus
+### svg icon plugin
+> 設定 svg icons 載入
 
-如果該 utils 不只用在 presentation 也用在 domain, 則選擇放在 Domain中，並以 service expose 出來
-如果該 utils presentation 有使用，domain 也有使用，屬於單純的 app 層級，考慮放在 third_parties / utils 裡面，
-以後如果有獨立分層需要時，便可以直接把 third_parties / utils 獨立出來便可
+### index
+> plugin 入口，安裝所有 plugin
+
+## utils
+- **crypto**
+  用於 app 加密解密
+- **assert_exceptions** 
+  所有 assert exceptions
