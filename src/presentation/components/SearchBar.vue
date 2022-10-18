@@ -22,6 +22,8 @@ export default defineComponent({
   emits: ["inputChanged"],
   setup(props, { emit }) {
     const input = ref("");
+
+    // 經過debounceDuration 後再觸發inputChanged event
     const debounceCallback = debounce(
       (val: string) => emit("inputChanged", val),
       props.debounceDuration,
@@ -46,4 +48,4 @@ export default defineComponent({
   }
 });
 </script>
-<style lang="ts"></style>
+<style></style>
