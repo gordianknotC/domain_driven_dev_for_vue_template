@@ -1,4 +1,3 @@
-
 /**
  * primary colors:
  *    These are the colors that are most frequently used across
@@ -28,79 +27,119 @@
  *    confirmation messages, etc.
  * */
 
+/**
+ * d: abbreviate for dark
+ * l: abbreviate for light
+ * s: abbreviate for saturated
+ *
+ * Corporation Identity System (CI)
+ */
 
-
-module.exports = {
-  primary: {
-    DEFAULT: "#4285F4",
-    light: "#58b6ff",
-    deep: "#000AFF",
-    dark: "#0A0943", // 用於部份 chamfered button 上
-    border: "#001971",
-    text: "#fff"
+const swatches = {
+  purple: {
+    800: "#3F56C6",
+    500: "#7882FA",
+    400: "#ADB1FF",
+    300: "#E0E2FF"
   },
-  secondary: {
-    DEFAULT: "#31D0AA",
-    deep: "#00BE91",
-    light: "#41EBC2",
-    lighter: "#6DF0D1",
-    border: "#056750",
-    text: "#fff"
+  brand: {
+    800: "#00193E",
+    500: "#1B3F69",
+    400: "#4C6997",
+    300: "#97B0D7"
   },
-  label: {
-    DEFAULT: "#828F98",
-    dark: "#22272A",
-    light: "#9F9F9F",
-  },
-  bg: {
-    "med-dark": "#E3E6EC", // 用於 inputField 及較深的 bg
-    DEFAULT: "#ECF0F3",
-    light: "#FBFDFF",
-    highlight: "#FFFFFF",
-    "table-header": "#D3DCED",
-  },
-  hr: "#E4ECF2",
-  success: {
-    DEFAULT: "#31D0AA"
-  },
-  danger: {
-    DEFAULT: "#ED4B72"
-  },
-  warning: {
-    DEFAULT: "#EDAC4B",
-    deep: "#DC8A0F",
-    light: "#EE624C"
-  },
-  info: {
-    DEFAULT: "#FFFFFF"
-  },
-  highlight: {
-    DEFAULT: "#FFFFFF"
-  },
-  stops: {
-    chamferToggledT: "#E3EBF1", // toggled 漸層色 Top
-    chamferToggledB: "#F2F5F7", // toggled 漸層色 Bottom
-    chamferUToggledT: "#E3EBF1", // untoggled 漸層色 Top
-    chamferUToggledB: "#ECF0F3", // untoggled 漸層色 Bottom
-    shaderSmoothB: "#ECF0F333", // alpha 0.2
-    shaderSmoothT: "#FFFFFF",
-  },
-  red: {
-    DEFAULT: "#ce3d3d",
+  blue: {
+    800: "#006ECA",
+    500: "#4C9CFE",
+    400: "#89CDFF",
+    300: "#BCE3FF"
   },
   green: {
-    DEFAULT: "#4EA85C",
-    light: "#7cd579",
-    dark: "#13930f",
+    800: "#0BA45B",
+    500: "#56D689",
+    400: "#8CFFB9",
+    300: "#CCFFE0",
+    200: "#EAFFF2"
   },
-  orange: {
-    DEFAULT: "#f09a34",
-    light: "#f09a34",
-    dark: "#f09a34"
+  red: {
+    800: "#B9002C",
+    500: "#DF2551",
+    400: "#EA6585",
+    300: "#FFE5EC"
   },
-  receive: {
-    DEFAULT: "#7A32E0",
-    wheel: "#325FFF",
-    lotto: "#EE704C"
+  grey: {
+    800: "#70757B",
+    500: "#99A3B2",
+    300: "#D4D9E0",
+    200: "#E3EAF3",
+    100: "#EFF3F8",
+    0: "#FFFFFF"
+  }
+};
+
+const ci = {
+  primary: {
+    d2: swatches.brand["800"],
+    d1: swatches.brand["500"],
+    DEFAULT: swatches.brand["400"],
+    l1: swatches.brand["300"],
+    // ----- saturated --------
+    sd2: swatches.purple["800"],
+    sd1: swatches.purple["500"],
+    s: swatches.purple["400"],
+    sl1: swatches.purple["300"]
+  },
+  secondary: {
+    d2: swatches.green["800"],
+    d1: swatches.green["500"],
+    DEFAULT: swatches.green["400"],
+    l1: swatches.green["300"],
+    l2: swatches.green["200"]
+  },
+  tritiary: {
+    d2: swatches.blue["800"],
+    d1: swatches.blue["500"],
+    DEFAULT: swatches.blue["400"],
+    l1: swatches.blue["300"]
+  },
+  success: {
+    DEFAULT: swatches.green["500"]
+  },
+  info: {
+    DEFAULT: swatches.green["500"]
+  },
+  danger: {
+    DEFAULT: swatches.red["500"]
+  },
+  warning: {
+    DEFAULT: swatches.red["500"]
+  },
+  text: {
+    DEFAULT: swatches.grey["800"],
+    bright: swatches.grey["0"],
+    light: swatches.grey["500"],
+    strong: swatches.brand["800"],
+    activated: swatches.purple["500"]
+  }
+};
+
+module.exports = {
+  ...swatches,
+  ...ci,
+  bg: {
+    primaryActivated: swatches.purple["500"],
+    primaryClickable: swatches.purple["400"],
+    secondaryClickable: swatches.green["500"],
+    tritiaryClickable: swatches.blue["400"],
+    colorlessClicable: swatches.grey["100"],
+    inputDisable: swatches.grey["100"],
+    tableHead: swatches.grey["200"],
+    appHeader: swatches.brand["500"],
+    footer: swatches.grey["200"]
+  },
+  stroke: {
+    error: swatches.red["500"],
+    focus: swatches.purple["500"],
+    inactive: swatches.grey["300"]
   }
 };
