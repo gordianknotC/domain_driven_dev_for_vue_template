@@ -34,9 +34,8 @@ module.exports = {
         "2xl": "1536px"
         // => @media (min-width: 1536px) { ... }
       },
-      textColor: theme => ({
-        DEFAULT: cColors.text.DEFAULT
-      }),
+      backgroundColor: _ => Object.assign({}, cColors.bg),
+      textColor: _ => Object.assign({}, cColors.text),
       zIndex: {
         75: 75,
         100: 100

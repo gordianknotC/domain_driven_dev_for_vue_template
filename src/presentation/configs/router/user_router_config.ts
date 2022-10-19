@@ -27,7 +27,7 @@ export const userRoutes: Array<RouteRecordRaw> = [
   {
     path: "/",
     name: ERouter.homelayout,
-    component: () => import("~/presentation/layout/HomeLayout.vue"),
+    component: () => import("~/presentation/layout/PageLayout.vue"),
     children: [
       {
         path: "",

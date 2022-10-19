@@ -59,12 +59,12 @@ const adminRoutes: Array<RouteRecordRaw> = [
   ...loginRoutes,
   {
     path: "/",
-    name: ERouter.homelayout,
-    component: () => import("~/presentation/layout/HomeLayout.vue"),
+    name: ERouter.pagelayout,
+    component: () => import("~/presentation/layout/PageLayout.vue"),
     children: [
       {
         path: "",
-        name: ERouter.homelayout,
+        name: ERouter.pagelayout,
         redirect: { name: ERouter.merhantList }
       },
       {

@@ -6,7 +6,7 @@
 
 <script lang="ts">
 import { defineComponent, reactive, ref, toRefs } from "vue";
-import AppLayout from "~/presentation/layout/HomeLayout.vue";
+import AppLayout from "~/presentation/layout/AppLayout.vue";
 
 export default defineComponent({
   name: "App",
