@@ -1,41 +1,30 @@
-// container.scss
+/* container.scss */
 
-.app-layout{
-  @apply w-full h-full;
-
+.app-layout {
+  @apply h-full w-full;
 }
 
-.page-layout{
+.page-layout {
   @apply w-full;
-
 }
-
 
 .van-dialog {
   width: 33rem;
   min-height: 30rem;
-  abc: wefoije 4234rem;
 
   @custom-env --hightligt blue;
-  
-  @abc abcfwofij wf {
-    @apply bg-green-200 hover:bg-green-400;
-    height1233: fowijef owif  woefij wefij oso33vs;
-    width: 33rem;
-    abc: woiefjwo fiowf w24234;
-    background: woeif wef oi fwefi oa;
-    owwef: wefoij 2234rem;
-  }
 
   @include tablet {
     width: 80% !important;
     max-width: 33rem;
     max-height: 33rem;
   }
+
   @include mobile {
     width: 80% !important;
     max-height: 38rem;
   }
+
   @include mini {
     width: 80% !important;
     max-height: 38rem;
@@ -44,4 +33,3 @@
 
 $header-h: 5.5rem;
 $card-h: 5rem;
- 
