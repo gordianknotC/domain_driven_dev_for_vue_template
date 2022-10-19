@@ -1,10 +1,10 @@
 export enum ERouter {
   splash = "splash",
-  pagelayout = "pagelayout",
+  pageLayout = "pageLayout",
   //
   home = "home",
-  signin = "signin",
-  merhantList = "merhantList",
+  signIn = "signIn",
+  merchantList = "merchantList",
   materialList = "materialList",
   notFound = "notFound",
   //

@@ -38,10 +38,10 @@ export class RemoteClientServiceImpl<T extends { id: number }>
       failed(msg: string) {
         throw new Error("Function not implemented.");
       },
-      resuccess(msg: string) {
+      reSuccess(msg: string) {
         throw new Error("Function not implemented.");
       },
-      refailed(msg: string) {
+      reFailed(msg: string) {
         throw new Error("Function not implemented.");
       }
     });

@@ -42,9 +42,9 @@ const loginRoutes: Array<RouteRecordRaw> = [
     }
   },
   {
-    path: "/signin",
-    name: ERouter.signin,
-    component: () => import("~/presentation/pages/SigninPage.vue"),
+    path: "/signIn",
+    name: ERouter.signIn,
+    component: () => import("~/presentation/pages/SignInPage.vue"),
     meta: {
       auth: false
     }
@@ -103,17 +103,17 @@ const adminRoutes: Array<RouteRecordRaw> = [
   ...demoRoutes,
   {
     path: "/",
-    name: ERouter.pagelayout,
+    name: ERouter.pageLayout,
     component: () => import("~/presentation/layout/PageLayout.vue"),
     children: [
       {
         path: "",
-        name: ERouter.pagelayout,
-        redirect: { name: ERouter.merhantList }
+        name: ERouter.pageLayout,
+        redirect: { name: ERouter.merchantList }
       },
       {
         path: "/merchant-list",
-        name: ERouter.merhantList,
+        name: ERouter.merchantList,
         component: () => import("~/presentation/pages/MerchantListPage.vue"),
         meta: {
           admin: ADMIN_GROUP.all
@@ -121,7 +121,7 @@ const adminRoutes: Array<RouteRecordRaw> = [
       },
       {
         path: "/material-list",
-        name: ERouter.merhantList,
+        name: ERouter.merchantList,
         component: () => import("~/presentation/pages/MaterialListPage.vue"),
         meta: {
           admin: ADMIN_GROUP.all

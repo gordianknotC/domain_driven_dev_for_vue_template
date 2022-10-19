@@ -27,12 +27,12 @@ export const userRoutes: Array<RouteRecordRaw> = [
   ...demoRoutes,
   {
     path: "/",
-    name: ERouter.pagelayout,
+    name: ERouter.pageLayout,
     component: () => import("~/presentation/layout/PageLayout.vue"),
     children: [
       {
         path: "",
-        name: ERouter.pagelayout,
+        name: ERouter.pageLayout,
         redirect: { name: ERouter.notFound }
       }
     ]
