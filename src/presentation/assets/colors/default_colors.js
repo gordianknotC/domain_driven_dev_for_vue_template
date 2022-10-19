@@ -96,7 +96,7 @@ const ci = {
     l1: swatches.green["300"],
     l2: swatches.green["200"]
   },
-  tritiary: {
+  tertiary: {
     d2: swatches.blue["800"],
     d1: swatches.blue["500"],
     DEFAULT: swatches.blue["400"],
@@ -130,8 +130,8 @@ module.exports = {
     primaryActivated: swatches.purple["500"],
     primaryClickable: swatches.purple["400"],
     secondaryClickable: swatches.green["500"],
-    tritiaryClickable: swatches.blue["400"],
-    colorlessClicable: swatches.grey["100"],
+    tertiaryClickable: swatches.blue["400"],
+    colorlessClickable: swatches.grey["100"],
     inputDisable: swatches.grey["100"],
     tableHead: swatches.grey["200"],
     appHeader: swatches.brand["500"],

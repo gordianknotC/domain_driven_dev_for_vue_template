@@ -1,5 +1,6 @@
 <template lang="pug">
-.page.w-full
+.page.w-full.p-2
+  .btn-primary 
   AppLayout()
 </template>
 
