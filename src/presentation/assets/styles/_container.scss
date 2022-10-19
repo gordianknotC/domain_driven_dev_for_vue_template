@@ -1,15 +1,12 @@
-// container.scss
+/* container.scss */
 
-.app-layout{
-  @apply w-full h-full;
-
+.app-layout {
+  @apply h-full w-full;
 }
 
-.page-layout{
+.page-layout {
   @apply w-full;
-
 }
-
 
 .van-dialog {
   width: 33rem;
@@ -20,10 +17,12 @@
     max-width: 33rem;
     max-height: 33rem;
   }
+
   @include mobile {
     width: 80% !important;
     max-height: 38rem;
   }
+
   @include mini {
     width: 80% !important;
     max-height: 38rem;
@@ -32,4 +31,3 @@
 
 $header-h: 5.5rem;
 $card-h: 5rem;
- 
