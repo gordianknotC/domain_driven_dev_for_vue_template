@@ -12,8 +12,6 @@
   width: 33rem;
   min-height: 30rem;
 
-  @custom-env --hightligt blue;
-
   @include tablet {
     width: 80% !important;
     max-width: 33rem;
