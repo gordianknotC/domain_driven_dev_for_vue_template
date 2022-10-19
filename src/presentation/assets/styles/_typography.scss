@@ -1,7 +1,7 @@
 
 body {
   h1, h2, h3, h4, h5, h6 {
-    @apply text-label-dark leading-8 font-semibold mb-4 capitalize;
+    @apply text-text-strong leading-8 font-semibold mb-4 capitalize;
   }
 
   h2 {
@@ -17,11 +17,11 @@ body {
   }
 
   p {
-    @apply mb-2 text-label-dark font-light;
+    @apply mb-2 text-text-strong font-light;
   }
 
   a {
-    @apply text-light hover:underline;
+    @apply text-text-light hover:underline;
   }
 
   ul {

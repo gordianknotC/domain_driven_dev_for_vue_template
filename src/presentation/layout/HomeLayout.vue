@@ -1,7 +1,7 @@
 <template>
-  <section>
+  <section class="app-layout">
     <AppHeader> </AppHeader>
-    <section class="page-layout-container">
+    <section class="page-layout">
       <router-view></router-view>
     </section>
     <AppAsideMenu> </AppAsideMenu>
@@ -19,7 +19,9 @@ export default defineComponent({
     AppAsideMenu,
     AppHeader
   },
-  setup() {}
+  setup(props) {
+
+  }
 });
 </script>
 

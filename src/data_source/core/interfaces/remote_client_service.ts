@@ -92,24 +92,27 @@ export abstract class IApiClientMethods<T extends { id: number }> {
   ): Promise<TDataResponse<T>>;
 }
 
+export type QueueItem = {
+  id: number;
+  promise: () => Promise<any>;
+  resolve: any;
+  reject: any;
+  timestamp: number;
+  timeout: NodeJS.Timeout;
+};
+
 /**
  * api client 處理由 websocket 傳送出去的請求, 將請求暫存於 queue 以後，待收到 socket
  * 資料，再由 queue 裡的 promise resolve 返回值， resolve 後無論成功失敗，移除該筆 queue
  */
-export abstract class IApiClientRequestQueue<
-  T extends {
-    id: number;
-    timestamp: number;
-    timeout: number;
-    promise: Promise<any>;
-  }
-> {
+export abstract class IQueue<T extends QueueItem> {
   abstract queue: T[];
-  abstract add(elt: T): void;
-  abstract addAll(elts: T[]): void;
-  abstract remove(id: number): void;
-  abstract removeAll(ids: number[]): void;
-  abstract pop(): T;
+  abstract enqueue(
+    id: number,
+    promise: () => Promise<any>,
+    timeout: number
+  ): Promise<any>;
+  abstract dequeue(id: number): boolean;
 }
 
 /**  api client service */
@@ -117,7 +120,7 @@ export abstract class IApiClientService<T extends { id: number }>
   implements IApiClientMethods<T>
 {
   abstract socket: ISocketClientService;
-  abstract queue: IApiClientRequestQueue<any>;
+  abstract queue: IQueue<any>;
   abstract stage: EClientStage;
   abstract get(
     url: string,

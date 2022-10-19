@@ -27,7 +27,6 @@ $card-h:5rem;
 }
 
 .hover-card{
-  @apply rounded p-4 border border-opacity-20 border-label  #{!important};
   border: solid 1px;
   height: $card-h;
   margin-top:0.1rem;

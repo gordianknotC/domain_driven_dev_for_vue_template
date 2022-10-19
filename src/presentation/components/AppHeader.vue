@@ -7,11 +7,13 @@ import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "AppHeader",
-  props: {},
   setup(props) {
-    return {};
+    return {
+    };
   }
 });
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+
+</style>

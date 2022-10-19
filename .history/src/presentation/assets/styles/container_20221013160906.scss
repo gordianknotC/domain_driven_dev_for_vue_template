@@ -23,25 +23,7 @@ $card-h: 5rem;
   @apply rounded p-4;
   height: $card-h;
 }
-
-.hover-card {
-  @apply rounded border border-label border-opacity-20 p-4  #{!important};
-  border: solid 1px;
-  height: $card-h;
-  margin-top: 0.1rem;
-  margin-bottom: 0.1rem;
-  &:hover {
-    @apply border border-primary border-opacity-50 #{!important};
-    cursor: pointer;
-  }
-}
-
-input {
-  @apply h-full w-full rounded border border-label border-opacity-20 p-3  #{!important};
-  &:hover {
-    @apply border border-primary border-opacity-50 #{!important};
-  }
-}
+ 
 
 .clickable-label {
   &:hover {

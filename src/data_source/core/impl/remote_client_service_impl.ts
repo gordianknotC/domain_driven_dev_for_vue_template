@@ -9,9 +9,14 @@ import {
   EClientStage,
   IApiClientMethods,
   IApiClientService,
-  IApiClientRequestQueue
+  IQueue,
+  QueueItem
 } from "~/data_source/core/interfaces/remote_client_service";
-import { TDataResponse } from "~/data_source/entities/response_entity";
+import {
+  TDataResponse,
+  TErrorResponse,
+  TSuccessResponse
+} from "~/data_source/entities/response_entity";
 import { ISocketClientService } from "../interfaces/socket_client_service";
 
 export class RemoteClientServiceImpl extends RemoteClientService {
@@ -120,61 +125,58 @@ export class RemoteClientServiceImpl extends RemoteClientService {
   }
 }
 
-export class Queue implements IApiClientRequestQueue<any> {
-  queue: any[];
-  constructor() {
-    this.queue = [];
-  }
-  private processElt(elt: any): any {
-    return elt;
-  }
-  add(elt: any): void {
-    this.queue.add(this.processElt(elt));
-  }
-  addAll(elts: any[]): void {
-    elts.forEach(this.add);
-  }
-  remove(id: number): void {
-    try {
-      const elt = this.queue.firstWhere(_ => _.id == id)!;
-      this.queue.remove(elt);
-    } catch (e) {
-      throw e;
-    }
-  }
-  removeAll(ids: number[]): void {
-    ids.forEach(this.remove);
-  }
-  pop() {
-    return this.queue.pop();
-  }
-}
-
 // UNTESTED:
 // INCOMPLETED:
 export class ApiClientService<T extends { id: number }>
   implements IApiClientService<T>
 {
   stage: EClientStage;
-  constructor(
-    public socket: ISocketClientService,
-    public queue: IApiClientRequestQueue<any>
-  ) {
+  constructor(public socket: ISocketClientService, public queue: IQueue<any>) {
     this.stage = EClientStage.idle;
   }
 
-  private connect() {}
+  private connect(): Promise<TSuccessResponse> {
+    const futureResponse = new Promise<TSuccessResponse>(() => {});
+    this.socket.connect({
+      success(msg: string) {
+        futureResponse.then();
+        throw new Error("Function not implemented.");
+      },
+      failed(msg: string) {
+        throw new Error("Function not implemented.");
+      },
+      resuccess(msg: string) {
+        throw new Error("Function not implemented.");
+      },
+      refailed(msg: string) {
+        throw new Error("Function not implemented.");
+      }
+    });
+    return futureResponse;
+  }
+
+  // TODO: 待確認請求方式
+  getEventFromUrl(url: string): string {
+    return "temp";
+  }
+
+  // TODO: unittest
+  // FIXME: 待確認請求方式, 可能為 eventname 而不是 url
   get(url: string, payload: Record<string, any>): Promise<TDataResponse<T>> {
     this.stage = EClientStage.fetching;
     if (this.socket.socket.connected) {
-      this.queue.add(new Promise(() => {}));
+      const payloadAsString = JSON.stringify({ url, payload });
+      const event = this.getEventFromUrl(url);
+      const futureResponse = new Promise<TDataResponse<T>>(() => {});
+
+      this.queue.add(futureResponse);
       this.socket.send(
-        JSON.stringify({
-          url,
-          payload
-        }),
-        msg => {}
+        event,
+        payloadAsString,
+        function onSuccess(msg: string) {},
+        function onError(msg: string) {}
       );
+      return futureResponse;
     } else {
       this.connect();
     }
@@ -187,5 +189,76 @@ export class ApiClientService<T extends { id: number }>
   }
   del(url: string, payload: Record<string, any>): Promise<TDataResponse<T>> {
     throw new Error("Method not implemented.");
+  }
+}
+
+/**
+ * api client 處理由 websocket 傳送出去的請求, 將請求暫存於 queue 以後，待收到 socket
+ * 資料，再由 queue 裡的 promise resolve 返回值， resolve 後無論成功失敗，移除該筆 queue
+ */
+export class Queue implements IQueue<QueueItem> {
+  queue: QueueItem[] = [];
+  enqueue(
+    id: number,
+    promise: () => Promise<any>,
+    timeout: number = 10000
+  ): Promise<any> {
+    const timestamp = new Date().getTime();
+    return new Promise((resolve, reject) => {
+      this.queue.push({
+        id,
+        timestamp,
+        timeout: setTimeout(() => {
+          this.onTimeout(id);
+        }, timeout),
+        promise,
+        resolve,
+        reject
+      });
+
+      this.dequeue(id);
+    });
+  }
+
+  private onTimeout(id: number) {
+    const item = this.queue.firstWhere(_ => _.id == id)!;
+    if (!item) return;
+
+    // TODO: error code 定義
+    const timeoutError: TErrorResponse = {
+      error_code: 0,
+      error_key: "",
+      error_msg: "timeout error",
+      message: "timeout error"
+    };
+    item.reject(timeoutError);
+  }
+
+  private remove(item: QueueItem) {
+    clearTimeout(item.timeout);
+    this.queue.remove(item);
+  }
+
+  dequeue(id: number): boolean {
+    const item = this.queue.firstWhere(_ => _.id == id)!;
+    if (!item) {
+      return false;
+    }
+    try {
+      item
+        .promise()
+        .then(value => {
+          item.resolve(value);
+          this.remove(item);
+        })
+        .catch(err => {
+          item.reject(err);
+          this.remove(item);
+        });
+    } catch (err) {
+      item.reject(err);
+      this.remove(item);
+    }
+    return true;
   }
 }
