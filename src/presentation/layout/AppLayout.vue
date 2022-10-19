@@ -1,6 +1,10 @@
 <template>
-  <section class="w-full h-full">
-    <router-view></router-view>
+  <section class="app-layout">
+    <AppHeader> </AppHeader>
+    <section class="page-layout">
+      <router-view> </router-view>
+    </section>
+    <AppAsideMenu> </AppAsideMenu>
   </section>
 </template>
 
@@ -11,9 +15,11 @@ import AppHeader from "../components/AppHeader.vue";
 
 export default defineComponent({
   name: "AppLayout",
-  setup(props) {
-
-  }
+  components: {
+    AppAsideMenu,
+    AppHeader
+  },
+  setup(props) {}
 });
 </script>
 
