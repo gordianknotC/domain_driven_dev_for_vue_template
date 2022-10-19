@@ -16,7 +16,7 @@ type RouterMetaType = {
   auth: boolean;
 };
 
-const { loginRoutes, notFoundROutes } = admin_router_config;
+const { loginRoutes, notFoundROutes, demoRoutes } = admin_router_config;
 
 /**
  * userRouterConfig, 用於設定 user 可訪頁面
@@ -24,14 +24,15 @@ const { loginRoutes, notFoundROutes } = admin_router_config;
  *  */
 export const userRoutes: Array<RouteRecordRaw> = [
   ...loginRoutes,
+  ...demoRoutes,
   {
     path: "/",
-    name: ERouter.homelayout,
+    name: ERouter.pagelayout,
     component: () => import("~/presentation/layout/PageLayout.vue"),
     children: [
       {
         path: "",
-        name: ERouter.homelayout,
+        name: ERouter.pagelayout,
         redirect: { name: ERouter.notFound }
       }
     ]

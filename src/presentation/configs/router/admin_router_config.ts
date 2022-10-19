@@ -51,12 +51,56 @@ const loginRoutes: Array<RouteRecordRaw> = [
   }
 ];
 
+/** 於邏輯層 (router_index) 判斷，以決定 production 下移除 demoRoutes */
+const demoRoutes: Array<RouteRecordRaw> = [
+  {
+    path: "/demo",
+    name: ERouter.demo,
+    component: () => import("~/presentation/pages/demos/DemoIndexPage.vue"),
+    meta: {
+      auth: false
+    }
+  },
+  {
+    path: "/demo/buttons",
+    name: ERouter.demoButtons,
+    component: () => import("~/presentation/pages/demos/DemoButtonsPage.vue"),
+    meta: {
+      auth: false
+    }
+  },
+  {
+    path: "/demo/dialogs",
+    name: ERouter.demoDialogs,
+    component: () => import("~/presentation/pages/demos/DemoDialogs.vue"),
+    meta: {
+      auth: false
+    }
+  },
+  {
+    path: "/demo/dropdowns",
+    name: ERouter.demoDropdowns,
+    component: () => import("~/presentation/pages/demos/DemoDropdowns.vue"),
+    meta: {
+      auth: false
+    }
+  },
+  {
+    path: "/demo/input-fields",
+    name: ERouter.demoInputFields,
+    component: () => import("~/presentation/pages/demos/DemoInputFields.vue"),
+    meta: {
+      auth: false
+    }
+  }
+];
+
 /**
  * adminRouterConfig, 用於設定 admin 可訪頁面
- *
  *  */
 const adminRoutes: Array<RouteRecordRaw> = [
   ...loginRoutes,
+  ...demoRoutes,
   {
     path: "/",
     name: ERouter.pagelayout,
@@ -90,6 +134,7 @@ const adminRoutes: Array<RouteRecordRaw> = [
 
 export default {
   loginRoutes,
+  demoRoutes,
   adminRoutes,
   notFoundROutes
 };

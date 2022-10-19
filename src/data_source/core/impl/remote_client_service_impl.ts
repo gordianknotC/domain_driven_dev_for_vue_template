@@ -5,10 +5,9 @@ import {
 } from "~/presentation/third_parties/utils/assert_exceptions";
 import { ClientServicePlugins } from "~/data_source/core/interfaces/client_service_plugin";
 import {
-  RemoteClientService,
   EClientStage,
   IApiClientMethods,
-  IApiClientService,
+  IRemoteClientService,
   IQueue,
   QueueItem
 } from "~/data_source/core/interfaces/remote_client_service";
@@ -19,122 +18,16 @@ import {
 } from "~/data_source/entities/response_entity";
 import { ISocketClientService } from "../interfaces/socket_client_service";
 
-export class RemoteClientServiceImpl extends RemoteClientService {
-  static _instance?: RemoteClientServiceImpl;
-  static singleton(
-    requestPlugins?: ClientServicePlugins<AxiosRequestConfig>[],
-    responsePlugins?: ClientServicePlugins<
-      AxiosResponse,
-      Promise<AxiosResponse>
-    >[],
-    config?: AxiosRequestConfig
-  ) {
-    if (this._instance != undefined) {
-      assert(
-        () => requestPlugins != undefined,
-        AssertMessages.notUndefined("requestParam")
-      );
-      assert(
-        () => responsePlugins != undefined,
-        AssertMessages.notUndefined("responsePlugins")
-      );
-      assert(() => config != undefined, AssertMessages.notUndefined("config"));
-    }
-    return (this._instance ??= new RemoteClientServiceImpl(
-      requestPlugins!,
-      responsePlugins!,
-      config!
-    ));
-  }
-
-  get isAuthorizing(): boolean {
-    return this.stage == EClientStage.authorizing;
-  }
-
-  get canResetAsIdle(): boolean {
-    return (
-      this.stage == EClientStage.error || this.stage == EClientStage.success
-    );
-  }
-
-  private async fetch(
-    method: "get" | "post" | "del" | "put",
-    url: string,
-    params: Record<string, any>
-  ): Promise<AxiosResponse<any>> {
-    // todo: processing plugins here...
-    if (this.isAuthorizing) {
-    } else if (this.canResetAsIdle) {
-      this.stage = EClientStage.idle;
-    }
-    const result = this.axios({
-      method,
-      url,
-      params
-    });
-    this.stage = EClientStage.fetching;
-    return result;
-  }
-
-  async get(
-    url: string,
-    payload: Record<string, any>
-  ): Promise<AxiosResponse<any, any>> {
-    try {
-      const result = await this.fetch("get", url, payload);
-      return result.data;
-    } catch (e) {
-      throw e;
-    }
-  }
-
-  async post(
-    url: string,
-    payload: Record<string, any>
-  ): Promise<AxiosResponse<any, any>> {
-    try {
-      const result = await this.fetch("post", url, payload);
-      return result.data;
-    } catch (e) {
-      throw e;
-    }
-  }
-
-  async put(
-    url: string,
-    payload: Record<string, any>
-  ): Promise<AxiosResponse<any, any>> {
-    try {
-      const result = await this.fetch("put", url, payload);
-      return result.data;
-    } catch (e) {
-      throw e;
-    }
-  }
-
-  async del(
-    url: string,
-    payload: Record<string, any>
-  ): Promise<AxiosResponse<any, any>> {
-    try {
-      const result = await this.fetch("del", url, payload);
-      return result.data;
-    } catch (e) {
-      throw e;
-    }
-  }
-}
-
-// UNTESTED:
-// INCOMPLETED:
-export class ApiClientService<T extends { id: number }>
-  implements IApiClientService<T>
+// TODO: unittest
+export class RemoteClientServiceImpl<T extends { id: number }>
+  implements IRemoteClientService<T>
 {
   stage: EClientStage;
   constructor(public socket: ISocketClientService, public queue: IQueue<any>) {
     this.stage = EClientStage.idle;
   }
 
+  // TODO: 失敗後自我連接，直到 max retries
   private connect(): Promise<TSuccessResponse> {
     const futureResponse = new Promise<TSuccessResponse>(() => {});
     this.socket.connect({
@@ -155,40 +48,76 @@ export class ApiClientService<T extends { id: number }>
     return futureResponse;
   }
 
-  // TODO: 待確認請求方式
-  getEventFromUrl(url: string): string {
-    return "temp";
+  // TODO: 實作資料轉換(如果需要的話)
+  private toDataResponse(rawData: any) {
+    return rawData;
   }
 
-  // TODO: unittest
-  // FIXME: 待確認請求方式, 可能為 eventname 而不是 url
-  get(url: string, payload: Record<string, any>): Promise<TDataResponse<T>> {
+  async sendRequest(
+    event: string,
+    payload: Record<string, any>
+  ): Promise<TDataResponse<T> | TErrorResponse> {
     this.stage = EClientStage.fetching;
-    if (this.socket.socket.connected) {
-      const payloadAsString = JSON.stringify({ url, payload });
-      const event = this.getEventFromUrl(url);
-      const futureResponse = new Promise<TDataResponse<T>>(() => {});
+    const payloadAsString = JSON.stringify({ event, payload });
+    const id: number = payload.id;
+    const self = this;
+    const action = () => {
+      return new Promise<TDataResponse<T>>((resolve, reject) => {
+        this.socket.send(
+          event,
+          payloadAsString,
+          // FIXME: 原認知為:這裡的 socket response 為 serializable json string
+          function onSuccess(msg: string) {
+            const rawData = JSON.parse(msg);
+            resolve(self.toDataResponse(rawData));
+          },
+          // FIXME: 原認知為:這裡的 socket response 為 serializable json string
+          function onError(msg: string) {
+            const rawData = JSON.parse(msg);
+            reject(self.toDataResponse(rawData));
+          }
+        );
+      });
+    };
 
-      this.queue.add(futureResponse);
-      this.socket.send(
-        event,
-        payloadAsString,
-        function onSuccess(msg: string) {},
-        function onError(msg: string) {}
-      );
-      return futureResponse;
+    if (this.socket.socket.connected) {
+      return this.queue.enqueue(id, action);
     } else {
-      this.connect();
+      try {
+        const connected = await this.connect();
+        if (connected.succeed) {
+          return this.queue.enqueue(id, action);
+        } else {
+          const error: TErrorResponse = {
+            error_code: 0,
+            error_key: "",
+            error_msg: "network error",
+            message: "network error"
+          };
+          return error;
+        }
+      } catch (e) {
+        throw e;
+      }
     }
   }
-  post(url: string, payload: Record<string, any>): Promise<TDataResponse<T>> {
-    throw new Error("Method not implemented.");
+
+  // 從設計上考量，get by event name 而不是 url, 因為使用的是 web socket 而不是 http request
+  async get(
+    event: string,
+    payload: Record<string, any>
+  ): Promise<TDataResponse<T> | TErrorResponse> {
+    return this.sendRequest(event, payload);
   }
-  put(url: string, payload: Record<string, any>): Promise<TDataResponse<T>> {
-    throw new Error("Method not implemented.");
+
+  post(url: string, payload: Record<string, any>) {
+    return this.sendRequest(url, payload);
   }
-  del(url: string, payload: Record<string, any>): Promise<TDataResponse<T>> {
-    throw new Error("Method not implemented.");
+  put(url: string, payload: Record<string, any>) {
+    return this.sendRequest(url, payload);
+  }
+  del(url: string, payload: Record<string, any>) {
+    return this.sendRequest(url, payload);
   }
 }
 
@@ -198,7 +127,7 @@ export class ApiClientService<T extends { id: number }>
  */
 export class Queue implements IQueue<QueueItem> {
   queue: QueueItem[] = [];
-  enqueue(
+  public enqueue(
     id: number,
     promise: () => Promise<any>,
     timeout: number = 10000
@@ -215,7 +144,6 @@ export class Queue implements IQueue<QueueItem> {
         resolve,
         reject
       });
-
       this.dequeue(id);
     });
   }
@@ -239,7 +167,7 @@ export class Queue implements IQueue<QueueItem> {
     this.queue.remove(item);
   }
 
-  dequeue(id: number): boolean {
+  public dequeue(id: number): boolean {
     const item = this.queue.firstWhere(_ => _.id == id)!;
     if (!item) {
       return false;

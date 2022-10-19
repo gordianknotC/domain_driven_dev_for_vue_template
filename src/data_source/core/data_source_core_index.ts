@@ -1,6 +1,6 @@
 import { provideFacade } from "js_util_for_vue_project";
 import {
-  ApiClientService,
+  RemoteClientServiceImpl,
   Queue,
   RemoteClientServiceImpl
 } from "~/data_source/core/impl/remote_client_service_impl";
@@ -49,7 +49,7 @@ function setupSocketService() {
   });
 
   const queue = new Queue();
-  const remoteClient = new ApiClientService(socket, queue);
+  const remoteClient = new RemoteClientServiceImpl(socket, queue);
   provideFacade({
     data: {
       remoteClient
