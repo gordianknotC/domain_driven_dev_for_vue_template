@@ -1,0 +1,1 @@
+import{_ as t,d as n,o as r,c as s}from"./index.2fc0c990.js";const a=n({name:"DemoIndexPage",components:{},props:{},emit:["close","route"],setup(e,{emit:o}){return{}}});function p(e,o,c,m,l,u){return r(),s("h3",null,"hello")}var d=t(a,[["render",p]]);export{d as default};

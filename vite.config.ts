@@ -31,6 +31,9 @@ export default ({ command, mode }: ConfigEnv) => {
     stringfiedEnv[key] = JSON.stringify(env[key]);
   });
 
+  // https://github.com/vitejs/vite/issues/8909
+  //stringfiedEnv["global"] = JSON.stringify(JSON.stringify({}));
+
   // Load app-level env vars to node-level env vars.
   console.log("env:", stringfiedEnv);
 
@@ -38,7 +41,6 @@ export default ({ command, mode }: ConfigEnv) => {
     root,
     define: {
       ...stringfiedEnv,
-      global: {}
     },
     esbuild: {
       target: "esnext"

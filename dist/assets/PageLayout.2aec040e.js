@@ -1,0 +1,1 @@
+import{_ as t,d as r,e as a,o as n,f as s}from"./index.2fc0c990.js";const p=r({name:"PageLayout",setup(e){}});function c(e,_,u,f,i,m){const o=a("router-view");return n(),s(o)}var l=t(p,[["render",c]]);export{l as default};
