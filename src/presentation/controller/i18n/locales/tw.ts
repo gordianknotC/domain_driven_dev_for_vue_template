@@ -1,4 +1,7 @@
 const tw = {
+  common: {
+    notFound: "404 找不到"
+  },
   information: {
     add: "添加信息",
     edit: "编辑信息",
