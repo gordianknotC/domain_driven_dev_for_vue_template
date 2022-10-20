@@ -15,7 +15,10 @@
         <div></div>
       </template>
       <template v-slot:empty>
-        <div>dropcontent: {{ dropContent }} :</div>
+        <div class="p-4">
+          <div>dropcontent: {{ dropContent }} :</div>
+          <el-input></el-input>
+        </div>
       </template>
     </el-select>
   </div>
