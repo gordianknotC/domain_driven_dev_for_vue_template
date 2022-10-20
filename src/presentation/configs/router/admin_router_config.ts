@@ -42,9 +42,54 @@ const loginRoutes: Array<RouteRecordRaw> = [
     }
   },
   {
-    path: "/signin",
-    name: ERouter.signin,
-    component: () => import("~/presentation/pages/SigninPage.vue"),
+    path: "/signIn",
+    name: ERouter.signIn,
+    component: () => import("~/presentation/pages/SignInPage.vue"),
+    meta: {
+      auth: false
+    }
+  }
+];
+
+/** 於邏輯層 (router_index) 判斷，以決定 production 下移除 demoRoutes */
+const demoRoutes: Array<RouteRecordRaw> = [
+  {
+    path: "/demo",
+    name: ERouter.demo,
+    component: () => import("~/presentation/pages/demos/DemoIndexPage.vue"),
+    meta: {
+      auth: false
+    }
+  },
+  {
+    path: "/demo/buttons",
+    name: ERouter.demoButtons,
+    component: () => import("~/presentation/pages/demos/DemoButtonsPage.vue"),
+    meta: {
+      auth: false
+    }
+  },
+  {
+    path: "/demo/dialogs",
+    name: ERouter.demoDialogs,
+    component: () => import("~/presentation/pages/demos/DemoDialogPage.vue"),
+    meta: {
+      auth: false
+    }
+  },
+  {
+    path: "/demo/dropdowns",
+    name: ERouter.demoDropdowns,
+    component: () => import("~/presentation/pages/demos/DemoDropdownsPage.vue"),
+    meta: {
+      auth: false
+    }
+  },
+  {
+    path: "/demo/input-fields",
+    name: ERouter.demoInputFields,
+    component: () =>
+      import("~/presentation/pages/demos/DemoInputFieldsPage.vue"),
     meta: {
       auth: false
     }
@@ -53,23 +98,23 @@ const loginRoutes: Array<RouteRecordRaw> = [
 
 /**
  * adminRouterConfig, 用於設定 admin 可訪頁面
- *
  *  */
 const adminRoutes: Array<RouteRecordRaw> = [
   ...loginRoutes,
+  ...demoRoutes,
   {
     path: "/",
-    name: ERouter.homelayout,
-    component: () => import("~/presentation/layout/HomeLayout.vue"),
+    name: ERouter.pageLayout,
+    component: () => import("~/presentation/layout/PageLayout.vue"),
     children: [
       {
         path: "",
-        name: ERouter.homelayout,
-        redirect: { name: ERouter.merhantList }
+        name: ERouter.pageLayout,
+        redirect: { name: ERouter.merchantList }
       },
       {
         path: "/merchant-list",
-        name: ERouter.merhantList,
+        name: ERouter.merchantList,
         component: () => import("~/presentation/pages/MerchantListPage.vue"),
         meta: {
           admin: ADMIN_GROUP.all
@@ -77,7 +122,7 @@ const adminRoutes: Array<RouteRecordRaw> = [
       },
       {
         path: "/material-list",
-        name: ERouter.merhantList,
+        name: ERouter.merchantList,
         component: () => import("~/presentation/pages/MaterialListPage.vue"),
         meta: {
           admin: ADMIN_GROUP.all
@@ -90,6 +135,7 @@ const adminRoutes: Array<RouteRecordRaw> = [
 
 export default {
   loginRoutes,
+  demoRoutes,
   adminRoutes,
   notFoundROutes
 };

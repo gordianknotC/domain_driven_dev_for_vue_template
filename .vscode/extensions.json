@@ -1,0 +1,7 @@
+{
+    "recommendations": [
+        "csstools.postcss",
+        "cpylua.language-postcss",
+        "vunguyentuan.vscode-postcss"
+    ]
+}

@@ -1,0 +1,21 @@
+{
+  "stylelint.config": {
+    
+  },
+  "stylelint.enable": true,
+  "stylelint.packageManager": "yarn",
+  "stylelint.snippet": [
+    "css",
+    "less",
+    "postcss",
+    "scss",
+    "vue"
+  ],
+  "stylelint.validate": [
+    "css",
+    "less",
+    "postcss",
+    "scss",
+    "vue"
+  ],
+}

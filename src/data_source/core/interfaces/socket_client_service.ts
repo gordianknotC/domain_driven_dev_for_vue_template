@@ -46,8 +46,8 @@ export abstract class ISocketClientService {
   abstract connect(opt: {
     success: (msg: string) => {};
     failed: (msg: string) => {};
-    resuccess: (msg: string) => {};
-    refailed: (msg: string) => {};
+    reSuccess: (msg: string) => {};
+    reFailed: (msg: string) => {};
   }): void;
   abstract disconnect(cb: (msg: string) => void): void;
 }

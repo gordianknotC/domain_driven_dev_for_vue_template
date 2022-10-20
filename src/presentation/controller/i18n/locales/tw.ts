@@ -8,6 +8,9 @@ const tw = {
     upcomingMatches: "即将举行的比赛",
     backText: "回到信息",
     dialogText: "您确定要{dialog_text}公告吗？"
+  },
+  errorCodes: {
+    networkError: "網路連線異常"
   }
 };
 

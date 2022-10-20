@@ -9,5 +9,18 @@
   "files.associations": {
     "*.css": "css",
     "*.scss": "scss"
-  }
+  },
+  "cSpell.words": [
+    "autofetch",
+    "Avenir",
+    "consts",
+    "ctlr",
+    "esbenp",
+    "impls",
+    "Lexend",
+    "rvest",
+    "tailwindcss",
+    "typegen",
+    "Avenir",
+  ],
 }

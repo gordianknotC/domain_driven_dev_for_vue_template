@@ -1,9 +1,17 @@
 export enum ERouter {
   splash = "splash",
-  homelayout = "homelayout",
+  pageLayout = "pageLayout",
+  //
   home = "home",
-  signin = "signin",
-  merhantList = "merhantList",
+  signIn = "signIn",
+  merchantList = "merchantList",
   materialList = "materialList",
-  notFound = "notFound"
+  notFound = "notFound",
+  //
+  demo = "demo",
+  demoButtons = "demoButtons",
+  demoDropdowns = "demoDropDowns",
+  demoDialogs = "demoDialogs",
+  demoInputFields = "demoInputFields"
+  //
 }
