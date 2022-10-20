@@ -19,9 +19,7 @@ export default defineComponent({
     AppAsideMenu,
     AppHeader
   },
-  setup(props) {
-
-  }
+  setup(props) {}
 });
 </script>
 
