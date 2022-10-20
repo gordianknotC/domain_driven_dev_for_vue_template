@@ -1,32 +1,14 @@
 <template lang="pug">
-.NotFound
-  van-empty(
-    image="error"
-    description="404"
-  )
-    van-button.btn--primary(
-      size="small"
-      :to="goHomeUrl"
-      rounded
-    ) Back to HomePage
+.w-screen.h-screen.flex.justify-center.items-center
+  p.text-2xl {{$t("common.notFound")}}
 </template>
 
 <script lang="ts">
-import goHomeUrl from "@/utils/goHomeUrl";
-export default {
-  setup() {
-    return {
-      goHomeUrl
-    };
-  }
-};
+import { defineComponent } from "vue";
+
+export default defineComponent({
+  name: "NotFound"
+});
 </script>
 
-<style lang="scss" scoped>
-.NotFound {
-  width: 100vw;
-  height: 100vh;
-
-  @apply flex justify-center items-center bg-white;
-}
-</style>
+<style lang="scss" scoped></style>

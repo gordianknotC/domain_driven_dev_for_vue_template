@@ -1,17 +1,9 @@
 <template>
   <section class="holder">
-    <section class="holder-bread-menu">
-      
-    </section>
-    <section class="holder-logo">
-      
-    </section>
-    <section class="holder-marquee">
-      
-    </section>
-    <section class="holder-account">
-      
-    </section>
+    <section class="holder-bread-menu"></section>
+    <section class="holder-logo"></section>
+    <section class="holder-marquee"></section>
+    <section class="holder-account"></section>
   </section>
 </template>
 
@@ -20,27 +12,22 @@ import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "AppHeader",
-  emits: ["toggle-bread-menu" ],
+  emits: ["toggle-bread-menu"],
   setup(props) {
-    return {
-    };
+    return {};
   }
 });
 </script>
 
 <style lang="scss">
 .holder {
-  &-bread-menu{
-
+  &-bread-menu {
   }
-  &-logo{
-
+  &-logo {
   }
-  &-marquee{
-
+  &-marquee {
   }
-  &-account{
-
+  &-account {
   }
 }
 </style>

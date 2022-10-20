@@ -4,7 +4,7 @@ const cColors = require("./src/presentation/assets/colors/default_colors");
 
 /**
  * 以下用來擋掉 tailwind future color migration warning
- * tailwin 3.0.24 之後無效
+ * tailwind 3.0.24 之後無效
  */
 delete colors["lightBlue"];
 delete colors["warmGray"];

@@ -8,9 +8,9 @@ import {
 import { routerConfig } from "~/presentation/configs/router_config";
 import { ADMIN_GROUP } from "~/presentation/consts/ua_const";
 import {
-  RouterGuardImpl,
-  QueryStringPreprocessorGuard
-} from "~/presentation/controller/router/impls/router_guard_impl";
+  QueryStringPreprocessorGuard,
+  RouterGuardImpl
+} from "./impls/router_guard_impl";
 
 let routerInstance: Router;
 
@@ -31,6 +31,15 @@ function applyMetaDefaults(
   return routes;
 }
 
+/**
+ * // TODO: 實作移除不必要的 routes 如
+ * 1）User Account Control 不允許的 routes
+ * e.g: demoRoutes
+ */
+function removeRedundantRoutes(config: typeof routerConfig): RouteRecordRaw[] {
+  return config.admin;
+}
+
 export function getRouter(): Router {
   if (routerInstance != undefined) return routerInstance!;
 
@@ -39,7 +48,10 @@ export function getRouter(): Router {
   // 預計這裡會偵聽 UAC change 重刷 routerInstance
   routerInstance ??= createRouter({
     history: createWebHistory(),
-    routes: applyMetaDefaults(routerConfig.admin, ADMIN_GROUP.all)
+    routes: applyMetaDefaults(
+      removeRedundantRoutes(routerConfig),
+      ADMIN_GROUP.all
+    )
   });
 
   // TODO: UAC guard

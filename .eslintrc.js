@@ -9,7 +9,7 @@ module.exports = {
     "plugin:vue/essential",
     "eslint:recommended",
     "@vue/typescript/recommended",
-    "@vue/prettier",
+    "@vue/prettier"
   ],
 
   parserOptions: {
@@ -43,6 +43,7 @@ module.exports = {
     "no-useless-escape": "off",
     "no-var": "warn",
     "no-param-reassign": "warn",
+    "vue/no-multiple-template-root": "off",
     "import/named": "off",
     "import/newline-after-import": "off",
     "import/no-dynamic-require": "off",
@@ -51,7 +52,7 @@ module.exports = {
     "import/no-webpack-loader-syntax": "off",
     "no-empty": "off",
     "vue/multi-word-component-names": "off",
-    "vue/return-in-computed-property":"off",
+    "vue/return-in-computed-property": "off",
 
     // "import/prefer-default-export": "off",
     // "import/no-duplicates": "off",

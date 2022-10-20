@@ -1,5 +1,7 @@
 // todo: define error code here...
-export enum EErrorCode {}
+export enum EErrorCode {
+  networkError
+}
 
 export type TPager = {
   page: number;
