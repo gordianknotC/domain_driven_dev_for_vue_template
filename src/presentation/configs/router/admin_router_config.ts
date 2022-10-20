@@ -72,7 +72,7 @@ const demoRoutes: Array<RouteRecordRaw> = [
   {
     path: "/demo/dialogs",
     name: ERouter.demoDialogs,
-    component: () => import("~/presentation/pages/demos/DemoDialogs.vue"),
+    component: () => import("~/presentation/pages/demos/DemoDialogPage.vue"),
     meta: {
       auth: false
     }
@@ -80,7 +80,7 @@ const demoRoutes: Array<RouteRecordRaw> = [
   {
     path: "/demo/dropdowns",
     name: ERouter.demoDropdowns,
-    component: () => import("~/presentation/pages/demos/DemoDropdowns.vue"),
+    component: () => import("~/presentation/pages/demos/DemoDropdownsPage.vue"),
     meta: {
       auth: false
     }
@@ -88,7 +88,8 @@ const demoRoutes: Array<RouteRecordRaw> = [
   {
     path: "/demo/input-fields",
     name: ERouter.demoInputFields,
-    component: () => import("~/presentation/pages/demos/DemoInputFields.vue"),
+    component: () =>
+      import("~/presentation/pages/demos/DemoInputFieldsPage.vue"),
     meta: {
       auth: false
     }
