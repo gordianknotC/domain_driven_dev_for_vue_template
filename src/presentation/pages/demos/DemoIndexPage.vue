@@ -1,22 +1,24 @@
 <template>
   <h3>customize el-select</h3>
-  <el-select
-    v-model="value"
-    size="large"
-    @focus="onFocus"
-    @click="onClick"
-    @show="onShow"
-    @hide="onHide"
-    @open="onOpen"
-    @close="onClose"
-  >
-    <template v-slot>
-      <section></section>
-    </template>
-    <template v-slot:empty>
-      <section>dropcontent: {{ dropContent }} :</section>
-    </template>
-  </el-select>
+  <div>
+    <el-select
+      v-model="value"
+      size="large"
+      @focus="onFocus"
+      @click="onClick"
+      @show="onShow"
+      @hide="onHide"
+      @open="onOpen"
+      @close="onClose"
+    >
+      <template v-slot>
+        <div></div>
+      </template>
+      <template v-slot:empty>
+        <div>dropcontent: {{ dropContent }} :</div>
+      </template>
+    </el-select>
+  </div>
 </template>
 
 <script lang="ts" setup>
