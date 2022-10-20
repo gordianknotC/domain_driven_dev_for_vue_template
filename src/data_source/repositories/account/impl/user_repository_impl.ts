@@ -1,11 +1,11 @@
 import { ERole, UserEntity } from "~/data_source/entities/user_entity";
-import { UserRepository } from "~/data_source/repositories/account/interfaces/user_repository";
-import { TDataResponse } from "~/data_source/entities/response_entity";
+import { TUserRepository, UserRepository } from "~/data_source/repositories/account/itf/user_repository_itf";
+import { EErrorCode, TDataResponse, TErrorResponse, TSuccessResponse } from "~/data_source/entities/response_entity";
 import { Model } from "~/data_source/mappers/base_mappers";
 import { UserDomainModel } from "~/domain/account/user_domain_model";
 import { useLocalStorage, RemovableRef } from "@vueuse/core";
 import { StorageKeys } from "~/data_source/core/impl/local_client_service_impl";
-import { RemoteClientService } from "~/data_source/core/interfaces/remote_client_service";
+import { IRemoteClientService } from "~/data_source/core/interfaces/remote_client_service";
 import { UserMapper } from "~/data_source/mappers/mappers_types";
 import { facade } from "~/main";
 
@@ -21,7 +21,7 @@ const defaultUser: UserEntity = {
 
 export class UserRepositoryImpl extends UserRepository {
   constructor(
-    protected client: RemoteClientService,
+    protected client: IRemoteClientService<UserEntity>,
     protected mapper: UserMapper
   ) {
     super(client, mapper);
@@ -33,16 +33,14 @@ export class UserRepositoryImpl extends UserRepository {
 
   async fetch(
     params: UserEntity | undefined
-  ): Promise<TDataResponse<Model<UserEntity, any>> | null> {
-    try {
-      const response = await this.client.get("user", params!);
-      const mapper = facade.data.mappers.user;
-      const entity = response.data.data as UserEntity;
-      response.data.data = new Model(mapper, entity);
-      return response.data as TDataResponse<Model<UserEntity, any>>;
-    } catch (e) {
-      throw e;
-    }
+  ): Promise<TDataResponse<Model<UserEntity, any>> | TErrorResponse> {
+    const event = "user";
+    return super.remoteCall(params, event);
+  }
+
+  upload(val: UserEntity): Promise<TErrorResponse | TDataResponse<Model<UserEntity, any>> | TSuccessResponse> {
+    const event = "userUpdate";
+    return super.remoteUpdate(val);
   }
 
   get(): Model<UserEntity, UserDomainModel> | null {
@@ -52,9 +50,5 @@ export class UserRepositoryImpl extends UserRepository {
 
   set(val: UserEntity): void {
     useLocalStorage(StorageKeys.user, defaultUser).value = val;
-  }
-
-  upload(val: UserEntity): Promise<{ success: boolean }> {
-    return Promise.resolve({ success: false });
-  }
+  }  
 }

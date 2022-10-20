@@ -13,7 +13,8 @@ const tw = {
     dialogText: "您确定要{dialog_text}公告吗？"
   },
   errorCodes: {
-    networkError: "網路連線異常"
+    networkError: "網路連線異常",
+    internalError: "內部錯誤",
   }
 };
 

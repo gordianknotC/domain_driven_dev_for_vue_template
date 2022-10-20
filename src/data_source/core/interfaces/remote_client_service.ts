@@ -1,6 +1,7 @@
 import {
   TDataResponse,
-  TErrorResponse
+  TErrorResponse,
+  TSuccessResponse
 } from "~/data_source/entities/response_entity";
 import { ISocketClientService, SocketMetaType } from "./socket_client_service";
 
@@ -13,7 +14,7 @@ export enum EClientStage {
 }
 
 /**  Api client 方法 interface */
-export abstract class IApiClientMethods<T extends { id: number }> {
+export abstract class IApiClientMethods<T extends { id: number|string }> {
   abstract get(
     event: string,
     payload: Record<string, any>
@@ -29,7 +30,7 @@ export abstract class IApiClientMethods<T extends { id: number }> {
   abstract del(
     event: string,
     payload: Record<string, any>
-  ): Promise<TDataResponse<T> | TErrorResponse>;
+  ): Promise<TSuccessResponse | TErrorResponse>;
 }
 
 export type QueueItem = {
@@ -55,13 +56,19 @@ export abstract class IQueue<T extends QueueItem> {
   abstract dequeue(id: number): boolean;
 }
 
+type TResponse<T> = TDataResponse<T> | TErrorResponse | TSuccessResponse;
+
 /**  api client service */
-export abstract class IRemoteClientService<T extends { id: number }>
+export abstract class IRemoteClientService<T extends { id: number|string }>
   implements IApiClientMethods<T>
 {
   abstract socket: ISocketClientService;
   abstract queue: IQueue<any>;
   abstract stage: EClientStage;
+  abstract isDataResponse(response: TResponse<any> | any): boolean;
+  abstract isErrorResponse(response: TResponse<any> | any): boolean;
+  abstract isSuccessResponse(response: TResponse<any> | any): boolean;
+  
   abstract get(
     event: string,
     payload: Record<string, any>
@@ -77,5 +84,5 @@ export abstract class IRemoteClientService<T extends { id: number }>
   abstract del(
     event: string,
     payload: Record<string, any>
-  ): Promise<TDataResponse<T> | TErrorResponse>;
+  ): Promise<TSuccessResponse | TErrorResponse>;
 }

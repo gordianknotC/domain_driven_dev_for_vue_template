@@ -19,12 +19,27 @@ import {
 import { ISocketClientService } from "../interfaces/socket_client_service";
 
 // TODO: unittest
-export class RemoteClientServiceImpl<T extends { id: number }>
+/** T remote entity, 必須帶有 id */
+export class RemoteClientServiceImpl<T extends { id: number|string }>
   implements IRemoteClientService<T>
 {
   stage: EClientStage;
   constructor(public socket: ISocketClientService, public queue: IQueue<any>) {
     this.stage = EClientStage.idle;
+  }
+  isDataResponse(response: any): boolean {
+    const validType = (response as TDataResponse<T>);
+    return validType.data?.id != undefined && validType.data?.id != "";
+  }
+
+  isErrorResponse(response: TDataResponse<T> | TErrorResponse | any): boolean {
+    if (!this.isDataResponse(response)) {
+      const validType = (response as TErrorResponse);
+      return validType.message != undefined
+        && validType.error_code != undefined;
+    } else { 
+      return false;
+    }
   }
 
   // TODO: 失敗後自我連接，直到 max retries
@@ -113,9 +128,11 @@ export class RemoteClientServiceImpl<T extends { id: number }>
   post(url: string, payload: Record<string, any>) {
     return this.sendRequest(url, payload);
   }
+
   put(url: string, payload: Record<string, any>) {
     return this.sendRequest(url, payload);
   }
+
   del(url: string, payload: Record<string, any>) {
     return this.sendRequest(url, payload);
   }

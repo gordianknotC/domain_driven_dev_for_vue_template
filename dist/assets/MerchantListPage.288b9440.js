@@ -1,0 +1,1 @@
+import{_ as n,d as r,o as a,c as o}from"./index.574389c7.js";const s=r({name:"MerchantListPage",components:{},props:{},setup(e,{emit:t}){return{}}});function c(e,t,p,i,_,m){return a(),o("h3",null,"MerchantListPage")}var u=n(s,[["render",c]]);export{u as default};
