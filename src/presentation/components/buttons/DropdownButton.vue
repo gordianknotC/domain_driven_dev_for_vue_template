@@ -1,11 +1,22 @@
 <template>
   <div class="flex-col justify-start">
-    <div class="pb-2 text-left text-xs text-strong">{{ title }}</div>
+    <div
+      v-if="title"
+      :class="[isDisable ? 'text-light' : 'text-strong']"
+      class="pb-2 text-left text-xs"
+    >
+      {{ title }}
+    </div>
     <el-dropdown
-      :class="{ 'bg-inputDisable': isDisable }"
-      class="min-w-116 rounded border px-4 py-2 focus:border-primary-sd1"
+      tabindex="0"
+      :class="{
+        'bg-inputDisable': isDisable,
+        'border-primary-sd1': isMenuVisible
+      }"
+      class="min-w-116 rounded border px-4 py-2"
       trigger="click"
       :disabled="isDisable"
+      @visible-change="onDropdownVisibleChanged"
       @command="onItemSelected"
     >
       <span class="flex w-full select-none justify-between">
@@ -25,7 +36,7 @@
         </el-dropdown-menu>
       </template>
     </el-dropdown>
-    <div class="pt-1 text-left text-2xs text-light">{{ hint }}</div>
+    <div v-if="hint" class="pt-1 text-left text-2xs text-light">{{ hint }}</div>
   </div>
 </template>
 
@@ -59,6 +70,7 @@ export default defineComponent({
   emit: ["itemSelected"],
   setup(props, { emit }) {
     const selectedItem = ref("");
+    const isMenuVisible = ref(false);
 
     onMounted(() => {
       if (props.defaultItem) {
@@ -72,9 +84,17 @@ export default defineComponent({
       emit("itemSelected", item);
     };
 
+    // 選單彈出後改變border color, 收起後還原
+    const onDropdownVisibleChanged = (isVisible: boolean) => {
+      isMenuVisible.value = isVisible;
+      console.log(isVisible);
+    };
+
     return {
       onItemSelected,
-      selectedItem
+      onDropdownVisibleChanged,
+      selectedItem,
+      isMenuVisible
     };
   }
 });
