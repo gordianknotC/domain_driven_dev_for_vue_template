@@ -1,83 +1,83 @@
 <template>
-  <h1>customize el-select</h1>
-  <section>
-    <section>
-      <div>
-        <el-select
-          v-model="value"
-          size="large"
-          @focus="onFocus"
-          @click="onClick"
-          @show="onShow"
-          @hide="onHide"
-          @open="onOpen"
-          @close="onClose"
-        >
-          <template v-slot>
-            <div></div>
-          </template>
-          <template v-slot:empty>
-            <div class="p-4">
-              <div>dropcontent: {{ dropContent }} :</div>
-              <el-input></el-input>
-            </div>
-          </template>
-        </el-select>
-      </div>
-    </section>
-    <section></section>
-  </section>
+  <h3>Dropdown Buttons Demo</h3>
+  <div class="flex">
+    <DropdownButton
+        :class="'p-8'"
+        :title="'標籤文字'"
+        :placeholder="'請選擇'"
+        :items="['1', '2', '3', '顯示全部']"
+    />
+    <DropdownButton
+        :class="'p-8'"
+        :title="'標籤文字'"
+        :placeholder="'請選擇'"
+        :is-disable="true"
+        :items="['12', '2', '3', '顯示全部']"
+    />
+  </div>
+  <div class="flex">
+    <DropdownButton
+        :class="'p-8'"
+        :placeholder="'請選擇'"
+        :items="['2', '2', '3', '顯示全部']"
+    />
+    <DropdownButton
+        :class="'p-8'"
+        :placeholder="'請選擇'"
+        :is-disable="true"
+        :items="['22', '2', '3', '顯示全部']"
+    />
+  </div>
+  <div class="flex">
+    <DropdownButton
+        :class="'p-8'"
+        :title="'標籤文字'"
+        :placeholder="'請選擇'"
+        :hint="'提示文字'"
+        :items="['3', '2123123123123123123123123123', '3', '顯示全部']"
+    />
+    <DropdownButton
+        :class="'p-8'"
+        :title="'標籤文字'"
+        :placeholder="'請選擇'"
+        :hint="'提示文字'"
+        :is-disable="true"
+        :items="['32', '2123123123123123123123123123', '3', '顯示全部']"
+    />
+  </div>
+  <div class="flex">
+    <DropdownButton
+        :class="'p-8'"
+        :placeholder="'請選擇'"
+        :hint="'提示文字'"
+        :items="['4', '2123123123123123123123123123', '3', '顯示全部']"
+    />
+    <DropdownButton
+        :class="'p-8'"
+        :placeholder="'請選擇'"
+        :hint="'提示文字'"
+        :is-disable="true"
+        :items="['42', '2123123123123123123123123123', '3', '顯示全部']"
+    />
+
+
+  </div>
 </template>
 
-<script lang="ts" setup>
-import { ref } from "vue";
+<script lang="ts">
+import { defineComponent, reactive, ref, toRefs } from "vue";
+import DropdownButton from "../../components/buttons/DropdownButton.vue";
 
-console.log("mount demo pageindex");
-const name = "DemoDropdownsPage";
-const value = ref("");
-const dropContent = ref("");
-const onFocus = v => {
-  console.log("onFocus", v);
-  dropContent.value = v;
-};
-const onClick = () => {
-  console.log("click");
-};
-const onHide = () => {
-  console.log("hide");
-};
-
-const onShow = () => {
-  console.log("onShow");
-};
-const onOpen = () => {
-  console.log("onOpen");
-};
-const onClose = () => {
-  console.log("onClose");
-};
-const options = [
-  {
-    value: "Option1",
-    label: "Option1"
-  },
-  {
-    value: "Option2",
-    label: "Option2"
-  },
-  {
-    value: "Option3",
-    label: "Option3"
-  },
-  {
-    value: "Option4",
-    label: "Option4"
-  },
-  {
-    value: "Option5",
-    label: "Option5"
+export default defineComponent({
+  name: "DemoIndexPage",
+  components: { DropdownButton },
+  props: {},
+  emit: ["close", "route"],
+  setup(props, { emit }) {
+    /** 儲存參數 */
+    return {};
   }
-];
+});
 </script>
 
 <style lang="scss" scoped></style>
