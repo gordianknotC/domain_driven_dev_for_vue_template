@@ -2,7 +2,7 @@
   <div class="flex-col justify-start">
     <div
       v-if="title"
-      :class="[isDisable ? 'text-light' : 'text-strong']"
+      :class="[isDisable ? 'text-light' : 'text']"
       class="pb-2 text-left text-xs"
     >
       {{ title }}
@@ -13,10 +13,10 @@
         'bg-inputDisable': isDisable,
         'border-primary-sd1': isMenuVisible
       }"
-      class="min-w-116 rounded border px-4 py-2"
+      class="min-w-100 rounded border px-4 py-2"
       trigger="click"
       :disabled="isDisable"
-      @visible-change="onDropdownVisibleChanged"
+      @visible-change="onMenuVisibleChanged"
       @command="onItemSelected"
     >
       <span class="flex w-full select-none justify-between">
@@ -85,14 +85,13 @@ export default defineComponent({
     };
 
     // 選單彈出後改變border color, 收起後還原
-    const onDropdownVisibleChanged = (isVisible: boolean) => {
+    const onMenuVisibleChanged = (isVisible: boolean) => {
       isMenuVisible.value = isVisible;
-      console.log(isVisible);
     };
 
     return {
       onItemSelected,
-      onDropdownVisibleChanged,
+      onMenuVisibleChanged,
       selectedItem,
       isMenuVisible
     };
@@ -101,7 +100,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-.min-w-116 {
-  min-width: 116px;
+.min-w-100 {
+  min-width: 100px;
 }
 </style>
