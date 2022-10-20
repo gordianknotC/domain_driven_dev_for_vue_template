@@ -4,9 +4,9 @@
 
 <script lang="ts">
 import { defineComponent, reactive, ref, toRefs } from "vue";
+
 export default defineComponent({
   name: "MaterialListPage",
-  components: {},
   props: {},
   setup(props, { emit }) {
     /** 儲存參數 */

@@ -1,9 +1,10 @@
 <template>
-  <h3>hello</h3>
+  <h3>Buttons Demo</h3>
 </template>
 
 <script lang="ts">
 import { defineComponent, reactive, ref, toRefs } from "vue";
+
 export default defineComponent({
   name: "DemoIndexPage",
   components: {},
