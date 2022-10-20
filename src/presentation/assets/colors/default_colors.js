@@ -114,6 +114,9 @@ const ci = {
   warning: {
     DEFAULT: swatches.red["500"]
   },
+  disable:{
+    DEFAULT: swatches.grey["500"]
+  },
   text: {
     DEFAULT: swatches.grey["800"],
     bright: swatches.grey["0"],
