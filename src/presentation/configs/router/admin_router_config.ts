@@ -72,7 +72,7 @@ const demoRoutes: Array<RouteRecordRaw> = [
   {
     path: "/demo/dialogs",
     name: ERouter.demoDialogs,
-    component: () => import("~/presentation/pages/demos/DemoDialogPage.vue"),
+    component: () => import("~/presentation/pages/demos/DemoDialogsPage.vue"),
     meta: {
       auth: false
     }
