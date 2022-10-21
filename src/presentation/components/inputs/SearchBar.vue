@@ -1,51 +1,66 @@
 <template>
-  <div>
-    <el-input v-model="input" :placeholder="placeholder" :prefix-icon="Search">
-    </el-input>
-  </div>
+  <el-input class="custom-el-input" v-model="input" :placeholder="placeholder">
+    <template #prefix>
+      <svg-icon class="border" name="search" />
+    </template>
+  </el-input>
 </template>
-<script lang="ts">
-import { defineComponent, ref, watch } from "vue";
-import { Search } from "@element-plus/icons-vue";
+<script lang="ts" setup>
+import { ref, watch } from "vue";
+import SvgIcon from "../../components/SvgIcon.vue";
 import debounce from "lodash/debounce";
 
-export default defineComponent({
-  name: "SearchBar",
-  props: {
-    placeholder: { type: String, default: "" },
-    // 需要延遲的毫秒數
-    debounceDuration: {
-      type: Number,
-      default: 300
-    }
+const props = defineProps({
+  placeholder: { type: String, default: "" },
+  // 需要延遲的毫秒數
+  debounceDuration: {
+    type: Number,
+    default: 300
   },
-  emits: ["inputChanged"],
-  setup(props, { emit }) {
-    const input = ref("");
-
-    // 經過debounceDuration 後再觸發inputChanged event
-    const debounceCallback = debounce(
-      (val: string) => emit("inputChanged", val),
-      props.debounceDuration,
-      {}
-    );
-
-    watch(
-      () => input.value,
-      (val, prevVal) => {
-        // 值若改變則觸發debounceCallback,
-        // 忽略前後空白格
-        if (val === prevVal) return;
-        debounceCallback(val.trim());
-      }
-    );
-
-    return {
-      props,
-      input,
-      Search
-    };
+  // 超過幾字元才觸發search
+  minSearchLength: {
+    type: Number,
+    default: 0
+  },
+  //
+  inputValidation: {
+    type: RegExp,
+    default: RegExp("")
   }
 });
+const emit = defineEmits<{ (e: "inputChanged", inputValue: string): void }>();
+
+const input = ref("");
+
+// 經過debounceDuration 後再觸發inputChanged event
+const debounceCallback = debounce(
+  (val: string) => emit("inputChanged", val),
+  props.debounceDuration,
+  {}
+);
+
+watch(
+  () => input.value,
+  (val, prevVal) => {
+    // 值若改變則觸發debounceCallback,
+    // 忽略前後空白格
+    if (val === prevVal) return;
+    if (val.length < props.minSearchLength) return;
+    const ok = props.inputValidation.test(val);
+    if (!ok) return;
+
+    debounceCallback(val.trim());
+  }
+);
 </script>
-<style></style>
+<style lang="scss">
+.custom-el-input {
+  .el-input__prefix {
+    padding: 0px;
+  }
+  .el-input__wrapper {
+    @apply py-1.5 px-5;
+    border-radius: 8px;
+  }
+}
+</style>
