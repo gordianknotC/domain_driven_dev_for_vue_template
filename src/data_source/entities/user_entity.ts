@@ -1,6 +1,6 @@
 export enum ERole {
   admin,
-  merchant
+  user
 }
 
 export type UserEntity = {

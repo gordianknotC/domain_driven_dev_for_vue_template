@@ -15,7 +15,7 @@ const defaultUser: UserEntity = {
   name: "guest",
   phone: "",
   // refresh_token: "",
-  role: ERole.merchant
+  role: ERole.user
   // token: ""
 };
 

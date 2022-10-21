@@ -6,6 +6,9 @@ export enum ERouter {
   signIn = "signIn",
   supplierLIst = "supplierList",
   materialList = "materialList",
+  dashboard = "dashboard",
+  userAdminControl = "userAdminControl",
+  projectManager = "projectManager",
   notFound = "notFound",
   //
   demo = "demo",

@@ -42,8 +42,8 @@ export type ElMenuConfig<T extends Record<string, ElMenuConfigItem>> = {
   children: Record<keyof T, ElMenuConfigItem>;
 }
 
-export function createElMenu<T>(
-  config: Record<string, ElMenuConfigItem>
+export function createElMenu<T extends Record<string, ElMenuConfigItem>>(
+  config: Record<keyof T, ElMenuConfigItem>
 ): ElMenuConfig<T> { 
   const menu = {
     indexMapping: {} as Record<ERouter, string | ERouter>,
