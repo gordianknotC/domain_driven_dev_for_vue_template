@@ -77,9 +77,11 @@ export default ({ command, mode }: ConfigEnv) => {
       // pugPlugin(options, locals),
       createSvgIconsPlugin({
         // Specify the icon folder to be cached
-        iconDirs: [path.resolve(process.cwd(), "presentation/assets/icons")],
+        iconDirs: [path.resolve(process.cwd(), "src/presentation/assets/icons")],
         // Specify symbolId format
-        symbolId: "icon-[name]"
+        symbolId: "icon-[dir]-[name]",
+        inject: 'body-last',
+        customDomId: '__svg__icons__dom__',
       }),
       createHtmlPlugin({
         inject: {
