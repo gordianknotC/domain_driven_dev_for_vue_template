@@ -110,11 +110,11 @@ const adminRoutes: Array<RouteRecordRaw> = [
       {
         path: "",
         name: ERouter.pageLayout,
-        redirect: { name: ERouter.merchantList }
+        redirect: { name: ERouter.supplierLIst }
       },
       {
         path: "/merchant-list",
-        name: ERouter.merchantList,
+        name: ERouter.supplierLIst,
         component: () => import("~/presentation/pages/MerchantListPage.vue"),
         meta: {
           admin: ADMIN_GROUP.all
@@ -122,7 +122,7 @@ const adminRoutes: Array<RouteRecordRaw> = [
       },
       {
         path: "/material-list",
-        name: ERouter.merchantList,
+        name: ERouter.supplierLIst,
         component: () => import("~/presentation/pages/MaterialListPage.vue"),
         meta: {
           admin: ADMIN_GROUP.all

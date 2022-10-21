@@ -1,3 +1,5 @@
+"use strict"
+
 import { createApp } from "vue";
 import App from "./App.vue";
 
@@ -28,6 +30,8 @@ import {
   getRouter,
   setupRouter
 } from "./presentation/controller/router/router_index";
+import 'virtual:svg-icons-register';
+
 
 const app = createApp(App as any);
 
@@ -69,6 +73,7 @@ app.use(getRouter());
  *  設定 App 所需要的相依注入
  * */
 (function setupDependencies() {
+  "use strict"
   setupAppPlugins(app, facade);
   // ---------------
   // data source 注入

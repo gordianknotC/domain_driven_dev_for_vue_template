@@ -17,6 +17,7 @@ module.exports = {
   },
 
   rules: {
+    impliedStrict: true,
     "no-console": "off",
     "no-debugger": "off",
     // "no-console": process.env.VITE_APP_ENV === "production" ? "warn" : "off",

@@ -4,8 +4,11 @@ export enum ERouter {
   //
   home = "home",
   signIn = "signIn",
-  merchantList = "merchantList",
+  supplierLIst = "supplierList",
   materialList = "materialList",
+  dashboard = "dashboard",
+  userAdminControl = "userAdminControl",
+  projectManager = "projectManager",
   notFound = "notFound",
   //
   demo = "demo",

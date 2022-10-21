@@ -1,0 +1,31 @@
+@font-face {
+  font-family: "SFProDisplay";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local("SF Pro Display"), url("../fonts/SFProDisplay-Regular.ttf");
+}
+
+@font-face {
+  font-family: "SFProDisplay";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: local("SF Pro Display Medium"), url("../fonts/SFProDisplay-Medium.ttf");
+}
+
+@font-face {
+  font-family: "Lexend";
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: local("Lexend - Light"), url("../fonts/Lexend-Light.ttf");
+}
+
+@font-face {
+  font-family: "Lexend";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local("Lexend - Regular"), url("../fonts/Lexend-Regular.ttf");
+}

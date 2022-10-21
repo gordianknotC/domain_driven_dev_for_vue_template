@@ -1,5 +1,5 @@
 <template lang="pug">
-section(
+div(
   :style="outline ? `outline-color:${color()};` : ''"
   :class="{outline}"
 )
@@ -81,7 +81,7 @@ export default defineComponent({
     console.log("");
     return {
       color() {
-        currentIndex++;
+        currentIndex += 3;
         return colors[currentIndex % numbersOfSteps];
       },
       outline: true

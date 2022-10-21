@@ -1,0 +1,1 @@
+import{_ as a,d as r,o as s,c as o}from"./index.574389c7.js";const n=r({name:"MaterialListPage",props:{},setup(e,{emit:t}){return{}}});function p(e,t,c,i,l,_){return s(),o("h3",null,"MaterialList")}var m=a(n,[["render",p]]);export{m as default};

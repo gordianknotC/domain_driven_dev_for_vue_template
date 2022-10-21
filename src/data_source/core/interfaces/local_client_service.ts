@@ -1,4 +1,9 @@
 import { CryptoService } from "~/data_source/core/interfaces/encrypt_service";
+import { useLocalStorage, RemovableRef } from "@vueuse/core";
+
+export abstract class ILocalStorage<ENTITY> { 
+  abstract get localStorage(): RemovableRef<ENTITY> | null;
+}
 
 export abstract class LocalClientService<T> {
   abstract store: typeof localStorage;

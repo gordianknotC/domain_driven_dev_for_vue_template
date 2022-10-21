@@ -60,15 +60,20 @@
       :items="['42', '2123123123123123123123123123', '3', '顯示全部']"
     />
   </div>
+
+  <div>
+    <span>customize el-select</span>
+    <DemoSelectComp></DemoSelectComp>
+  </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, reactive, ref, toRefs } from "vue";
 import DropdownButton from "../../components/buttons/DropdownButton.vue";
-
+import DemoSelectComp from "./DemoSelectComp.vue";
 export default defineComponent({
   name: "DemoIndexPage",
-  components: { DropdownButton },
+  components: { DropdownButton, DemoSelectComp },
   props: {},
   emit: ["close", "route"],
   setup(props, { emit }) {
