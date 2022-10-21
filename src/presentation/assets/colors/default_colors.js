@@ -38,9 +38,11 @@
 const swatches = {
   purple: {
     800: "#3F56C6",
+    600: "#5562FF",
     500: "#7882FA",
     400: "#ADB1FF",
-    300: "#E0E2FF"
+    300: "#C4C8FF",
+    200: "#E0E2FF"
   },
   brand: {
     800: "#00193E",
@@ -50,12 +52,14 @@ const swatches = {
   },
   blue: {
     800: "#006ECA",
+    600: "#1E83FF",
     500: "#4C9CFE",
     400: "#89CDFF",
     300: "#BCE3FF"
   },
   green: {
     800: "#0BA45B",
+    600: "#37C570",
     500: "#56D689",
     400: "#8CFFB9",
     300: "#CCFFE0",
@@ -63,17 +67,19 @@ const swatches = {
   },
   red: {
     800: "#B9002C",
+    600:" #B9002C",
     500: "#DF2551",
     400: "#EA6585",
     300: "#FFE5EC"
   },
   grey: {
     800: "#70757B",
+    600: "#8791A0",
     500: "#99A3B2",
     300: "#D4D9E0",
     200: "#E3EAF3",
     100: "#EFF3F8",
-    0: "#FFFFFF"
+    0:   "#FFFFFF"
   }
 };
 
@@ -84,23 +90,41 @@ const ci = {
     DEFAULT: swatches.brand["400"],
     l1: swatches.brand["300"],
     // ----- saturated --------
-    sd2: swatches.purple["800"],
+    sd3: swatches.purple["800"],
+    sd2: swatches.purple["600"],
     sd1: swatches.purple["500"],
     s: swatches.purple["400"],
-    sl1: swatches.purple["300"]
+    sl1: swatches.purple["300"],
+    sl2: swatches.purple["200"]
   },
   secondary: {
-    d2: swatches.green["800"],
+    d3: swatches.green["800"],
+    d2: swatches.green["600"],
     d1: swatches.green["500"],
     DEFAULT: swatches.green["400"],
     l1: swatches.green["300"],
     l2: swatches.green["200"]
   },
   tertiary: {
-    d2: swatches.blue["800"],
+    d3: swatches.blue["800"],
+    d2: swatches.blue["600"],
     d1: swatches.blue["500"],
     DEFAULT: swatches.blue["400"],
     l1: swatches.blue["300"]
+  },
+  error:{
+    d3: swatches.red["800"],
+    d2: swatches.red["600"],
+    d1: swatches.red["500"],
+    DEFAULT: swatches.red["400"],
+    l1: swatches.red["300"]
+  },
+  cancel:{
+    d3: swatches.grey["800"],
+    d2: swatches.grey["600"],
+    d1: swatches.grey["500"],
+    DEFAULT: swatches.grey["400"],
+    l1: swatches.grey["300"]
   },
   success: {
     DEFAULT: swatches.green["500"]

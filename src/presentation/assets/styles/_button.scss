@@ -3,31 +3,60 @@ a {
   outline: none !important;
 }
 
-%BaseBtnStyle {
+%BaseShadow{
+  border-radius: 8px;
   box-shadow: 0px 2px 5px 0px #1B0E3733;
-  @apply text-white  rounded-lg 
 }
 
+%BaseLightShadow{
+  border-radius: 8px;
+  box-shadow: 0px 2px 7px 0px #191D2326;
+}
+
+%BaseHoverShadow{
+  border-radius: 8px;
+  box-shadow: 0px 2px 7px 0px #191D2326;
+}
+
+
+//default
+//purple 
 %BaseBtnColor{
-  @apply bg-primary-sd1 
+  @apply bg-primary-sd1 text-white
+}
+%BaseBtnColorLight{
+  color: #3F56C6;
+  border: 1px solid #ADB1FF;
+  @apply bg-primary-sl2;
+}
+//
+
+
+
+//hover
+%BaseBtnHoverColor{
+  @apply bg-primary-sd2  text-white
+}
+%BaseBtnHoverColorLight{
+  border: 1px solid #7882FA;
+  @apply bg-primary-s  text-purple-800
+}
+
+//disabled
+%BaseBtnDisableColor{
+  cursor: default;
+  opacity: 0.5;
+  @apply bg-primary-sd1 text-white
+}
+%BaseBtnDisableColorLight{
+  cursor: default;
+  opacity: 0.5;
+  border: 1px solid #ADB1FF;
+  @apply bg-primary-s text-purple-800
 }
 
 
 
-%BaseBtnColorBlue{
-  @apply bg-tertiary-d1
-}
-%BaseBtnColorGrey{
-  @apply bg-disable
-}
-
-%BaseBtnColorRed{
-  @apply bg-warning
-}
-
-%BaseBtnColorGreen{
-  @apply bg-info
-}
 
 
 %BaseBtnSize{
@@ -42,43 +71,68 @@ a {
 
 
 .btn{
-  
-  &-primary{
-    @extend %BaseBtnStyle ,%BaseBtnSize,%BaseBtnColor;
+  &-purple-normal{
+    @extend %BaseShadow,%BaseBtnColor,%BaseBtnSize;
+    &:hover,
+    &:active,
+    &:focus{
+     @extend %BaseBtnHoverColor;
+    }
   }
+  &-purple-normal--disable{
+    @extend %BaseShadow,%BaseBtnDisableColor,%BaseBtnSize;
+    &:hover,
+    &:active,
+    &:focus{
+      @extend %BaseBtnDisableColor;
+     }
+  }
+  &-purple-small{
+    @extend %BaseShadow,%BaseBtnColor,%BaseBtnSize-small;
+    &:hover,
+    &:active,
+    &:focus{
+      @extend %BaseBtnHoverColorLight;
+     }
+  }
+  &-purple-small--disable{
+    @extend %BaseShadow,%BaseBtnDisableColor,%BaseBtnSize-small;
+    &:hover,
+    &:active,
+    &:focus{
+      @extend %BaseBtnDisableColor;
+     }
+  }
+  &-purpleLight-normal{
+    @extend %BaseLightShadow,%BaseBtnColorLight,%BaseBtnSize;
+    &:hover,
+    &:active,
+    &:focus{
+      @extend %BaseBtnHoverColor;
+     }
+  }
+  &-purpleLight-normal--disable{
+    @extend %BaseLightShadow,%BaseBtnDisableColorLight,%BaseBtnSize;
+    &:hover,
+    &:active,
+    &:focus{
+      @extend %BaseBtnDisableColorLight;
+     }
+  }
+  &-purpleLight-small{
+    @extend %BaseLightShadow,%BaseBtnColorLight,%BaseBtnSize-small;
+    &:hover,
+    &:active,
+    &:focus{
+      @extend %BaseBtnHoverColorLight;
+     }
+  }
+  &-purpleLight-small--disable{
+    @extend %BaseLightShadow,%BaseBtnDisableColorLight,%BaseBtnSize-small;
+  }
+  &:hover{
+    @extend %BaseBtnDisableColorLight;
+   }
 
-  &-primary-small{
-    @extend %BaseBtnStyle,%BaseBtnSize-small ,%BaseBtnColor;
-  }
-
-  &-blue{
-    @extend %BaseBtnStyle ,%BaseBtnSize,%BaseBtnColorBlue;
-  }
-
-  &-blue-small{
-    @extend %BaseBtnStyle,%BaseBtnSize-small ,%BaseBtnColorBlue;
-  }
  
-  &-grey{
-    @extend %BaseBtnStyle ,%BaseBtnSize,%BaseBtnColorGrey;
-  }
-
-  &-grey-small{
-    @extend %BaseBtnStyle,%BaseBtnSize-small ,%BaseBtnColorGrey;
-  }
- 
-  &-red{
-    @extend %BaseBtnStyle ,%BaseBtnSize,%BaseBtnColorRed;
-  }
-  
-  &-red-small{
-    @extend %BaseBtnStyle,%BaseBtnSize-small ,%BaseBtnColorRed;
-  }
- 
-  &-green{
-    @extend %BaseBtnStyle ,%BaseBtnSize,%BaseBtnColorGreen;
-  }
-  &-green-small{
-    @extend %BaseBtnStyle,%BaseBtnSize-small,%BaseBtnColorGreen;
-  }
 }
