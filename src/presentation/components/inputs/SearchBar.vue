@@ -1,7 +1,7 @@
 <template>
   <el-input class="custom-el-input" v-model="input" :placeholder="placeholder">
     <template #prefix>
-      <svg-icon class="border" name="search" />
+      <svg-icon name="search" :height="iconSize" :width="iconSize" />
     </template>
   </el-input>
 </template>
@@ -31,6 +31,7 @@ const props = defineProps({
 const emit = defineEmits<{ (e: "inputChanged", inputValue: string): void }>();
 
 const input = ref("");
+const iconSize = "14px";
 
 // 經過debounceDuration 後再觸發inputChanged event
 const debounceCallback = debounce(
@@ -55,12 +56,20 @@ watch(
 </script>
 <style lang="scss">
 .custom-el-input {
+  @apply text-xs;
+
   .el-input__prefix {
     padding: 0px;
   }
   .el-input__wrapper {
     @apply py-1.5 px-5;
     border-radius: 8px;
+  }
+  .el-input__prefix-inner {
+    @apply pr-3;
+    .svg-icon {
+      margin: 0px;
+    }
   }
 }
 </style>
