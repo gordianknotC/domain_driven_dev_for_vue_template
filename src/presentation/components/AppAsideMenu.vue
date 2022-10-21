@@ -7,6 +7,11 @@ import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "AppAsideMenu",
+  props: {
+    menuCnfig: {
+
+    }
+  },
   setup(props) {
     return {};
   }

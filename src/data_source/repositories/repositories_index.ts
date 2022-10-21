@@ -1,7 +1,8 @@
 import { IFacade, provideFacade } from "js_util_for_vue_project";
-import { TUserRepository } from "~/data_source/repositories/account/interfaces/user_repository";
+import { TUserRepository } from "~/data_source/repositories/account/itf/user_repository_itf";
 import { UserRepositoryImpl } from "~/data_source/repositories/account/impl/user_repository_impl";
 import { facade } from "~/main";
+import { App } from "vue";
 
 export type FacadeRepository = {
   data: {

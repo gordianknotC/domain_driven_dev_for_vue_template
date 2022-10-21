@@ -1,6 +1,7 @@
 // todo: define error code here...
 export enum EErrorCode {
-  networkError
+  networkError,
+  internalError = 100000
 }
 
 export type TPager = {

@@ -30,6 +30,8 @@ import {
   getRouter,
   setupRouter
 } from "./presentation/controller/router/router_index";
+import 'virtual:svg-icons-register';
+
 
 const app = createApp(App as any);
 

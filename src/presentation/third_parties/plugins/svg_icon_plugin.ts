@@ -14,6 +14,7 @@ export function setupSvg(app: App<Element>) {
         // 按需引入图标
         const { imports } = options;
         imports.forEach((name: any) => {
+          console.log("import", `/src/presentation/assets/icons/${name}.svg`);
           import.meta.resolve!(`/src/presentation/assets/icons/${name}.svg`);
         });
       } else {
@@ -27,6 +28,7 @@ export function setupSvg(app: App<Element>) {
           const temp = path.match(/\.\/([A-Za-z0-9\-_]+)\.svg$/);
           if (!temp) return;
           const name = temp[1];
+          console.log("import", `/src/presentation/assets/icons/${name}.svg`);
           import.meta.resolve!(`/src/presentation/assets/icons/${name}.svg`);
         });
       }

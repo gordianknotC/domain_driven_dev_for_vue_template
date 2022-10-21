@@ -29,9 +29,20 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from "vue";
+import { booleanLiteral } from "@babel/types";
+import { ref, defineEmits } from "vue";
 
 console.log("mount demo pageindex");
+const emit = defineEmits<{
+  (
+    eventName: "focus",
+    argName: "some",
+    argNameOther: "how",
+    third: "wow"
+  ): void;
+  (eventName: "blur", otherArg: "some"): boolean;
+}>();
+
 const name = "DemoSelectComp";
 const value = ref("");
 const dropContent = ref("");

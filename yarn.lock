@@ -6656,10 +6656,10 @@ js-yaml@^4.1.0:
   dependencies:
     argparse "^2.0.1"
 
-js_util_for_vue_project@0.2.5:
-  version "0.2.5"
-  resolved "https://registry.yarnpkg.com/js_util_for_vue_project/-/js_util_for_vue_project-0.2.5.tgz#786ce709b3d15dca43b95fca6f41fbfa8fac252e"
-  integrity sha512-V70lnE/BP2c9k5J+K5jSqoZY1/TongDcOtlbiV2A8ITMR/+vtQi4e9C26DXHML6nDb3vN3J13UVWS35pXe9meg==
+js_util_for_vue_project@0.3.2:
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/js_util_for_vue_project/-/js_util_for_vue_project-0.3.2.tgz#a15c36b45862b44a5988c7b1dd00ab16d754dfa8"
+  integrity sha512-B5VXKSHHRX1LcfU4NZZHhS8CPRmRNnI+FpfDxArfYmzwru+xyqr+Sby5qMd8gU2VGxAsrF4NfD+hT8/0czDL6Q==
   dependencies:
     merge-anything "^5.0.4"
 
