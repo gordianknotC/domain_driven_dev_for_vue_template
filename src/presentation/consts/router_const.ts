@@ -4,7 +4,7 @@ export enum ERouter {
   //
   home = "home",
   signIn = "signIn",
-  merchantList = "merchantList",
+  supplierLIst = "supplierList",
   materialList = "materialList",
   notFound = "notFound",
   //

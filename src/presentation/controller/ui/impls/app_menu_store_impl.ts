@@ -21,7 +21,7 @@ export type AppTabItem = {
 
 export type AppMenuState = {
     config: TAppMenu[],
-    activate?: AppTabItem,
+    activated?: AppTabItem,
     openedTabs?: AppTabItem[],
 }
 
@@ -38,20 +38,22 @@ class AppMenuController implements
 
     constructor(public defaultState: () => AppMenuState, singleton: boolean = true) { 
         this.initializeLocalTabs();
-        this.getters = {};
+        this.getters = {
+            
+        };
         flattenInstance(this);
     }
 
     setActiveTab(item: AppTabItem): Promise<{ succeed: boolean }> { 
-        const preTab = this.state.activate;
-        this.state.activate = item;
+        const preTab = this.state.activated;
+        this.state.activated = item;
         return new Promise((resolve, reject) => {
             facade.ctlr.router.push(item).then((_) => { 
                 if (_ == undefined) {
                     resolve({ succeed: true });
                 } else { 
                     resolve({ succeed: false });
-                    this.state.activate = preTab;
+                    this.state.activated = preTab;
                 }
             });
         });
@@ -66,16 +68,18 @@ class AppMenuController implements
 
 
 export const appMenuStore = defineStore("AppMenu", () => {
-    const activate: AppTabItem = {
-        name: ERouter.home
+    const activated: AppTabItem = {
+        name: ERouter.home,
+        params: {},
+        query: {}
     };
     const openedTabs: AppTabItem[] = [
-        activate
+        activated
     ];
     return new AppMenuController(() => { 
         return {
             config: APP_MENU_CONFIG,
-            activate,
+            activated,
             openedTabs
         };
     });
