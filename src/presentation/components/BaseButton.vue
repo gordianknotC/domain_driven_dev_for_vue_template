@@ -1,10 +1,8 @@
 <template>
-  
-<el-button 
-:class="btnTypeName" 
->
-    <slot></slot>
 
+<el-button :class="btnTypeName" >
+    <SvgIcon></SvgIcon>
+    <slot></slot>
 
 </el-button>
 
@@ -18,9 +16,13 @@ import { computed, defineComponent, PropType } from "vue";
 export default defineComponent({
 name:"BaseButton",
 props:{
-    type:{
-        type:String as PropType<"purple"|"purpleLight"|"grey"|"red"|"green"|"blue">,
+    color:{
+        type:String as PropType<"purple"|"grey"|"red"|"green"|"blue">,
         default:"purple"
+    },
+    type:{
+        type:String as PropType<""|"light">,
+        default:""
     },
     size:{
         type:String as PropType<"normal"|"small">,
@@ -37,16 +39,12 @@ props:{
 setup(props){
     // `btn-red-small`
     const btnTypeName = computed(()=>{
+        const type = props.type ? 'Light' : ''
         const disable = props.disable
         const size = props.size ? `-${props.size}`: ''
-        if(disable==false){
-            return `btn-${props.type}${size}`
-        }
-        else{
-            return `btn-${props.type}${size}--disable`
-        }
+        const disableBtn = disable ? '--disable' : ''
+        return `btn-${props.color}${type}${size}${disableBtn}`
     })
-    
     return{
         btnTypeName
     }

@@ -55,7 +55,8 @@ const swatches = {
     600: "#1E83FF",
     500: "#4C9CFE",
     400: "#89CDFF",
-    300: "#BCE3FF"
+    300: "#BCE3FF",
+    200: "#BCE3FF"
   },
   green: {
     800: "#0BA45B",
@@ -110,7 +111,8 @@ const ci = {
     d2: swatches.blue["600"],
     d1: swatches.blue["500"],
     DEFAULT: swatches.blue["400"],
-    l1: swatches.blue["300"]
+    l1: swatches.blue["300"],
+    l2: swatches.blue["200"]
   },
   error:{
     d3: swatches.red["800"],

@@ -1,18 +1,32 @@
 <template lang="pug">
 .page.w-full.p-2
-  .btn-primary 
+  p -------
+  BaseButton(
+    color="blue"
+    disable=true
+    
+  ) 123
+  p -------
+  BaseButton(
+    color="blue"
+    type="light"
+    disable=true
+  ) 123
+  p -------
   AppLayout()
 </template>
 
 <script lang="ts">
 import { defineComponent, reactive, ref, toRefs } from "vue";
 import AppLayout from "~/presentation/layout/AppLayout.vue";
+import BaseButton from "./presentation/components/BaseButton.vue";
 
 export default defineComponent({
   name: "App",
   components: {
-    AppLayout
-  },
+    AppLayout,
+    BaseButton
+},
   props: {},
   emit: ["close"],
   setup(props, { emit }) {
