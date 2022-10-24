@@ -56,7 +56,7 @@ watch(
 </script>
 <style lang="scss">
 .custom-el-input {
-  @apply text-xs;
+  @apply h-9 text-xs;
 
   .el-input__prefix {
     padding: 0px;

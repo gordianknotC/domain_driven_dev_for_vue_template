@@ -13,18 +13,18 @@
         'bg-inputDisable': isDisable,
         'border-primary-sd1': isMenuVisible
       }"
-      class="min-w-100 rounded border px-4 py-2"
+      class="min-w-100 h-9 rounded border px-4 py-2"
       trigger="click"
       :disabled="isDisable"
       @visible-change="onMenuVisibleChanged"
       @command="onItemSelected"
     >
-      <span class="flex w-full select-none justify-between">
+      <span class="flex w-full select-none items-center justify-between">
         <div class="text-strong" v-if="selectedItem">
           {{ selectedItem }}
         </div>
         <div class="text-light" v-else>{{ placeholder }}</div>
-        <span class="w-3"></span>
+        <span class="w-2"></span>
         <el-icon><arrow-down /></el-icon>
       </span>
 
