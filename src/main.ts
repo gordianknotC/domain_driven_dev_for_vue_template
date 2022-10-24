@@ -1,4 +1,4 @@
-"use strict"
+"use strict";
 
 import { createApp } from "vue";
 import App from "./App.vue";
@@ -73,7 +73,7 @@ app.use(getRouter());
  *  設定 App 所需要的相依注入
  * */
 (function setupDependencies() {
-  "use strict"
+  "use strict";
   setupAppPlugins(app, facade);
   // ---------------
   // data source 注入
