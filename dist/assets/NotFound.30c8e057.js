@@ -1,0 +1,1 @@
+import{o as t,c as o,a as s,t as n,_ as c,d as a}from"./index.6314f83a.js";const r={class:"w-screen h-screen flex justify-center items-center"},d={class:"text-2xl"};function i(e,_,l,m,f,u){return t(),o("div",r,[s("p",d,n(e.$t("common.notFound")),1)])}const p=a({name:"NotFound"}),$=c(p,[["render",i]]);export{$ as default};

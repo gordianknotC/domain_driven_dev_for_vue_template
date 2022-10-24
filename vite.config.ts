@@ -39,11 +39,17 @@ export default ({ command, mode }: ConfigEnv) => {
 
   return defineConfig({
     root,
+    // https://github.com/vitejs/vite/issues/5270#issuecomment-1065221182
+    optimizeDeps: {
+      esbuildOptions: {
+        target: 'es2020',
+      },
+    },
     define: {
       ...stringifiedEnv,
     },
     esbuild: {
-      target: "esnext"
+      target: "es2020"
     },
     resolve: {
       alias: {

@@ -1,0 +1,1 @@
+import{_ as o,d as t,o as s,c as r}from"./index.6314f83a.js";const c=t({name:"SignIn",components:{},props:{},emit:["close","route"],setup(e,{emit:n}){return{}}});function p(e,n,a,i,l,m){return s(),r("h3",null,"hello")}const u=o(c,[["render",p]]);export{u as default};
