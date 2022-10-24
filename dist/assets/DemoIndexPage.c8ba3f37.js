@@ -1,1 +1,0 @@
-import e from"./DemoDropdownsPage.91df480b.js";import{d as o,o as n,c as t,b as a}from"./index.6314f83a.js";const _=o({__name:"DemoIndexPage",setup(r){return(c,s)=>(n(),t("section",null,[a(e)]))}});export{_ as default};

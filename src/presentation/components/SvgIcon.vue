@@ -3,7 +3,7 @@
     class="svg-icon"
     :style="{
       width: props.width,
-      height: props.height
+      height: props.height,
     }"
   >
     <use :xlink:href="`#icon-${props.name}`" />
@@ -29,10 +29,6 @@ export default defineComponent({
       type: String,
       default: "24px"
     },
-    color: {
-      type: String,
-      default: "#000"
-    }
   },
   setup(props) {
     return {

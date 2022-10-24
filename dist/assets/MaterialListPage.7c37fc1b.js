@@ -1,1 +1,0 @@
-import{_ as a,d as n,f as s,o as r,c,b as p,F as i,S as l,a as _}from"./index.6314f83a.js";const m=n({name:"MaterialListPage",props:{},setup(e,{emit:o}){return{}},components:{SvgIcon:l}}),d=_("h3",null,"MaterialList",-1);function f(e,o,u,g,v,S){const t=s("SvgIcon");return r(),c(i,null,[d,p(t,{name:"loading"})],64)}const h=a(m,[["render",f]]);export{h as default};
