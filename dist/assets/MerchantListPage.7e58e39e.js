@@ -1,1 +1,0 @@
-import{_ as n,d as o,o as s,c as r}from"./index.6314f83a.js";const a=o({name:"MerchantListPage",components:{},props:{},setup(e,{emit:t}){return{}}});function c(e,t,p,i,_,m){return s(),r("h3",null,"MerchantListPage")}const u=n(a,[["render",c]]);export{u as default};
