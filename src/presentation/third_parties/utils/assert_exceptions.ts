@@ -1,6 +1,6 @@
-const isNotDev = () =>
-  // @ts-ignore
-  process.env.NODE_ENV != "default" || process.env.NODE_ENV != "develop";
+const isNotDev = () => { 
+  return import.meta.env.NODE_ENV != "default" || import.meta.env.NODE_ENV != "develop";
+}
 
 export function assert(guard: () => boolean, reason: string = "") {
   if (isNotDev()) {

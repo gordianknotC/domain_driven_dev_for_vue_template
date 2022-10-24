@@ -5,5 +5,5 @@ module.exports = {
     },
     autoprefixer: {},
     ...(process.env.NODE_ENV === "production" ? { cssnano: {} } : {})
-  },
-}
+  }
+};

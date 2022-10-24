@@ -2,7 +2,7 @@ import { CryptoService } from "~/data_source/core/interfaces/encrypt_service";
 import { LocalClientService } from "~/data_source/core/interfaces/local_client_service";
 import { CryptoServiceImpl } from "~/data_source/core/impl/encrypt_service_impl";
 
-const APP = process.title;
+const APP = import.meta.env.title;
 const prefixWith = <T extends Record<string, string>>(target: T, prefix: string):T => {
   Object.entries(target).forEach((pair) => {
     target[pair[0] as any as keyof T] = `/${prefix}${pair[1]}` as any;

@@ -5,6 +5,7 @@ import { App } from "vue";
 export function setupSvg(app: App<Element>) {
   const componentPlugin: any = {
     install: function (vue: any, options: any) {
+      console.log("import.meta:", import.meta, import.meta.resolve);
       if (
         options &&
         options.imports &&
@@ -14,8 +15,8 @@ export function setupSvg(app: App<Element>) {
         // 按需引入图标
         const { imports } = options;
         imports.forEach((name: any) => {
-          console.log("import", `/src/presentation/assets/icons/${name}.svg`);
           import.meta.resolve!(`/src/presentation/assets/icons/${name}.svg`);
+          console.log("import", `/src/presentation/assets/icons/${name}.svg`);
         });
       } else {
         // 全量引入图标
@@ -28,8 +29,8 @@ export function setupSvg(app: App<Element>) {
           const temp = path.match(/\.\/([A-Za-z0-9\-_]+)\.svg$/);
           if (!temp) return;
           const name = temp[1];
-          console.log("import", `/src/presentation/assets/icons/${name}.svg`);
           import.meta.resolve!(`/src/presentation/assets/icons/${name}.svg`);
+          console.log("import", `/src/presentation/assets/icons/${name}.svg`);
         });
       }
       vue.component(SvgIcon.name, SvgIcon);

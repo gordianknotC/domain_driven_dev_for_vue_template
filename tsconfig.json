@@ -6,6 +6,7 @@
   },
   "compilerOptions": {
     "target": "es2020",
+    "module": "es2020",
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "baseUrl": ".",
@@ -17,7 +18,6 @@
     "importHelpers": true,
     "jsx": "preserve",
     "jsxFactory": "h", /* Specify the JSX factory function to use when targeting react JSX emit, e.g. React.createElement or h. */
-    "module": "es2020",
     "moduleResolution": "node",
     "noEmit": true,
     "resolveJsonModule": true,
@@ -39,7 +39,8 @@
       "webpack-env",
       "jquery",
       "vitest/globals",
-      "vitest"
+      "vitest",
+      "vite/client"
     ],
     "typeRoots": [
       "node_modules/@types"
@@ -61,7 +62,7 @@
       "dom",
       "dom.iterable",
       "scripthost"
-    ]
+    ],
   },
   "include": [
     "vite.config.ts",

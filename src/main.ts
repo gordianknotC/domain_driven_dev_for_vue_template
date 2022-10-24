@@ -1,4 +1,4 @@
-"use strict"
+"use strict";
 
 import { createApp } from "vue";
 import App from "./App.vue";
@@ -19,8 +19,8 @@ import {
   setupMappers
 } from "~/data_source/mappers/mappers_index";
 import {
-  FacadePresentationController,
-  setupPresentationControllers
+  FacadePresentationStore,
+  setupPresentationStores
 } from "~/presentation/controller/controller_index";
 import {
   FacadeDomainService,
@@ -63,7 +63,7 @@ export const facade = IFacade<
   FacadeMappers &
     FacadeDateSource &
     FacadeRepository &
-    FacadePresentationController &
+    FacadePresentationStore &
     FacadeDomainService
 >();
 
@@ -73,7 +73,7 @@ app.use(getRouter());
  *  設定 App 所需要的相依注入
  * */
 (function setupDependencies() {
-  "use strict"
+  "use strict";
   setupAppPlugins(app, facade);
   // ---------------
   // data source 注入
@@ -85,7 +85,7 @@ app.use(getRouter());
   setupDomainServices(app, facade);
   // ----------------
   // presentation 注入
-  setupPresentationControllers(app, facade, true);
+  setupPresentationStores(app, facade, true);
   app.mount("#app");
-  setupPresentationControllers(app, facade, false);
+  setupPresentationStores(app, facade, false);
 })();

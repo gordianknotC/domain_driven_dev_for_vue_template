@@ -3,14 +3,12 @@
 // const resolve = path.resolve;
 // const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 // const pjson = require("./package.json");
-// const isGithubPageDeployment = process.env.VITE_APP_ENV === "githubPage";
+// const isGithubPageDeployment = import.meta.env.VITE_APP_ENV === "githubPage";
 // const plugins = isGithubPageDeployment
 //   ? []
 //   : [
 //     //new BundleAnalyzerPlugin(),
 //   ];
-
-
 
 // module.exports = defineConfig({
 //   publicPath: isGithubPageDeployment
@@ -21,7 +19,7 @@
 //   // outputDir: "../tempSiteForTestingOnly.github.io",
 //   configureWebpack: config => {
 //     let optimization = {};
-//     if (process.env.VITE_APP_ENV) {
+//     if (import.meta.env.VITE_APP_ENV) {
 //       optimization = {
 //         minimize: true,
 //         runtimeChunk: true,
