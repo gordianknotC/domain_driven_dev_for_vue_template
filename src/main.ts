@@ -19,8 +19,8 @@ import {
   setupMappers
 } from "~/data_source/mappers/mappers_index";
 import {
-  FacadePresentationController,
-  setupPresentationControllers
+  FacadePresentationStore,
+  setupPresentationStores
 } from "~/presentation/controller/controller_index";
 import {
   FacadeDomainService,
@@ -63,7 +63,7 @@ export const facade = IFacade<
   FacadeMappers &
     FacadeDateSource &
     FacadeRepository &
-    FacadePresentationController &
+    FacadePresentationStore &
     FacadeDomainService
 >();
 
@@ -85,7 +85,7 @@ app.use(getRouter());
   setupDomainServices(app, facade);
   // ----------------
   // presentation 注入
-  setupPresentationControllers(app, facade, true);
+  setupPresentationStores(app, facade, true);
   app.mount("#app");
-  setupPresentationControllers(app, facade, false);
+  setupPresentationStores(app, facade, false);
 })();

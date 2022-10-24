@@ -35,5 +35,7 @@
     "aapt",
     "xstate",
     "originjs",
+    "esbuild",
+    "importopt"
   ],
 }

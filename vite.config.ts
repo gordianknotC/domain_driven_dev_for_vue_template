@@ -24,23 +24,23 @@ const locals = { name: "My Pug" };
 export default ({ command, mode }: ConfigEnv) => {
   const root = process.cwd();
   const env = loadEnv(mode, root);
-  const stringfiedEnv: Record<string, any> = {};
+  const stringifiedEnv: Record<string, any> = {};
   const isBuild = command === "build";
 
   Object.keys(env).forEach(key => {
-    stringfiedEnv[key] = JSON.stringify(env[key]);
+    stringifiedEnv[key] = JSON.stringify(env[key]);
   });
 
   // https://github.com/vitejs/vite/issues/8909
-  //stringfiedEnv["global"] = JSON.stringify(JSON.stringify({}));
+  //stringifiedEnv["global"] = JSON.stringify(JSON.stringify({}));
 
   // Load app-level env vars to node-level env vars.
-  console.log("env:", stringfiedEnv);
+  console.log("env:", stringifiedEnv);
 
   return defineConfig({
     root,
     define: {
-      ...stringfiedEnv,
+      ...stringifiedEnv,
     },
     esbuild: {
       target: "esnext"

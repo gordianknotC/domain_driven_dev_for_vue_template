@@ -25,20 +25,21 @@ export type AppMenuState = {
     config: typeof APP_MENU_CONFIG,
     activated?: AppTabItem,
     openedTabs?: AppTabItem[],
+    enlarged: boolean,
 }
 
-class AppMenuStore implements
+export class AppMenuStore implements
     ISimpleStore<AppMenuState>,
     ILocalStorage<AppMenuState>
 {
     state!: AppMenuState;
-    getters: Record<string, ComputedRef<any>>; 
+    getters: Record<string, ComputedRef<any>>;
     get localStorage(): RemovableRef<AppMenuState> | null {
         const defaultMenu = this.defaultState();
         return useLocalStorage(StorageKeys.ui.appMenu, defaultMenu);
     }
 
-    constructor(public defaultState: () => AppMenuState) { 
+    constructor(public defaultState: () => AppMenuState) {
         this.initializeLocalTabs();
         this.getters = {
             
@@ -46,19 +47,25 @@ class AppMenuStore implements
         flattenInstance(this);
     }
 
-    setActiveTab(item: AppTabItem): Promise<{ succeed: boolean }> { 
+    /** 作用於 app tabs */
+    setActiveTab(item: AppTabItem): Promise<{ succeed: boolean }> {
         const preTab = this.state.activated;
         this.state.activated = item;
         return new Promise((resolve, reject) => {
-            facade.ctlr.router.push(item).then((_) => { 
+            facade.stores.router.push(item).then((_) => {
                 if (_ == undefined) {
                     resolve({ succeed: true });
-                } else { 
+                } else {
                     resolve({ succeed: false });
                     this.state.activated = preTab;
                 }
             });
         });
+    }
+
+    /** 作用於 app menu */
+    setActiveIndex(index: ERouter | string) { 
+        
     }
 
     /** 初始化 local tabs 由 local storage 載入 */
@@ -78,13 +85,24 @@ export const appMenuStore = defineStore("AppMenu", () => {
     const openedTabs: AppTabItem[] = [
         activated
     ];
+    const enlarged = true;
+    const state = () => { 
+        return {
+            config: APP_MENU_CONFIG,
+            activated,
+            openedTabs,
+            enlarged
+        };
+    }
+
     return new AppMenuStore(() => { 
         return {
             config: APP_MENU_CONFIG,
             activated,
-            openedTabs
+            openedTabs,
+            enlarged,
         };
     });
 });
 
-const s = appMenuStore();
+

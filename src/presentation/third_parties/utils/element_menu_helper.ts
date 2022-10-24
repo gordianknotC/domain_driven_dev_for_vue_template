@@ -33,7 +33,7 @@ export type ElMenuConfigItem = {
   };
 };
 
-type ElMenuConfigItemGroup = Partial<Record<ERouter, ElMenuConfigItem>>;
+export type ElMenuConfigItemGroup = Partial<Record<ERouter, ElMenuConfigItem>>;
 
 export type ElRawMenuConfig<T> = ElMenuConfigItem[];
 
