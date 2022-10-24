@@ -71,13 +71,15 @@ const swatches = {
     600:" #B9002C",
     500: "#DF2551",
     400: "#EA6585",
-    300: "#FFE5EC"
+    300: "#FFCDD9",
+    200: "#FFE5EC"
+
   },
   grey: {
     800: "#70757B",
     600: "#8791A0",
     500: "#99A3B2",
-    300: "#D4D9E0",
+    400: "#D4D9E0",
     200: "#E3EAF3",
     100: "#EFF3F8",
     0:   "#FFFFFF"
@@ -119,14 +121,16 @@ const ci = {
     d2: swatches.red["600"],
     d1: swatches.red["500"],
     DEFAULT: swatches.red["400"],
-    l1: swatches.red["300"]
+    l1: swatches.red["300"],
+    l2: swatches.red["200"]
   },
   cancel:{
     d3: swatches.grey["800"],
     d2: swatches.grey["600"],
     d1: swatches.grey["500"],
     DEFAULT: swatches.grey["400"],
-    l1: swatches.grey["300"]
+    l1: swatches.grey["200"],
+    l2: swatches.grey["100"]
   },
   success: {
     DEFAULT: swatches.green["500"]

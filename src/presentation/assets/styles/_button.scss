@@ -32,14 +32,47 @@ a {
   border: 1px solid #ADB1FF;
   @apply bg-primary-sl2 text-primary-sd3;
 }
+//default
 //blue
 %BaseBtnBlueColor{
   @apply bg-tertiary-d1 text-white
 }
 %BaseBtnBlueColorLight{
   border: 1px solid #89CDFF;
-  @apply bg-tertiary text-tertiary-d3
+  @apply bg-tertiary-l2 text-tertiary-d3
 }
+
+//default
+//grey
+%BaseBtnGreyColor{
+  @apply bg-cancel-d1 text-white
+}
+%BaseBtnGreyColorLight{
+  border: 1px solid #D4D9E0;
+  @apply bg-cancel-l2 text-cancel-d3
+}
+
+//default
+//red
+%BaseBtnRedColor{
+  @apply bg-error-d1 text-white
+}
+%BaseBtnRedColorLight{
+  border: 1px solid #DF2551;
+  @apply bg-error-l2 text-error-d3
+}
+
+//default
+//green
+%BaseBtnGreenColor{
+  @apply bg-secondary-d1 text-white
+}
+%BaseBtnGreenColorLight{
+  border: 1px solid #56D689;
+  @apply bg-secondary-l2 text-secondary-d3
+}
+
+
 
 
 
@@ -52,6 +85,8 @@ a {
   border: 1px solid #7882FA;
   @apply  bg-primary-sl1  text-primary-sd3
 }
+
+//hover
 //blue
 %BaseBtnHoverBlueColor{
   @apply bg-tertiary-d2  text-white
@@ -60,6 +95,36 @@ a {
   border: 1px solid #89CDFF;
   @apply  bg-tertiary-l1  text-tertiary-d3
 }
+
+//hover
+//grey
+%BaseBtnHoverGreyColor{
+  @apply bg-cancel-d2  text-white
+}
+%BaseBtnHoverGreyColorLight{
+  border: 1px solid #D4D9E0;
+  @apply  bg-cancel-l1  text-cancel-d3
+}
+//hover
+//red
+%BaseBtnHoverRedColor{
+  @apply bg-error-d2  text-white
+}
+%BaseBtnHoverRedColorLight{
+  border: 1px solid #DF2551;
+  @apply  bg-error-l1  text-error-d3
+}
+
+//hover
+//green
+%BaseBtnHoverGreenColor{
+  @apply bg-secondary-d2  text-white
+}
+%BaseBtnHoverGreenColorLight{
+  border: 1px solid #56D689;
+  @apply  bg-secondary-l1  text-secondary-d3
+}
+
 
 //disabled
 //purple
@@ -74,6 +139,7 @@ a {
   border: 1px solid #ADB1FF;
   @apply bg-primary-s text-purple-800
 }
+//disabled
 //blue
 %BaseBtnDisableBlueColor{
   cursor: default;
@@ -87,16 +153,61 @@ a {
   @apply  bg-tertiary-l1  text-tertiary-d3
 }
 
+//disabled
+//grey
+%BaseBtnDisableGreyColor{
+  cursor: default;
+  opacity: 0.5;
+  @apply bg-cancel-d2  text-white
+}
+%BaseBtnDisableGreyColorLight{
+  cursor: default;
+  opacity: 0.5;
+  border: 1px solid #D4D9E0;
+  @apply  bg-cancel-l1  text-cancel-d3
+}
+
+//disabled
+//red
+%BaseBtnDisableRedColor{
+  cursor: default;
+  opacity: 0.5;
+  @apply bg-error-d2  text-white
+}
+%BaseBtnDisableRedColorLight{
+  cursor: default;
+  opacity: 0.5;
+  border: 1px solid #D4D9E0;
+  @apply  bg-error-l1  text-error-d3
+}
+
+//disabled
+//green
+%BaseBtnDisableGreenColor{
+  cursor: default;
+  opacity: 0.5;
+  @apply bg-secondary-d2  text-white
+}
+%BaseBtnDisableGreenColorLight{
+  cursor: default;
+  opacity: 0.5;
+  border: 1px solid #56D689;
+  @apply  bg-secondary-l1  text-secondary-d3
+}
+
+
+
+
 
 
 
 
 %BaseBtnSize{
-  @apply h-9 px-2 py-4 text-base w-full flex justify-center items-center
+  @apply h-9 px-2 py-4 text-base flex justify-center items-center
 }
 
 %BaseBtnSize-small{
-  @apply h-7  px-1 py-2  text-sm w-full flex justify-center items-center
+  @apply h-7  px-2 py-4  text-sm flex justify-center items-center
 }
 
 
@@ -108,7 +219,7 @@ a {
     &:hover,
     &:active,
     &:focus{
-     @extend %BaseBtnHoverColor ,%BaseHoverShadow;
+    @extend %BaseBtnHoverColor ,%BaseHoverShadow;
     }
   }
   &-purple-normal--disable{
@@ -117,7 +228,7 @@ a {
     &:active,
     &:focus{
       @extend %BaseBtnDisableColor, %BaseHoverShadow;
-     }
+    }
   }
   &-purple-small{
     @extend %BaseShadow,%BaseBtnColor,%BaseBtnSize-small;
@@ -125,7 +236,7 @@ a {
     &:active,
     &:focus{
       @extend %BaseBtnHoverColor, %BaseHoverShadow;
-     }
+    }
   }
   &-purple-small--disable{
     @extend %BaseShadow,%BaseBtnDisableColor,%BaseBtnSize-small;
@@ -133,14 +244,14 @@ a {
     &:active,
     &:focus{
       @extend %BaseBtnDisableColor, %BaseHoverShadow;
-     }
+    }
   }
   &-purpleLight-normal{
     @extend %BaseLightShadow,%BaseBtnColorLight,%BaseBtnSize;
     &:hover,
     &:active,
     &:focus{
-     @extend %BaseBtnHoverColorLight, %BaseHoverShadow;
+    @extend %BaseBtnHoverColorLight, %BaseHoverShadow;
     }
   }
   &-purpleLight-normal--disable{
@@ -149,7 +260,7 @@ a {
     &:active,
     &:focus{
       @extend %BaseBtnDisableColorLight, %BaseHoverShadow;
-     }
+    }
   }
   &-purpleLight-small{
     @extend %BaseLightShadow,%BaseBtnColorLight,%BaseBtnSize-small;
@@ -157,7 +268,7 @@ a {
     &:active,
     &:focus{
       @extend %BaseBtnHoverColorLight, %BaseHoverShadow;
-     }
+    }
   }
   &-purpleLight-small--disable{
     @extend %BaseLightShadow,%BaseBtnDisableColorLight,%BaseBtnSize-small;
@@ -166,14 +277,14 @@ a {
     &:focus{
       @extend %BaseBtnDisableColorLight, %BaseHoverShadow;
     }
-   }
+  }
    //blue
-   &-blue-normal{
+  &-blue-normal{
     @extend %BaseShadow,%BaseBtnBlueColor,%BaseBtnSize;
     &:hover,
     &:active,
     &:focus{
-     @extend %BaseBtnHoverBlueColor ,%BaseHoverShadow;
+    @extend %BaseBtnHoverBlueColor ,%BaseHoverShadow;
     }
   }
   &-blue-normal--disable{
@@ -182,7 +293,7 @@ a {
     &:active,
     &:focus{
       @extend %BaseBtnDisableBlueColor, %BaseHoverShadow;
-     }
+    }
   }
   &-blue-small{
     @extend %BaseShadow,%BaseBtnBlueColor,%BaseBtnSize-small;
@@ -190,7 +301,7 @@ a {
     &:active,
     &:focus{
       @extend %BaseBtnHoverBlueColor, %BaseHoverShadow;
-     }
+    }
   }
   &-blue-small--disable{
     @extend %BaseShadow,%BaseBtnDisableBlueColor,%BaseBtnSize-small;
@@ -198,14 +309,14 @@ a {
     &:active,
     &:focus{
       @extend %BaseBtnDisableBlueColor, %BaseHoverShadow;
-     }
+    }
   }
   &-blueLight-normal{
     @extend %BaseLightShadow,%BaseBtnBlueColorLight,%BaseBtnSize;
     &:hover,
     &:active,
     &:focus{
-     @extend %BaseBtnHoverBlueColorLight, %BaseHoverShadow;
+    @extend %BaseBtnHoverBlueColorLight, %BaseHoverShadow;
     }
   }
   &-blueLight-normal--disable{
@@ -214,7 +325,7 @@ a {
     &:active,
     &:focus{
       @extend %BaseBtnDisableBlueColorLight, %BaseHoverShadow;
-     }
+    }
   }
   &-blueLight-small{
     @extend %BaseLightShadow,%BaseBtnBlueColorLight,%BaseBtnSize-small;
@@ -222,7 +333,7 @@ a {
     &:active,
     &:focus{
       @extend %BaseBtnHoverBlueColorLight, %BaseHoverShadow;
-     }
+    }
   }
   &-blueLight-small--disable{
     @extend %BaseLightShadow,%BaseBtnDisableBlueColorLight,%BaseBtnSize-small;
@@ -231,6 +342,204 @@ a {
     &:focus{
       @extend %BaseBtnDisableBlueColorLight, %BaseHoverShadow;
     }
-   }
- 
+  }
+
+  //grey
+  &-grey-normal{
+    @extend %BaseShadow,%BaseBtnGreyColor,%BaseBtnSize;
+    &:hover,
+    &:active,
+    &:focus{
+    @extend %BaseBtnHoverGreyColor ,%BaseHoverShadow;
+    }
+  }
+  &-grey-normal--disable{
+    @extend %BaseShadow,%BaseBtnDisableGreyColor,%BaseBtnSize;
+    &:hover,
+    &:active,
+    &:focus{
+      @extend %BaseBtnDisableGreyColor, %BaseHoverShadow;
+    }
+  }
+  &-grey-small{
+    @extend %BaseShadow,%BaseBtnGreyColor,%BaseBtnSize-small;
+    &:hover,
+    &:active,
+    &:focus{
+      @extend %BaseBtnHoverGreyColor, %BaseHoverShadow;
+    }
+  }
+  &-grey-small--disable{
+    @extend %BaseShadow,%BaseBtnDisableGreyColor,%BaseBtnSize-small;
+    &:hover,
+    &:active,
+    &:focus{
+      @extend %BaseBtnDisableGreyColor, %BaseHoverShadow;
+    }
+  }
+  &-greyLight-normal{
+    @extend %BaseLightShadow,%BaseBtnGreyColorLight,%BaseBtnSize;
+    &:hover,
+    &:active,
+    &:focus{
+    @extend %BaseBtnHoverGreyColorLight, %BaseHoverShadow;
+    }
+  }
+  &-greyLight-normal--disable{
+    @extend %BaseLightShadow,%BaseBtnDisableGreyColorLight,%BaseBtnSize;
+    &:hover,
+    &:active,
+    &:focus{
+      @extend %BaseBtnDisableGreyColorLight, %BaseHoverShadow;
+    }
+  }
+  &-greyLight-small{
+    @extend %BaseLightShadow,%BaseBtnHoverGreyColorLight,%BaseBtnSize-small;
+    &:hover,
+    &:active,
+    &:focus{
+      @extend %BaseBtnHoverGreyColorLight, %BaseHoverShadow;
+    }
+  }
+  &-greyLight-small--disable{
+    @extend %BaseLightShadow,%BaseBtnDisableGreyColorLight,%BaseBtnSize-small;
+    &:hover,
+    &:active,
+    &:focus{
+      @extend %BaseBtnDisableGreyColorLight, %BaseHoverShadow;
+    }
+  }
+
+  //red
+  &-red-normal{
+    @extend %BaseShadow,%BaseBtnRedColor,%BaseBtnSize;
+    &:hover,
+    &:active,
+    &:focus{
+    @extend %BaseBtnHoverRedColor ,%BaseHoverShadow;
+    }
+  }
+  &-red-normal--disable{
+    @extend %BaseShadow,%BaseBtnDisableRedColor,%BaseBtnSize;
+    &:hover,
+    &:active,
+    &:focus{
+      @extend %BaseBtnDisableRedColor, %BaseHoverShadow;
+    }
+  }
+  &-red-small{
+    @extend %BaseShadow,%BaseBtnRedColor,%BaseBtnSize-small;
+    &:hover,
+    &:active,
+    &:focus{
+      @extend %BaseBtnHoverRedColor, %BaseHoverShadow;
+    }
+  }
+  &-red-small--disable{
+    @extend %BaseShadow,%BaseBtnDisableRedColor,%BaseBtnSize-small;
+    &:hover,
+    &:active,
+    &:focus{
+      @extend %BaseBtnDisableRedColor, %BaseHoverShadow;
+    }
+  }
+  &-redLight-normal{
+    @extend %BaseLightShadow,%BaseBtnRedColorLight,%BaseBtnSize;
+    &:hover,
+    &:active,
+    &:focus{
+    @extend %BaseBtnHoverRedColorLight, %BaseHoverShadow;
+    }
+  }
+  &-redLight-normal--disable{
+    @extend %BaseLightShadow,%BaseBtnDisableRedColorLight,%BaseBtnSize;
+    &:hover,
+    &:active,
+    &:focus{
+      @extend %BaseBtnDisableRedColorLight, %BaseHoverShadow;
+    }
+  }
+  &-redLight-small{
+    @extend %BaseLightShadow,%BaseBtnDisableRedColorLight,%BaseBtnSize-small;
+    &:hover,
+    &:active,
+    &:focus{
+      @extend %BaseBtnHoverRedColorLight, %BaseHoverShadow;
+    }
+  }
+  &-redLight-small--disable{
+    @extend %BaseLightShadow,%BaseBtnDisableRedColorLight,%BaseBtnSize-small;
+    &:hover,
+    &:active,
+    &:focus{
+      @extend %BaseBtnDisableRedColorLight, %BaseHoverShadow;
+    }
+  }
+  //green
+  &-green-normal{
+    @extend %BaseShadow,%BaseBtnGreenColor,%BaseBtnSize;
+    &:hover,
+    &:active,
+    &:focus{
+    @extend %BaseBtnHoverGreenColor ,%BaseHoverShadow;
+    }
+  }
+  &-green-normal--disable{
+    @extend %BaseShadow,%BaseBtnDisableGreenColor,%BaseBtnSize;
+    &:hover,
+    &:active,
+    &:focus{
+      @extend %BaseBtnDisableGreenColor, %BaseHoverShadow;
+    }
+  }
+  &-green-small{
+    @extend %BaseShadow,%BaseBtnGreenColor,%BaseBtnSize-small;
+    &:hover,
+    &:active,
+    &:focus{
+      @extend %BaseBtnHoverGreenColor, %BaseHoverShadow;
+    }
+  }
+  &-green-small--disable{
+    @extend %BaseShadow,%BaseBtnDisableGreenColor,%BaseBtnSize-small;
+    &:hover,
+    &:active,
+    &:focus{
+      @extend %BaseBtnDisableGreenColor, %BaseHoverShadow;
+    }
+  }
+  &-greenLight-normal{
+    @extend %BaseLightShadow,%BaseBtnGreenColorLight,%BaseBtnSize;
+    &:hover,
+    &:active,
+    &:focus{
+    @extend %BaseBtnHoverGreenColorLight, %BaseHoverShadow;
+    }
+  }
+  &-greenLight-normal--disable{
+    @extend %BaseLightShadow,%BaseBtnDisableGreenColorLight,%BaseBtnSize;
+    &:hover,
+    &:active,
+    &:focus{
+      @extend %BaseBtnDisableGreenColorLight, %BaseHoverShadow;
+    }
+  }
+  &-greenLight-small{
+    @extend %BaseLightShadow,%BaseBtnDisableGreenColorLight,%BaseBtnSize-small;
+    &:hover,
+    &:active,
+    &:focus{
+      @extend %BaseBtnHoverGreenColorLight, %BaseHoverShadow;
+    }
+  }
+  &-greenLight-small--disable{
+    @extend %BaseLightShadow,%BaseBtnDisableGreenColorLight,%BaseBtnSize-small;
+    &:hover,
+    &:active,
+    &:focus{
+      @extend %BaseBtnDisableGreenColorLight, %BaseHoverShadow;
+    }
+  }
+
+
 }

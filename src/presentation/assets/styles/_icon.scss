@@ -1,0 +1,44 @@
+//default
+// 
+
+.baseIcon{
+    color:white
+    &--disable{
+        opacity: 0.5;
+    }
+    &-purpleLight{
+    color: #7882FA;
+        &--disable{
+            opacity: 0.5;
+        }
+    }
+
+    &-blueLight{
+    color: #4C9CFE;
+        &--disable{
+            opacity: 0.5;
+        }
+    }
+
+    &-greyLight{
+    color:#99A3B2;
+        &--disable{
+            opacity: 0.5;
+        }
+    }
+
+    &-redLight{
+    color: #EA6585;
+        &--disable{
+            opacity: 0.5;
+            }
+    }
+
+    &-greenLight{
+    color: #0BA45B;
+        &--disable{
+            opacity: 0.5;
+            }
+    }
+}
+
