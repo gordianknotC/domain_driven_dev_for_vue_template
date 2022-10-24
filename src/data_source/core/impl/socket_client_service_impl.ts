@@ -41,10 +41,10 @@ export class SocketClientServiceImpl implements ISocketClientService {
   socket: ISocket;
   private token: string;
   constructor(token: string) {
-    if (process.env.VITE_APP_PSEUDO_SOCKET == "true") {
+    if (import.meta.env.VITE_APP_PSEUDO_SOCKET == "true") {
       this.socket = new PseudoSocket();
     } else {
-      this.socket = io(process.env.VITE_APP_API_HOST!);
+      this.socket = io(import.meta.env.VITE_APP_API_HOST!);
     }
     this.token = token;
   }

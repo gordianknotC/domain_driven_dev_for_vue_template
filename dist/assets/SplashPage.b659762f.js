@@ -1,0 +1,1 @@
+import{_ as s,d as n,o as p,c as a}from"./index.0a00e12f.js";const t=n({name:"Splash",components:{},props:{},setup(e,{emit:o}){return console.log("123 splash"),{}}});function r(e,o,c,l,_,m){return p(),a("h3",null,"Splash")}var u=s(t,[["render",r]]);export{u as default};

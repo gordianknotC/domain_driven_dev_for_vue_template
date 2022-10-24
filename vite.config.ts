@@ -72,7 +72,7 @@ export default ({ command, mode }: ConfigEnv) => {
       vueJsx(),
       ViteRequireContext(),
       viteCommonjs(),
-      // 讓 process.env 可以被存取
+      // 讓 import.meta.env 可以被存取
       envCompatible(),
       // pugPlugin(options, locals),
       createSvgIconsPlugin({
