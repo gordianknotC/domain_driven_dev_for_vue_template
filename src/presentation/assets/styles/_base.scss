@@ -29,3 +29,53 @@
   font-display: swap;
   src: local("Lexend - Regular"), url("../fonts/Lexend-Regular.ttf");
 }
+
+body {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply mb-4 font-semibold capitalize leading-8 text-text-strong;
+  }
+
+  h2 {
+    @apply text-3xl;
+  }
+
+  h3 {
+    @apply text-2xl;
+  }
+
+  h4 {
+    @apply text-xl;
+  }
+
+  p {
+    @apply mb-2 font-light text-text-strong;
+  }
+
+  a {
+    @apply text-text-light hover:underline;
+  }
+
+  ul {
+    @apply mb-4 list-disc pl-4;
+
+    li {
+      @apply mb-2;
+    }
+
+    ul {
+      @apply mt-2;
+    }
+  }
+
+  ul,
+  li,
+  div,
+  section {
+    background: none;
+  }
+}

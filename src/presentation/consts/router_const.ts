@@ -1,15 +1,16 @@
-export enum ERouter {
+export enum ERouteName {
   splash = "splash",
   pageLayout = "pageLayout",
-  //
   home = "home",
   signIn = "signIn",
-  supplierLIst = "supplierList",
+  notFound = "notFound",
+  // 
+  supplierList = "supplierList",
   materialList = "materialList",
   dashboard = "dashboard",
-  userAdminControl = "userAdminControl",
-  projectManager = "projectManager",
-  notFound = "notFound",
+  userAccountControl = "userAccountControl",
+  projectManagement = "projectManagement",
+  humanResource="humanResource",
   //
   demo = "demo",
   demoButtons = "demoButtons",

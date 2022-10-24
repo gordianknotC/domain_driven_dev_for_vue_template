@@ -1,1 +1,8 @@
 /* container.scss */
+
+.row-direction {
+  @apply flex h-full w-full flex-row justify-start;
+}
+.col-direction {
+  @apply flex h-full w-full flex-col justify-start;
+}

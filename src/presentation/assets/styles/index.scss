@@ -1,4 +1,11 @@
 @import "tailwind";
+@import "predefined/mixin";
+@import "predefined/variables";
+
 @import "form";
 @import "container";
 @import "typography";
+@import "menu";
+@import "button";
+@import "utils";
+@import "table";

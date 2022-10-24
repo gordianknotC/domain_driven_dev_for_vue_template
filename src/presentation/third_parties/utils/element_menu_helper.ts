@@ -1,6 +1,6 @@
 import { is } from "js_util_for_vue_project/dist/utils/typeInferernce";
 import { computed, ComputedRef } from "vue";
-import { ERouter } from "~/presentation/consts/router_const";
+import { ERouteName } from "~/presentation/consts/router_const";
 import { EUserAccount } from "~/presentation/consts/ua_const";
 
 /**
@@ -22,23 +22,23 @@ import { EUserAccount } from "~/presentation/consts/ua_const";
  */
 export type ElMenuConfigItem = {
   order?: number;
-  index?: ERouter | string;
-  route: ERouter;
+  index?: ERouteName | string;
+  route: {name: ERouteName};
   icon: string;
   label: ComputedRef<string>;
-  defaultChild?: ERouter;
+  defaultChild?: ERouteName;
   children?: ElMenuConfigItemGroup;
   meta: {
     admin: EUserAccount[];
   };
 };
 
-export type ElMenuConfigItemGroup = Partial<Record<ERouter, ElMenuConfigItem>>;
+export type ElMenuConfigItemGroup = Partial<Record<ERouteName, ElMenuConfigItem>>;
 
 export type ElRawMenuConfig<T> = ElMenuConfigItem[];
 
 export type ElMenuConfig<T extends Record<string, ElMenuConfigItem>> = {
-  indexMapping: Record<ERouter, string | ERouter>;
+  indexMapping: Record<ERouteName, string | ERouteName>;
   children: Record<keyof T, ElMenuConfigItem>;
 }
 
@@ -46,18 +46,18 @@ export function createElMenu<T extends Record<string, ElMenuConfigItem>>(
   config: Record<keyof T, ElMenuConfigItem>
 ): ElMenuConfig<T> { 
   const menu = {
-    indexMapping: {} as Record<ERouter, string | ERouter>,
+    indexMapping: {} as Record<ERouteName, string | ERouteName>,
     children: config,
   }
 
-  function processItem(item: ElMenuConfigItem, indexMap:Record<ERouter, string | ERouter>, prependKey: string|ERouter = ""): any {
+  function processItem(item: ElMenuConfigItem, indexMap:Record<ERouteName, string | ERouteName>, prependKey: string|ERouteName = ""): any {
     const hasSubMenu = is.not.empty((item as any)?.children);
     if (hasSubMenu) {
       let order = 0;
       Object.entries(item.children!).forEach(entry => {
         let [origMenuKey, val] = entry;
         val.order = order;
-        val.index ??= val.route;
+        val.index ??= val.route.name;
         const combinedKey = prependKey
           ? `${prependKey}-${val!.index ?? origMenuKey}`
           : origMenuKey;
@@ -67,14 +67,14 @@ export function createElMenu<T extends Record<string, ElMenuConfigItem>>(
     } else {
       item.index = prependKey;
       /** 這裡是以 route name 作為 key, 所以如果有 RouterNames.comingSoon 就有可能連錯地方 */
-      indexMap[item.route!] = item.index;
+      indexMap[item.route!.name] = item.index;
     }
     return item;
   }
 
   Object.values(menu.children).forEach((_item: any) => {
     const item = _item as ElMenuConfigItem;
-    item.index ??= item.route;
+    item.index ??= item.route.name;
     processItem(item as any, menu.indexMapping, item.index);
   });
   

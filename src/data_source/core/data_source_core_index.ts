@@ -37,7 +37,7 @@ function setupSocketService() {
     data: {
       socket
     }
-  });
+  }, true);
 
   const queue = new Queue();
   const remoteClient = new RemoteClientServiceImpl(socket, queue);
@@ -45,7 +45,7 @@ function setupSocketService() {
     data: {
       remoteClient
     }
-  });
+  }, true);
 }
 
 export function setupDataCoreServices(app: App<Element>, facade: any) {

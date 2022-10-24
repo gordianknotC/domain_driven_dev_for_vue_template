@@ -1,3 +1,19 @@
+@forward "element-plus/theme-chalk/src/common/var.scss" with (
+  $menu: (
+    "base-level-padding": 0px
+  )
+  !default,
+  $tabs: (
+    "header-height": 34px
+  )
+  !default
+);
 
 $card-h: 45px;
 
+:root {
+  --el-menu-base-level-padding: 0rem !important;
+  --el-menu-level-padding: 20px !important;
+  --el-menu-bg-color: none !important;
+  --el-tabs-header-height: 34px !important;
+}

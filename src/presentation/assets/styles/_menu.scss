@@ -1,0 +1,14 @@
+.el-menu {
+  border-right: none !important;
+  &-item {
+    padding: 0rem;
+    background: none !important;
+  }
+
+  &--vertical {
+    padding: 0rem;
+    .el-menu--vertical & {
+      border-right: 0px;
+    }
+  }
+}

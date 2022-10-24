@@ -1,6 +1,6 @@
 import admin_router_config from "./admin_router_config";
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
-import { ERouter } from "~/presentation/consts/router_const";
+import { ERouteName } from "~/presentation/consts/router_const";
 import { ADMIN_GROUP, EUserAccount } from "~/presentation/consts/ua_const";
 
 /**
@@ -16,7 +16,7 @@ type RouterMetaType = {
   auth: boolean;
 };
 
-const { loginRoutes, notFoundROutes, demoRoutes } = admin_router_config;
+const { loginRoutes, notFoundRoutes, demoRoutes } = admin_router_config;
 
 /**
  * userRouterConfig, 用於設定 user 可訪頁面
@@ -27,17 +27,17 @@ export const userRoutes: Array<RouteRecordRaw> = [
   ...demoRoutes,
   {
     path: "/",
-    name: ERouter.pageLayout,
+    name: ERouteName.pageLayout,
     component: () => import("~/presentation/layout/PageLayout.vue"),
     children: [
       {
         path: "",
-        name: ERouter.pageLayout,
-        redirect: { name: ERouter.notFound }
+        name: ERouteName.pageLayout,
+        redirect: { name: ERouteName.notFound }
       }
     ]
   },
-  ...notFoundROutes
+  ...notFoundRoutes
 ];
 
 export default {

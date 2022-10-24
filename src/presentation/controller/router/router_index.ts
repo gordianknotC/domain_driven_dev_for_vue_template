@@ -6,6 +6,7 @@ import {
   RouteRecordRaw
 } from "vue-router";
 import { routerConfig } from "~/presentation/configs/router_config";
+import { ERouteName } from "~/presentation/consts/router_const";
 import { ADMIN_GROUP } from "~/presentation/consts/ua_const";
 import {
   QueryStringPreprocessorGuard,
@@ -66,6 +67,14 @@ export function getRouter(): Router {
     });
   });
 
+  Object.assign(routerInstance, {
+    getHomeRoute:(): ERouteName=>{
+      const layout = routerConfig.admin.firstWhere((_)=>_.name == ERouteName.pageLayout)!;
+      const home = layout?.children?.firstWhere((_)=>_.path == "")!;
+      return (home!.redirect! as any).name as any;
+    }
+  });
+
   return routerInstance!;
 }
 
@@ -74,7 +83,7 @@ export function setupRouter() {
   const mergeObject = true;
   provideFacade(
     {
-      ctrl: {
+      stores: {
         router: getRouter()
       }
     },

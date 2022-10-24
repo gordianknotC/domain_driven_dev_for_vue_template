@@ -18,5 +18,5 @@ export function setupDomainServices(app: App<Element>, facade: any) {
       material: materialService,
       merchant: merchantService
     }
-  });
+  }, true);
 }

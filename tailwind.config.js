@@ -73,12 +73,11 @@ module.exports = {
           backgroundColor: cColors.primary.d1
         },
         ".tab-gradient-bg": {
-          backgroundColor:
+          background:
             "linear-gradient(90deg, rgba(76,105,151,1.0) 0%, rgba(64,93,138,1.0) 100%)"
         },
         ".aside-gradient-bg": {
-          backgroundColor:
-            "linear-gradient(1.73deg, rgba(0,25,62,1.0) 0%, rgba(7,44,100,1.0) 100%)"
+          background: "linear-gradient(1.73deg, #00193E 0%, #072C64 100%)"
         },
         /** -------------------------
          *          shadow 

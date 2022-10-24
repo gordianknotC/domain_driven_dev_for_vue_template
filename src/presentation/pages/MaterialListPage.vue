@@ -1,6 +1,5 @@
 <template>
   <h3>MaterialList</h3>
-  <SvgIcon name="loading"></SvgIcon>
 </template>
 
 <script lang="ts">

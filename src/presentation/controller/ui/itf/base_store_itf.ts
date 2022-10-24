@@ -1,7 +1,7 @@
-import { computed, ComputedRef, ref } from "vue";
+import { computed, ComputedRef, ref, UnwrapNestedRefs } from "vue";
 
 export abstract class ISimpleStore<T> { 
-    abstract state: T;
+    abstract state: UnwrapNestedRefs<T>;
     abstract getters: Record<string, ComputedRef>;
     constructor(public defaultState: () => T) { };
 }

@@ -1,15 +1,14 @@
 import { createI18n } from "vue-i18n";
-import tw from "./locales/tw";
+import tw, { LocaleObject } from "./locales/tw";
 import { App } from "vue";
-import { provideFacade } from "js_util_for_vue_project";
+import { LazyHolder, provideFacade } from "js_util_for_vue_project";
 
-type MessageSchema = typeof tw;
 
 const i18n = createI18n<{
   locale: string;
   fallbackLocale: string;
   messages: {
-    tw: MessageSchema;
+    tw: LocaleObject;
   };
 }>({
   legacy: false,
@@ -28,14 +27,15 @@ export function setupI18n(app: App<Element>) {
   console.log("i18n:", i18n);
   provideFacade(
     {
-      ctrl: {
+      stores: {
         i18n,
-        t: new Proxy(
-          {},
-          {
-            get(name, target) {}
-          }
-        )
+        t: LazyHolder<LocaleObject>(() => {
+          return new Proxy<LocaleObject>({} as any, {
+            get(target, name) {
+              return i18n.global.t(name as string) as string;
+            }
+          });
+        })
       }
     },
     mergeObject
@@ -62,7 +62,6 @@ export function setupI18n(app: App<Element>) {
 // }>(() => {
 //   const { global } = getStore() as TStore;
 //   const locale = global.getters.currentLang.value;
-
 //   // prettier-ignore
 //   _i18nInstance ??= createI18n({
 //     locale: locale,
