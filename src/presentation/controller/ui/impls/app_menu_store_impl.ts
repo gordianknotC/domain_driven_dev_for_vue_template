@@ -11,11 +11,11 @@ import {
 import { facade } from "~/main";
 import { APP_MENU_CONFIG } from "~/presentation/configs/menu_config";
 import { ERouteName } from "~/presentation/consts/router_const";
-import { flattenInstance } from "js_util_for_vue_project";
+import { flattenInstance, LazyHolder } from "js_util_for_vue_project";
 import { ISimpleStore } from "../itf/base_store_itf";
 import { useLocalStorage, RemovableRef } from "@vueuse/core";
-import { ILocalStorage } from "~/data_source/core/interfaces/local_client_service";
-import { StorageKeys } from "~/data_source/core/impl/local_client_service_impl";
+import { LocalStorage } from "~/data_source/core/interfaces/crypto_storage";
+import { StorageKeys } from "~/data_source/core/impl/crypto_storage_impl";
 import { merge } from "merge-anything";
 
 import { RouteLocationNormalizedLoaded } from "vue-router";
@@ -33,7 +33,8 @@ export class AppMenuStoreExtensionMarquee {
 
 /** 處理 app aside menu, app tab header */
 export class AppMenuStore
-  implements ISimpleStore<AppMenuState>, ILocalStorage<AppMenuState>
+  extends LocalStorage<AppMenuState>
+  implements ISimpleStore<AppMenuState>
 {
   state!: UnwrapNestedRefs<AppMenuState>;
   getters: Record<string, ComputedRef<any>>;
@@ -43,9 +44,11 @@ export class AppMenuStore
   }
 
   constructor(public defaultState: () => AppMenuState) {
+    super(StorageKeys.ui.appMenu, defaultState());
     this.initializeLocalTabs();
     this.getters = {};
     flattenInstance(this, undefined, console.log);
+    
   }
 
   /** 初始化 local tabs 由 local storage 載入 */
@@ -173,7 +176,7 @@ export const appMenuStore = defineStore("AppMenu", () => {
 
   return new AppMenuStore(() => {
     return {
-      config: APP_MENU_CONFIG,
+      config: LazyHolder(()=>APP_MENU_CONFIG),
       activated,
       openedTabs,
       enlarged,

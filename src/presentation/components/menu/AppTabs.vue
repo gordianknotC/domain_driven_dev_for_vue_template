@@ -1,25 +1,25 @@
 <template lang="pug">
 Container()
-    el-tabs.app-tab(
-        type="card"
-        v-model="currentTabName"
-        @tab-click="onTabClick"
-        @tab-remove="onRemoveTab"
-        :key="languageKey"
-    )
-        el-tab-pane(
-            v-for="(tab, idx) in openedTabs"
-            v-model="tab.title"
-            :key="tab.name"
-            :label="tab.title"
-            :name="tab.name"
-            :closable="idx != 0"
-        )
-          template(v-if="idx == 0" #label)
-            svg-icon.inline-block(:size="20" name="Home")
-          template(v-else #label)
-            span {{tab.title}}
-    </template>
+  el-tabs.app-tab(
+      type="card"
+      v-model="currentTabName"
+      @tab-click="onTabClick"
+      @tab-remove="onRemoveTab"
+      :key="languageKey"
+  )
+      el-tab-pane(
+          v-for="(tab, idx) in openedTabs"
+          v-model="tab.title"
+          :key="tab.name"
+          :label="tab.title"
+          :name="tab.name"
+          :closable="idx != 0"
+      )
+        template(v-if="idx == 0" #label)
+          svg-icon.inline-block(:size="20" name="Home")
+        template(v-else #label)
+          span {{tab.title}}
+</template>
 
 <script lang="ts">
 export default {
@@ -32,7 +32,7 @@ export default {
 import { computed, onMounted } from "vue";
 import { facade } from "~/main";
 import { ERouteName } from "~/presentation/consts/router_const";
-import { LocaleKeys } from "~/presentation/controller/i18n/locales/tw";
+import type { LocaleKeys } from "~/presentation/controller/i18n/locales/tw";
 import Container from "../utils/Container.vue";
 
 const currentTabName = computed({
@@ -46,6 +46,7 @@ const currentTabName = computed({
   }
 });
 
+// FIXME: 改用 mapper model 寫，不要在這寫 logic
 const openedTabs = computed(() => {
   return facade.stores.appMenu.state.openedTabs!.map(_ => {
     console.log("onOopenTabsChanged....");
@@ -60,6 +61,10 @@ const onTabClick = ({ paneName }: { paneName: string }) => {
   // TODO: query, params...
   facade.stores.router.push({ name: paneName });
 };
+
+const languageKey = computed(() => {
+  return facade.stores.i18n.global.locale;
+});
 
 const onRemoveTab = (routeName: string) => {
   facade.stores.appMenu.removeTab(routeName);

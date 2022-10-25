@@ -2,30 +2,30 @@
 import { provideFacade } from "js_util_for_vue_project";
 import { App } from "vue";
 import { UserEntity } from "~/data_source/entities/user_entity";
-import { BaseModelMapper } from "~/data_source/mappers/base_mappers";
+import { BaseModelMapper, tempMapper } from "~/data_source/mappers/base_mappers";
+import { UserDomainModel } from "~/domain/account/user_domain_model";
+import { AnnouncementDomainModel } from "~/domain/app/announcement_domain_model";
+import { AnnouncementEntity } from "../entities/announcement_entity";
 
 export type FacadeMappers = {
   data: {
     mappers: {
-      user: BaseModelMapper<UserEntity, UserEntity>;
+      user: BaseModelMapper<UserEntity, UserDomainModel>;
+      announcement: BaseModelMapper<AnnouncementEntity, AnnouncementDomainModel>;
     };
   };
 };
+
 
 export function setupMappers(app: App<Element>, facade: any) {
   const mergeObject = true;
   provideFacade(
     {
       data: {
+        // FIXME: tempMapper 測試用
         mappers: {
-          user: new BaseModelMapper(
-            entity => {
-              return entity;
-            },
-            domain => {
-              return domain;
-            }
-          )
+          user: tempMapper(),
+          announcement: tempMapper()
         }
       }
     },

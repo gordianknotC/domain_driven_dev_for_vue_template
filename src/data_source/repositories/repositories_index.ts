@@ -3,11 +3,17 @@ import { TUserRepository } from "~/data_source/repositories/account/itf/user_rep
 import { UserRepositoryImpl } from "~/data_source/repositories/account/impl/user_repository_impl";
 import { facade } from "~/main";
 import { App } from "vue";
+import { TAnnouncementRepository } from "./app/itf/announcement_repository_itf";
+import { AnnouncementRepositoryImpl } from "./app/impl/announcement_repository_impl";
+import { UserEntity } from "../entities/user_entity";
+import { UserMapper } from "../mappers/mappers_types";
+import { BaseRepository } from "./base_repository";
 
 export type FacadeRepository = {
   data: {
     repo: {
-      user: TUserRepository;
+      user: TUserRepository,
+      announcement: TAnnouncementRepository,
     };
   };
 };
@@ -21,11 +27,15 @@ export function setupRepositories(app: App<Element>, facade: any) {
   const userMapper = facade.data.mappers.user;
   const user = new UserRepositoryImpl(client, userMapper);
 
+  const announcementMapper = facade.data.mappers.announcement;
+  const announcement = new AnnouncementRepositoryImpl(client, announcementMapper);
+
   provideFacade(
     {
       data: {
         repo: {
-          user
+          user,
+          announcement
         }
       }
     },

@@ -20,7 +20,6 @@ export default {
 };
 </script>
 <script lang="ts" setup>
-import { defineComponent } from "vue";
 import colors from "~/presentation/assets/colors/default_colors";
 import brandingImg from "~/presentation/assets/images/branding.png";
 import Container from "../utils/Container.vue";
@@ -37,6 +36,7 @@ import Container from "../utils/Container.vue";
     }
   }
   &-branding {
+    @apply flex items-center;
     width: 239px;
   }
   &-marquee {

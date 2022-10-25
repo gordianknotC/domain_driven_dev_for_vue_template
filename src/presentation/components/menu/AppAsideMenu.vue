@@ -9,8 +9,8 @@
       @select="onMenuSelect"
     >
       <AppMenuItemGroup
-        v-for="(val, name, idx) in APP_MENU_CONFIG.children"
-        :value="val.label.value"
+        v-for="(val, name, idx) in menuConfig.children"
+        :value="val.label"
         :index="val.index"
         :route="val.route"
         :icon-name="val.icon"
@@ -24,7 +24,6 @@
 <script lang="ts" setup>
 import { onMounted, PropType, ref, computed, onUnmounted } from "vue";
 import { facade } from "~/main";
-import { APP_MENU_CONFIG } from "~/presentation/configs/menu_config";
 import AppMenuItemGroup from "../buttons/AppMenuItemGroup.vue";
 
 const menuElt = ref<HTMLElement>();
@@ -34,6 +33,8 @@ const props = defineProps({
     default: true
   }
 });
+
+const menuConfig = computed(() => facade.stores.appMenu.state.config);
 
 const isEnlarge = computed(() => {
   return facade.stores.appMenu.state.enlarged;

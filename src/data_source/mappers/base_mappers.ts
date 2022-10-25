@@ -13,6 +13,13 @@ export abstract class IModelMapper<E, D> {
 
 /** base mapper */
 export class BaseModelMapper<E, D> extends IModelMapper<E, D> {
+  constructor(option: {
+    fromEntity: (entity: E) => D,
+    fromDomain: (domain: D) => E
+  }) {
+    const {fromEntity, fromDomain} = option;
+    super(fromEntity, fromDomain);
+  }
   toEntity(domain: D): E {
     return this.fromDomain(domain);
   }
@@ -46,3 +53,16 @@ export class Model<E, D> {
     }
   }
 }
+
+
+export 
+const tempMapper = ()=> new BaseModelMapper({
+  // convert from entity to domain
+  fromEntity: entity => {
+    return entity;
+  },
+  // convert from domain to entity
+  fromDomain: domain => {
+    return domain;
+  }
+});

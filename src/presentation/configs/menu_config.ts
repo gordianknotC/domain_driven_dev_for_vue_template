@@ -78,7 +78,9 @@ const finalConfig = {
   userAdminControl,
 }
 
-export const APP_MENU_CONFIG = LazyHolder<ElMenuConfig<typeof finalConfig>>(() => {
+export type AppMenuConfig = ElMenuConfig<typeof finalConfig>;
+
+export const APP_MENU_CONFIG = LazyHolder<AppMenuConfig>(() => {
   return createElMenu<typeof finalConfig>(finalConfig);
 });
 

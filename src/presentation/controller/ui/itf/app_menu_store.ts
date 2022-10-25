@@ -1,8 +1,9 @@
-import { AnnouncementEntity } from "~/data_source/entities/announcement_entity";
-import { Model } from "~/data_source/mappers/base_mappers";
-import { AnnouncementDomainModel } from "~/domain/app/announcement_domain_model";
-import { APP_MENU_CONFIG } from "~/presentation/configs/menu_config";
+import type { AnnouncementEntity } from "~/data_source/entities/announcement_entity";
+import type { Model } from "~/data_source/mappers/base_mappers";
+import type { AnnouncementDomainModel } from "~/domain/app/announcement_domain_model";
+import type { AppMenuConfig } from "~/presentation/configs/menu_config";
 import { ERouteName } from "~/presentation/consts/router_const";
+
 
 export type AppTabItem = {
     name: ERouteName,
@@ -11,7 +12,7 @@ export type AppTabItem = {
 }
 
 export type AppMenuState = {
-    config: typeof APP_MENU_CONFIG,
+    config: AppMenuConfig,
     activated?: AppTabItem,
     openedTabs?: AppTabItem[],
     enlarged: boolean,

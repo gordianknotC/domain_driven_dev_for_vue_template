@@ -41,6 +41,7 @@ function removeRedundantRoutes(config: typeof routerConfig): RouteRecordRaw[] {
   return config.admin;
 }
 
+
 export function getRouter(): Router {
   if (routerInstance != undefined) return routerInstance!;
 

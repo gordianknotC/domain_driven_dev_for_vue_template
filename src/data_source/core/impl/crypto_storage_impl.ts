@@ -1,5 +1,5 @@
 import { CryptoService } from "~/data_source/core/interfaces/encrypt_service";
-import { LocalClientService } from "~/data_source/core/interfaces/local_client_service";
+import { CryptoLocalStorage } from "~/data_source/core/interfaces/crypto_storage";
 import { CryptoServiceImpl } from "~/data_source/core/impl/encrypt_service_impl";
 
 const APP = import.meta.env.title;
@@ -24,14 +24,14 @@ export const StorageKeys = {
     ...prefixWith(uiKeys, `${APP}/ui`)
   }
 };
-export class LocalClientServiceImpl<T> extends LocalClientService<T> {
+export class CryptoLocalStorageImpl<T> extends CryptoLocalStorage<T> {
   crypto: CryptoService<T>;
   store: typeof localStorage;
   constructor(
     protected storeKey: string,
-    protected enableCrypto: boolean = true
+    protected defaultEntity: T 
   ) {
-    super(storeKey, enableCrypto);
+    super(storeKey, defaultEntity);
     this.store = localStorage;
     this.crypto = new CryptoServiceImpl(storeKey);
   }

@@ -4,7 +4,7 @@ import { EErrorCode, TDataResponse, TErrorResponse, TSuccessResponse } from "~/d
 import { InvalidUsage, NotImplementedError, UnCaughtCondition } from "js_util_for_vue_project";
 import { useLocalStorage, RemovableRef } from "@vueuse/core";
 import { facade } from "~/main";
-import { ILocalStorage } from "../core/interfaces/local_client_service";
+import { LocalStorage } from "../core/interfaces/crypto_storage";
 
  
 /**
@@ -17,40 +17,55 @@ export abstract class BaseRepository<
   MAPPER extends IModelMapper<ENTITY, any>,
   ENTITY extends {id: number|string},
   PAYLOAD = any
-> implements ILocalStorage<ENTITY> {
+> extends LocalStorage<ENTITY> {
   protected constructor(
     protected client: IRemoteClientService<ENTITY>,
-    protected mapper: MAPPER
-  ) {}
-  abstract get localStorage(): RemovableRef<ENTITY> | null;
+    protected mapper: MAPPER,
+    protected clientEvents: {get: string, upload: string},
+    protected defaultEntity: ENTITY,
+    protected storeKey: string,
+  ) {
+    super(storeKey, defaultEntity);
+  }
+  get localStorage(): RemovableRef<ENTITY> | null {
+    return useLocalStorage(this.storeKey, this.defaultEntity);
+  }
 
   /** sync get and set from local storage */
-  abstract get(): Model<ENTITY, any> | null;
+  protected get(): Model<ENTITY, any> | null{
+    return new Model(this.mapper, this.localStorage!.value);
+  };
 
   /** sync get and set from local storage */
-  abstract set(val: ENTITY): void;
+  protected set(val: ENTITY): void{
+    this.localStorage!.value = val;
+  };
 
   /** async fetch/upload from/onto remote cloud  
    *  使用者實作後，需乎叫 super.remoteCall
   */
-  abstract fetch(
+  protected fetch(
     params?: PAYLOAD,
     event?: string,
-  ): Promise<TDataResponse<Model<ENTITY, any>> | TErrorResponse>;
+  ): Promise<TDataResponse<Model<ENTITY, any>> | TErrorResponse>{
+    return this.remoteCall(params, this.clientEvents.get);
+  };
 
   /** async fetch/upload from/onto remote cloud  
    * 使用者實作後，需乎叫 super.remoteUpdate
   */
-  abstract upload(
+  protected upload(
     val: ENTITY
-  ): Promise<TDataResponse<Model<ENTITY, any>> | TSuccessResponse | TErrorResponse>;
+  ): Promise<TDataResponse<Model<ENTITY, any>> | TSuccessResponse | TErrorResponse>{
+    return this.remoteUpdate(val, this.clientEvents.upload);
+  }
 
   protected async remoteCall(
     params?: PAYLOAD,
     event?: string,
   ): Promise<TDataResponse<Model<ENTITY, any>> | TErrorResponse> { 
     try {
-      const response = await this.client.get("user", params!);
+      const response = await this.client.get(this.clientEvents.get, params!);
       const mapper = this.mapper;
       if (this.client.isDataResponse(response)) {
         const entity = (response as TDataResponse<ENTITY>).data;
@@ -112,4 +127,3 @@ export abstract class BaseRemoteRepository<
     throw new InvalidUsage();
   }
 }
-
