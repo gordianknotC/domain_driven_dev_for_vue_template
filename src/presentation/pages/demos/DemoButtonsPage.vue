@@ -1,4 +1,5 @@
 <template lang="pug">
+section
   h3 Buttons Demo
   p -------
   BaseButton(
