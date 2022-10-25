@@ -1,20 +1,13 @@
 <template>
-  <h3>MaterialList</h3>
+  <h3>{{ title }}</h3>
 </template>
 
-<script lang="ts">
-import { defineComponent, reactive, ref, toRefs } from "vue";
-import SvgIcon from "../components/SvgIcon.vue";
-
-export default defineComponent({
-  name: "MaterialListPage",
-  props: {},
-  setup(props, { emit }) {
-    /** 儲存參數 */
-    return {};
-  },
-  components: { SvgIcon }
-});
+<script lang="ts" setup>
+import { computed } from "vue";
+import { facade } from "~/main";
+const title = computed(() => facade.stores.t.material);
+const props = defineProps<{}>();
+const name = "MaterialList";
 </script>
 
 <style lang="scss" scoped></style>

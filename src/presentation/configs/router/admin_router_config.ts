@@ -121,9 +121,9 @@ const adminRoutes: Array<RouteRecordRaw> = [
         }
       },
       {
-        path: "/merchant-list",
+        path: "/supplier-list",
         name: ERouteName.supplierList,
-        component: () => import("~/presentation/pages/MerchantListPage.vue"),
+        component: () => import("~/presentation/pages/SupplierListPage.vue"),
         meta: {
           admin: ADMIN_GROUP.all
         }

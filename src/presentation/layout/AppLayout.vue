@@ -5,7 +5,7 @@
       <AppAsideMenu> </AppAsideMenu>
       <div class="col-direction">
         <AppTabs></AppTabs>
-        <div class="content-layout">
+        <div class="page-layout">
           <router-view> </router-view>
         </div>
       </div>
@@ -26,9 +26,11 @@ import AppTabs from "../components/menu/AppTabs.vue";
 
 <style lang="scss" scoped>
 .app-layout {
-  @apply flex h-screen w-screen flex-col justify-start;
+  @apply flex h-screen w-screen flex-col justify-start overflow-y-hidden;
 }
-.content-layout {
-  @apply bg-bg-pageBlank flex  h-full w-full justify-center p-6;
+.page-layout {
+  @apply bg-bg-pageBlank flex min-h-full w-full justify-center overflow-y-auto p-6;
+  max-height: 100vh;
+  height: auto;
 }
 </style>
