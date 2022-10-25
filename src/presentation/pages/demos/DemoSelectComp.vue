@@ -13,14 +13,13 @@
           @close="onClose"
         >
           <template v-slot>
-            <div></div>
-          </template>
-          <template v-slot:empty>
+            <el-option v-for="(item, idx) in ['a', 'b']"></el-option>
             <div class="p-4">
               <div>dropcontent: {{ dropContent }} :</div>
               <el-input></el-input>
             </div>
           </template>
+          <template v-slot:empty> </template>
         </el-select>
       </div>
     </section>

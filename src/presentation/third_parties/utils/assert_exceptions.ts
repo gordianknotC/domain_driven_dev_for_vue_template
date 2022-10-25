@@ -1,6 +1,5 @@
-const isNotDev = () => { 
-  return import.meta.env.NODE_ENV != "default" || import.meta.env.NODE_ENV != "develop";
-}
+import { isNotDev } from "./env_util";
+
 
 export function assert(guard: () => boolean, reason: string = "") {
   if (isNotDev()) {

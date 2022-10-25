@@ -51,7 +51,7 @@ const app = createApp(App as any);
  * facade.data.repo.user;
  *
  * 存取 presentation controllers
- * facade.ctlr.sideMenu;
+ * facade.stores.appMenu;
  *
  * 存取 domain service
  * facade.svc.material;

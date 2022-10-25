@@ -1,8 +1,7 @@
 <template lang="pug">
-.w-screen.h-screen.flex.justify-center.items-center
-  p.text-2xl {{$t("common.notFound")}}
+.w-full.h-full.flex.justify-center.items-center
+  p.text-2xl {{$t("notFound")}}
 </template>
-
 <script lang="ts">
 import { defineComponent } from "vue";
 

@@ -1,14 +1,15 @@
 <template>
-  <el-menu-item v-if="!children" class="aside-item item-human-resource">
-    <div v-if="enlarge" class="aside-item-enlarge">
+  <el-menu-item v-if="!children" class="aside-item">
+    <Container v-if="enlarge" class="aside-item--enlarge">
       <SvgIcon size="20" :name="iconName"></SvgIcon>
       <span>{{ value }}</span>
-    </div>
-    <div v-else class="aside-item-enclose">
+    </Container>
+    <Container v-else class="aside-item--enclose">
       <SvgIcon size="20" :name="iconName"></SvgIcon>
-    </div>
+    </Container>
   </el-menu-item>
-  <el-menu-item-group v-else>
+
+  <el-menu-item-group class="aside-group" v-else>
     <AppMenuItem
       v-for="(val, name, index) in children"
       :value="val!.label.value"
@@ -25,6 +26,7 @@ import {
   ElMenuConfigItem,
   ElMenuConfigItemGroup
 } from "~/presentation/third_parties/utils/element_menu_helper";
+import Container from "../utils/Container.vue";
 
 const name = "AppMenuItem";
 // NOTE: inheritAttrs 有用到，不要刪
@@ -48,29 +50,32 @@ const props = defineProps({
 });
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .aside-item {
-  @apply mb-4 flex flex-row justify-start p-2;
+  @apply mb-4 flex flex-row items-center justify-start;
   height: 2.75rem;
 
   svg {
-    @apply mr-2 text-text-light;
+    @apply mr-2 flex items-center text-text-light;
     &:hover {
       @apply text-text-strong;
     }
   }
   span {
-    @apply text-text-light;
+    @apply text-2xl text-text-light;
+    line-height: 2;
     &:hover {
       @apply text-text-strong;
     }
   }
 
-  &-enlarge {
-    width: 9rem;
+  &--enlarge {
+    @apply flex flex-row;
+    width: 100%;
   }
-  &-enclose {
-    width: 9rem;
+  &--enclose {
+    @apply flex flex-row;
+    width: 100%;
   }
 }
 </style>

@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
-import { ERouter } from "~/presentation/consts/router_const";
+import { ERouteName } from "~/presentation/consts/router_const";
 import { ADMIN_GROUP, EUserAccount } from "~/presentation/consts/ua_const";
 
 /**
@@ -18,10 +18,10 @@ type RouterMetaType = {
 /**
  * 共用 - not found
  **/
-const notFoundROutes: Array<RouteRecordRaw> = [
+const notFoundRoutes: Array<RouteRecordRaw> = [
   {
     path: "/:catchAll(.*)",
-    name: ERouter.notFound,
+    name: ERouteName.notFound,
     component: () => import("~/presentation/components/NotFound.vue"),
     meta: {
       auth: false
@@ -35,7 +35,7 @@ const notFoundROutes: Array<RouteRecordRaw> = [
 const loginRoutes: Array<RouteRecordRaw> = [
   {
     path: "/splash",
-    name: ERouter.splash,
+    name: ERouteName.splash,
     component: () => import("~/presentation/pages/SplashPage.vue"),
     meta: {
       auth: false
@@ -43,7 +43,7 @@ const loginRoutes: Array<RouteRecordRaw> = [
   },
   {
     path: "/signIn",
-    name: ERouter.signIn,
+    name: ERouteName.signIn,
     component: () => import("~/presentation/pages/SignInPage.vue"),
     meta: {
       auth: false
@@ -55,7 +55,7 @@ const loginRoutes: Array<RouteRecordRaw> = [
 const demoRoutes: Array<RouteRecordRaw> = [
   {
     path: "/demo",
-    name: ERouter.demo,
+    name: ERouteName.demo,
     component: () => import("~/presentation/pages/demos/DemoIndexPage.vue"),
     meta: {
       auth: false
@@ -63,7 +63,7 @@ const demoRoutes: Array<RouteRecordRaw> = [
   },
   {
     path: "/demo/buttons",
-    name: ERouter.demoButtons,
+    name: ERouteName.demoButtons,
     component: () => import("~/presentation/pages/demos/DemoButtonsPage.vue"),
     meta: {
       auth: false
@@ -71,7 +71,7 @@ const demoRoutes: Array<RouteRecordRaw> = [
   },
   {
     path: "/demo/dialogs",
-    name: ERouter.demoDialogs,
+    name: ERouteName.demoDialogs,
     component: () => import("~/presentation/pages/demos/DemoDialogsPage.vue"),
     meta: {
       auth: false
@@ -79,7 +79,7 @@ const demoRoutes: Array<RouteRecordRaw> = [
   },
   {
     path: "/demo/dropdowns",
-    name: ERouter.demoDropdowns,
+    name: ERouteName.demoDropdowns,
     component: () => import("~/presentation/pages/demos/DemoDropdownsPage.vue"),
     meta: {
       auth: false
@@ -87,7 +87,7 @@ const demoRoutes: Array<RouteRecordRaw> = [
   },
   {
     path: "/demo/input-fields",
-    name: ERouter.demoInputFields,
+    name: ERouteName.demoInputFields,
     component: () =>
       import("~/presentation/pages/demos/DemoInputFieldsPage.vue"),
     meta: {
@@ -104,17 +104,25 @@ const adminRoutes: Array<RouteRecordRaw> = [
   ...demoRoutes,
   {
     path: "/",
-    name: ERouter.pageLayout,
+    name: ERouteName.pageLayout,
     component: () => import("~/presentation/layout/PageLayout.vue"),
     children: [
       {
         path: "",
-        name: ERouter.pageLayout,
-        redirect: { name: ERouter.supplierLIst }
+        name: ERouteName.pageLayout,
+        redirect: { name: ERouteName.dashboard }
+      },
+      {
+        path: "/dashboard",
+        name: ERouteName.dashboard,
+        component: () => import("~/presentation/pages/DashboardPage.vue"),
+        meta: {
+          admin: ADMIN_GROUP.all
+        }
       },
       {
         path: "/merchant-list",
-        name: ERouter.supplierLIst,
+        name: ERouteName.supplierList,
         component: () => import("~/presentation/pages/MerchantListPage.vue"),
         meta: {
           admin: ADMIN_GROUP.all
@@ -122,20 +130,44 @@ const adminRoutes: Array<RouteRecordRaw> = [
       },
       {
         path: "/material-list",
-        name: ERouter.supplierLIst,
+        name: ERouteName.materialList,
         component: () => import("~/presentation/pages/MaterialListPage.vue"),
         meta: {
           admin: ADMIN_GROUP.all
         }
-      }
-    ]
+      },
+      {
+        path: "/project-manager",
+        name: ERouteName.projectManagement,
+        component: () => import("~/presentation/pages/ProjectManagementPage.vue"),
+        meta: {
+          admin: ADMIN_GROUP.all
+        }
+      },
+      {
+        path: "/human-resource",
+        name: ERouteName.humanResource,
+        component: () => import("~/presentation/pages/HumanResourcePage.vue"),
+        meta: {
+          admin: ADMIN_GROUP.all
+        }
+      },
+      {
+        path: "/user-account-control",
+        name: ERouteName.userAccountControl,
+        component: () => import("~/presentation/pages/UserAccountControlPage.vue"),
+        meta: {
+          admin: ADMIN_GROUP.all
+        }
+      },
+    ],
   },
-  ...notFoundROutes
+  ...notFoundRoutes
 ];
 
 export default {
   loginRoutes,
   demoRoutes,
   adminRoutes,
-  notFoundROutes
+  notFoundRoutes
 };
