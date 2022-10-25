@@ -58,6 +58,9 @@ export function createElMenu<T extends Record<string, ElMenuConfigItem>>(
         let [origMenuKey, val] = entry;
         val.order = order;
         val.index ??= val.route.name;
+        /** 母子關係時 母key-子key 如
+         * 母 index 1, 子 index 勍會為 1-...
+         */
         const combinedKey = prependKey
           ? `${prependKey}-${val!.index ?? origMenuKey}`
           : origMenuKey;
@@ -65,9 +68,8 @@ export function createElMenu<T extends Record<string, ElMenuConfigItem>>(
         processItem(val as any, indexMap, combinedKey);
       });
     } else {
-      item.index = prependKey;
       /** 這裡是以 route name 作為 key, 所以如果有 RouterNames.comingSoon 就有可能連錯地方 */
-      indexMap[item.route!.name] = item.index;
+      indexMap[item.route!.name] = item.index = prependKey;
     }
     return item;
   }

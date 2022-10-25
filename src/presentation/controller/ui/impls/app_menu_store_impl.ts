@@ -13,6 +13,7 @@ import { merge } from "merge-anything";
 import { RouteLocationNormalizedLoaded } from "vue-router";
 import { AppMenuState, AppTabItem } from "../itf/app_menu_store";
 import { ElMenuConfigItem } from "~/presentation/third_parties/utils/element_menu_helper";
+import { i } from "vitest/dist/index-6e18a03a";
 
 
 export class AppMenuStore implements
@@ -52,19 +53,40 @@ export class AppMenuStore implements
         return this.state.openedTabs!.firstWhere((_)=>_.name == route) != undefined;
     }
 
+    private walkMenuConfig(items: ElMenuConfigItem[], continueAction: (item: ElMenuConfigItem)=>boolean){
+        for (let index = 0; index < items.length; index++) {
+            const element = items[index];
+            if (continueAction(element)){
+                if (element.children){
+                    this.walkMenuConfig(Object.values(element.children), continueAction);
+                }
+            }else{
+                return;
+            }
+        }
+    }
+    private canFindInMenuConfig(routeName: ERouteName): boolean{
+        if (this.state.config.indexMapping[routeName]){
+            return true;
+        }else {
+            return false;
+        }   
+    }
     
 
     private onRouterChange(newVal: RouteLocationNormalizedLoaded, oldVal: RouteLocationNormalizedLoaded){
-        
         if (newVal.name == oldVal.name){
             //pass
         }else{
-            if (this.isRouteAlreadyOpened(newVal.name as any)){
-            console.log("onRouterChange, setActiveTab");
-                this.setActiveTab(this.getTabItem(newVal.name as any));
+            const routeName = newVal.name as any as ERouteName;
+            const item = this.getTabItem(routeName);
+            if (this.isRouteAlreadyOpened(routeName)){
+                this.setActiveTab(item);
+            } else if (this.canFindInMenuConfig(routeName)){
+                this.addActiveTab(item);
             }else{
-            console.log("onRouterChange, addActiveTab");
-                this.addActiveTab(this.getTabItem(newVal.name as any));
+                this.addActiveTab(item);
+                this.setActiveTab(item);
             }
         }
     }
