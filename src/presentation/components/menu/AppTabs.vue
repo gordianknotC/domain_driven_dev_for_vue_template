@@ -119,7 +119,7 @@ onMounted(() => {
         @apply text-xs text-text-bright;
       }
       &.is-active {
-        background-color: white;
+        @apply bg-bg-pageBlank;
         svg {
           @apply text-text-strong;
         }

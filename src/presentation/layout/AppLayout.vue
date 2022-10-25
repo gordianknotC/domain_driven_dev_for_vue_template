@@ -29,6 +29,6 @@ import AppTabs from "../components/menu/AppTabs.vue";
   @apply flex h-screen w-screen flex-col justify-start;
 }
 .content-layout {
-  @apply flex h-full w-full  justify-center p-6;
+  @apply bg-bg-pageBlank flex  h-full w-full justify-center p-6;
 }
 </style>

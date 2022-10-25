@@ -68,12 +68,14 @@ const swatches = {
   },
   red: {
     800: "#B9002C",
-    600:" #B9002C",
+    600: " #B9002C",
     500: "#DF2551",
     400: "#EA6585",
     300: "#FFCDD9",
     200: "#FFE5EC"
-
+  },
+  warnGrey: {
+    300: "#D6D6D6"
   },
   grey: {
     800: "#70757B",
@@ -82,7 +84,7 @@ const swatches = {
     400: "#D4D9E0",
     200: "#E3EAF3",
     100: "#EFF3F8",
-    0:   "#FFFFFF"
+    0: "#FFFFFF"
   }
 };
 
@@ -116,7 +118,7 @@ const ci = {
     l1: swatches.blue["300"],
     l2: swatches.blue["200"]
   },
-  error:{
+  error: {
     d3: swatches.red["800"],
     d2: swatches.red["600"],
     d1: swatches.red["500"],
@@ -124,7 +126,7 @@ const ci = {
     l1: swatches.red["300"],
     l2: swatches.red["200"]
   },
-  cancel:{
+  cancel: {
     d3: swatches.grey["800"],
     d2: swatches.grey["600"],
     d1: swatches.grey["500"],
@@ -144,7 +146,7 @@ const ci = {
   warning: {
     DEFAULT: swatches.red["500"]
   },
-  disable:{
+  disable: {
     DEFAULT: swatches.grey["500"]
   },
   text: {
@@ -168,7 +170,8 @@ module.exports = {
     inputDisable: swatches.grey["100"],
     tableHead: swatches.grey["200"],
     appHeader: swatches.brand["500"],
-    footer: swatches.grey["200"]
+    footer: swatches.grey["200"],
+    pageBlank: swatches.warnGrey["300"]
   },
   stroke: {
     error: swatches.red["500"],
