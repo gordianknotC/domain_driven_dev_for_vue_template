@@ -1,3 +1,6 @@
+import { AnnouncementEntity } from "~/data_source/entities/announcement_entity";
+import { Model } from "~/data_source/mappers/base_mappers";
+import { AnnouncementDomainModel } from "~/domain/app/announcement_domain_model";
 import { APP_MENU_CONFIG } from "~/presentation/configs/menu_config";
 import { ERouteName } from "~/presentation/consts/router_const";
 
@@ -12,5 +15,6 @@ export type AppMenuState = {
     activated?: AppTabItem,
     openedTabs?: AppTabItem[],
     enlarged: boolean,
+    announcements: Model<AnnouncementEntity, AnnouncementDomainModel>[];
 }
  

@@ -10830,6 +10830,11 @@ vue-template-es2015-compiler@^1.9.0:
   resolved "https://registry.yarnpkg.com/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.9.1.tgz#1ee3bc9a16ecbf5118be334bb15f9c46f82f5825"
   integrity sha512-4gDntzrifFnCEvyoO8PqyJDmguXgVPxKiIxrBKjIowvL9l+N66196+72XVYR8BBf1Uv1Fgt3bGevJ+sEmxfZzw==
 
+vue3-marquee@^3.1.2:
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/vue3-marquee/-/vue3-marquee-3.1.2.tgz#a168523944738b3bb59e60a154a94f8c3013c47d"
+  integrity sha512-qorZUAakbQqxHmgFBpunQ4WNcdgclG8XRTWjA9Rg+LSLIBWUFYL8LP7Ozf/CQPiZrFxP3PK2GtfN1uCDA/FoiA==
+
 vue@^3.2.13:
   version "3.2.40"
   resolved "https://registry.yarnpkg.com/vue/-/vue-3.2.40.tgz#23f387f6f9b3a0767938db6751e4fb5900f0ee34"

@@ -1,5 +1,5 @@
 <template>
-  <Container class="aside-menu" :class="{ 'aside-menu--large': isEnlarge }">
+  <div class="aside-menu" :class="{ 'aside-menu--large': isEnlarge }">
     <el-menu
       ref="menuElt"
       mode="vertical"
@@ -18,19 +18,14 @@
         :children="val.children"
       ></AppMenuItemGroup>
     </el-menu>
-  </Container>
+  </div>
 </template>
 
 <script lang="ts" setup>
-import { fa } from "element-plus/es/locale";
 import { onMounted, PropType, ref, computed, onUnmounted } from "vue";
 import { facade } from "~/main";
-import { APP_MENU_CONFIG } from "../configs/menu_config";
-import AppMenuItem from "./buttons/AppMenuItem.vue";
-import AppMenuItemGroup from "./buttons/AppMenuItemGroup.vue";
-import DemoDropdownsPage from "./DemoDropdownsPage.vue";
-import SvgIcon from "./SvgIcon.vue";
-import Container from "./utils/Container.vue";
+import { APP_MENU_CONFIG } from "~/presentation/configs/menu_config";
+import AppMenuItemGroup from "../buttons/AppMenuItemGroup.vue";
 
 const menuElt = ref<HTMLElement>();
 const props = defineProps({

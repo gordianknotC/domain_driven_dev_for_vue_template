@@ -22,6 +22,7 @@ export class BaseModelMapper<E, D> extends IModelMapper<E, D> {
 }
 
 /** base model, 便於 entity / domain 互換
+ *  generic E 代表 Entity, generic D 代表 Domain
  *  @param mapper required
  *  @param entity optional (entity / domain 二擇一)
  *  @param domain optional (entity / domain 二擇一)

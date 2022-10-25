@@ -1,6 +1,9 @@
+// 官方方法這裡似乎無用，所以才在下方 :root 覆寫
 @forward "element-plus/theme-chalk/src/common/var.scss" with (
   $menu: (
-    "base-level-padding": 0px
+    "base-level-padding": 0px,
+    "level-padding": 20px,
+    "bg-color": none
   )
   !default,
   $tabs: (

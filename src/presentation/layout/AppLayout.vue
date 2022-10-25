@@ -13,11 +13,15 @@
   </div>
 </template>
 
+<script lang="ts">
+export default {
+  name: "AppLayout"
+};
+</script>
 <script lang="ts" setup>
-import AppAsideMenu from "../components/AppAsideMenu.vue";
-import AppTabs from "../components/AppTabs.vue";
-import AppHeader from "../components/AppHeader.vue";
-const name = "AppLayout";
+import AppAsideMenu from "../components/menu/AppAsideMenu.vue";
+import AppHeader from "../components/menu/AppHeader.vue";
+import AppTabs from "../components/menu/AppTabs.vue";
 </script>
 
 <style lang="scss" scoped>
