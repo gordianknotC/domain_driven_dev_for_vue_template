@@ -59,33 +59,43 @@ const app = createApp(App as any);
  * facade.svc.generalMaterial;
  *
  * */
-export const facade = IFacade<
+export type AppFacade = 
   FacadeMappers &
-    FacadeDateSource &
-    FacadeRepository &
-    FacadePresentationStore &
-    FacadeDomainService
->();
+  FacadeDateSource &
+  FacadeRepository &
+  FacadePresentationStore &
+  FacadeDomainService;
+
+export const facade = IFacade<AppFacade>();
 
 app.use(getRouter());
+
+
+const feed = (msg: string, cb: ()=>void)=>{
+  console.group("", `----------${msg}---------`);
+  cb();
+  console.groupEnd();
+}
 
 /**
  *  設定 App 所需要的相依注入
  * */
 (function setupDependencies() {
   "use strict";
-  setupAppPlugins(app, facade);
+  console.group("===============JinHao INFO================")
+  feed("APP_PLUGIN", ()=>setupAppPlugins(app, facade));
   // ---------------
   // data source 注入
-  setupMappers(app, facade);
-  setupRepositories(app, facade);
-  setupDataCoreServices(app, facade);
+  feed("DATE_SERVICES", ()=>setupDataCoreServices(app, facade));
+  feed("MAPPERS", ()=>setupMappers(app, facade));
+  feed("REPOS", ()=>setupRepositories(app, facade));
   // -----------
   // domain 注入
-  setupDomainServices(app, facade);
+  feed("DOMAIN_SERVICES", ()=>setupDomainServices(app, facade));
   // ----------------
   // presentation 注入
-  setupPresentationStores(app, facade, true);
+  feed("VIEW_STORES", ()=>setupPresentationStores(app, facade, true));
   app.mount("#app");
-  setupPresentationStores(app, facade, false);
+  feed("VIEW_STORES", ()=>setupPresentationStores(app, facade, false));
+  console.groupEnd();
 })();

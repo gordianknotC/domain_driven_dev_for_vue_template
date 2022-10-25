@@ -3,7 +3,6 @@ import { computed, ComputedRef, ref } from "vue";
 import { ERole, UserEntity } from "~/data_source/entities/user_entity";
 import { facade } from "~/main";
 
-~/data_source/core/interfaces/crypto_storage
 export type AccountState = UserEntity & {
   // todo:
 }
@@ -15,10 +14,10 @@ export const accountStore = defineStore("user", () => {
     state,
     getters: {
       isAdmin: computed(() => {
-        return state!.value!.role == ERole.admin;
+        return state!.value![0].role == ERole.admin;
       }),
       isMerchant: computed(() => {
-        return state!.value!.role == ERole.user;
+        return state!.value![0].role == ERole.user;
       })
     },
     actions: {}

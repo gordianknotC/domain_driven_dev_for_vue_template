@@ -1,5 +1,5 @@
 <template lang="pug">
-Container()
+div()
   el-tabs.app-tab(
       type="card"
       v-model="currentTabName"
@@ -49,7 +49,6 @@ const currentTabName = computed({
 // FIXME: 改用 mapper model 寫，不要在這寫 logic
 const openedTabs = computed(() => {
   return facade.stores.appMenu.state.openedTabs!.map(_ => {
-    console.log("onOopenTabsChanged....");
     return {
       name: _.name,
       title: facade.stores.t[`routes.${_.name}` as any as LocaleKeys]
@@ -71,8 +70,8 @@ const onRemoveTab = (routeName: string) => {
 };
 
 onMounted(() => {
-  console.log("currentTabName", currentTabName.value);
-  console.log("openedTabs", openedTabs.value);
+  // console.log("currentTabName", currentTabName.value);
+  // console.log("openedTabs", openedTabs.value);
 });
 </script>
 

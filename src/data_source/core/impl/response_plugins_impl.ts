@@ -1,8 +1,8 @@
-import { ClientServicePlugins } from "~/data_source/core/interfaces/client_service_plugin";
+import { ApiClientServicePlugins } from "~/data_source/core/interfaces/api_client_service_plugin";
 import { AxiosRequestConfig, AxiosResponse } from "axios";
-import { RemoteClientService } from "src/data_source/core/interfaces/remote_client_service";
+import { IRemoteClientService } from "src/data_source/core/interfaces/remote_client_service";
 
-abstract class BaseClientServiceResponsePlugin extends ClientServicePlugins<
+abstract class BaseClientServiceResponsePlugin extends ApiClientServicePlugins<
   AxiosResponse,
   Promise<AxiosResponse>
 > {
@@ -33,12 +33,12 @@ abstract class BaseClientServiceResponsePlugin extends ClientServicePlugins<
 
 // todo:
 export class AuthResponsePlugin extends BaseClientServiceResponsePlugin {
-  client?: RemoteClientService;
-  prev?: ClientServicePlugins<
+  client?: IRemoteClientService<any>;
+  prev?: ApiClientServicePlugins<
     AxiosRequestConfig<AxiosResponse>,
     Promise<AxiosResponse>
   >;
-  next?: ClientServicePlugins<
+  next?: ApiClientServicePlugins<
     AxiosRequestConfig<AxiosResponse>,
     Promise<AxiosResponse>
   >;

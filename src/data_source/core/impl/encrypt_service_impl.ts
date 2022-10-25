@@ -3,6 +3,7 @@ import {
   decryptWithAES,
   encryptWithAES
 } from "~/presentation/third_parties/utils/crypto_util";
+import { StorageKeys } from "./crypto_storage_impl";
 
 export class CryptoServiceImpl<T> extends CryptoService<T> {
   constructor(key: string) {

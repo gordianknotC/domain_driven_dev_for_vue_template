@@ -1,5 +1,5 @@
 import type { AnnouncementEntity } from "~/data_source/entities/announcement_entity";
-import type { Model } from "~/data_source/mappers/base_mappers";
+import type { DataModel } from "~/data_source/mappers/base_mappers";
 import type { AnnouncementDomainModel } from "~/domain/app/announcement_domain_model";
 import type { AppMenuConfig } from "~/presentation/configs/menu_config";
 import { ERouteName } from "~/presentation/consts/router_const";
@@ -16,6 +16,7 @@ export type AppMenuState = {
     activated?: AppTabItem,
     openedTabs?: AppTabItem[],
     enlarged: boolean,
-    announcements: Model<AnnouncementEntity, AnnouncementDomainModel>[];
+    announcements: DataModel<AnnouncementEntity, AnnouncementDomainModel>;
+    initialFetched: boolean,
 }
  

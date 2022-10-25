@@ -24,6 +24,7 @@ export const StorageKeys = {
     ...prefixWith(uiKeys, `${APP}/ui`)
   }
 };
+
 export class CryptoLocalStorageImpl<T> extends CryptoLocalStorage<T> {
   crypto: CryptoService<T>;
   store: typeof localStorage;

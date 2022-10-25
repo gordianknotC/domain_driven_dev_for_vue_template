@@ -1,31 +1,32 @@
-import { AxiosPromise, AxiosRequestConfig, AxiosResponse } from "axios";
-import {
-  assert,
-  AssertMessages
-} from "~/presentation/third_parties/utils/assert_exceptions";
-import { ClientServicePlugins } from "~/data_source/core/interfaces/client_service_plugin";
 import {
   EClientStage,
-  IApiClientMethods,
   IRemoteClientService,
   IQueue,
-  QueueItem
+  QueueItem,
+  IdentData
 } from "~/data_source/core/interfaces/remote_client_service";
 import {
+  EErrorCode,
   TDataResponse,
   TErrorResponse,
   TSuccessResponse
 } from "~/data_source/entities/response_entity";
 import { ISocketClientService } from "../interfaces/socket_client_service";
 
-// TODO: unittest
-/** T remote entity, 必須帶有 id */
-export class RemoteClientServiceImpl<T extends { id: number|string }>
+// TODO: unittest, 先定版 socket 再來做這個
+/** T remote entity, 必須帶有 id 
+ *  以 websocket 實作 api request 方法  get/post/del/put
+ * 
+*/
+export class RemoteClientServiceImpl<T extends IdentData<any>>
   implements IRemoteClientService<T>
 {
   stage: EClientStage;
   constructor(public socket: ISocketClientService, public queue: IQueue<any>) {
     this.stage = EClientStage.idle;
+  }
+  isSuccessResponse(response: any): boolean {
+    throw new Error("Method not implemented.");
   }
   isDataResponse(response: any): boolean {
     const validType = (response as TDataResponse<T>);
@@ -43,53 +44,65 @@ export class RemoteClientServiceImpl<T extends { id: number|string }>
   }
 
   // TODO: 失敗後自我連接，直到 max retries
-  private connect(): Promise<TSuccessResponse> {
-    const futureResponse = new Promise<TSuccessResponse>(() => {});
-    this.socket.connect({
-      success(msg: string) {
-        futureResponse.then();
-        throw new Error("Function not implemented.");
-      },
-      failed(msg: string) {
-        throw new Error("Function not implemented.");
-      },
-      reSuccess(msg: string) {
-        throw new Error("Function not implemented.");
-      },
-      reFailed(msg: string) {
-        throw new Error("Function not implemented.");
-      }
+  private connect(): Promise<TSuccessResponse| TErrorResponse> {
+    return new Promise<TSuccessResponse|TErrorResponse>((resolve, reject) => {
+      this.socket.connect({
+        success(msg: string) {
+          resolve({succeed: true});
+        },
+        failed(msg: string) {
+          const ret: TErrorResponse = {
+            error_code: EErrorCode.socketConnectFailed,
+            error_key: "",
+            error_msg: "",
+            message: ""
+          };
+          reject(ret);
+        },
+        reSuccess(msg: string) {
+          resolve({succeed: true});
+        },
+        reFailed(msg: string) {
+          const ret: TErrorResponse = {
+            error_code: EErrorCode.socketConnectFailed,
+            error_key: "",
+            error_msg: "",
+            message: ""
+          };
+          reject(ret);
+        }
+      });
     });
-    return futureResponse;
+     
   }
 
   // TODO: 實作資料轉換(如果需要的話)
-  private toDataResponse(rawData: any) {
+  private toResponse(rawData: any): TDataResponse<T> | TSuccessResponse {
     return rawData;
   }
 
   async sendRequest(
     event: string,
     payload: Record<string, any>
-  ): Promise<TDataResponse<T> | TErrorResponse> {
+  ): Promise<TDataResponse<T> | TErrorResponse | TSuccessResponse> {
     this.stage = EClientStage.fetching;
     const payloadAsString = JSON.stringify({ event, payload });
     const id: number = payload.id;
     const self = this;
     const action = () => {
-      return new Promise<TDataResponse<T>>((resolve, reject) => {
+      return new Promise<TDataResponse<T>|TSuccessResponse>((resolve, reject) => {
         this.socket.send(
           event,
           payloadAsString,
           // FIXME: 原認知為:這裡的 socket response 為 serializable json string
           function onSuccess(msg: string) {
             const rawData = JSON.parse(msg);
-            resolve(self.toDataResponse(rawData));
+            resolve(self.toResponse(rawData));
           },
           // FIXME: 原認知為:這裡的 socket response 為 serializable json string
           function onError(msg: string) {
             const rawData = JSON.parse(msg);
-            reject(self.toDataResponse(rawData));
+            reject(self.toResponse(rawData));
           }
         );
       });
@@ -122,7 +135,7 @@ export class RemoteClientServiceImpl<T extends { id: number|string }>
     event: string,
     payload: Record<string, any>
   ): Promise<TDataResponse<T> | TErrorResponse> {
-    return this.sendRequest(event, payload);
+    return this.sendRequest(event, payload) as any;
   }
 
   post(url: string, payload: Record<string, any>) {
@@ -134,8 +147,9 @@ export class RemoteClientServiceImpl<T extends { id: number|string }>
   }
 
   del(url: string, payload: Record<string, any>) {
-    return this.sendRequest(url, payload);
+    return this.sendRequest(url, payload) as any;
   }
+  
 }
 
 /**
@@ -171,7 +185,7 @@ export class Queue implements IQueue<QueueItem> {
 
     // TODO: error code 定義
     const timeoutError: TErrorResponse = {
-      error_code: 0,
+      error_code: EErrorCode.timeout,
       error_key: "",
       error_msg: "timeout error",
       message: "timeout error"

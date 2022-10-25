@@ -1,9 +1,13 @@
 import {
   TDataResponse,
   TErrorResponse,
+  TResponse,
   TSuccessResponse
 } from "~/data_source/entities/response_entity";
 import { ISocketClientService, SocketMetaType } from "./socket_client_service";
+
+export type Ident = { id: number|string };
+export type IdentData<T> = { id: number|string, data: T[] }
 
 export enum EClientStage {
   idle,
@@ -14,7 +18,7 @@ export enum EClientStage {
 }
 
 /**  Api client 方法 interface */
-export abstract class IApiClientMethods<T extends { id: number|string }> {
+export abstract class IApiClientMethods<T extends IdentData<any>> {
   abstract get(
     event: string,
     payload: Record<string, any>
@@ -22,11 +26,11 @@ export abstract class IApiClientMethods<T extends { id: number|string }> {
   abstract post(
     event: string,
     payload: Record<string, any>
-  ): Promise<TDataResponse<T> | TErrorResponse>;
+  ): Promise<TSuccessResponse | TDataResponse<T> | TErrorResponse>;
   abstract put(
     event: string,
     payload: Record<string, any>
-  ): Promise<TDataResponse<T> | TErrorResponse>;
+  ): Promise<TSuccessResponse | TDataResponse<T> | TErrorResponse>;
   abstract del(
     event: string,
     payload: Record<string, any>
@@ -56,10 +60,9 @@ export abstract class IQueue<T extends QueueItem> {
   abstract dequeue(id: number): boolean;
 }
 
-type TResponse<T> = TDataResponse<T> | TErrorResponse | TSuccessResponse;
 
 /**  api client service */
-export abstract class IRemoteClientService<T extends { id: number|string }>
+export abstract class IRemoteClientService<T extends IdentData<any>>
   implements IApiClientMethods<T>
 {
   abstract socket: ISocketClientService;
@@ -76,11 +79,11 @@ export abstract class IRemoteClientService<T extends { id: number|string }>
   abstract post(
     event: string,
     payload: Record<string, any>
-  ): Promise<TDataResponse<T> | TErrorResponse>;
+  ): Promise<TSuccessResponse | TDataResponse<T> | TErrorResponse>;
   abstract put(
     event: string,
     payload: Record<string, any>
-  ): Promise<TDataResponse<T> | TErrorResponse>;
+  ): Promise<TSuccessResponse | TDataResponse<T> | TErrorResponse>;
   abstract del(
     event: string,
     payload: Record<string, any>

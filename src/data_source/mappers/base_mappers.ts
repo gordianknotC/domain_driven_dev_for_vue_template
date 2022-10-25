@@ -1,4 +1,3 @@
-import { UserEntity } from "~/data_source/entities/user_entity";
 import { assert } from "~/presentation/third_parties/utils/assert_exceptions";
 
 /** mapper interface */
@@ -38,18 +37,25 @@ export class BaseModelMapper<E, D> extends IModelMapper<E, D> {
  *    const entity = model.entity;
  *    const domain = model.domain;
  */
-export class Model<E, D> {
-  entity!: E;
-  domain!: D;
-  constructor(public mapper: IModelMapper<E, D>, entity?: E, domain?: D) {
+export class DataModel<E, D> {
+  entities!: E[];
+  domains!: D[];
+  constructor(public mapper: IModelMapper<E, D>, entities?: E[], domains?: D[]) {
     assert(
-      () => entity != undefined || domain != undefined,
+      () => entities != undefined || domains != undefined,
       "entity/domain 則一不為空"
     );
-    if (entity == undefined) {
-      this.entity = mapper.toEntity(domain!);
-    } else {
-      this.domain = mapper.toDomain(entity!);
+    try{
+      if (entities == undefined) {
+        this.domains = domains!;
+        this.entities = domains!.map((_)=>mapper.toEntity(_));
+      } else {
+        this.entities = entities!;
+        this.domains = entities!.map((_)=>mapper.toDomain(_));
+      }
+    }catch(e){
+      console.error("DataModel error:", this);
+      throw e;
     }
   }
 }

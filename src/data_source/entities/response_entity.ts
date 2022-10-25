@@ -1,7 +1,9 @@
 // todo: define error code here...
 export enum EErrorCode {
   networkError,
-  internalError = 100000
+  internalError = 100000,
+  socketConnectFailed = 100001,
+  timeout = 100002,
 }
 
 export type TPager = {
@@ -29,4 +31,4 @@ export type TDataResponse<T> = {
   pager?: TPager | null | undefined;
 };
 
-export type TResponse = Partial<TSuccessResponse & TDataResponse<any>>;
+export type TResponse<T> = TDataResponse<T> | TErrorResponse | TSuccessResponse;

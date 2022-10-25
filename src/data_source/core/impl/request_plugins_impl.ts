@@ -1,6 +1,6 @@
-import { ClientServicePlugins } from "~/data_source/core/interfaces/client_service_plugin";
+import { ApiClientServicePlugins } from "~/data_source/core/interfaces/api_client_service_plugin";
 import { AxiosRequestConfig } from "axios";
-import { RemoteClientService } from "src/data_source/core/interfaces/remote_client_service";
+import { IRemoteClientService } from "src/data_source/core/interfaces/remote_client_service";
 
 type AxiosConfigHeader = {
   common: {
@@ -9,7 +9,7 @@ type AxiosConfigHeader = {
   };
 };
 
-abstract class BaseClientServiceRequestPlugin extends ClientServicePlugins<AxiosRequestConfig> {
+abstract class BaseClientServiceRequestPlugin extends ApiClientServicePlugins<AxiosRequestConfig> {
   get canGoNext(): boolean {
     return super.canGoNext;
   }
@@ -33,9 +33,9 @@ abstract class BaseClientServiceRequestPlugin extends ClientServicePlugins<Axios
 }
 
 export class UpdateRequestHeaderPlugin extends BaseClientServiceRequestPlugin {
-  client?: RemoteClientService;
-  prev?: ClientServicePlugins<AxiosRequestConfig<any>, AxiosRequestConfig<any>>;
-  next?: ClientServicePlugins<AxiosRequestConfig<any>, AxiosRequestConfig<any>>;
+  client?: IRemoteClientService<any>;
+  prev?: ApiClientServicePlugins<AxiosRequestConfig<any>, AxiosRequestConfig<any>>;
+  next?: ApiClientServicePlugins<AxiosRequestConfig<any>, AxiosRequestConfig<any>>;
   process(config: AxiosRequestConfig): AxiosRequestConfig {
     if (this.canProcess) {
       const header = config.headers as any as AxiosConfigHeader;

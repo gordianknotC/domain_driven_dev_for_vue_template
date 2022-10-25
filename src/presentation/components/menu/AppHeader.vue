@@ -8,8 +8,10 @@
     <div class="holder-branding">
       <el-image :src="brandingImg"></el-image>
     </div>
-    <Container class="holder-marquee"> </Container>
-    <Container class="holder-account"> </Container>
+    <div class="holder-marquee">
+      <Marquee></Marquee>
+    </div>
+    <div class="holder-account"></div>
   </div>
 </template>
 
@@ -22,7 +24,7 @@ export default {
 <script lang="ts" setup>
 import colors from "~/presentation/assets/colors/default_colors";
 import brandingImg from "~/presentation/assets/images/branding.png";
-import Container from "../utils/Container.vue";
+import Marquee from "../Marquee.vue";
 </script>
 
 <style lang="scss" scoped>
@@ -40,7 +42,7 @@ import Container from "../utils/Container.vue";
     width: 239px;
   }
   &-marquee {
-    @apply w-full flex-1;
+    @apply flex w-full flex-1 pl-4;
   }
   &-account {
     @apply pr-5;

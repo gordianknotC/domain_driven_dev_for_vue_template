@@ -1,11 +1,4 @@
-import { AxiosInstance, AxiosPromise } from "axios";
-import { io, Socket } from "socket.io-client";
-import { TDataResponse } from "~/data_source/entities/response_entity";
-import {
-  EClientStage,
-  RemoteClientMethods,
-  RemoteClientService
-} from "./remote_client_service";
+import { BuiltinSocketEvent, RequestEvent } from "~/data_source/entities/request_entity";
 
 export enum SocketMetaType {
   waitOnQueue,
@@ -17,8 +10,8 @@ export abstract class ISocket {
   abstract connected: boolean;
   abstract disconnected: boolean;
   abstract id: string;
-  abstract on(msg: string, listener: (msg: string) => void): void;
-  abstract emit(msg: string, args: any): void;
+  abstract on(msg: RequestEvent | BuiltinSocketEvent, listener: (msg: string) => void): void;
+  abstract emit(msg: RequestEvent | BuiltinSocketEvent, args: any): void;
 }
 
 /** 用來解析 socket 返回後的資料 */
@@ -43,11 +36,18 @@ export abstract class ISocketClientService {
     success: (msg: string) => void,
     error: (msg: string) => void
   ): void;
+  /**
+   * @param success 連結成功
+   * @param failed  連結失敗
+   * @param reSuccess 重連結成功
+   * @param reFailed  重連結失敗
+   * 
+   * */
   abstract connect(opt: {
-    success: (msg: string) => {};
-    failed: (msg: string) => {};
-    reSuccess: (msg: string) => {};
-    reFailed: (msg: string) => {};
+    success: (msg: string) => void;
+    failed: (msg: string) => void;
+    reSuccess: (msg: string) => void;
+    reFailed: (msg: string) => void;
   }): void;
   abstract disconnect(cb: (msg: string) => void): void;
 }

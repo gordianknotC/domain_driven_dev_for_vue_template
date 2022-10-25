@@ -1,6 +1,7 @@
 import { provideFacade } from "js_util_for_vue_project";
 import { App } from "vue";
 import { Router } from "vue-router";
+import type { AppFacade } from "~/main";
 import { APP_MENU_CONFIG } from "../configs/menu_config";
 import { ERouteName } from "../consts/router_const";
 import i18n, { setupI18n } from "./i18n/i18n_index";
@@ -23,7 +24,7 @@ export type FacadePresentationStore = {
 // todo: presentation controller
 export function setupPresentationStores(
   app: App<Element>,
-  facade: any,
+  facade: AppFacade,
   beforeMounted: boolean
 ) {
   if (beforeMounted) {

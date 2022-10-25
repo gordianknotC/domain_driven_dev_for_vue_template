@@ -1,16 +1,17 @@
-import { RemoteClientService } from "~/data_source/core/interfaces/remote_client_service";
+import { IdentData, IRemoteClientService } from "~/data_source/core/interfaces/remote_client_service";
+import { TResponse } from "~/data_source/entities/response_entity";
 import {
   assert,
   AssertMessages
 } from "~/presentation/third_parties/utils/assert_exceptions";
 
-export abstract class ClientServicePlugins<T, R = T> {
-  abstract prev?: ClientServicePlugins<T, R>;
-  abstract next?: ClientServicePlugins<T, R>;
-  abstract client?: RemoteClientService;
-  abstract process(config: T): R;
+export abstract class ApiClientServicePlugins<REQ, RESP = REQ> {
+  abstract prev?: ApiClientServicePlugins<REQ, RESP>;
+  abstract next?: ApiClientServicePlugins<REQ, RESP>;
+  abstract client?: IRemoteClientService<IdentData<TResponse<RESP>>>;
+  abstract process(config: REQ): RESP;
   abstract processError(error: any): Promise<any>;
-  addNext(next: ClientServicePlugins<T, R>) {
+  addNext(next: ApiClientServicePlugins<REQ, RESP>) {
     assert(
       () => this.client != undefined,
       AssertMessages.notUndefined("client")
@@ -18,7 +19,7 @@ export abstract class ClientServicePlugins<T, R = T> {
     this.next = next;
     next.prev = this;
   }
-  addPrev(prev: ClientServicePlugins<T, R>) {
+  addPrev(prev: ApiClientServicePlugins<REQ, RESP>) {
     assert(
       () => this.client != undefined,
       AssertMessages.notUndefined("client")
@@ -26,7 +27,7 @@ export abstract class ClientServicePlugins<T, R = T> {
     this.prev = prev;
     prev.next = this;
   }
-  addAll(all: ClientServicePlugins<T, R>[]) {
+  addAll(all: ApiClientServicePlugins<REQ, RESP>[]) {
     if (all.length == 1) return;
     assert(
       () => this.client != undefined,
@@ -45,7 +46,7 @@ export abstract class ClientServicePlugins<T, R = T> {
   protected get canProcess(): boolean {
     return true;
   }
-  init(client: RemoteClientService) {
+  init(client: IRemoteClientService<IdentData<TResponse<RESP>>>) {
     this.client = client;
   }
 }

@@ -70,7 +70,6 @@ const humanResource: ElMenuConfigItem = {
 
 const finalConfig = {
   dashboard,
-  // home,
   humanResource,
   material,
   projectManager,

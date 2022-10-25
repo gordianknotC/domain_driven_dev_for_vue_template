@@ -1,11 +1,12 @@
 // todo: index mappers 統一注入
 import { provideFacade } from "js_util_for_vue_project";
 import { App } from "vue";
-import { UserEntity } from "~/data_source/entities/user_entity";
+import type { UserEntity } from "~/data_source/entities/user_entity";
 import { BaseModelMapper, tempMapper } from "~/data_source/mappers/base_mappers";
-import { UserDomainModel } from "~/domain/account/user_domain_model";
-import { AnnouncementDomainModel } from "~/domain/app/announcement_domain_model";
-import { AnnouncementEntity } from "../entities/announcement_entity";
+import type { UserDomainModel } from "~/domain/account/user_domain_model";
+import type { AnnouncementDomainModel } from "~/domain/app/announcement_domain_model";
+import type { AnnouncementEntity } from "../entities/announcement_entity";
+import type { AppFacade } from "~/main";
 
 export type FacadeMappers = {
   data: {
@@ -17,7 +18,7 @@ export type FacadeMappers = {
 };
 
 
-export function setupMappers(app: App<Element>, facade: any) {
+export function setupMappers(app: App<Element>, facade: AppFacade) {
   const mergeObject = true;
   provideFacade(
     {

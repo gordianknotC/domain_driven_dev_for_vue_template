@@ -24,12 +24,11 @@ import { ElMenuConfigItem } from "~/presentation/third_parties/utils/element_men
 import { i } from "vitest/dist/index-6e18a03a";
 import { AnnouncementEntity } from "~/data_source/entities/announcement_entity";
 import { AnnouncementDomainModel } from "~/domain/app/announcement_domain_model";
-import { Model } from "~/data_source/mappers/base_mappers";
+import { DataModel } from "~/data_source/mappers/base_mappers";
+import { RequestEvent } from "~/data_source/entities/request_entity";
 
 /** 處理 announcement */
-export class AppMenuStoreExtensionMarquee {
-
-}
+export class AppMenuStoreExtensionMarquee {}
 
 /** 處理 app aside menu, app tab header */
 export class AppMenuStore
@@ -48,7 +47,13 @@ export class AppMenuStore
     this.initializeLocalTabs();
     this.getters = {};
     flattenInstance(this, undefined, console.log);
-    
+    this.initialFetchUpdate();
+  }
+
+  async initialFetchUpdate(): Promise<void> {
+    await facade.data.repo.announcement.fetchAndUpdate({id: 12345}, RequestEvent.getAnnouncement);
+    this.state.announcements = facade.data.repo.announcement.get()!;
+    this.state.initialFetched = true;
   }
 
   /** 初始化 local tabs 由 local storage 載入 */
@@ -155,8 +160,9 @@ export class AppMenuStore
 
 /** 實驗 oop 寫法，這裡沒必要不要這樣寫，之後會改 function */
 export const appMenuStore = defineStore("AppMenu", () => {
-  const announcements: Model<AnnouncementEntity, AnnouncementDomainModel>[] =
-    [];
+  const announcements: DataModel<AnnouncementEntity, AnnouncementDomainModel> =
+    facade.data.repo.announcement.get()!;
+
   const activated: AppTabItem = {
     name:
       (facade.stores.router.currentRoute.value.name as any) ??
@@ -174,13 +180,15 @@ export const appMenuStore = defineStore("AppMenu", () => {
 
   const enlarged = true;
 
+  console.log("AppMenu announcements:", announcements);
   return new AppMenuStore(() => {
     return {
-      config: LazyHolder(()=>APP_MENU_CONFIG),
+      config: LazyHolder(() => APP_MENU_CONFIG),
       activated,
       openedTabs,
       enlarged,
-      announcements
+      announcements,
+      initialFetched: false,
     };
   });
 });

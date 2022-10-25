@@ -1,82 +1,66 @@
 <template lang="pug">
-Vue3Marquee(v-if="hasAnnouncement" :duration="30")
+//- this is comment
+Vue3Marquee( :duration="30")
   .inline-block(
-    v-for="(announcement, index) in announcements"
-    :key="announcement"
+    v-for="(announcement, index) in state.announcements"
+    :key="index"
   )
-    .flex.mr-4
-      svg-icon.fill-primary.stroke-primary.mx-1(
-        name="announcement"
+    .container
+      svg-icon(
+        name="Campaign"
         :width="24"
         :height="24"
       )
-      .cursor-pointer(@click="$router.push({name: RouterNames.information})") {{announcement}}
-div.marquee-placeholder(v-else)
+      .text-label.cursor-pointer(@click="onGoToAnnouncementPage") {{announcement.title}}
+
 </template>
 
 <script lang="ts">
-import {
-  computed,
-  defineComponent,
-  onMounted,
-  reactive,
-  toRefs,
-  watch
-} from "vue";
-import Vue3Marquee from "vue3-marquee";
-import { getStore, TStore } from "~/store";
-import RouterNames from "~/router/name";
+export default {
+  name: "Marquee"
+};
+</script>
+<script lang="ts" setup>
+import "vue3-marquee/dist/style.css";
+import { Vue3Marquee } from "vue3-marquee";
+import { computed, onMounted, reactive } from "vue";
+import type { AnnouncementEntity } from "~/data_source/entities/announcement_entity";
+import { RequestEvent } from "~/data_source/entities/request_entity";
+import { facade } from "~/main";
+import { ERouteName } from "../consts/router_const";
 
-interface IState {
-  isLoading: boolean;
-  announcements: string[];
-}
+const state = reactive({
+  isLoading: false,
+  announcements: computed(() => {
+    return facade.stores.appMenu.state.announcements.entities;
+  })
+});
 
-export default defineComponent({
-  name: "Marquee",
-  components: {
-    Vue3Marquee
-  },
-  setup() {
-    const { global } = getStore() as TStore;
-    const state = reactive<IState>({
-      isLoading: false,
-      announcements: global.state.announcements ?? []
-    });
-    const hasAnnouncement = computed<boolean>(() => {});
-    const getAnnouncement = async (id?: number) => {
-      state.isLoading = true;
-      const announcementList = await BaseApi.getAnnouncement({ id: id });
-      let announcements: string[] = [];
-      if (announcementList.data.length > 0) {
-        announcementList.data.forEach(item => {
-          if (item.is_open) {
-            announcements.push(item.title as string);
-          }
-        });
-        state.announcements = announcements;
-        global.actions.setGlobalStore({ announcements });
-      }
-      state.isLoading = false;
-    };
+const hasAnnouncement = computed<boolean>(() => {
+  console.log(
+    "hasAnnouncement:",
+    facade.stores.appMenu.state.announcements.entities.length > 0,
+    "announcements",
+    state.announcements
+  );
+  return facade.stores.appMenu.state.announcements.entities.length > 0;
+});
 
-    onMounted(() => {
-      getAnnouncement();
-    });
+const updateAnnouncement = async (id: number) => {
+  state.isLoading = true;
+  await facade.data.repo.announcement.fetchAndUpdate(
+    { id },
+    RequestEvent.getAnnouncement
+  );
+  state.isLoading = false;
+};
 
-    watch(
-      () => global.state.announcements,
-      announcements => {
-        state.announcements = announcements;
-      }
-    );
+const onGoToAnnouncementPage = (ann: AnnouncementEntity) => {
+  console.log("goto announcement", ann);
+};
 
-    return {
-      ...toRefs(state),
-      global,
-      RouterNames
-    };
-  }
+onMounted(async () => {
+  //await updateAnnouncement();
 });
 </script>
 
@@ -89,9 +73,19 @@ export default defineComponent({
   @apply bg-appHeader py-1 text-text-light;
 }
 
+.container {
+  @apply mr-4 flex items-center text-sm;
+  svg {
+    @apply text-text-light;
+  }
+  .text-label {
+    @apply pl-2 text-sm;
+  }
+}
+
 .marquee-placeholder {
   height: 32px;
-  @apply fixed top-0 right-0 z-100 bg-appHeader;
+  @apply bg-appHeader;
   left: 230px;
 }
 </style>

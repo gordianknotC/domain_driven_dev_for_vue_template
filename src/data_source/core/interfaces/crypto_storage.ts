@@ -4,10 +4,10 @@ import { useLocalStorage, RemovableRef } from "@vueuse/core";
 export abstract class LocalStorage<ENTITY> { 
   protected constructor(
       protected storeKey: string,
-      protected defaultEntity: ENTITY,
+      protected defaultEntities: ENTITY,
   ){};
   protected get localStorage(): RemovableRef<ENTITY> | null{
-    return useLocalStorage(this.storeKey, this.defaultEntity);
+    return useLocalStorage(this.storeKey, this.defaultEntities);
   };
 }
 

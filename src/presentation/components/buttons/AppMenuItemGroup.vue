@@ -40,12 +40,11 @@ const props = defineProps({
     required: true
   },
   children: {
-    type: Object as PropType<ElMenuConfigItemGroup>
+    type: Object as PropType<Record<any, ElMenuConfigItem>>
   }
 });
 
 const attrs = useAttrs();
-console.log("attrs:", attrs.index, props);
 </script>
 
 <style lang="scss" scoped>
