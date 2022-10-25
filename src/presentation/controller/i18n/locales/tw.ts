@@ -24,6 +24,7 @@ const tw = {
     home: "總覧",
     supplierList: "供應商名單",
     humanResource: "人力範本",
+    materialList: "通用材料",
     dashboard: "總覧",
     announcements: "公告",
     projectManagement: "案件管理",
