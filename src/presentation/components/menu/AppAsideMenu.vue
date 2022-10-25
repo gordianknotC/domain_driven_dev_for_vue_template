@@ -28,9 +28,9 @@ import AppMenuItemGroup from "../buttons/AppMenuItemGroup.vue";
 
 const menuElt = ref<HTMLElement>();
 const props = defineProps({
-  mode: {
+  size: {
     type: String as PropType<"enlarge" | "enclose">,
-    default: true
+    default: "enlarge"
   }
 });
 

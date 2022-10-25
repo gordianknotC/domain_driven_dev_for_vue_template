@@ -1,11 +1,11 @@
 <template>
   <el-menu-item class="aside-group">
     <div v-if="enlarge" class="aside-group--enlarge">
-      <SvgIcon size="20" :name="iconName"></SvgIcon>
+      <SvgIcon size="20px" :name="iconName"></SvgIcon>
       <span>{{ value }}</span>
     </div>
     <div v-else class="aside-group--enclose">
-      <SvgIcon size="20" :name="iconName"></SvgIcon>
+      <SvgIcon size="20px" :name="iconName"></SvgIcon>
     </div>
   </el-menu-item>
 </template>

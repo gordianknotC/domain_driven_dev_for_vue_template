@@ -16,7 +16,7 @@ div()
           :closable="idx != 0"
       )
         template(v-if="idx == 0" #label)
-          svg-icon.inline-block(:size="20" name="Home")
+          svg-icon.inline-block(size="20px" name="Home")
         template(v-else #label)
           span {{tab.title}}
 </template>

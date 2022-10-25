@@ -9,6 +9,7 @@ const tw = {
   dashboard: "總覧",
   announcements: "公告",
   projectManagement: "案件管理",
+  userName: "用戶名稱",
   userAccountControl: "權限管理",
     //
   backText: "回到信息",

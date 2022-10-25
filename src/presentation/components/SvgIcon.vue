@@ -3,7 +3,7 @@
     class="svg-icon"
     :style="{
       width: props.width,
-      height: props.height,
+      height: props.height
     }"
   >
     <use :xlink:href="`#icon-${props.name}`" />
@@ -11,6 +11,7 @@
 </template>
 
 <script lang="ts">
+import { computed } from "@vue/reactivity";
 import { defineComponent } from "vue";
 
 export default defineComponent({
@@ -29,10 +30,22 @@ export default defineComponent({
       type: String,
       default: "24px"
     },
+    size: {
+      type: String
+    }
   },
   setup(props) {
     return {
-      props
+      props: computed(() => {
+        const width = props.size ?? props.width;
+        const height = props.size ?? props.height;
+        const name = props.name;
+        return {
+          width,
+          height,
+          name
+        };
+      })
     };
   }
 });

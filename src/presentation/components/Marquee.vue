@@ -8,8 +8,7 @@ Vue3Marquee( :duration="30")
     .container
       svg-icon(
         name="Campaign"
-        :width="24"
-        :height="24"
+        size="20px"
       )
       .text-label.cursor-pointer(@click="onGoToAnnouncementPage") {{announcement.title}}
 

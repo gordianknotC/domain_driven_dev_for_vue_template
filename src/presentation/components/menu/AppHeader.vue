@@ -2,7 +2,7 @@
   <div class="holder">
     <div class="holder-bread-menu">
       <el-button :color="colors.bg.appHeader" dark>
-        <SvgIcon name="Dehaze" :size="20"></SvgIcon>
+        <SvgIcon name="Dehaze" size="20px"></SvgIcon>
       </el-button>
     </div>
     <div class="holder-branding">
@@ -11,20 +11,25 @@
     <div class="holder-marquee">
       <Marquee></Marquee>
     </div>
-    <div class="holder-account"></div>
+    <div class="holder-account">
+      <UACDropDownButton></UACDropDownButton>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 export default {
   name: "AppHeader",
-  emits: ["toggle-bread-menu"]
+  emits: ["toggle-bread-menu"],
+  components: { SvgIcon, UACDropDownButton }
 };
 </script>
 <script lang="ts" setup>
 import colors from "~/presentation/assets/colors/default_colors";
 import brandingImg from "~/presentation/assets/images/branding.png";
+import UACDropDownButton from "../buttons/UACDropDownButton.vue";
 import Marquee from "../Marquee.vue";
+import SvgIcon from "../SvgIcon.vue";
 </script>
 
 <style lang="scss" scoped>
@@ -42,10 +47,10 @@ import Marquee from "../Marquee.vue";
     width: 239px;
   }
   &-marquee {
-    @apply flex w-full flex-1 pl-4;
+    @apply flex w-full flex-1 px-4;
   }
   &-account {
-    @apply pr-5;
+    @apply flex flex-row items-center justify-around pr-5;
     min-width: 108px;
   }
 }
