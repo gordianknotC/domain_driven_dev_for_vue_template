@@ -55,9 +55,7 @@ const attrs = useAttrs();
 .aside-group {
   @apply mb-4 flex flex-row items-center justify-start text-text-light;
   height: 2.25rem;
-  svg {
-    @apply mr-2 flex items-center;
-  }
+
   span {
     @apply text-sm;
     line-height: 2;
@@ -73,12 +71,18 @@ const attrs = useAttrs();
     &:hover {
       @extend .hover;
     }
+    svg {
+      @apply mr-2 flex items-center;
+    }
   }
   &--enclose {
     @apply flex h-full flex-row items-center p-2;
     width: 100%;
     &:hover {
       @extend .hover;
+    }
+    svg {
+      @apply m-0 flex items-center;
     }
   }
 }

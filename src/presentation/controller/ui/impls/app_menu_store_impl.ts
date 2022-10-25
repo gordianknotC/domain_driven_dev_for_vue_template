@@ -122,6 +122,10 @@ export class AppMenuStore
     );
   }
 
+  toggleAsideMenu(){
+    this.state.enlarged = !this.state.enlarged;
+  }
+
   unbindRouter() {
     this.routerWatcher?.();
   }

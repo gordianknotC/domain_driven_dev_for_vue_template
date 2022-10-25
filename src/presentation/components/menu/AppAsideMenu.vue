@@ -27,12 +27,6 @@ import { facade } from "~/main";
 import AppMenuItemGroup from "../buttons/AppMenuItemGroup.vue";
 
 const menuElt = ref<HTMLElement>();
-const props = defineProps({
-  size: {
-    type: String as PropType<"enlarge" | "enclose">,
-    default: "enlarge"
-  }
-});
 
 const menuConfig = computed(() => facade.stores.appMenu.state.config);
 
@@ -65,7 +59,7 @@ onUnmounted(() => {
 <style lang="scss" scoped>
 .aside-menu {
   @apply aside-gradient-bg flex h-full flex-col justify-start bg-primary p-4;
-  width: 5rem;
+  width: 4.5rem;
   &--large {
     width: 12rem !important;
   }

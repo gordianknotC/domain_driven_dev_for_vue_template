@@ -1,7 +1,7 @@
 <template>
   <div class="holder">
     <div class="holder-bread-menu">
-      <el-button :color="colors.bg.appHeader" dark>
+      <el-button :color="colors.bg.appHeader" dark @click="onClickBreadMenu">
         <SvgIcon name="Dehaze" size="20px"></SvgIcon>
       </el-button>
     </div>
@@ -25,11 +25,16 @@ export default {
 };
 </script>
 <script lang="ts" setup>
+import { facade } from "~/main";
 import colors from "~/presentation/assets/colors/default_colors";
 import brandingImg from "~/presentation/assets/images/branding.png";
 import UACDropDownButton from "../buttons/UACDropDownButton.vue";
 import Marquee from "../Marquee.vue";
 import SvgIcon from "../SvgIcon.vue";
+
+const onClickBreadMenu = () => {
+  facade.stores.appMenu.toggleAsideMenu();
+};
 </script>
 
 <style lang="scss" scoped>
