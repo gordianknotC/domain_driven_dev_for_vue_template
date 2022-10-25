@@ -71,19 +71,20 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
-.tab-h {
+.tab-cell {
   height: 2.15rem !important;
   line-height: 2.15rem !important;
+  border: none !important;
 }
 .app-tab {
   @apply w-full;
-  @extend .tab-h;
+  @extend .tab-cell;
 }
 
 ::v-deep() {
   .el-tabs {
     @apply tab-gradient-bg;
-    @extend .tab-h;
+    @extend .tab-cell;
 
     &__header,
     &__card,
@@ -91,7 +92,7 @@ onMounted(() => {
     &__nav,
     &__item,
     &__nav-scroll {
-      @extend .tab-h;
+      @extend .tab-cell;
       margin: 0px;
     }
 
