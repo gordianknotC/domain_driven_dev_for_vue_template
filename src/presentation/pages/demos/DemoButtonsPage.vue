@@ -1,13 +1,29 @@
-<template>
-  <h3>Buttons Demo</h3>
+<template lang="pug">
+  h3 Buttons Demo
+  p -------
+  BaseButton(
+    color="blue"
+    disable=true
+    
+  ) 123
+  p -------
+  BaseButton(
+    color="blue"
+    type="light"
+    disable=true
+  ) 123
+  p -------
 </template>
 
 <script lang="ts">
 import { defineComponent, reactive, ref, toRefs } from "vue";
+import BaseButton from "~/presentation/components/buttons/BaseButton.vue";
 
 export default defineComponent({
-  name: "DemoIndexPage",
-  components: {},
+  name: "DemoButtonsPage",
+  components: {
+    BaseButton
+  },
   props: {},
   emit: ["close", "route"],
   setup(props, { emit }) {

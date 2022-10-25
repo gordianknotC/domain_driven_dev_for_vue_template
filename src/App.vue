@@ -6,13 +6,11 @@
 <script lang="ts">
 import { defineComponent, reactive, ref, toRefs } from "vue";
 import AppLayout from "~/presentation/layout/AppLayout.vue";
-import BaseButton from "~/presentation/components/buttons/BaseButton.vue";
 
 export default defineComponent({
   name: "App",
   components: {
-    AppLayout,
-    BaseButton
+    AppLayout
   },
   props: {},
   emit: ["close"],
