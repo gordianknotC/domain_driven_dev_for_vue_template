@@ -3,7 +3,7 @@ const tw = {
   edit: "编辑信息",
   delete: "删除信息",
   update: "更新信息",
-    //
+  //
   supplierList: "供應商名單",
   humanResource: "人力範本",
   dashboard: "總覧",
@@ -11,7 +11,7 @@ const tw = {
   projectManagement: "案件管理",
   userName: "用戶名稱",
   userAccountControl: "權限管理",
-    //
+  //
   backText: "回到信息",
   material: "通用材料",
   dialogText: "您确定要{dialog_text}公告吗？",
@@ -30,6 +30,7 @@ const tw = {
     projectManagement: "案件管理",
     userAccountControl: "權限管理",
   }
+  //
 };
 
 export default tw;

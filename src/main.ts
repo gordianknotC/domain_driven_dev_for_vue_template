@@ -71,7 +71,7 @@ export const facade = IFacade<AppFacade>();
 app.use(getRouter());
 
 
-const feed = (msg: string, cb: ()=>void)=>{
+const executeAndLog = (msg: string, cb: ()=>void)=>{
   console.group("", `----------${msg}---------`);
   cb();
   console.groupEnd();
@@ -83,19 +83,19 @@ const feed = (msg: string, cb: ()=>void)=>{
 (function setupDependencies() {
   "use strict";
   console.group("===============JinHao INFO================")
-  feed("APP_PLUGIN", ()=>setupAppPlugins(app, facade));
+  executeAndLog("APP_PLUGIN", ()=>setupAppPlugins(app, facade));
   // ---------------
   // data source 注入
-  feed("DATE_SERVICES", ()=>setupDataCoreServices(app, facade));
-  feed("MAPPERS", ()=>setupMappers(app, facade));
-  feed("REPOS", ()=>setupRepositories(app, facade));
+  executeAndLog("DATE_SERVICES", ()=>setupDataCoreServices(app, facade));
+  executeAndLog("MAPPERS", ()=>setupMappers(app, facade));
+  executeAndLog("REPOS", ()=>setupRepositories(app, facade));
   // -----------
   // domain 注入
-  feed("DOMAIN_SERVICES", ()=>setupDomainServices(app, facade));
+  executeAndLog("DOMAIN_SERVICES", ()=>setupDomainServices(app, facade));
   // ----------------
   // presentation 注入
-  feed("VIEW_STORES", ()=>setupPresentationStores(app, facade, true));
+  executeAndLog("VIEW_STORES", ()=>setupPresentationStores(app, facade, true));
   app.mount("#app");
-  feed("VIEW_STORES", ()=>setupPresentationStores(app, facade, false));
+  executeAndLog("VIEW_STORES", ()=>setupPresentationStores(app, facade, false));
   console.groupEnd();
 })();

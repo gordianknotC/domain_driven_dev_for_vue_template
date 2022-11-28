@@ -123,6 +123,15 @@
     "vite-plugin-pug": "^0.3.1",
     "vite-plugin-svg-icons": "^2.0.1",
     "vitest": "^0.23.4",
-    "webpack-bundle-analyzer": "^4.5.0"
+    "webpack-bundle-analyzer": "^4.5.0",
+    "@storybook/addon-actions": "^6.5.6",
+    "@storybook/addon-essentials": "^6.5.6",
+    "@storybook/addon-interactions": "^6.5.6",
+    "@storybook/addon-links": "^6.5.6",
+    "@storybook/builder-webpack5": "^6.5.6",
+    "@storybook/jest": "^0.0.10",
+    "@storybook/manager-webpack5": "^6.5.6",
+    "@storybook/testing-library": "^0.0.11",
+    "@storybook/vue3": "^6.5.6"
   }
 }
