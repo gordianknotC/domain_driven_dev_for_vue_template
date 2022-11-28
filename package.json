@@ -9,6 +9,8 @@
     "release": " VITE_APP_ENV=release vite build",
     "prettier": "prettier --write 'src/**/*.vue' 'src/**/*.ts'",
     "test": "vitest",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook",
     "coverage": "vitest run --coverage",
     "test:ui": "vitest --ui",
     "install_node": "nvm install v14.18.0 && nvm alias default v14.18.0",
@@ -28,6 +30,7 @@
     "-------------------------": "",
     " 安 裝 編 譯 套 件 及 設 定 ": "",
     "-------------------------_": "",
+    "install:storybook": "npx storybook init",
     "install:imageOptim": "brew install --cask imageoptim && brew install imageoptim-cli",
     "install:buildEssentials": "sudo brew install node@14.18.0 && brew install yarn && yarn global add npx && yarn global add cordova-res && yarn global add npm-run-all && brew update && brew upgrade && brew cleanup -d -v && brew install cocoapods && brew install aapt && brew install --cask imageoptim && brew install imageoptim-cli"
   },
@@ -124,14 +127,13 @@
     "vite-plugin-svg-icons": "^2.0.1",
     "vitest": "^0.23.4",
     "webpack-bundle-analyzer": "^4.5.0",
-    "@storybook/addon-actions": "^6.5.6",
-    "@storybook/addon-essentials": "^6.5.6",
-    "@storybook/addon-interactions": "^6.5.6",
-    "@storybook/addon-links": "^6.5.6",
-    "@storybook/builder-webpack5": "^6.5.6",
-    "@storybook/jest": "^0.0.10",
-    "@storybook/manager-webpack5": "^6.5.6",
-    "@storybook/testing-library": "^0.0.11",
-    "@storybook/vue3": "^6.5.6"
+    "@storybook/addon-actions": "^6.5.13",
+    "@storybook/addon-essentials": "^6.5.13",
+    "@storybook/addon-interactions": "^6.5.13",
+    "@storybook/addon-links": "^6.5.13",
+    "@storybook/vue3-vite": "^7.0.0-alpha.25",
+    "@storybook/testing-library": "^0.0.13",
+    "@storybook/vue3": "^6.5.13",
+    "@storybook/builder-vite": "^0.2.5"
   }
 }
