@@ -1,14 +1,10 @@
 {
-  "vueCompilerOptions": {
-    "plugins": [
-      "@volar/vue-language-plugin-pug"
-    ]
-  },
   "compilerOptions": {
-    "target": "es2020",
-    "module": "es2020",
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
+    /** strict mode ...*/
+    // "noImplicitUseStrict": true,
+    "alwaysStrict": true,
     "baseUrl": ".",
     "declaration": true, /* Generates corresponding '.d.ts' file. */
     "diagnostics": true,
@@ -18,52 +14,54 @@
     "importHelpers": true,
     "jsx": "preserve",
     "jsxFactory": "h", /* Specify the JSX factory function to use when targeting react JSX emit, e.g. React.createElement or h. */
-    "moduleResolution": "node",
-    "noEmit": true,
-    "resolveJsonModule": true,
-    "noImplicitAny": true, /* Raise error on expressions and declarations with an implied 'any' type. */
-    "noImplicitReturns": true, /* Report error when not all code paths in function return a value. */
-    "noImplicitThis": true, /* Raise error on 'this' expressions with an implied 'any' type. */
-    "outDir": "./dist/out-tsc", /* Redirect output structure to the directory. */
-    "skipLibCheck": true,
-    "sourceMap": true,
-    /** strict mode ...*/
-    // "noImplicitUseStrict": true,
-    "alwaysStrict": true,
-    "strict": true,
-    "strictBindCallApply": true, /**/
-    "strictFunctionTypes": true,
-    "strictNullChecks": true, /* Enable strict null checks. */
-    "strictPropertyInitialization": true,
-    "types": [
-      "webpack-env",
-      "jquery",
-      "vitest/globals",
-      "vitest",
-      "vite/client"
-    ],
-    "typeRoots": [
-      "node_modules/@types"
-    ],
-    "paths": {
-      /*
-      *     A L I A S   P A T H
-      *     需要同時設置 vue.config.js - alias
-      **/
-      "~/*": [
-        "src/*"
-      ],
-      "@/*": [
-        "src/*"
-      ]
-    },
     "lib": [
       "esnext",
       "dom",
       "dom.iterable",
       "scripthost"
     ],
+    "module": "es2020",
+    "moduleResolution": "node",
+    "noEmit": true,
+    "noImplicitAny": true, /* Raise error on expressions and declarations with an implied 'any' type. */
+    "noImplicitReturns": true, /* Report error when not all code paths in function return a value. */
+    "noImplicitThis": true, /* Raise error on 'this' expressions with an implied 'any' type. */
+    "outDir": "./dist/out-tsc", /* Redirect output structure to the directory. */
+    "paths": {
+      "@/*": [
+        "src/*"
+      ],
+      /*
+      *     A L I A S   P A T H
+      *     需要同時設置 vue.config.js - alias
+      **/
+      "~/*": [
+        "src/*"
+      ]
+    },
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "strict": true,
+    "strictBindCallApply": true, /**/
+    "strictFunctionTypes": true,
+    "strictNullChecks": true, /* Enable strict null checks. */
+    "strictPropertyInitialization": true,
+    "target": "es2020",
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "types": [
+      "webpack-env",
+      "jquery",
+      "vitest/globals",
+      "vitest",
+      "vite/client"
+    ]
   },
+  "exclude": [
+    "node_modules"
+  ],
   "include": [
     "vite.config.ts",
     "jest.d.ts",
@@ -76,7 +74,9 @@
     "__tests__/**/*.ts",
     "__tests__/**/*.tsx"
   ],
-  "exclude": [
-    "node_modules"
-  ]
+  "vueCompilerOptions": {
+    "plugins": [
+      "@volar/vue-language-plugin-pug"
+    ]
+  }
 }

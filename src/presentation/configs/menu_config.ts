@@ -14,15 +14,6 @@ const supplier: ElMenuConfigItem = {
   }
 };
 
-// const home: ElMenuConfigItem = {
-//   route: {name: ERouteName.home},
-//   label: computed(() => facade.stores.t.material),
-//   icon: "Material",
-//   meta: {
-//     admin: ADMIN_GROUP.all
-//   }
-// };
-
 const material: ElMenuConfigItem = {
   route: {name: ERouteName.materialList},
   label: computed(() => facade.stores.t.material),
