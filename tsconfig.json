@@ -60,9 +60,11 @@
     ]
   },
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "storybook-static"
   ],
   "include": [
+    "@types",
     "vite.config.ts",
     "jest.d.ts",
     "src/**/*.svg",
@@ -72,7 +74,9 @@
     "src/**/*.tsx",
     "src/**/*.vue",
     "__tests__/**/*.ts",
-    "__tests__/**/*.tsx"
+    "__tests__/**/*.tsx",
+    "__tests__/*.tsx",
+    "__tests__/*.ts",
   ],
   "vueCompilerOptions": {
     "plugins": [

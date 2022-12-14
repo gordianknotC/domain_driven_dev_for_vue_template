@@ -8,7 +8,10 @@ export default mergeConfig(viteConfig, defineConfig({
 
     // benchmark: {},
     // Include globs for test files
-    include: ["./__tests__/tests/**/*.ts", "./__tests__/tests/*.ts"],
+    include: [
+      "./__tests__/tests/**/*.ts", 
+      "./__tests__/tests/*.ts"
+    ],
     // Exclude globs for test files
     exclude: configDefaults.exclude,
 
