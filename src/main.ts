@@ -5,7 +5,7 @@ import App from "./App.vue";
 
 import "~/presentation/assets/styles/index.scss";
 import { setupAppPlugins } from "~/presentation/third_parties/plugins/plugins_index";
-import { IFacade, provideFacade } from "js_util_for_vue_project";
+import { IFacade, provideFacade } from "@gdknot/frontend_common";
 import {
   FacadeDateSource,
   setupDataCoreServices

@@ -1,3 +1,4 @@
+import { Arr, ArrayDelegate } from "@gdknot/frontend_common";
 import {
   EClientStage,
   IRemoteClientService,
@@ -113,7 +114,7 @@ export class RemoteClientServiceImpl<T extends IdentData<any>>
     } else {
       try {
         const connected = await this.connect();
-        if (connected.succeed) {
+        if ((connected as TSuccessResponse).succeed) {
           return this.queue.enqueue(id, action);
         } else {
           const error: TErrorResponse = {
@@ -157,7 +158,7 @@ export class RemoteClientServiceImpl<T extends IdentData<any>>
  * 資料，再由 queue 裡的 promise resolve 返回值， resolve 後無論成功失敗，移除該筆 queue
  */
 export class Queue implements IQueue<QueueItem> {
-  queue: QueueItem[] = [];
+  queue: ArrayDelegate<QueueItem> = Arr([]);
   public enqueue(
     id: number,
     promise: () => Promise<any>,

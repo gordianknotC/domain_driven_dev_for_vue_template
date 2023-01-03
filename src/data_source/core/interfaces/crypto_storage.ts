@@ -23,11 +23,11 @@ export abstract class CryptoLocalStorage<T> {
     return useLocalStorage(this.storeKey, this.crypto.encryptObj(this.defaultEntity));
   };
 
-  protected get(): T | undefined {
+   get(): T | undefined {
     return JSON.parse(this.crypto.decrypt(this.localStorage!.value) as string);
   }
   
-  protected set(item: T) {
+   set(item: T) {
     this.localStorage!.value = this.crypto.encryptObj(item);
   }
 }

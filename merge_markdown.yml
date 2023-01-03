@@ -1,0 +1,15 @@
+
+input:
+ src/data_source/README.md:  {noYAML: true, doctoc: true, replace: {<!--#-->: "# Data Source:"}}
+ src/data_source/core/README.md:  {noYAML: true, doctoc: true, replace: {<!--#-->: "# Data Source:"}}
+ src/data_source/entities/README.md:  {noYAML: true, doctoc: true, replace: {<!--#-->: "# Data Source:"}}
+ src/data_source/mappers/README.md:  {noYAML: true, doctoc: true, replace: {<!--#-->: "# Data Source:"}}
+ src/data_source/repositories/README.md:  {noYAML: true, doctoc: true, replace: {<!--#-->: "# Data Source:"}} 
+ src/domain/README.md:  {noYAML: true, doctoc: true, replace: {<!--#-->: "# Domain:"}}
+ src/presentation/README.md:  {noYAML: true, doctoc: true, replace: {<!--#-->: "# Presentation:"}}
+ 
+output: 
+  name: README.md
+  doctoc:
+    title: "table of content"
+    all: true
