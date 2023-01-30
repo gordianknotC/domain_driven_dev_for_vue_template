@@ -99,3 +99,6 @@ const executeAndLog = (msg: string, cb: ()=>void)=>{
   executeAndLog("VIEW_STORES", ()=>setupPresentationStores(app, facade, false));
   console.groupEnd();
 })();
+
+let a = undefined;
+a ??= "";

@@ -1,4 +1,4 @@
-import { provideFacade } from "js_util_for_vue_project";
+import { provideFacade, Queue } from "@gdknot/frontend_common";
 import { App } from "vue";
 import { UpdateRequestHeaderPlugin } from "~/data_source/core/impl/request_plugins_impl";
 import { AuthResponsePlugin } from "~/data_source/core/impl/response_plugins_impl";
@@ -6,7 +6,6 @@ import { SocketClientServiceImpl } from "~/data_source/core/impl/socket_client_s
 import type { AppFacade } from "~/main";
 import type { ISocketClientService } from "~/data_source/core/interfaces/socket_client_service";
 import {
-  Queue,
   RemoteClientServiceImpl
 } from "./impl/remote_client_service_impl";
 import type { IRemoteClientService } from "./interfaces/remote_client_service";
@@ -26,18 +25,23 @@ export function setupDataCoreServices(app: App<Element>, facade: AppFacade) {
     token
   ) as any as ISocketClientService;
   provideFacade({
-    data: {
-      socket
-    }
-  }, true);
+    deps: {
+      data: {
+        socket
+      }
+    },
+    merge: true
+  });
   //     RemoteClient
   const queue = new Queue();
   const remoteClient = new RemoteClientServiceImpl(socket, queue);
   provideFacade({
-    data: {
-      remoteClient
-    }
-  }, true);
+    deps: {
+      data: {
+        remoteClient
+      }
+    }, merge: true
+  });
 
   // TODO: ApiClientService
   // const apiClient 

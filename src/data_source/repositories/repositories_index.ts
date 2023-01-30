@@ -1,4 +1,4 @@
-import { IFacade, provideFacade } from "js_util_for_vue_project";
+import { IFacade, provideFacade } from "@gdknot/frontend_common";
 import { TUserRepository } from "~/data_source/repositories/account/itf/user_repository_itf";
 import { UserRepositoryImpl } from "~/data_source/repositories/account/impl/user_repository_impl";
 import { App } from "vue";
@@ -21,7 +21,7 @@ export type FacadeRepository = {
 
 // todo: index repositories 統一注入
 export function setupRepositories(app: App<Element>, facade: AppFacade) {
-  const mergeObject = true;
+  const merge = true;
   const client = facade.data.remoteClient;
 
   /** repository 設定，注入 */
@@ -31,8 +31,8 @@ export function setupRepositories(app: App<Element>, facade: AppFacade) {
   const announcementMapper = facade.data.mappers.announcement;
   const announcement = new AnnouncementRepositoryImpl(client, announcementMapper);
   
-  provideFacade(
-    {
+  provideFacade({
+    deps: {
       data: {
         repo: {
           user,
@@ -43,6 +43,6 @@ export function setupRepositories(app: App<Element>, facade: AppFacade) {
         }
       }
     },
-    mergeObject
-  );
+    merge
+  });
 }

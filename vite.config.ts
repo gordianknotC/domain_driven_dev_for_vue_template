@@ -1,5 +1,3 @@
-/// <reference types="vitest" />
-
 import {
   ConfigEnv,
   defineConfig,
@@ -17,11 +15,15 @@ import envCompatible from "vite-plugin-env-compatible";
 import { viteCommonjs } from "@originjs/vite-plugin-commonjs";
 // import pugPlugin from "vite-plugin-pug"
 import { createSvgIconsPlugin } from "vite-plugin-svg-icons";
+// 為了使用 jest
+import EnvironmentPlugin from 'vite-plugin-environment';
+
 
 const options = { pretty: true }; // FIXME: pug pretty is deprecated!
 const locals = { name: "My Pug" };
 
 export default ({ command, mode }: ConfigEnv) => {
+  try{
   const root = process.cwd();
   const env = loadEnv(mode, root);
   const stringifiedEnv: Record<string, any> = {};
@@ -49,7 +51,7 @@ export default ({ command, mode }: ConfigEnv) => {
       ...stringifiedEnv,
     },
     esbuild: {
-      target: "es2020"
+        target: "es2020"
     },
     resolve: {
       alias: {
@@ -74,12 +76,13 @@ export default ({ command, mode }: ConfigEnv) => {
       }
     },
     plugins: [
+      EnvironmentPlugin('all'), // 為了使用jest
       vue(),
       vueJsx(),
       ViteRequireContext(),
       viteCommonjs(),
       // 讓 import.meta.env 可以被存取
-      envCompatible(),
+      //envCompatible(),
       // pugPlugin(options, locals),
       createSvgIconsPlugin({
         // Specify the icon folder to be cached
@@ -96,4 +99,8 @@ export default ({ command, mode }: ConfigEnv) => {
       })
     ]
   });
+    }catch(e){
+      console.error(e);
+      throw e;
+    }
 };

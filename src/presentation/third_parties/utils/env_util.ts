@@ -4,5 +4,6 @@ export const isNotDev = () => {
 }
 
 export const isDev = () => { 
-    return import.meta.env.DEV;
+  return process.env.DEV;
+    // return import.meta.env.DEV;
 }

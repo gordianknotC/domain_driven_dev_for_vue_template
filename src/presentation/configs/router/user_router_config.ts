@@ -1,7 +1,7 @@
 import admin_router_config from "./admin_router_config";
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
-import { ERouteName } from "~/presentation/consts/router_const";
-import { ADMIN_GROUP, EUserAccount } from "~/presentation/consts/ua_const";
+import { ERouteName } from "@/presentation/const/router_const";
+import { ADMIN_GROUP, EUserAccount } from "@/presentation/const/ua_const";
 
 /**
  *  Router Config 所使用的 meta type

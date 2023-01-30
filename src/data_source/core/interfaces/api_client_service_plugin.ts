@@ -5,6 +5,9 @@ import {
   AssertMessages
 } from "~/presentation/third_parties/utils/assert_exceptions";
 
+/**
+ * 
+ */
 export abstract class ApiClientServicePlugins<REQ, RESP = REQ> {
   abstract prev?: ApiClientServicePlugins<REQ, RESP>;
   abstract next?: ApiClientServicePlugins<REQ, RESP>;

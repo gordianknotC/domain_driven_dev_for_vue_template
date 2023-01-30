@@ -1,9 +1,7 @@
-import { Arr, ArrayDelegate } from "@gdknot/frontend_common";
+import { Arr, ArrayDelegate, IQueue } from "@gdknot/frontend_common";
 import {
   EClientStage,
   IRemoteClientService,
-  IQueue,
-  QueueItem,
   IdentData
 } from "~/data_source/core/interfaces/remote_client_service";
 import {
@@ -17,7 +15,6 @@ import { ISocketClientService } from "../interfaces/socket_client_service";
 // TODO: unittest, 先定版 socket 再來做這個
 /** T remote entity, 必須帶有 id 
  *  以 websocket 實作 api request 方法  get/post/del/put
- * 
 */
 export class RemoteClientServiceImpl<T extends IdentData<any>>
   implements IRemoteClientService<T>
@@ -152,73 +149,4 @@ export class RemoteClientServiceImpl<T extends IdentData<any>>
   }
   
 }
-
-/**
- * api client 處理由 websocket 傳送出去的請求, 將請求暫存於 queue 以後，待收到 socket
- * 資料，再由 queue 裡的 promise resolve 返回值， resolve 後無論成功失敗，移除該筆 queue
- */
-export class Queue implements IQueue<QueueItem> {
-  queue: ArrayDelegate<QueueItem> = Arr([]);
-  public enqueue(
-    id: number,
-    promise: () => Promise<any>,
-    timeout: number = 10000
-  ): Promise<any> {
-    const timestamp = new Date().getTime();
-    return new Promise((resolve, reject) => {
-      this.queue.push({
-        id,
-        timestamp,
-        timeout: setTimeout(() => {
-          this.onTimeout(id);
-        }, timeout),
-        promise,
-        resolve,
-        reject
-      });
-      this.dequeue(id);
-    });
-  }
-
-  private onTimeout(id: number) {
-    const item = this.queue.firstWhere(_ => _.id == id)!;
-    if (!item) return;
-
-    // TODO: error code 定義
-    const timeoutError: TErrorResponse = {
-      error_code: EErrorCode.timeout,
-      error_key: "",
-      error_msg: "timeout error",
-      message: "timeout error"
-    };
-    item.reject(timeoutError);
-  }
-
-  private remove(item: QueueItem) {
-    clearTimeout(item.timeout);
-    this.queue.remove(item);
-  }
-
-  public dequeue(id: number): boolean {
-    const item = this.queue.firstWhere(_ => _.id == id)!;
-    if (!item) {
-      return false;
-    }
-    try {
-      item
-        .promise()
-        .then(value => {
-          item.resolve(value);
-          this.remove(item);
-        })
-        .catch(err => {
-          item.reject(err);
-          this.remove(item);
-        });
-    } catch (err) {
-      item.reject(err);
-      this.remove(item);
-    }
-    return true;
-  }
-}
+ 

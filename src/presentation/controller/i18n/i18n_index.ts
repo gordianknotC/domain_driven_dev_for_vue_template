@@ -1,7 +1,7 @@
 import { createI18n } from "vue-i18n";
 import tw, { LocaleObject } from "./locales/tw";
 import { App } from "vue";
-import { LazyHolder, provideFacade } from "js_util_for_vue_project";
+import { LazyHolder, provideFacade } from "@gdknot/frontend_common";
 
 
 const i18n = createI18n<{
@@ -22,11 +22,11 @@ const i18n = createI18n<{
 export default i18n;
 
 export function setupI18n(app: App<Element>) {
-  const mergeObject = true;
+  const merge = true;
   app.use(i18n);
   console.log("i18n:", i18n);
-  provideFacade(
-    {
+  provideFacade({
+    deps: {
       stores: {
         i18n,
         t: LazyHolder<LocaleObject>(() => {
@@ -38,8 +38,8 @@ export function setupI18n(app: App<Element>) {
         })
       }
     },
-    mergeObject
-  );
+    merge
+  });
 }
 
 // TODO:

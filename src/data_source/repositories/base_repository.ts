@@ -11,20 +11,18 @@ import {
   TSuccessResponse
 } from "~/data_source/entities/response_entity";
 import {
-  InvalidUsage,
+  InvalidUsageError,
   is,
   NotImplementedError,
   UnCaughtCondition
-} from "js_util_for_vue_project";
+} from "@gdknot/frontend_common";
 import { useLocalStorage, RemovableRef } from "@vueuse/core";
-import { LocalStorage } from "../core/interfaces/crypto_storage";
+import { CryptoService, LocalStorage } from "../core/interfaces/crypto_storage";
 import { assert } from "~/presentation/third_parties/utils/assert_exceptions";
-import { CryptoService } from "../core/interfaces/encrypt_service";
 import { CryptoServiceImpl } from "../core/impl/encrypt_service_impl";
 import { appLocalStorageMgr } from "../core/impl/local_storage_manager_impl";
 import { RequestEvent } from "../entities/request_entity";
 
-const localStorageInUsed = appLocalStorageMgr();
 
 /**
  *  用於可與 local/remote 同步之 repository
@@ -37,10 +35,9 @@ export abstract class BaseRepository<
   ENTITY extends Ident,
   PAYLOAD extends Ident
 > extends LocalStorage<ENTITY[]> {
-  static get localStorageInUsed(): typeof localStorageInUsed{
-    return localStorageInUsed;
-  }
+  static storedKeys: WeakMap<any, RemovableRef<any[]> | null> = new WeakMap();
   private crypto?: CryptoService<ENTITY[]>;
+  private _localStorage: RemovableRef<ENTITY[]> | null | undefined;
   protected constructor(
     protected client: IRemoteClientService<IdentData<ENTITY>>,
     protected mapper: MAPPER,
@@ -54,26 +51,16 @@ export abstract class BaseRepository<
     if (useCrypto) {
       this.crypto = new CryptoServiceImpl(storeKey);
     }
+    BaseRepository.storedKeys.set(this, this.localStorage);
   }
 
-  get localStorage(): RemovableRef<ENTITY[]> | null {
-    if (localStorageInUsed.has(this))
-      return localStorageInUsed.get(this) as any;
-
-    const defaultEntities = this.crypto
-      ? this.crypto!.encryptObj(this.defaultEntities) as any
-      : this.defaultEntities;
-
-    localStorageInUsed.set(
-      this,
-      useLocalStorage(this.storeKey, defaultEntities),
-      ()=>{
-        if (localStorageInUsed.get(this) != undefined){
-          localStorageInUsed.get(this)!.value = defaultEntities;
-        }
-      }
+  get localStorage(): RemovableRef<ENTITY[]> | null{
+    this._localStorage ??= useLocalStorage(this.storeKey, 
+      this.useCrypto 
+      ? this.crypto!.encryptObj(this.defaultEntities as any) 
+      : this.defaultEntities as any
     );
-    return localStorageInUsed.get(this) as any;
+    return this._localStorage;
   }
 
   /** sync get and set from local storage */
@@ -208,12 +195,12 @@ export abstract class BaseRemoteRepository<
   PAYLOAD extends Ident,
 > extends BaseRepository<IModelMapper<ENTITY, any>, ENTITY, PAYLOAD> {
   get localStorage(): RemovableRef<ENTITY[]> | null {
-    throw new InvalidUsage();
+    throw new InvalidUsageError("local storage");
   }
   get(): DataModel<ENTITY, any> | null {
-    throw new InvalidUsage();
+    throw new InvalidUsageError("get data model from remote repository");
   }
   set(val: ENTITY[]): void {
-    throw new InvalidUsage();
+    throw new InvalidUsageError("set entity");
   }
 }

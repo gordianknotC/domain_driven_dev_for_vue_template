@@ -2,10 +2,12 @@ import { ApiClientServicePlugins } from "~/data_source/core/interfaces/api_clien
 import { AxiosRequestConfig, AxiosResponse } from "axios";
 import { IRemoteClientService } from "src/data_source/core/interfaces/remote_client_service";
 
-abstract class BaseClientServiceResponsePlugin extends ApiClientServicePlugins<
-  AxiosResponse,
-  Promise<AxiosResponse>
-> {
+abstract class BaseClientServiceResponsePlugin 
+  extends ApiClientServicePlugins<
+    AxiosResponse,
+    Promise<AxiosResponse>
+  > 
+{
   get canGoNext(): boolean {
     return super.canGoNext;
   }
@@ -32,14 +34,16 @@ abstract class BaseClientServiceResponsePlugin extends ApiClientServicePlugins<
 }
 
 // todo:
-export class AuthResponsePlugin extends BaseClientServiceResponsePlugin {
+export class AuthResponsePlugin 
+  extends BaseClientServiceResponsePlugin
+{
   client?: IRemoteClientService<any>;
   prev?: ApiClientServicePlugins<
-    AxiosRequestConfig<AxiosResponse>,
+    AxiosResponse,
     Promise<AxiosResponse>
   >;
   next?: ApiClientServicePlugins<
-    AxiosRequestConfig<AxiosResponse>,
+    AxiosResponse,
     Promise<AxiosResponse>
   >;
 

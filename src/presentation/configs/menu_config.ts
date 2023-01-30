@@ -1,8 +1,8 @@
-import { LazyHolder } from "js_util_for_vue_project";
+import { LazyHolder } from "@gdknot/frontend_common";
 import { computed, ComputedRef } from "vue";
 import { facade } from "~/main";
-import { ERouteName } from "../consts/router_const";
-import { ADMIN_GROUP, EUserAccount } from "../consts/ua_const";
+import { ERouteName } from "../const/router_const";
+import { ADMIN_GROUP, EUserAccount } from "../const/ua_const";
 import { createElMenu, ElMenuConfig, ElMenuConfigItem } from "../third_parties/utils/element_menu_helper";
 
 const supplier: ElMenuConfigItem = {

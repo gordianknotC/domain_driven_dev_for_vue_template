@@ -1,5 +1,5 @@
 // todo: index mappers 統一注入
-import { provideFacade } from "js_util_for_vue_project";
+import { provideFacade } from "@gdknot/frontend_common";
 import { App } from "vue";
 import type { UserEntity } from "~/data_source/entities/user_entity";
 import { BaseModelMapper, tempMapper } from "~/data_source/mappers/base_mappers";
@@ -19,9 +19,9 @@ export type FacadeMappers = {
 
 
 export function setupMappers(app: App<Element>, facade: AppFacade) {
-  const mergeObject = true;
-  provideFacade(
-    {
+  const merge = true;
+  provideFacade({
+    deps: {
       data: {
         // FIXME: tempMapper 測試用
         mappers: {
@@ -30,6 +30,6 @@ export function setupMappers(app: App<Element>, facade: AppFacade) {
         }
       }
     },
-    mergeObject
-  );
+    merge
+  });
 }

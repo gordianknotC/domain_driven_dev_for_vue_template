@@ -1,7 +1,8 @@
-import { is } from "js_util_for_vue_project/dist/utils/typeInferernce";
+import { ERouteName } from "@/presentation/const/router_const";
+import { EUserAccount } from "@/presentation/const/ua_const";
+import { is } from "@gdknot/frontend_common";
 import { computed, ComputedRef } from "vue";
-import { ERouteName } from "~/presentation/consts/router_const";
-import { EUserAccount } from "~/presentation/consts/ua_const";
+
 
 /**
  * @param meta 額外資料，可用來判斷該 menu 是不出現

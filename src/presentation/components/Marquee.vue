@@ -26,7 +26,7 @@ import { computed, onMounted, reactive } from "vue";
 import type { AnnouncementEntity } from "~/data_source/entities/announcement_entity";
 import { RequestEvent } from "~/data_source/entities/request_entity";
 import { facade } from "~/main";
-import { ERouteName } from "../consts/router_const";
+import { ERouteName } from "../const/router_const";
 
 const state = reactive({
   isLoading: false,

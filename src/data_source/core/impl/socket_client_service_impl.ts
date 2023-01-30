@@ -1,4 +1,4 @@
-import { UnCaughtCondition } from "js_util_for_vue_project";
+import { UnCaughtCondition } from "@gdknot/frontend_common";
 import { io, Socket } from "socket.io-client";
 import { createBlock } from "vue";
 import { BuiltinSocketEvent, RequestEvent } from "~/data_source/entities/request_entity";
@@ -7,16 +7,19 @@ import {
   ISocketClientService
 } from "../interfaces/socket_client_service";
 
+// todo: untested: inCompleted:
 
 
 export class SocketClientServiceImpl implements ISocketClientService {
   socket: ISocket;
   private token: string;
   constructor(token: string) {
-    if (import.meta.env.VITE_APP_PSEUDO_SOCKET == "true") {
+    if (process.env.VITE_APP_PSEUDO_SOCKET == "true") {
+    // if (import.meta.env.VITE_APP_PSEUDO_SOCKET == "true") {
       this.socket = new PseudoSocket();
     } else {
-      this.socket = io(import.meta.env.VITE_APP_API_HOST!);
+      this.socket = io(process.env.VITE_APP_API_HOST!);
+      // this.socket = io(import.meta.env.VITE_APP_API_HOST!);
     }
     this.token = token;
   }

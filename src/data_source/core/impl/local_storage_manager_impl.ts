@@ -1,11 +1,11 @@
-import { CryptoService } from "~/data_source/core/interfaces/encrypt_service";
-import { CryptoLocalStorage } from "~/data_source/core/interfaces/crypto_storage";
-import { CryptoServiceImpl } from "~/data_source/core/impl/encrypt_service_impl";
-import { useLocalStorage, RemovableRef } from "@vueuse/core";
+import { RemovableRef } from "@vueuse/core";
 import { LocalStorageManager } from "../interfaces/local_storage_manager";
 
 let instance;
 
+/** 統一管理 localStorage / sessionStorage
+ * 統一管理/destroy...
+ */
 export
 class _LocalStorageManager implements LocalStorageManager{
   protected wm?: WeakMap<object, RemovableRef<any[]>>;

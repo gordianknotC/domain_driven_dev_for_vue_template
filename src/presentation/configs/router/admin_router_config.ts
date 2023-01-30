@@ -1,6 +1,7 @@
+import { Arr, ArrayDelegate } from "@gdknot/frontend_common";
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
-import { ERouteName } from "~/presentation/consts/router_const";
-import { ADMIN_GROUP, EUserAccount } from "~/presentation/consts/ua_const";
+import { ERouteName } from "@/presentation/const/router_const";
+import { ADMIN_GROUP, EUserAccount } from "@/presentation/const/ua_const";
 
 /**
  *  Router Config 所使用的 meta type
@@ -11,14 +12,14 @@ import { ADMIN_GROUP, EUserAccount } from "~/presentation/consts/ua_const";
  *  notFound / login pages 不需要 auth, 其他頁面均需要
  */
 type RouterMetaType = {
-  admin: EUserAccount[];
+  admin: ArrayDelegate<EUserAccount>;
   auth: boolean;
 };
 
 /**
  * 共用 - not found
  **/
-const notFoundRoutes: Array<RouteRecordRaw> = [
+const notFoundRoutes: ArrayDelegate<RouteRecordRaw> = Arr([
   {
     path: "/:catchAll(.*)",
     name: ERouteName.notFound,
@@ -27,12 +28,12 @@ const notFoundRoutes: Array<RouteRecordRaw> = [
       auth: false
     }
   }
-];
+]);
 
 /**
  * 共用 - login
  *  */
-const loginRoutes: Array<RouteRecordRaw> = [
+const loginRoutes: ArrayDelegate<RouteRecordRaw> = Arr([
   {
     path: "/splash",
     name: ERouteName.splash,
@@ -49,10 +50,10 @@ const loginRoutes: Array<RouteRecordRaw> = [
       auth: false
     }
   }
-];
+]);
 
 /** 於邏輯層 (router_index) 判斷，以決定 production 下移除 demoRoutes */
-const demoRoutes: Array<RouteRecordRaw> = [
+const demoRoutes: ArrayDelegate<RouteRecordRaw> = Arr([
   {
     path: "/demo",
     name: ERouteName.demo,
@@ -94,12 +95,12 @@ const demoRoutes: Array<RouteRecordRaw> = [
       auth: false
     }
   }
-];
+]);
 
 /**
  * adminRouterConfig, 用於設定 admin 可訪頁面
  *  */
-const adminRoutes: Array<RouteRecordRaw> = [
+const adminRoutes: ArrayDelegate<RouteRecordRaw> = Arr([
   ...loginRoutes,
   ...demoRoutes,
   {
@@ -163,7 +164,7 @@ const adminRoutes: Array<RouteRecordRaw> = [
     ],
   },
   ...notFoundRoutes
-];
+]);
 
 export default {
   loginRoutes,

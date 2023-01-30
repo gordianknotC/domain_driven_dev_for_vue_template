@@ -1,8 +1,8 @@
-import { CryptoService } from "~/data_source/core/interfaces/encrypt_service";
-import { CryptoLocalStorage } from "~/data_source/core/interfaces/crypto_storage";
+import { CryptoLocalStorage, CryptoService } from "~/data_source/core/interfaces/crypto_storage";
 import { CryptoServiceImpl } from "~/data_source/core/impl/encrypt_service_impl";
 
-const APP = import.meta.env.title;
+// const APP = import.meta.env.title;
+const APP = process.env.title!;
 const prefixWith = <T extends Record<string, string>>(target: T, prefix: string):T => {
   Object.entries(target).forEach((pair) => {
     target[pair[0] as any as keyof T] = `/${prefix}${pair[1]}` as any;
@@ -33,7 +33,7 @@ export class CryptoLocalStorageImpl<T> extends CryptoLocalStorage<T> {
     protected defaultEntity: T 
   ) {
     super(storeKey, defaultEntity);
-    this.store = localStorage;
     this.crypto = new CryptoServiceImpl(storeKey);
+    this.store = this.localStorage as any;
   }
 }

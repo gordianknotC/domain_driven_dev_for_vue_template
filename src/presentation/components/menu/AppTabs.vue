@@ -31,7 +31,7 @@ export default {
 <script lang="ts" setup>
 import { computed, onMounted } from "vue";
 import { facade } from "~/main";
-import { ERouteName } from "~/presentation/consts/router_const";
+import { ERouteName } from "~/presentation/const/router_const";
 import type { LocaleKeys } from "~/presentation/controller/i18n/locales/tw";
 import Container from "../utils/Container.vue";
 

@@ -5,7 +5,7 @@ import {
   TSuccessResponse
 } from "~/data_source/entities/response_entity";
 import { ISocketClientService, SocketMetaType } from "./socket_client_service";
-
+import { Arr, ArrayDelegate, IQueue } from "@gdknot/frontend_common";
 export type Ident = { id: number|string };
 export type IdentData<T> = { id: number|string, data: T[] }
 
@@ -36,30 +36,8 @@ export abstract class IApiClientMethods<T extends IdentData<any>> {
     payload: Record<string, any>
   ): Promise<TSuccessResponse | TErrorResponse>;
 }
-
-export type QueueItem = {
-  id: number;
-  promise: () => Promise<any>;
-  resolve: any;
-  reject: any;
-  timestamp: number;
-  timeout: NodeJS.Timeout;
-};
-
-/**
- * api client 處理由 websocket 傳送出去的請求, 將請求暫存於 queue 以後，待收到 socket
- * 資料，再由 queue 裡的 promise resolve 返回值， resolve 後無論成功失敗，移除該筆 queue
- */
-export abstract class IQueue<T extends QueueItem> {
-  abstract queue: T[];
-  abstract enqueue(
-    id: number,
-    promise: () => Promise<any>,
-    timeout?: number
-  ): Promise<any>;
-  abstract dequeue(id: number): boolean;
-}
-
+ 
+ 
 
 /**  api client service */
 export abstract class IRemoteClientService<T extends IdentData<any>>

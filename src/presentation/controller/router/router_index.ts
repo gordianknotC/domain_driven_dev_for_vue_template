@@ -1,4 +1,4 @@
-import { IFacade, provideFacade } from "js_util_for_vue_project";
+import { Arr, IFacade, provideFacade } from "@gdknot/frontend_common";
 import {
   createRouter,
   createWebHistory,
@@ -6,8 +6,8 @@ import {
   RouteRecordRaw
 } from "vue-router";
 import { routerConfig } from "~/presentation/configs/router_config";
-import { ERouteName } from "~/presentation/consts/router_const";
-import { ADMIN_GROUP } from "~/presentation/consts/ua_const";
+import { ERouteName } from "@/presentation/const/router_const";
+import { ADMIN_GROUP } from "@/presentation/const/ua_const";
 import {
   QueryStringPreprocessorGuard,
   RouterGuardImpl
@@ -70,8 +70,8 @@ export function getRouter(): Router {
 
   Object.assign(routerInstance, {
     getHomeRoute:(): ERouteName=>{
-      const layout = routerConfig.admin.firstWhere((_)=>_.name == ERouteName.pageLayout)!;
-      const home = layout?.children?.firstWhere((_)=>_.path == "")!;
+      const layout = Arr(routerConfig.admin ?? []).firstWhere((_)=>_.name == ERouteName.pageLayout)!;
+      const home = Arr(layout?.children ?? []).firstWhere((_)=>_.path == "")!;
       return (home!.redirect! as any).name as any;
     }
   });
@@ -81,13 +81,13 @@ export function getRouter(): Router {
 
 /** 注入 router */
 export function setupRouter() {
-  const mergeObject = true;
-  provideFacade(
-    {
+  const merge = true;
+  provideFacade({
+    deps: {
       stores: {
         router: getRouter()
       }
     },
-    mergeObject
-  );
+    merge
+  });
 }

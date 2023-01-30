@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
-import { ERouteName } from "../consts/router_const";
-import { ADMIN_GROUP, EUserAccount } from "../consts/ua_const";
+import { ERouteName } from "../const/router_const";
+import { ADMIN_GROUP, EUserAccount } from "../const/ua_const";
 import admin_router_config from "./router/admin_router_config";
 import user_router_config from "./router/user_router_config";
 

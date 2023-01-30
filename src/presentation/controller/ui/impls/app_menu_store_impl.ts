@@ -10,8 +10,8 @@ import {
 } from "vue";
 import { facade } from "~/main";
 import { APP_MENU_CONFIG } from "~/presentation/configs/menu_config";
-import { ERouteName } from "~/presentation/consts/router_const";
-import { flattenInstance, LazyHolder } from "js_util_for_vue_project";
+import { ERouteName } from "@/presentation/const/router_const";
+import { flattenInstance, LazyHolder } from "@gdknot/frontend_common";
 import { ISimpleStore } from "../itf/base_store_itf";
 import { useLocalStorage, RemovableRef } from "@vueuse/core";
 import { LocalStorage } from "~/data_source/core/interfaces/crypto_storage";
@@ -21,12 +21,11 @@ import { merge } from "merge-anything";
 import { RouteLocationNormalizedLoaded } from "vue-router";
 import { AppMenuState, AppTabItem } from "../itf/app_menu_store";
 import { ElMenuConfigItem } from "~/presentation/third_parties/utils/element_menu_helper";
-import { i } from "vitest/dist/index-6e18a03a";
 import { AnnouncementEntity } from "~/data_source/entities/announcement_entity";
 import { AnnouncementDomainModel } from "~/domain/app/announcement_domain_model";
 import { DataModel } from "~/data_source/mappers/base_mappers";
 import { RequestEvent } from "~/data_source/entities/request_entity";
-
+import { ArrayDelegate, Arr } from "@gdknot/frontend_common";
 /** 處理 announcement */
 export class AppMenuStoreExtensionMarquee {}
 
@@ -44,9 +43,10 @@ export class AppMenuStore
 
   constructor(public defaultState: () => AppMenuState) {
     super(StorageKeys.ui.appMenu, defaultState());
+    const overrideReadonlyProperty = true;
     this.initializeLocalTabs();
     this.getters = {};
-    flattenInstance(this, undefined, console.log);
+    flattenInstance(this, overrideReadonlyProperty);
     this.initialFetchUpdate();
   }
 
@@ -64,7 +64,7 @@ export class AppMenuStore
 
   /** 作用於 app tabs */
   private addActiveTab(item: AppTabItem): void {
-    this.state.openedTabs = [...this.state.openedTabs!, item];
+    this.state.openedTabs = Arr([...this.state.openedTabs!, item]);
   }
 
   private isRouteAlreadyOpened(route: ERouteName): boolean {
@@ -156,7 +156,7 @@ export class AppMenuStore
     const item = this.state.openedTabs!.firstWhere(_ => _.name == routeName)!;
     if (item) {
       this.state.openedTabs!.remove(item);
-      this.state.openedTabs! = [...this.state.openedTabs!];
+      this.state.openedTabs! = Arr([...this.state.openedTabs!]);
       facade.stores.router.push(this.state.openedTabs!.last);
     }
   }
@@ -189,7 +189,7 @@ export const appMenuStore = defineStore("AppMenu", () => {
     return {
       config: LazyHolder(() => APP_MENU_CONFIG),
       activated,
-      openedTabs,
+      openedTabs: Arr(openedTabs),
       enlarged,
       announcements,
       initialFetched: false,
