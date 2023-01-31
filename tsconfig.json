@@ -22,8 +22,8 @@
       "dom.iterable",
       "scripthost"
     ],
-    "module": "es2020",
-    "target": "es2020",
+    "module": "ES2015",
+    "target": "ES2018",
     "moduleResolution": "node",
     "noEmit": true,
     "noImplicitAny": true, /* Raise error on expressions and declarations with an implied 'any' type. */
@@ -56,7 +56,6 @@
     "types": [
       "webpack-env",
       "jquery",
-
       "node", 
       "jest"
     ]

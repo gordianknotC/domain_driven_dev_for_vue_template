@@ -32,7 +32,10 @@ export abstract class CryptoLocalStorage<T> {
   };
 
    get value(): T | undefined{
-    return this.crypto.decrypt(this.localStorage!.value);
+    const self = this;
+    return this.crypto.decrypt(this.localStorage!.value, function onFailed(){
+      console.error("failed to decrypt:", self.localStorage!.value );
+    });
   }
   
    set value(item: T | undefined) {

@@ -1,7 +1,5 @@
 import { provideFacade, Queue } from "@gdknot/frontend_common";
 import { App } from "vue";
-import { UpdateRequestHeaderPlugin } from "~/data_source/core/impl/request_plugins_impl";
-import { AuthResponsePlugin } from "~/data_source/core/impl/response_plugins_impl";
 import { SocketClientServiceImpl } from "~/data_source/core/impl/socket_client_service_impl";
 import type { AppFacade } from "~/main";
 import type { ISocketClientService } from "~/data_source/core/interfaces/socket_client_service";

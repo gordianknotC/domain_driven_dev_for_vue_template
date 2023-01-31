@@ -26,7 +26,13 @@ export default ({ command, mode }: ConfigEnv) => {
   try{
   const root = process.cwd();
   const env = loadEnv(mode, root);
-  const stringifiedEnv: Record<string, any> = {};
+  const stringifiedEnv: Record<string, any> = {
+    'process.argv': process.argv,
+    'process.env': {
+        NODE_ENV: process.env.NODE_ENV,
+        VITE_APP_ENV: process.env.VITE_APP_ENV
+    }
+  };
   const isBuild = command === "build";
 
   Object.keys(env).forEach(key => {

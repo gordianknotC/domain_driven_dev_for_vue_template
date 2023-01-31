@@ -23,7 +23,7 @@ import { AppMenuState, AppTabItem } from "../itf/app_menu_store";
 import { ElMenuConfigItem } from "~/presentation/third_parties/utils/element_menu_helper";
 import { AnnouncementEntity } from "~/data_source/entities/announcement_entity";
 import { AnnouncementDomainModel } from "~/domain/app/announcement_domain_model";
-import { DataModel } from "~/data_source/mappers/base_mappers";
+import { DataModel } from "@/data_source/mappers/mappers_base";
 import { RequestEvent } from "~/data_source/entities/request_entity";
 import { ArrayDelegate, Arr } from "@gdknot/frontend_common";
 /** 處理 announcement */

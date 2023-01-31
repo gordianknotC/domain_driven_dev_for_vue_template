@@ -2,7 +2,7 @@
 import { provideFacade } from "@gdknot/frontend_common";
 import { App } from "vue";
 import type { UserEntity } from "~/data_source/entities/user_entity";
-import { BaseModelMapper, tempMapper } from "~/data_source/mappers/base_mappers";
+import { BaseModelMapper, tempMapper } from "@/data_source/mappers/mappers_base";
 import type { UserDomainModel } from "~/domain/account/user_domain_model";
 import type { AnnouncementDomainModel } from "~/domain/app/announcement_domain_model";
 import type { AnnouncementEntity } from "../entities/announcement_entity";

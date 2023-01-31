@@ -1,16 +1,24 @@
 import { assert } from "~/presentation/third_parties/utils/assert_exceptions";
 
-/** mapper interface */
+/** mapper interface 
+ * @typeParam E - EntityModel
+ * @typeParam D - DomainModel */
 export abstract class IModelMapper<E, D> {
+  /** DomainModel 轉換為 EntityModel */
   abstract toEntity(domain: D): E;
+  /** EntityModel 轉換為 DomainModel */
   abstract toDomain(entity: E): D;
   constructor(
+    /** EntityModel 轉換為 DomainModel */
     protected fromEntity: (entity: E) => D,
+    /** DomainModel 轉換為 EntityModel */
     protected fromDomain: (domain: D) => E
   ) {}
 }
 
-/** base mapper */
+/** {@inheritdoc IModelMapper} base mapper 
+ * @typeParam E - EntityModel
+ * @typeParam D - DomainModel */
 export class BaseModelMapper<E, D> extends IModelMapper<E, D> {
   constructor(option: {
     fromEntity: (entity: E) => D,
@@ -27,39 +35,35 @@ export class BaseModelMapper<E, D> extends IModelMapper<E, D> {
   }
 }
 
-/** base model, 便於 entity / domain 互換
- *  generic E 代表 Entity, generic D 代表 Domain
+/** 便於 entity / domain 互換
+ * @typeParam E - EntityModel
+ *  @typeParam D - DomainModel
  *  @param mapper required
  *  @param entity optional (entity / domain 二擇一)
  *  @param domain optional (entity / domain 二擇一)
- *  e.g.:
- *    const model = new Model(mapper, entityOrUndefined, domainOrUndefined);
- *    const entity = model.entity;
- *    const domain = model.domain;
  */
 export class DataModel<E, D> {
-  entities!: E[];
-  domains!: D[];
-  constructor(public mapper: IModelMapper<E, D>, entities?: E[], domains?: D[]) {
+  get entity(): E[]{
+    if (this._entity == undefined)
+      return this._domain!.map(this.mapper.toEntity);
+    return this._entity!;
+  }
+  get domain(): D[]{
+    if (this._domain == undefined)
+      return this._entity!.map(this.mapper.toDomain);
+    return this._domain!;
+  }
+  constructor(
+    public mapper: IModelMapper<E, D>, 
+    private _entity?: E[], 
+    private _domain?: D[]
+  ) {
     assert(
-      () => entities != undefined || domains != undefined,
+      () => _entity != undefined || _domain != undefined,
       "entity/domain 則一不為空"
     );
-    try{
-      if (entities == undefined) {
-        this.domains = domains!;
-        this.entities = domains!.map((_)=>mapper.toEntity(_));
-      } else {
-        this.entities = entities!;
-        this.domains = entities!.map((_)=>mapper.toDomain(_));
-      }
-    }catch(e){
-      console.error("DataModel error:", this);
-      throw e;
-    }
   }
 }
-
 
 export 
 const tempMapper = ()=> new BaseModelMapper({

@@ -1,40 +1,34 @@
 import {
-  TDataResponse,
-  TErrorResponse,
-  TResponse,
-  TSuccessResponse
+  DataResponse,
+  ErrorResponse,
+  Response,
+  SuccessResponse
 } from "~/data_source/entities/response_entity";
 import { ISocketClientService, SocketMetaType } from "./socket_client_service";
 import { Arr, ArrayDelegate, IQueue } from "@gdknot/frontend_common";
+import { EClientStage, IBaseClient } from "@gdknot/request_client/dist";
 export type Ident = { id: number|string };
 export type IdentData<T> = { id: number|string, data: T[] }
 
-export enum EClientStage {
-  idle,
-  fetching,
-  authorizing,
-  success,
-  error
-}
 
 /**  Api client 方法 interface */
 export abstract class IApiClientMethods<T extends IdentData<any>> {
   abstract get(
     event: string,
     payload: Record<string, any>
-  ): Promise<TDataResponse<T> | TErrorResponse>;
+  ): Promise<DataResponse<T> | ErrorResponse>;
   abstract post(
     event: string,
     payload: Record<string, any>
-  ): Promise<TSuccessResponse | TDataResponse<T> | TErrorResponse>;
+  ): Promise<SuccessResponse | DataResponse<T> | ErrorResponse>;
   abstract put(
     event: string,
     payload: Record<string, any>
-  ): Promise<TSuccessResponse | TDataResponse<T> | TErrorResponse>;
+  ): Promise<SuccessResponse | DataResponse<T> | ErrorResponse>;
   abstract del(
     event: string,
     payload: Record<string, any>
-  ): Promise<TSuccessResponse | TErrorResponse>;
+  ): Promise<SuccessResponse | ErrorResponse>;
 }
  
  
@@ -44,26 +38,26 @@ export abstract class IRemoteClientService<T extends IdentData<any>>
   implements IApiClientMethods<T>
 {
   abstract socket: ISocketClientService;
-  abstract queue: IQueue<any>;
+  //abstract client: IBaseClient<DataResponse<T> , ErrorResponse, SuccessResponse>;
   abstract stage: EClientStage;
-  abstract isDataResponse(response: TResponse<any> | any): boolean;
-  abstract isErrorResponse(response: TResponse<any> | any): boolean;
-  abstract isSuccessResponse(response: TResponse<any> | any): boolean;
+  abstract isDataResponse(response: Response<any> | any): boolean;
+  abstract isErrorResponse(response: Response<any> | any): boolean;
+  abstract isSuccessResponse(response: Response<any> | any): boolean;
   
   abstract get(
-    event: string,
+    url: string,
     payload: Record<string, any>
-  ): Promise<TDataResponse<T> | TErrorResponse>;
+  ): Promise<DataResponse<T> | ErrorResponse>;
   abstract post(
-    event: string,
+    url: string,
     payload: Record<string, any>
-  ): Promise<TSuccessResponse | TDataResponse<T> | TErrorResponse>;
+  ): Promise<SuccessResponse | DataResponse<T> | ErrorResponse>;
   abstract put(
-    event: string,
+    url: string,
     payload: Record<string, any>
-  ): Promise<TSuccessResponse | TDataResponse<T> | TErrorResponse>;
+  ): Promise<SuccessResponse | DataResponse<T> | ErrorResponse>;
   abstract del(
-    event: string,
+    url: string,
     payload: Record<string, any>
-  ): Promise<TSuccessResponse | TErrorResponse>;
+  ): Promise<SuccessResponse | ErrorResponse>;
 }

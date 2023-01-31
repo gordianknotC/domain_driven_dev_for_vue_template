@@ -3,12 +3,12 @@ import {
   IdentData,
   IRemoteClientService
 } from "~/data_source/core/interfaces/remote_client_service";
-import { DataModel, IModelMapper } from "~/data_source/mappers/base_mappers";
+import { DataModel, IModelMapper } from "@/data_source/mappers/mappers_base";
 import {
   EErrorCode,
-  TDataResponse,
-  TErrorResponse,
-  TSuccessResponse
+  DataResponse,
+  ErrorResponse,
+  SuccessResponse
 } from "~/data_source/entities/response_entity";
 import {
   InvalidUsageError,
@@ -29,6 +29,8 @@ import { RequestEvent } from "../entities/request_entity";
  *  get - 同步local取值
  *  set - 同步local設值
  *  fetch / upload 非同步遠端取/設值
+ * @typeParam ENTITY - Entity Model
+ * @typeParam PAYLOAD - 用來表示 fetch 當前 entity model 所需的 payload
  * */
 export abstract class BaseRepository<
   MAPPER extends IModelMapper<ENTITY, any>,
@@ -66,8 +68,11 @@ export abstract class BaseRepository<
   /** sync get and set from local storage */
   get(): DataModel<ENTITY, any> | null {
     try {
+      const self = this;
       const entities = this.crypto
-        ? this.crypto!.decrypt(this.localStorage!.value! as any as string)!
+        ? this.crypto!.decrypt(this.localStorage!.value! as any as string, function onFailed(){
+          console.error("failed to decrypt:", self.localStorage?.value);
+        })!
         : (this.localStorage!.value! as ENTITY[]);
       assert(
         () => Array.isArray(entities),
@@ -106,8 +111,8 @@ export abstract class BaseRepository<
   async fetchAndUpdate(params: PAYLOAD, event: RequestEvent) {
     const response = await this.fetch(params, event);
     if (this.client.isDataResponse(response)) {
-      const entities = (response as TDataResponse<DataModel<ENTITY, any>>).data
-        .entities!;
+      const entities = (response as DataResponse<DataModel<ENTITY, any>>).data
+        .entity!;
       this.localStorage!.value = entities;
     }
     return response;
@@ -119,7 +124,7 @@ export abstract class BaseRepository<
   fetch(
     params?: PAYLOAD,
     event?: RequestEvent
-  ): Promise<TDataResponse<DataModel<ENTITY, any>> | TErrorResponse> {
+  ): Promise<DataResponse<DataModel<ENTITY, any>> | ErrorResponse> {
     return this.remoteCall(params, this.clientEvents.get);
   }
 
@@ -129,7 +134,7 @@ export abstract class BaseRepository<
   upload(
     val: ENTITY
   ): Promise<
-    TDataResponse<DataModel<ENTITY, any>> | TSuccessResponse | TErrorResponse
+    DataResponse<DataModel<ENTITY, any>> | SuccessResponse | ErrorResponse
   > {
     return this.remoteUpdate(val, this.clientEvents.post);
   }
@@ -137,22 +142,22 @@ export abstract class BaseRepository<
   protected async remoteCall(
     params?: PAYLOAD,
     event?: RequestEvent
-  ): Promise<TDataResponse<DataModel<ENTITY, any>> | TErrorResponse> {
+  ): Promise<DataResponse<DataModel<ENTITY, any>> | ErrorResponse> {
     try {
       const response = await this.client.get(this.clientEvents.get, params!);
       const mapper = this.mapper;
       if (this.client.isDataResponse(response)) {
         const entities = (
-          response as TDataResponse<{ id: string; data: ENTITY[] }>
+          response as DataResponse<{ id: string; data: ENTITY[] }>
         ).data.data as ENTITY[];
         const model = new DataModel<ENTITY, any>(mapper, entities);
-        this.localStorage!.value = model.entities;
+        this.localStorage!.value = model.entity;
         return {
           ...response,
           data: model
         };
       } else if (this.client.isErrorResponse(response)) {
-        return response as TErrorResponse;
+        return response as ErrorResponse;
       } else if (this.client.isSuccessResponse(response)) {
         return response as any;
       } else {
@@ -165,7 +170,7 @@ export abstract class BaseRepository<
         error_key: "",
         error_msg: (e ?? "").toString(),
         message: "internal error"
-      } as TErrorResponse;
+      } as ErrorResponse;
     }
   }
 
@@ -173,15 +178,15 @@ export abstract class BaseRepository<
     val: ENTITY,
     event?: RequestEvent
   ): Promise<
-    TDataResponse<DataModel<ENTITY, any>> | TSuccessResponse | TErrorResponse
+    DataResponse<DataModel<ENTITY, any>> | SuccessResponse | ErrorResponse
   > {
     const response = await this.remoteCall(val as any, event);
     if (this.client.isErrorResponse(response)) {
-      return response as TErrorResponse;
+      return response as ErrorResponse;
     } else if (this.client.isSuccessResponse(response)) {
-      return response as any as TSuccessResponse;
+      return response as any as SuccessResponse;
     } else {
-      return response as TDataResponse<DataModel<ENTITY, any>>;
+      return response as DataResponse<DataModel<ENTITY, any>>;
     }
   }
 }
@@ -189,6 +194,8 @@ export abstract class BaseRepository<
 /**
  *  用於 不需與 local 同步之 repository
  *  fetch / upload 非同步遠端取/設值
+ * @typeParam ENTITY - Entity Model
+ * @typeParam PAYLOAD - 用來表示 fetch 當前 entity model 所需的 payload
  * */
 export abstract class BaseRemoteRepository<
   ENTITY extends Ident,

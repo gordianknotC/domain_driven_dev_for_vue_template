@@ -1,55 +1,141 @@
-import { Arr, ArrayDelegate, IQueue } from "@gdknot/frontend_common";
 import {
-  EClientStage,
-  IRemoteClientService,
-  IdentData
-} from "~/data_source/core/interfaces/remote_client_service";
-import {
+  DataResponse,
   EErrorCode,
-  TDataResponse,
-  TErrorResponse,
-  TSuccessResponse
-} from "~/data_source/entities/response_entity";
+  ErrorResponse,
+  SuccessResponse
+} from "@/data_source/entities/response_entity";
+import { facade } from "@/main";
+import { IQueue } from "@gdknot/frontend_common";
+
+import {
+  RequestReplacer,
+  AuthResponseGuard,
+  ClientOption,
+  NetworkErrorResponseGuard,
+  ACFetchedMarker,
+  ACTokenUpdater,
+  ACAuthResponseGuard,
+  ACIdleMarker ,
+  AuthRequestHeaderUpdater,
+  ExtraRequestHeaderUpdater,
+  EClientStage,
+  BaseClient,
+  IBaseClient
+} from "@gdknot/request_client";
+import { AxiosResponse } from "axios";
+import { IdentData, IRemoteClientService } from "../interfaces/remote_client_service";
 import { ISocketClientService } from "../interfaces/socket_client_service";
 
-// TODO: unittest, 先定版 socket 再來做這個
-/** T remote entity, 必須帶有 id 
- *  以 websocket 實作 api request 方法  get/post/del/put
-*/
+export type AuthResponse = DataResponse<{
+  token: string;
+}>;
+
+const timeout = 10 * 1000;
+const baseURL = "http://localhost";
+
+export const formatHeader = { value: { format: "mock" } };
+const authUrl = "path/to/auth_url";
+
+export const requestClientOption: ClientOption<
+  DataResponse<any>,
+  ErrorResponse,
+  SuccessResponse
+> = {
+  isSuccessResponse: (s: any) => (s as SuccessResponse).succeed != undefined,
+  isDataResponse: (d: any) => (d as DataResponse<any>).data != undefined,
+  isErrorResponse: (e: any) => (e as ErrorResponse).error_code != undefined,
+  axiosConfig: {
+    baseURL,
+    timeout,
+  },
+  requestChain: [
+    new AuthRequestHeaderUpdater(function tokenGetter() {
+      return facade.data.repo.user.get()?.entity[0]?.token ?? "";
+    }),
+    new ExtraRequestHeaderUpdater(function () {
+      return formatHeader.value;
+    }),
+    new RequestReplacer(
+      // replacementIdentifier = BaseRequestReplacer...
+    ),
+  ],
+  responseChain: [
+    new AuthResponseGuard(
+    ),
+    new NetworkErrorResponseGuard(
+      function networkError(error){
+      console.log("detect network error:", error);
+    }),
+  ],
+  authOption: {
+    axiosConfig: {
+      url: authUrl,
+      baseURL,
+      timeout: 12000,
+    },
+    interval: 600,
+    requestChain: [],
+    responseChain: [
+      new ACFetchedMarker(),
+      new ACTokenUpdater(),
+      new ACAuthResponseGuard(),
+      new ACIdleMarker(),
+    ],
+    payloadGetter: function () {
+      return null;
+    },
+    tokenGetter: function () {
+      return facade.data.repo.user.get()?.entity[0]?.token ?? "";
+    },
+    tokenUpdater: function (response: AxiosResponse<any, any>): void {
+      try{
+        console.log("tokenUpdater", (response.data as any).data.token)
+        const user = facade.data.repo.user;
+        const entity = (user.get()?.entity[0] ?? {}) as any;
+        entity.token = (response.data as any).data.token;
+        facade.data.repo.user.set([entity]);
+      }catch(e){
+        console.error("tokenUpdater error, response:", response, "\nerror:", e);
+        throw e;
+      }
+    },
+    redirect: function (response: AxiosResponse<any, any>) {
+      return null;
+    },
+  },
+};
+
+
+
 export class RemoteClientServiceImpl<T extends IdentData<any>>
   implements IRemoteClientService<T>
 {
-  stage: EClientStage;
+  private client: IBaseClient<DataResponse<T>, ErrorResponse, SuccessResponse>;
+  get stage(): EClientStage{
+    return this.client.stage;
+  }
   constructor(public socket: ISocketClientService, public queue: IQueue<any>) {
-    this.stage = EClientStage.idle;
+    this.client = new BaseClient(requestClientOption);
   }
   isSuccessResponse(response: any): boolean {
-    throw new Error("Method not implemented.");
+    return this.client.isSuccessResponse(response);
   }
   isDataResponse(response: any): boolean {
-    const validType = (response as TDataResponse<T>);
-    return validType.data?.id != undefined && validType.data?.id != "";
+    return this.client.isDataResponse(response);
   }
-
-  isErrorResponse(response: TDataResponse<T> | TErrorResponse | any): boolean {
-    if (!this.isDataResponse(response)) {
-      const validType = (response as TErrorResponse);
-      return validType.message != undefined
-        && validType.error_code != undefined;
-    } else { 
-      return false;
-    }
+  isErrorResponse(response: DataResponse<T> | ErrorResponse | any): boolean {
+    return this.client.isErrorResponse(response);
   }
 
   // TODO: 失敗後自我連接，直到 max retries
-  private connect(): Promise<TSuccessResponse| TErrorResponse> {
-    return new Promise<TSuccessResponse|TErrorResponse>((resolve, reject) => {
+  private connect(): Promise<SuccessResponse| ErrorResponse> {
+    return new Promise<SuccessResponse|ErrorResponse>((resolve, reject) => {
       this.socket.connect({
         success(msg: string) {
           resolve({succeed: true});
         },
         failed(msg: string) {
-          const ret: TErrorResponse = {
+          const ret: ErrorResponse = {
             error_code: EErrorCode.socketConnectFailed,
             error_key: "",
             error_msg: "",
@@ -61,7 +147,7 @@ export class RemoteClientServiceImpl<T extends IdentData<any>>
           resolve({succeed: true});
         },
         reFailed(msg: string) {
-          const ret: TErrorResponse = {
+          const ret: ErrorResponse = {
             error_code: EErrorCode.socketConnectFailed,
             error_key: "",
             error_msg: "",
@@ -71,81 +157,80 @@ export class RemoteClientServiceImpl<T extends IdentData<any>>
         }
       });
     });
-     
   }
 
   // TODO: 實作資料轉換(如果需要的話)
-  private toResponse(rawData: any): TDataResponse<T> | TSuccessResponse {
+  private toResponse(rawData: any): DataResponse<T> | SuccessResponse {
     return rawData;
   }
 
-  async sendRequest(
-    event: string,
-    payload: Record<string, any>
-  ): Promise<TDataResponse<T> | TErrorResponse | TSuccessResponse> {
-    this.stage = EClientStage.fetching;
-    const payloadAsString = JSON.stringify({ event, payload });
-    const id: number = payload.id;
-    const self = this;
-    const action = () => {
-      return new Promise<TDataResponse<T>|TSuccessResponse>((resolve, reject) => {
-        this.socket.send(
-          event,
-          payloadAsString,
-          // FIXME: 原認知為:這裡的 socket response 為 serializable json string
-          function onSuccess(msg: string) {
-            const rawData = JSON.parse(msg);
-            resolve(self.toResponse(rawData));
-          },
-          // FIXME: 原認知為:這裡的 socket response 為 serializable json string
-          function onError(msg: string) {
-            const rawData = JSON.parse(msg);
-            reject(self.toResponse(rawData));
-          }
-        );
-      });
-    };
+  // async sendRequest(
+  //   event: string,
+  //   payload: Record<string, any>
+  // ): Promise<DataResponse<T> | ErrorResponse | SuccessResponse> {
+  //   this.stage = EClientStage.fetching;
+  //   const payloadAsString = JSON.stringify({ event, payload });
+  //   const id: number = payload.id;
+  //   const self = this;
+  //   const action = () => {
+  //     return new Promise<DataResponse<T>|SuccessResponse>((resolve, reject) => {
+  //       this.socket.send(
+  //         event,
+  //         payloadAsString,
+  //         // FIXME: 原認知為:這裡的 socket response 為 serializable json string
+  //         function onSuccess(msg: string) {
+  //           const rawData = JSON.parse(msg);
+  //           resolve(self.toResponse(rawData));
+  //         },
+  //         // FIXME: 原認知為:這裡的 socket response 為 serializable json string
+  //         function onError(msg: string) {
+  //           const rawData = JSON.parse(msg);
+  //           reject(self.toResponse(rawData));
+  //         }
+  //       );
+  //     });
+  //   };
 
-    if (this.socket.socket.connected) {
-      return this.queue.enqueue(id, action);
-    } else {
-      try {
-        const connected = await this.connect();
-        if ((connected as TSuccessResponse).succeed) {
-          return this.queue.enqueue(id, action);
-        } else {
-          const error: TErrorResponse = {
-            error_code: 0,
-            error_key: "",
-            error_msg: "network error",
-            message: "network error"
-          };
-          return error;
-        }
-      } catch (e) {
-        throw e;
-      }
-    }
-  }
+  //   if (this.socket.socket.connected) {
+  //     return this.queue.enqueue(id, action);
+  //   } else {
+  //     try {
+  //       const connected = await this.connect();
+  //       if ((connected as TSuccessResponse).succeed) {
+  //         return this.queue.enqueue(id, action);
+  //       } else {
+  //         const error: TErrorResponse = {
+  //           error_code: 0,
+  //           error_key: "",
+  //           error_msg: "network error",
+  //           message: "network error"
+  //         };
+  //         return error;
+  //       }
+  //     } catch (e) {
+  //       throw e;
+  //     }
+  //   }
+  // }
 
-  // 從設計上考量，get by event name 而不是 url, 因為使用的是 web socket 而不是 http request
+  // FIXME: 從設計上考量，get by event name 而不是 url, 因為使用的是 web socket 而不是 http request
   async get(
-    event: string,
+    url: string,
     payload: Record<string, any>
-  ): Promise<TDataResponse<T> | TErrorResponse> {
-    return this.sendRequest(event, payload) as any;
+  ): Promise<DataResponse<T> | ErrorResponse> {
+    return this.client.get(url, payload);
   }
 
   post(url: string, payload: Record<string, any>) {
-    return this.sendRequest(url, payload);
+    return this.client.post(url, payload);
   }
 
   put(url: string, payload: Record<string, any>) {
-    return this.sendRequest(url, payload);
+    return this.client.put(url, payload);
   }
 
   del(url: string, payload: Record<string, any>) {
-    return this.sendRequest(url, payload) as any;
+    return this.client.del(url, payload);
   }
   
 }

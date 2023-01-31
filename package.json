@@ -42,9 +42,10 @@
   },
   "dependencies": {
     "@element-plus/icons-vue": "2.0.10",
-    "@gdknot/frontend_common": "0.9.11",
-    "@gdknot/request_client": "0.0.2",
-    "axios": "^1.2.1",
+    "@gdknot/frontend_common": "0.9.14",
+    "@gdknot/request_client": "0.0.18",
+    "axios": "1.2.2",
+    "colors": "^1.4.0",
     "crypto-js": "^4.1.1",
     "element-plus": "^2.2.26",
     "http-status-codes": "^2.2.0",

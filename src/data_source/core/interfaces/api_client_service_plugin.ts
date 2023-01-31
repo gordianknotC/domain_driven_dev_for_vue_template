@@ -1,5 +1,5 @@
 import { IdentData, IRemoteClientService } from "~/data_source/core/interfaces/remote_client_service";
-import { TResponse } from "~/data_source/entities/response_entity";
+import { Response } from "~/data_source/entities/response_entity";
 import {
   assert,
   AssertMessages
@@ -11,7 +11,7 @@ import {
 export abstract class ApiClientServicePlugins<REQ, RESP = REQ> {
   abstract prev?: ApiClientServicePlugins<REQ, RESP>;
   abstract next?: ApiClientServicePlugins<REQ, RESP>;
-  abstract client?: IRemoteClientService<IdentData<TResponse<RESP>>>;
+  abstract client?: IRemoteClientService<IdentData<Response<RESP>>>;
   abstract process(config: REQ): RESP;
   abstract processError(error: any): Promise<any>;
   addNext(next: ApiClientServicePlugins<REQ, RESP>) {
@@ -49,7 +49,7 @@ export abstract class ApiClientServicePlugins<REQ, RESP = REQ> {
   protected get canProcess(): boolean {
     return true;
   }
-  init(client: IRemoteClientService<IdentData<TResponse<RESP>>>) {
+  init(client: IRemoteClientService<IdentData<Response<RESP>>>) {
     this.client = client;
   }
 }

@@ -6,29 +6,29 @@ export enum EErrorCode {
   timeout = 100002,
 }
 
-export type TPager = {
+export type Pager = {
   page: number;
   pages?: number;
   per_page: number;
   total?: number;
 };
 
-export type TOptional<T> = T | undefined | null;
+export type Optional<T> = T | undefined | null;
 
-export type TErrorResponse = {
+export type ErrorResponse = {
   error_code: EErrorCode;
   error_key: string;
   error_msg: string;
   message: string;
 };
 
-export type TSuccessResponse = {
+export type SuccessResponse = {
   succeed: boolean;
 };
 
-export type TDataResponse<T> = {
+export type DataResponse<T> = {
   data: T;
-  pager?: TPager | null | undefined;
+  pager?: Pager | null | undefined;
 };
 
-export type TResponse<T> = TDataResponse<T> | TErrorResponse | TSuccessResponse;
+export type Response<T> = DataResponse<T> | ErrorResponse | SuccessResponse;

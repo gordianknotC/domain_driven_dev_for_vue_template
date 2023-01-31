@@ -31,18 +31,18 @@ import { ERouteName } from "../const/router_const";
 const state = reactive({
   isLoading: false,
   announcements: computed(() => {
-    return facade.stores.appMenu.state.announcements.entities;
+    return facade.stores.appMenu.state.announcements.entity;
   })
 });
 
 const hasAnnouncement = computed<boolean>(() => {
   console.log(
     "hasAnnouncement:",
-    facade.stores.appMenu.state.announcements.entities.length > 0,
+    facade.stores.appMenu.state.announcements.entity.length > 0,
     "announcements",
     state.announcements
   );
-  return facade.stores.appMenu.state.announcements.entities.length > 0;
+  return facade.stores.appMenu.state.announcements.entity.length > 0;
 });
 
 const updateAnnouncement = async (id: number) => {

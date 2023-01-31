@@ -1,5 +1,5 @@
 import type { AnnouncementEntity } from "~/data_source/entities/announcement_entity";
-import type { DataModel } from "~/data_source/mappers/base_mappers";
+import type { DataModel } from "@/data_source/mappers/mappers_base";
 import type { AnnouncementDomainModel } from "~/domain/app/announcement_domain_model";
 import type { AppMenuConfig } from "~/presentation/configs/menu_config";
 import { ERouteName } from "@/presentation/const/router_const";

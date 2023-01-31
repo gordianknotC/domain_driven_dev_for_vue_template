@@ -2,9 +2,9 @@ import { ERole, UserEntity } from "~/data_source/entities/user_entity";
 import { UserRepository } from "~/data_source/repositories/account/itf/user_repository_itf";
 import { UserDomainModel } from "~/domain/account/user_domain_model";
 import { StorageKeys } from "~/data_source/core/impl/crypto_storage_impl";
-import { IRemoteClientService } from "~/data_source/core/interfaces/remote_client_service";
 import { UserMapper } from "~/data_source/mappers/mappers_types";
 import { RequestEvent } from "~/data_source/entities/request_entity";
+import { IRemoteClientService } from "@/data_source/core/interfaces/remote_client_service";
 
 type Entity = UserEntity;
 type Mapper = UserMapper;
@@ -33,5 +33,6 @@ export class UserRepositoryImpl extends UserRepository {
     protected mapper: Mapper
   ) {
     super(client, mapper, clientEvents, defaultEntity, storeKey);
+    
   }
 }
