@@ -1,4 +1,4 @@
-import { CryptoLocalStorage, CryptoService } from "~/data_source/core/interfaces/crypto_storage";
+import { CryptoLocalStorage, CryptoService } from "~/data_source/core/itf/crypto_storage_itf";
 import { CryptoServiceImpl } from "~/data_source/core/impl/encrypt_service_impl";
 
 // const APP = import.meta.env.title;

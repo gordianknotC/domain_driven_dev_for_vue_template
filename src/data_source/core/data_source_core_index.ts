@@ -2,11 +2,11 @@ import { provideFacade, Queue } from "@gdknot/frontend_common";
 import { App } from "vue";
 import { SocketClientServiceImpl } from "~/data_source/core/impl/socket_client_service_impl";
 import type { AppFacade } from "~/main";
-import type { ISocketClientService } from "~/data_source/core/interfaces/socket_client_service";
+import type { ISocketClientService } from "~/data_source/core/itf/socket_client_service_itf";
 import {
   RemoteClientServiceImpl
 } from "./impl/remote_client_service_impl";
-import type { IRemoteClientService } from "./interfaces/remote_client_service";
+import { IRemoteClientService } from "~/data_source/core/itf/remote_client_service_itf";
 
 
 export type FacadeDateSource = {
@@ -43,6 +43,5 @@ export function setupDataCoreServices(app: App<Element>, facade: AppFacade) {
 
   // TODO: ApiClientService
   // const apiClient 
-
 }
 

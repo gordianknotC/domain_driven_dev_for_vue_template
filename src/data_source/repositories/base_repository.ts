@@ -2,7 +2,7 @@ import {
   Ident,
   IdentData,
   IRemoteClientService
-} from "~/data_source/core/interfaces/remote_client_service";
+} from "~/data_source/core/itf/remote_client_service_itf";
 import { DataModel, IModelMapper } from "@/data_source/mappers/mappers_base";
 import {
   EErrorCode,
@@ -17,11 +17,11 @@ import {
   UnCaughtCondition
 } from "@gdknot/frontend_common";
 import { useLocalStorage, RemovableRef } from "@vueuse/core";
-import { CryptoService, LocalStorage } from "../core/interfaces/crypto_storage";
+import { CryptoService, LocalStorage } from "@/data_source/core/itf/crypto_storage_itf";
 import { assert } from "~/presentation/third_parties/utils/assert_exceptions";
-import { CryptoServiceImpl } from "../core/impl/encrypt_service_impl";
-import { appLocalStorageMgr } from "../core/impl/local_storage_manager_impl";
-import { RequestEvent } from "../entities/request_entity";
+import { CryptoServiceImpl } from "@/data_source/core/impl/encrypt_service_impl";
+import { appLocalStorageMgr } from "@/data_source/core/impl/local_storage_manager_impl";
+import { RequestEvent } from "@/data_source/entities/request_entity";
 
 
 /**

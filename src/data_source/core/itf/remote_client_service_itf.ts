@@ -4,9 +4,9 @@ import {
   Response,
   SuccessResponse
 } from "~/data_source/entities/response_entity";
-import { ISocketClientService, SocketMetaType } from "./socket_client_service";
+import { ISocketClientService, SocketMetaType } from "./socket_client_service_itf";
 import { Arr, ArrayDelegate, IQueue } from "@gdknot/frontend_common";
-import { EClientStage, IBaseClient } from "@gdknot/request_client/dist";
+import { EClientStage, IBaseClient } from "@gdknot/request_client";
 export type Ident = { id: number|string };
 export type IdentData<T> = { id: number|string, data: T[] }
 

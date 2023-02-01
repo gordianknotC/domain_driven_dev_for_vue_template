@@ -6,7 +6,6 @@ import {
 } from "@/data_source/entities/response_entity";
 import { facade } from "@/main";
 import { IQueue } from "@gdknot/frontend_common";
-
 import {
   RequestReplacer,
   AuthResponseGuard,
@@ -23,8 +22,9 @@ import {
   IBaseClient
 } from "@gdknot/request_client";
 import { AxiosResponse } from "axios";
-import { IdentData, IRemoteClientService } from "../interfaces/remote_client_service";
-import { ISocketClientService } from "../interfaces/socket_client_service";
+import { IRemoteClientService } from '@/data_source/core/itf/remote_client_service_itf';
+import { IdentData } from '@/data_source/core/itf/remote_client_service_itf';
+import { ISocketClientService } from '@/data_source/core/itf/socket_client_service_itf';
 
 export type AuthResponse = DataResponse<{
   token: string;

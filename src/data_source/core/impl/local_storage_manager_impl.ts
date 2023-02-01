@@ -1,12 +1,14 @@
 import { RemovableRef } from "@vueuse/core";
-import { LocalStorageManager } from "../interfaces/local_storage_manager";
+import { LocalStorageManager } from "~/data_source/core/itf/local_storage_manager_itf";
 
 let instance;
 
-/** 統一管理 localStorage / sessionStorage
+/** 
+ * @singleton
+ * 統一管理 localStorage / sessionStorage
  * 統一管理/destroy...
  */
-export
+
 class _LocalStorageManager implements LocalStorageManager{
   protected wm?: WeakMap<object, RemovableRef<any[]>>;
   protected cm?: (()=>void)[];
@@ -43,6 +45,5 @@ class _LocalStorageManager implements LocalStorageManager{
 }
 
 export function appLocalStorageMgr(): LocalStorageManager{
-  // singleton
   return new _LocalStorageManager();
 }

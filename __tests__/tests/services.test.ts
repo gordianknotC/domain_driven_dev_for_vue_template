@@ -1,7 +1,7 @@
 
 import { CryptoLocalStorageImpl } from "@/data_source/core/impl/crypto_storage_impl";
 import { appLocalStorageMgr } from "@/data_source/core/impl/local_storage_manager_impl";
-import { LocalStorageManager } from "@/data_source/core/interfaces/local_storage_manager";
+import { LocalStorageManager } from "@/data_source/core/itf/local_storage_manager_itf";
 import { setupComputed, setupCurrentEnv, setupReactive, setupRef, setupWatch } from "@gdknot/frontend_common";
 import { computed, reactive, ref, watch } from "vue";
 

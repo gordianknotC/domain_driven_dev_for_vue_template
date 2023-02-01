@@ -2,7 +2,7 @@ import {
   decryptWithAES,
   encryptWithAES
 } from "~/presentation/third_parties/utils/crypto_util";
-import { CryptoService } from "../interfaces/crypto_storage";
+import { CryptoService } from "~/data_source/core/itf/crypto_storage_itf";
 import { StorageKeys } from "./crypto_storage_impl";
 
 export class CryptoServiceImpl<T> extends CryptoService<T> {
