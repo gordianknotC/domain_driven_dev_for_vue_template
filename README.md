@@ -45,7 +45,11 @@ Domain Driven Design 原則用於 Vue 專案，結合以下 package
     - colors
     - icons
     - large_icons
+
+      為防止一些 plugin 如 svgIcon, 將所有 svg bundle 成單一包裹寫入 index.html 中，導致 index.html 太大而無法優化，固將檔案較大的 svg icon 拆分至不同的 folder, 以區分需要 bundle 的 icons 及不需要或另行 bundle 的 svg icons 有哪些.
     - large_images
+
+      同上，為區分能夠自動 bundle 的小 image 及大型 image，以便未來在bundle優化時能更方便的區分。
     - styles
   - components
     > 可複用的組件
@@ -66,7 +70,7 @@ Domain Driven Design 原則用於 Vue 專案，結合以下 package
       - admin_router_config
       - user_router_config
   - third_parties
-    > 第三方套件的安裝 / export / 方便後續 minification / tree-shaking
+    > 第三方套件的安裝 / export / 方便後續 minification / tree-shaking 時能透過直接修改 third_parties 中的 import 方式而使 tree-shaking 能自動幫我們進行套件大小的優化.
 
 # Table of Content
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
@@ -80,6 +84,8 @@ table of content
     - [entities](#entities)
     - [mappers](#mappers)
     - [repositories](#repositories)
+      - [BaseRepository](#baserepository)
+      - [BaseRemoteRepository](#baseremoterepository)
   - [Domain:](#domain)
   - [Presentation:](#presentation)
 
