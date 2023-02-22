@@ -1,6 +1,6 @@
 {
   "name": "domain_driven_dev_template_for_vue_project",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "curtis",
   "description": "domain driven development template for vue project",
   "scripts": {
@@ -29,7 +29,7 @@
     "lint": "vue-cli-service lint",
     "css": "tailwind build src/presentation/assets/styles/index.scss -o ./src/assets/styles/index.scss",
     "compress:png": "imageoptim -a src/assets/images/**/*.png src/assets/images/*.png",
-    "compress:svg": "node dumpSvgImage.js && bash compressSvgImage.sh && node updateSvgImage.js",
+    "compress:svg": "node scripts/dumpSvgImage.js && bash scripts/compressSvgImage.sh && node scripts/updateSvgImage.js",
     "--------- 安 裝 編 譯 套 件 及 設 定 ---------": "",
     "install:node": "nvm install v14.18.0 && nvm alias default v14.18.0",
     "config:vscode": "git config --global core.editor 'code --wait'",
